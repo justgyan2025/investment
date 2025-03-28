@@ -1,0 +1,629 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="py-6">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
+        <div class="flex justify-between items-center">
+            <h1 class="text-2xl font-semibold text-gray-900">Other Investments</h1>
+            <div class="flex space-x-4">
+                <button id="addSSYBtn" class="bg-indigo-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-indigo-700">
+                    Add Sukanya Scheme
+                </button>
+                <button id="addPORDBtn" class="bg-green-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-green-700">
+                    Add Post Office RD
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
+        <!-- Portfolio Summary -->
+        <div class="mt-8">
+            <div class="bg-white shadow rounded-lg">
+                <div class="px-4 py-5 sm:p-6">
+                    <h3 class="text-lg leading-6 font-medium text-gray-900">
+                        Portfolio Summary
+                    </h3>
+                    <div class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-3">
+                        <div class="bg-gray-50 overflow-hidden shadow rounded-lg">
+                            <div class="p-5">
+                                <div class="flex items-center">
+                                    <div class="flex-shrink-0">
+                                        <svg class="h-6 w-6 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                        </svg>
+                                    </div>
+                                    <div class="ml-5 w-0 flex-1">
+                                        <dl>
+                                            <dt class="text-sm font-medium text-gray-500 truncate">
+                                                Total Investment
+                                            </dt>
+                                            <dd class="flex items-baseline">
+                                                <div class="text-2xl font-semibold text-gray-900">
+                                                    ₹<span id="totalOtherInvestment">0</span>
+                                                </div>
+                                            </dd>
+                                        </dl>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-gray-50 overflow-hidden shadow rounded-lg">
+                            <div class="p-5">
+                                <div class="flex items-center">
+                                    <div class="flex-shrink-0">
+                                        <svg class="h-6 w-6 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                                        </svg>
+                                    </div>
+                                    <div class="ml-5 w-0 flex-1">
+                                        <dl>
+                                            <dt class="text-sm font-medium text-gray-500 truncate">
+                                                Current Value
+                                            </dt>
+                                            <dd class="flex items-baseline">
+                                                <div class="text-2xl font-semibold text-gray-900">
+                                                    ₹<span id="currentOtherValue">0</span>
+                                                </div>
+                                            </dd>
+                                        </dl>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-gray-50 overflow-hidden shadow rounded-lg">
+                            <div class="p-5">
+                                <div class="flex items-center">
+                                    <div class="flex-shrink-0">
+                                        <svg class="h-6 w-6 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                                        </svg>
+                                    </div>
+                                    <div class="ml-5 w-0 flex-1">
+                                        <dl>
+                                            <dt class="text-sm font-medium text-gray-500 truncate">
+                                                Total Returns
+                                            </dt>
+                                            <dd class="flex items-baseline">
+                                                <div class="text-2xl font-semibold text-gray-900">
+                                                    ₹<span id="totalOtherReturns">0</span>
+                                                </div>
+                                            </dd>
+                                        </dl>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sukanya Samriddhi Scheme Table -->
+        <div class="mt-8">
+            <div class="bg-white shadow rounded-lg">
+                <div class="px-4 py-5 sm:p-6">
+                    <h3 class="text-lg leading-6 font-medium text-gray-900">
+                        Sukanya Samriddhi Scheme
+                    </h3>
+                    <div class="mt-5">
+                        <div class="flex flex-col">
+                            <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                                <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+                                    <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+                                        <table class="min-w-full divide-y divide-gray-200">
+                                            <thead class="bg-gray-50">
+                                                <tr>
+                                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                        Account Number
+                                                    </th>
+                                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                        Girl's Name
+                                                    </th>
+                                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                        Date of Birth
+                                                    </th>
+                                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                        Annual Deposit
+                                                    </th>
+                                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                        Start Date
+                                                    </th>
+                                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                        Maturity Date
+                                                    </th>
+                                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                        Current Balance
+                                                    </th>
+                                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                        Actions
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="ssyAccounts" class="bg-white divide-y divide-gray-200">
+                                                <!-- SSY accounts will be populated here -->
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Post Office RD Table -->
+        <div class="mt-8">
+            <div class="bg-white shadow rounded-lg">
+                <div class="px-4 py-5 sm:p-6">
+                    <h3 class="text-lg leading-6 font-medium text-gray-900">
+                        Post Office Recurring Deposit
+                    </h3>
+                    <div class="mt-5">
+                        <div class="flex flex-col">
+                            <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                                <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+                                    <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+                                        <table class="min-w-full divide-y divide-gray-200">
+                                            <thead class="bg-gray-50">
+                                                <tr>
+                                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                        Account Number
+                                                    </th>
+                                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                        Monthly Deposit
+                                                    </th>
+                                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                        Interest Rate
+                                                    </th>
+                                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                        Start Date
+                                                    </th>
+                                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                        Maturity Date
+                                                    </th>
+                                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                        Current Balance
+                                                    </th>
+                                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                        Actions
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="pordAccounts" class="bg-white divide-y divide-gray-200">
+                                                <!-- Post Office RD accounts will be populated here -->
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add Sukanya Scheme Modal -->
+<div id="addSSYModal" class="fixed z-10 inset-0 overflow-y-auto hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+    <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+        <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
+        <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+        <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+            <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                <div class="sm:flex sm:items-start">
+                    <div class="mt-3 text-center sm:mt-0 sm:text-left w-full">
+                        <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">
+                            Add New Sukanya Samriddhi Account
+                        </h3>
+                        <div class="mt-4">
+                            <label for="ssyAccountNumber" class="block text-sm font-medium text-gray-700">Account Number</label>
+                            <input type="text" name="ssyAccountNumber" id="ssyAccountNumber" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                        </div>
+                        <div class="mt-4">
+                            <label for="girlsName" class="block text-sm font-medium text-gray-700">Girl's Name</label>
+                            <input type="text" name="girlsName" id="girlsName" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                        </div>
+                        <div class="mt-4">
+                            <label for="dob" class="block text-sm font-medium text-gray-700">Date of Birth</label>
+                            <input type="date" name="dob" id="dob" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                        </div>
+                        <div class="mt-4">
+                            <label for="annualDeposit" class="block text-sm font-medium text-gray-700">Annual Deposit</label>
+                            <input type="number" name="annualDeposit" id="annualDeposit" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                        </div>
+                        <div class="mt-4">
+                            <label for="ssyStartDate" class="block text-sm font-medium text-gray-700">Start Date</label>
+                            <input type="date" name="ssyStartDate" id="ssyStartDate" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                        </div>
+                        <div class="mt-4">
+                            <label for="ssyMaturityDate" class="block text-sm font-medium text-gray-700">Maturity Date</label>
+                            <input type="date" name="ssyMaturityDate" id="ssyMaturityDate" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                <button type="button" id="saveSSYBtn" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:ml-3 sm:w-auto sm:text-sm">
+                    Save
+                </button>
+                <button type="button" id="cancelSSYBtn" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
+                    Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add Post Office RD Modal -->
+<div id="addPORDModal" class="fixed z-10 inset-0 overflow-y-auto hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+    <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+        <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
+        <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+        <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+            <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                <div class="sm:flex sm:items-start">
+                    <div class="mt-3 text-center sm:mt-0 sm:text-left w-full">
+                        <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">
+                            Add New Post Office RD Account
+                        </h3>
+                        <div class="mt-4">
+                            <label for="pordAccountNumber" class="block text-sm font-medium text-gray-700">Account Number</label>
+                            <input type="text" name="pordAccountNumber" id="pordAccountNumber" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                        </div>
+                        <div class="mt-4">
+                            <label for="monthlyDeposit" class="block text-sm font-medium text-gray-700">Monthly Deposit</label>
+                            <input type="number" name="monthlyDeposit" id="monthlyDeposit" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                        </div>
+                        <div class="mt-4">
+                            <label for="interestRate" class="block text-sm font-medium text-gray-700">Interest Rate (%)</label>
+                            <input type="number" name="interestRate" id="interestRate" step="0.01" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                        </div>
+                        <div class="mt-4">
+                            <label for="pordStartDate" class="block text-sm font-medium text-gray-700">Start Date</label>
+                            <input type="date" name="pordStartDate" id="pordStartDate" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                        </div>
+                        <div class="mt-4">
+                            <label for="pordMaturityDate" class="block text-sm font-medium text-gray-700">Maturity Date</label>
+                            <input type="date" name="pordMaturityDate" id="pordMaturityDate" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                <button type="button" id="savePORDBtn" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:ml-3 sm:w-auto sm:text-sm">
+                    Save
+                </button>
+                <button type="button" id="cancelPORDBtn" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
+                    Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// Initialize Firebase
+const db = firebase.firestore();
+
+// Modal elements
+const ssyModal = document.getElementById('addSSYModal');
+const pordModal = document.getElementById('addPORDModal');
+const addSSYBtn = document.getElementById('addSSYBtn');
+const addPORDBtn = document.getElementById('addPORDBtn');
+const cancelSSYBtn = document.getElementById('cancelSSYBtn');
+const cancelPORDBtn = document.getElementById('cancelPORDBtn');
+const saveSSYBtn = document.getElementById('saveSSYBtn');
+const savePORDBtn = document.getElementById('savePORDBtn');
+
+// Show modals
+addSSYBtn.addEventListener('click', () => {
+    ssyModal.classList.remove('hidden');
+});
+
+addPORDBtn.addEventListener('click', () => {
+    pordModal.classList.remove('hidden');
+});
+
+// Hide modals
+cancelSSYBtn.addEventListener('click', () => {
+    ssyModal.classList.add('hidden');
+});
+
+cancelPORDBtn.addEventListener('click', () => {
+    pordModal.classList.add('hidden');
+});
+
+// Save Sukanya Scheme
+saveSSYBtn.addEventListener('click', async () => {
+    const accountNumber = document.getElementById('ssyAccountNumber').value;
+    const girlsName = document.getElementById('girlsName').value;
+    const dob = document.getElementById('dob').value;
+    const annualDeposit = parseFloat(document.getElementById('annualDeposit').value);
+    const startDate = document.getElementById('ssyStartDate').value;
+    const maturityDate = document.getElementById('ssyMaturityDate').value;
+
+    try {
+        // Calculate current value based on duration and interest rate
+        const start = new Date(startDate);
+        const maturity = new Date(maturityDate);
+        const today = new Date();
+        
+        // Simple calculation for current value (can be enhanced with actual SSY interest rate)
+        const totalDuration = maturity - start;
+        const elapsedDuration = today - start;
+        const progress = elapsedDuration / totalDuration;
+        
+        // Assuming 8.0% annual interest rate for SSY
+        const currentValue = annualDeposit * Math.pow(1.08, progress);
+
+        // Add to Firestore
+        const userId = firebase.auth().currentUser.uid;
+        const ssyRef = db.collection('users').doc(userId).collection('ssy').doc(accountNumber);
+        
+        await ssyRef.set({
+            accountNumber,
+            girlsName,
+            dob,
+            annualDeposit,
+            startDate,
+            maturityDate,
+            currentValue,
+            lastUpdated: firebase.firestore.FieldValue.serverTimestamp()
+        });
+
+        // Update user's total other investments value
+        const userRef = db.collection('users').doc(userId);
+        await userRef.update({
+            otherValue: firebase.firestore.FieldValue.increment(currentValue),
+            totalInvestment: firebase.firestore.FieldValue.increment(annualDeposit),
+            currentValue: firebase.firestore.FieldValue.increment(currentValue)
+        });
+
+        ssyModal.classList.add('hidden');
+        updateOtherInvestments();
+    } catch (error) {
+        console.error('Error adding SSY account:', error);
+        alert('Error adding SSY account. Please try again.');
+    }
+});
+
+// Save Post Office RD
+savePORDBtn.addEventListener('click', async () => {
+    const accountNumber = document.getElementById('pordAccountNumber').value;
+    const monthlyDeposit = parseFloat(document.getElementById('monthlyDeposit').value);
+    const interestRate = parseFloat(document.getElementById('interestRate').value);
+    const startDate = document.getElementById('pordStartDate').value;
+    const maturityDate = document.getElementById('pordMaturityDate').value;
+
+    try {
+        // Calculate current value based on duration and interest rate
+        const start = new Date(startDate);
+        const maturity = new Date(maturityDate);
+        const today = new Date();
+        
+        // Simple calculation for current value (can be enhanced with actual RD interest rate)
+        const totalDuration = maturity - start;
+        const elapsedDuration = today - start;
+        const progress = elapsedDuration / totalDuration;
+        
+        // Calculate current value with compound interest
+        const monthlyRate = interestRate / 12 / 100;
+        const monthsElapsed = Math.floor(elapsedDuration / (1000 * 60 * 60 * 24 * 30));
+        const currentValue = monthlyDeposit * ((Math.pow(1 + monthlyRate, monthsElapsed) - 1) / monthlyRate);
+
+        // Add to Firestore
+        const userId = firebase.auth().currentUser.uid;
+        const pordRef = db.collection('users').doc(userId).collection('pord').doc(accountNumber);
+        
+        await pordRef.set({
+            accountNumber,
+            monthlyDeposit,
+            interestRate,
+            startDate,
+            maturityDate,
+            currentValue,
+            lastUpdated: firebase.firestore.FieldValue.serverTimestamp()
+        });
+
+        // Update user's total other investments value
+        const userRef = db.collection('users').doc(userId);
+        await userRef.update({
+            otherValue: firebase.firestore.FieldValue.increment(currentValue),
+            totalInvestment: firebase.firestore.FieldValue.increment(monthlyDeposit * monthsElapsed),
+            currentValue: firebase.firestore.FieldValue.increment(currentValue)
+        });
+
+        pordModal.classList.add('hidden');
+        updateOtherInvestments();
+    } catch (error) {
+        console.error('Error adding Post Office RD account:', error);
+        alert('Error adding Post Office RD account. Please try again.');
+    }
+});
+
+// Function to update other investments
+async function updateOtherInvestments() {
+    try {
+        const userId = firebase.auth().currentUser.uid;
+        const ssySnapshot = await db.collection('users').doc(userId).collection('ssy').get();
+        const pordSnapshot = await db.collection('users').doc(userId).collection('pord').get();
+        
+        // Update SSY accounts
+        const ssyTbody = document.getElementById('ssyAccounts');
+        ssyTbody.innerHTML = '';
+
+        // Update Post Office RD accounts
+        const pordTbody = document.getElementById('pordAccounts');
+        pordTbody.innerHTML = '';
+
+        let totalInvestment = 0;
+        let currentValue = 0;
+        let totalReturns = 0;
+
+        // Process SSY accounts
+        ssySnapshot.forEach(doc => {
+            const ssy = doc.data();
+            totalInvestment += ssy.annualDeposit;
+            currentValue += ssy.currentValue;
+            totalReturns += (ssy.currentValue - ssy.annualDeposit);
+
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                    ${ssy.accountNumber}
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    ${ssy.girlsName}
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    ${new Date(ssy.dob).toLocaleDateString()}
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    ₹${ssy.annualDeposit.toFixed(2)}
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    ${new Date(ssy.startDate).toLocaleDateString()}
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    ${new Date(ssy.maturityDate).toLocaleDateString()}
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    ₹${ssy.currentValue.toFixed(2)}
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    <button class="text-red-600 hover:text-red-900" onclick="deleteSSY('${ssy.accountNumber}')">
+                        Delete
+                    </button>
+                </td>
+            `;
+            ssyTbody.appendChild(row);
+        });
+
+        // Process Post Office RD accounts
+        pordSnapshot.forEach(doc => {
+            const pord = doc.data();
+            const monthsElapsed = Math.floor((new Date() - new Date(pord.startDate)) / (1000 * 60 * 60 * 24 * 30));
+            totalInvestment += pord.monthlyDeposit * monthsElapsed;
+            currentValue += pord.currentValue;
+            totalReturns += (pord.currentValue - (pord.monthlyDeposit * monthsElapsed));
+
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                    ${pord.accountNumber}
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    ₹${pord.monthlyDeposit.toFixed(2)}
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    ${pord.interestRate}%
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    ${new Date(pord.startDate).toLocaleDateString()}
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    ${new Date(pord.maturityDate).toLocaleDateString()}
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    ₹${pord.currentValue.toFixed(2)}
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    <button class="text-red-600 hover:text-red-900" onclick="deletePORD('${pord.accountNumber}')">
+                        Delete
+                    </button>
+                </td>
+            `;
+            pordTbody.appendChild(row);
+        });
+
+        // Update summary stats
+        document.getElementById('totalOtherInvestment').textContent = totalInvestment.toFixed(2);
+        document.getElementById('currentOtherValue').textContent = currentValue.toFixed(2);
+        document.getElementById('totalOtherReturns').textContent = totalReturns.toFixed(2);
+    } catch (error) {
+        console.error('Error updating other investments:', error);
+    }
+}
+
+// Function to delete SSY account
+async function deleteSSY(accountNumber) {
+    if (!confirm('Are you sure you want to delete this SSY account?')) {
+        return;
+    }
+
+    try {
+        const userId = firebase.auth().currentUser.uid;
+        const ssyRef = db.collection('users').doc(userId).collection('ssy').doc(accountNumber);
+        const ssyDoc = await ssyRef.get();
+        const ssy = ssyDoc.data();
+
+        // Delete from Firestore
+        await ssyRef.delete();
+
+        // Update user's total other investments value
+        const userRef = db.collection('users').doc(userId);
+        await userRef.update({
+            otherValue: firebase.firestore.FieldValue.increment(-ssy.currentValue),
+            totalInvestment: firebase.firestore.FieldValue.increment(-ssy.annualDeposit),
+            currentValue: firebase.firestore.FieldValue.increment(-ssy.currentValue)
+        });
+
+        updateOtherInvestments();
+    } catch (error) {
+        console.error('Error deleting SSY account:', error);
+        alert('Error deleting SSY account. Please try again.');
+    }
+}
+
+// Function to delete Post Office RD account
+async function deletePORD(accountNumber) {
+    if (!confirm('Are you sure you want to delete this Post Office RD account?')) {
+        return;
+    }
+
+    try {
+        const userId = firebase.auth().currentUser.uid;
+        const pordRef = db.collection('users').doc(userId).collection('pord').doc(accountNumber);
+        const pordDoc = await pordRef.get();
+        const pord = pordDoc.data();
+
+        // Delete from Firestore
+        await pordRef.delete();
+
+        // Update user's total other investments value
+        const userRef = db.collection('users').doc(userId);
+        await userRef.update({
+            otherValue: firebase.firestore.FieldValue.increment(-pord.currentValue),
+            totalInvestment: firebase.firestore.FieldValue.increment(-(pord.monthlyDeposit * Math.floor((new Date() - new Date(pord.startDate)) / (1000 * 60 * 60 * 24 * 30)))),
+            currentValue: firebase.firestore.FieldValue.increment(-pord.currentValue)
+        });
+
+        updateOtherInvestments();
+    } catch (error) {
+        console.error('Error deleting Post Office RD account:', error);
+        alert('Error deleting Post Office RD account. Please try again.');
+    }
+}
+
+// Update other investments when page loads
+document.addEventListener('DOMContentLoaded', updateOtherInvestments);
+
+// Listen for real-time updates
+firebase.auth().onAuthStateChanged((user) => {
+    if (user) {
+        const userId = user.uid;
+        db.collection('users').doc(userId).collection('ssy').onSnapshot((snapshot) => {
+            updateOtherInvestments();
+        });
+        db.collection('users').doc(userId).collection('pord').onSnapshot((snapshot) => {
+            updateOtherInvestments();
+        });
+    }
+});
+</script>
+{% endblock %} 
