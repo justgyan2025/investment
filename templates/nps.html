@@ -5,9 +5,39 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
         <div class="flex justify-between items-center">
             <h1 class="text-2xl font-semibold text-gray-900">National Pension System (NPS)</h1>
-            <button id="addNPSBtn" class="bg-indigo-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-indigo-700">
-                Add NPS Scheme
-            </button>
+        </div>
+
+        <!-- NPS Information Section -->
+        <div class="mt-6 bg-white shadow rounded-lg">
+            <div class="px-4 py-5 sm:p-6">
+                <h3 class="text-lg leading-6 font-medium text-gray-900 mb-4">
+                    About NPS Accounts
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <h4 class="font-medium text-indigo-600 mb-2">Tier 1 Account</h4>
+                        <p class="text-gray-600 text-sm">Tier 1 is a mandatory retirement account with restrictions on withdrawals until retirement. Contributions to Tier 1 qualify for tax benefits under Section 80C and Section 80CCD(1B) of the Income Tax Act.</p>
+                        <p class="text-gray-600 text-sm mt-2">Key features:</p>
+                        <ul class="list-disc list-inside text-sm text-gray-600 mt-1">
+                            <li>Partial withdrawals allowed after 3 years for specific needs</li>
+                            <li>Tax benefits on contributions up to ₹1.5 lakhs under Section 80C</li>
+                            <li>Additional tax deduction of up to ₹50,000 under Section 80CCD(1B)</li>
+                            <li>Mandatory 40% annuity purchase at retirement</li>
+                        </ul>
+                    </div>
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <h4 class="font-medium text-indigo-600 mb-2">Tier 2 Account</h4>
+                        <p class="text-gray-600 text-sm">Tier 2 is a voluntary savings account with no withdrawal restrictions. It works similar to a mutual fund investment but with typically lower fund management charges.</p>
+                        <p class="text-gray-600 text-sm mt-2">Key features:</p>
+                        <ul class="list-disc list-inside text-sm text-gray-600 mt-1">
+                            <li>No restrictions on withdrawals</li>
+                            <li>No tax benefits on contributions (except for government employees)</li>
+                            <li>Lower expense ratio compared to mutual funds</li>
+                            <li>Must have an active Tier 1 account to open Tier 2</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -103,44 +133,221 @@
                     <h3 class="text-lg leading-6 font-medium text-gray-900">
                         NPS Holdings
                     </h3>
-                    <div class="mt-5">
-                        <div class="flex flex-col">
-                            <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-                                <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-                                    <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-                                        <table class="min-w-full divide-y divide-gray-200">
-                                            <thead class="bg-gray-50">
-                                                <tr>
-                                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                        Scheme Code
-                                                    </th>
-                                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                        Scheme Name
-                                                    </th>
-                                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                        Units
-                                                    </th>
-                                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                        Avg Price
-                                                    </th>
-                                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                        Current NAV
-                                                    </th>
-                                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                        Total Value
-                                                    </th>
-                                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                        Returns
-                                                    </th>
-                                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                        Actions
-                                                    </th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="npsHoldings" class="bg-white divide-y divide-gray-200">
-                                                <!-- NPS holdings will be populated here -->
-                                            </tbody>
-                                        </table>
+                    
+                    <!-- Tabs -->
+                    <div class="mt-4 border-b border-gray-200">
+                        <nav class="-mb-px flex" aria-label="Tabs">
+                            <button id="tier1Tab" class="tab-button border-indigo-500 text-indigo-600 w-1/2 py-4 px-1 text-center border-b-2 font-medium text-sm">
+                                Tier 1 Investment
+                            </button>
+                            <button id="tier2Tab" class="tab-button border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 w-1/2 py-4 px-1 text-center border-b-2 font-medium text-sm">
+                                Tier 2 Investment
+                            </button>
+                        </nav>
+                    </div>
+                    
+                    <!-- Tier 1 Content -->
+                    <div id="tier1Content" class="tab-content mt-6">
+                        <div class="bg-indigo-50 p-4 mb-4 rounded-lg">
+                            <h4 class="font-medium text-indigo-800">Tier 1 Summary</h4>
+                            <div class="grid grid-cols-3 gap-4 mt-2">
+                                <div>
+                                    <p class="text-xs text-gray-500">Total Investment</p>
+                                    <div class="flex items-center">
+                                        <p class="font-medium">₹<span id="tier1TotalInvestment">0</span></p>
+                                        <button id="editTier1InvestmentBtn" class="ml-2 p-1 bg-indigo-500 text-white rounded hover:bg-indigo-600 focus:outline-none px-2 text-xs">
+                                            Update
+                                        </button>
+                                    </div>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-gray-500">Current Value</p>
+                                    <p class="font-medium">₹<span id="tier1CurrentValue">0</span></p>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-gray-500">Returns</p>
+                                    <p class="font-medium">₹<span id="tier1Returns">0</span></p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Add New Tier 1 Fund Form -->
+                        <div class="form-section mt-6">
+                            <h3 class="form-title">Add New Tier 1 Fund</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="input-group">
+                                    <label for="tier1SchemeCode">Scheme Code</label>
+                                    <div class="flex space-x-2">
+                                        <input type="text" id="tier1SchemeCode" placeholder="Enter Scheme Code" class="w-full">
+                                        <button id="tier1FetchBtn" class="fetch-button">Fetch</button>
+                                    </div>
+                                </div>
+                                
+                                <div class="input-group">
+                                    <label for="tier1Units">Number of Units</label>
+                                    <input type="number" id="tier1Units" placeholder="Number of Units" min="0" step="0.01">
+                                </div>
+                            </div>
+                            
+                            <div id="tier1SchemeDetails" class="scheme-info mt-4" style="display: none;">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div>
+                                        <p class="text-sm font-medium text-gray-500">Scheme Name</p>
+                                        <p id="tier1SchemeName" class="text-base font-semibold">Waiting...</p>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm font-medium text-gray-500">Current NAV</p>
+                                        <p id="tier1CurrentNav" class="text-base font-semibold">Waiting...</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-4">
+                                <button id="tier1AddFundBtn" class="add-fund-button bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded">Add Fund</button>
+                            </div>
+                        </div>
+                        
+                        <!-- Tier 1 Holdings Table -->
+                        <div class="mt-6">
+                            <h3 class="text-base font-medium text-gray-700 mb-2">Your Tier 1 Holdings</h3>
+                            <div class="flex flex-col">
+                                <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                                    <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+                                        <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+                                            <table class="min-w-full divide-y divide-gray-200">
+                                                <thead class="bg-gray-50">
+                                                    <tr>
+                                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                            Scheme Name
+                                                        </th>
+                                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                            Current NAV
+                                                        </th>
+                                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                            Units
+                                                        </th>
+                                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                            Current Value
+                                                        </th>
+                                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                            Actions
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="tier1Holdings" class="bg-white divide-y divide-gray-200">
+                                                    <!-- Tier 1 holdings will be populated here -->
+                                                    <tr>
+                                                        <td colspan="5" class="px-6 py-4 text-center text-gray-500">
+                                                            <i class="fas fa-info-circle mr-2"></i>No Tier 1 investments found.
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Tier 2 Content -->
+                    <div id="tier2Content" class="tab-content mt-6 hidden">
+                        <div class="bg-green-50 p-4 mb-4 rounded-lg">
+                            <h4 class="font-medium text-green-800">Tier 2 Summary</h4>
+                            <div class="grid grid-cols-3 gap-4 mt-2">
+                                <div>
+                                    <p class="text-xs text-gray-500">Total Investment</p>
+                                    <div class="flex items-center">
+                                        <p class="font-medium">₹<span id="tier2TotalInvestment">0</span></p>
+                                        <button id="editTier2InvestmentBtn" class="ml-2 p-1 bg-green-500 text-white rounded hover:bg-green-600 focus:outline-none px-2 text-xs">
+                                            Update
+                                        </button>
+                                    </div>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-gray-500">Current Value</p>
+                                    <p class="font-medium">₹<span id="tier2CurrentValue">0</span></p>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-gray-500">Returns</p>
+                                    <p class="font-medium">₹<span id="tier2Returns">0</span></p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Add New Tier 2 Fund Form -->
+                        <div class="form-section mt-6">
+                            <h3 class="form-title">Add New Tier 2 Fund</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="input-group">
+                                    <label for="tier2SchemeCode">Scheme Code</label>
+                                    <div class="flex space-x-2">
+                                        <input type="text" id="tier2SchemeCode" placeholder="Enter Scheme Code" class="w-full">
+                                        <button id="tier2FetchBtn" class="fetch-button">Fetch</button>
+                                    </div>
+                                </div>
+                                
+                                <div class="input-group">
+                                    <label for="tier2Units">Number of Units</label>
+                                    <input type="number" id="tier2Units" placeholder="Number of Units" min="0" step="0.01">
+                                </div>
+                            </div>
+                            
+                            <div id="tier2SchemeDetails" class="scheme-info mt-4" style="display: none;">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div>
+                                        <p class="text-sm font-medium text-gray-500">Scheme Name</p>
+                                        <p id="tier2SchemeName" class="text-base font-semibold">Waiting...</p>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm font-medium text-gray-500">Current NAV</p>
+                                        <p id="tier2CurrentNav" class="text-base font-semibold">Waiting...</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-4">
+                                <button id="tier2AddFundBtn" class="add-fund-button bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded">Add Fund</button>
+                            </div>
+                        </div>
+                        
+                        <!-- Tier 2 Holdings Table -->
+                        <div class="mt-6">
+                            <h3 class="text-base font-medium text-gray-700 mb-2">Your Tier 2 Holdings</h3>
+                            <div class="flex flex-col">
+                                <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                                    <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+                                        <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+                                            <table class="min-w-full divide-y divide-gray-200">
+                                                <thead class="bg-gray-50">
+                                                    <tr>
+                                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                            Scheme Name
+                                                        </th>
+                                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                            Current NAV
+                                                        </th>
+                                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                            Units
+                                                        </th>
+                                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                            Current Value
+                                                        </th>
+                                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                            Actions
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="tier2Holdings" class="bg-white divide-y divide-gray-200">
+                                                    <!-- Tier 2 holdings will be populated here -->
+                                                    <tr>
+                                                        <td colspan="5" class="px-6 py-4 text-center text-gray-500">
+                                                            <i class="fas fa-info-circle mr-2"></i>No Tier 2 investments found.
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -169,6 +376,13 @@
                             <input type="text" name="schemeCode" id="schemeCode" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                         </div>
                         <div class="mt-4">
+                            <label for="accountTier" class="block text-sm font-medium text-gray-700">Account Tier</label>
+                            <select id="accountTier" name="accountTier" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                <option value="1">Tier 1</option>
+                                <option value="2">Tier 2</option>
+                            </select>
+                        </div>
+                        <div class="mt-4">
                             <label for="units" class="block text-sm font-medium text-gray-700">Units</label>
                             <input type="number" name="units" id="units" step="0.01" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                         </div>
@@ -191,182 +405,1374 @@
     </div>
 </div>
 
+<!-- Common scheme codes info section -->
+<div class="form-section mt-6">
+    <h3 class="form-title">Common NPS Scheme Codes</h3>
+    <p class="text-sm text-gray-600 mb-4">You can use any of these common scheme codes to fetch details:</p>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+            <h4 class="text-base font-semibold text-indigo-700 mb-2">SBI Pension Fund</h4>
+            <ul class="text-sm">
+                <li><strong>SM001149</strong> - SBI Scheme E (Equity) - Tier 1</li>
+                <li><strong>SM001150</strong> - SBI Scheme E (Equity) - Tier 2</li>
+                <li><strong>SM001151</strong> - SBI Scheme C (Corporate Bond) - Tier 1</li>
+                <li><strong>SM001152</strong> - SBI Scheme C (Corporate Bond) - Tier 2</li>
+                <li><strong>SM001153</strong> - SBI Scheme G (Govt. Securities) - Tier 1</li>
+                <li><strong>SM001154</strong> - SBI Scheme G (Govt. Securities) - Tier 2</li>
+            </ul>
+        </div>
+        <div>
+            <h4 class="text-base font-semibold text-indigo-700 mb-2">HDFC Pension Fund</h4>
+            <ul class="text-sm">
+                <li><strong>SM001173</strong> - HDFC Scheme E (Equity) - Tier 1</li>
+                <li><strong>SM001174</strong> - HDFC Scheme E (Equity) - Tier 2</li>
+                <li><strong>SM001175</strong> - HDFC Scheme C (Corporate Bond) - Tier 1</li>
+                <li><strong>SM001176</strong> - HDFC Scheme C (Corporate Bond) - Tier 2</li>
+                <li><strong>SM001177</strong> - HDFC Scheme G (Govt. Securities) - Tier 1</li>
+                <li><strong>SM001178</strong> - HDFC Scheme G (Govt. Securities) - Tier 2</li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="mt-4 text-sm text-gray-600">
+        <p>Click on any scheme code to copy it to clipboard:</p>
+        <div class="flex flex-wrap gap-2 mt-2">
+            <button class="scheme-code-btn px-3 py-1 bg-blue-100 text-blue-800 rounded hover:bg-blue-200" data-code="SM001149">SM001149</button>
+            <button class="scheme-code-btn px-3 py-1 bg-blue-100 text-blue-800 rounded hover:bg-blue-200" data-code="SM001150">SM001150</button>
+            <button class="scheme-code-btn px-3 py-1 bg-blue-100 text-blue-800 rounded hover:bg-blue-200" data-code="SM001151">SM001151</button>
+            <button class="scheme-code-btn px-3 py-1 bg-blue-100 text-blue-800 rounded hover:bg-blue-200" data-code="SM001152">SM001152</button>
+            <button class="scheme-code-btn px-3 py-1 bg-blue-100 text-blue-800 rounded hover:bg-blue-200" data-code="SM001153">SM001153</button>
+            <button class="scheme-code-btn px-3 py-1 bg-blue-100 text-blue-800 rounded hover:bg-blue-200" data-code="SM001154">SM001154</button>
+            <button class="scheme-code-btn px-3 py-1 bg-blue-100 text-blue-800 rounded hover:bg-blue-200" data-code="SM001173">SM001173</button>
+            <button class="scheme-code-btn px-3 py-1 bg-blue-100 text-blue-800 rounded hover:bg-blue-200" data-code="SM001174">SM001174</button>
+        </div>
+    </div>
+</div>
+
 <script>
 // Initialize Firebase
 const db = firebase.firestore();
 
-// Modal elements
-const modal = document.getElementById('addNPSModal');
-const addNPSBtn = document.getElementById('addNPSBtn');
-const cancelNPSBtn = document.getElementById('cancelNPSBtn');
-const saveNPSBtn = document.getElementById('saveNPSBtn');
+// Tab elements
+const tier1Tab = document.getElementById('tier1Tab');
+const tier2Tab = document.getElementById('tier2Tab');
+const tier1Content = document.getElementById('tier1Content');
+const tier2Content = document.getElementById('tier2Content');
 
-// Show modal
-addNPSBtn.addEventListener('click', () => {
-    modal.classList.remove('hidden');
+// Tab switching functionality
+tier1Tab.addEventListener('click', () => {
+    tier1Tab.classList.add('border-indigo-500', 'text-indigo-600');
+    tier1Tab.classList.remove('border-transparent', 'text-gray-500');
+    tier2Tab.classList.add('border-transparent', 'text-gray-500');
+    tier2Tab.classList.remove('border-indigo-500', 'text-indigo-600');
+    tier1Content.classList.remove('hidden');
+    tier2Content.classList.add('hidden');
 });
 
-// Hide modal
-cancelNPSBtn.addEventListener('click', () => {
-    modal.classList.add('hidden');
+tier2Tab.addEventListener('click', () => {
+    tier2Tab.classList.add('border-indigo-500', 'text-indigo-600');
+    tier2Tab.classList.remove('border-transparent', 'text-gray-500');
+    tier1Tab.classList.add('border-transparent', 'text-gray-500');
+    tier1Tab.classList.remove('border-indigo-500', 'text-indigo-600');
+    tier2Content.classList.remove('hidden');
+    tier1Content.classList.add('hidden');
 });
 
-// Save NPS scheme
-saveNPSBtn.addEventListener('click', async () => {
-    const schemeCode = document.getElementById('schemeCode').value;
-    const units = parseFloat(document.getElementById('units').value);
-    const avgPrice = parseFloat(document.getElementById('avgPrice').value);
+// Tier 1 form elements
+const tier1SchemeCode = document.getElementById('tier1SchemeCode');
+const tier1FetchBtn = document.getElementById('tier1FetchBtn');
+const tier1SchemeInfo = document.getElementById('tier1SchemeInfo');
+const tier1SchemeName = document.getElementById('tier1SchemeName');
+const tier1CurrentNav = document.getElementById('tier1CurrentNav');
+const tier1Units = document.getElementById('tier1Units');
+const tier1SaveBtn = document.getElementById('tier1SaveBtn');
+const addTier1InvestmentBtn = document.getElementById('addTier1InvestmentBtn');
+const editTier1InvestmentBtn = document.getElementById('editTier1InvestmentBtn');
 
+// Tier 2 form elements
+const tier2SchemeCode = document.getElementById('tier2SchemeCode');
+const tier2FetchBtn = document.getElementById('tier2FetchBtn');
+const tier2SchemeInfo = document.getElementById('tier2SchemeInfo');
+const tier2SchemeName = document.getElementById('tier2SchemeName');
+const tier2CurrentNav = document.getElementById('tier2CurrentNav');
+const tier2Units = document.getElementById('tier2Units');
+const tier2SaveBtn = document.getElementById('tier2SaveBtn');
+const addTier2InvestmentBtn = document.getElementById('addTier2InvestmentBtn');
+const editTier2InvestmentBtn = document.getElementById('editTier2InvestmentBtn');
+
+// Current fetched scheme data
+let tier1SchemeData = null;
+let tier2SchemeData = null;
+
+// Tier total amounts
+let tier1TotalInvestmentAmount = 0;
+let tier2TotalInvestmentAmount = 0;
+let tier1TotalCurrentValue = 0;
+let tier2TotalCurrentValue = 0;
+
+// Edit tier total investment button event listeners
+editTier1InvestmentBtn.addEventListener('click', function() {
+    console.log("Edit Tier 1 button clicked");
+    const tier1Total = parseFloat(window.tier1TotalInvestment || 0);
+    console.log("Passing numeric value to editTierTotalInvestment:", tier1Total);
+    editTierTotalInvestment('tier1', tier1Total);
+});
+
+editTier2InvestmentBtn.addEventListener('click', function() {
+    console.log("Edit Tier 2 button clicked");
+    const tier2Total = parseFloat(window.tier2TotalInvestment || 0);
+    console.log("Passing numeric value to editTierTotalInvestment:", tier2Total);
+    editTierTotalInvestment('tier2', tier2Total);
+});
+
+// Function to edit the total investment for a tier
+async function editTierTotalInvestment(tier, currentAmount) {
     try {
-        // Fetch current NAV
-        const response = await fetch(`/api/nps/${schemeCode}`);
-        const data = await response.json();
+        console.log(`Editing tier ${tier} with current amount:`, currentAmount);
         
-        if (data.error) {
-            alert(data.error);
+        // Ensure we have a number for currentAmount, not a DOM element
+        if (currentAmount && typeof currentAmount === 'object') {
+            console.log("currentAmount is a DOM element, extracting numeric value");
+            currentAmount = 0;
+        }
+        
+        // Use the global tier investment amount if currentAmount is not a valid number
+        if (currentAmount === undefined || isNaN(parseFloat(currentAmount))) {
+            if (tier === 'tier1' || tier === 1) {
+                currentAmount = window.tier1TotalInvestment || 0;
+                console.log("Using window.tier1TotalInvestment:", currentAmount);
+            } else if (tier === 'tier2' || tier === 2) {
+                currentAmount = window.tier2TotalInvestment || 0;
+                console.log("Using window.tier2TotalInvestment:", currentAmount);
+            } else {
+                console.error("Invalid tier parameter:", tier);
+                alert("Error: Invalid tier parameter");
+                return;
+            }
+        } else {
+            currentAmount = parseFloat(currentAmount);
+        }
+        
+        const tierLabel = (tier === 'tier1' || tier === 1) ? 'Tier 1' : 'Tier 2';
+        
+        // Prompt for new investment amount
+        const newAmountStr = prompt(`Edit total ${tierLabel} investment amount:`, currentAmount.toFixed(2));
+        
+        // Check if user cancelled
+        if (newAmountStr === null) {
             return;
         }
-
-        const currentNav = parseFloat(data.nav);
-        const totalValue = units * currentNav;
-        const totalInvestment = units * avgPrice;
-        const returns = totalValue - totalInvestment;
-        const returnsPercentage = (returns / totalInvestment) * 100;
-
-        // Add to Firestore
-        const userId = firebase.auth().currentUser.uid;
-        const npsRef = db.collection('users').doc(userId).collection('nps').doc(schemeCode);
         
-        await npsRef.set({
-            schemeCode,
-            schemeName: data.name,
-            units,
-            avgPrice,
-            currentNav,
-            totalValue,
-            totalInvestment,
-            returns,
-            returnsPercentage,
+        // Validate input
+        const newAmount = parseFloat(newAmountStr);
+        if (isNaN(newAmount) || newAmount < 0) {
+            alert('Please enter a valid investment amount.');
+            return;
+        }
+        
+        // Standardize tier format for document ID
+        const metaDocId = (tier === 'tier1' || tier === 1) ? 'tier1_total' : 'tier2_total';
+        
+        const userId = firebase.auth().currentUser.uid;
+        console.log(`Updating metadata document: ${metaDocId} for user: ${userId}`);
+        const metaRef = db.collection('users').doc(userId).collection('nps_metadata').doc(metaDocId);
+        
+        // Update the metadata with the new total
+        await metaRef.update({
+            totalInvestment: newAmount,
             lastUpdated: firebase.firestore.FieldValue.serverTimestamp()
         });
-
-        // Update user's total NPS value
-        const userRef = db.collection('users').doc(userId);
-        await userRef.update({
-            npsValue: firebase.firestore.FieldValue.increment(totalValue),
-            totalInvestment: firebase.firestore.FieldValue.increment(totalInvestment),
-            currentValue: firebase.firestore.FieldValue.increment(totalValue)
-        });
-
-        modal.classList.add('hidden');
+        
+        // Calculate the change in total investment
+        const difference = newAmount - currentAmount;
+        console.log(`Investment change: ${difference} (${currentAmount} → ${newAmount})`);
+        
+        // Update the user's total investment
+        if (difference !== 0) {
+            const userRef = db.collection('users').doc(userId);
+            await userRef.update({
+                totalInvestment: firebase.firestore.FieldValue.increment(difference)
+            });
+        }
+        
+        alert(`${tierLabel} total investment updated successfully.`);
+        
+        // Refresh the display
         updateNPSHoldings();
+        
     } catch (error) {
-        console.error('Error adding NPS scheme:', error);
-        alert('Error adding NPS scheme. Please try again.');
+        console.error('Error updating total investment:', error);
+        console.log('Error details:', error.message, error.code);
+        alert(`Error updating total investment: ${error.message}`);
+    }
+}
+
+// Function to fetch scheme details
+async function fetchSchemeDetails(tier) {
+    try {
+        const schemeCodeElement = document.getElementById(`${tier}SchemeCode`);
+        const schemeCode = schemeCodeElement.value.trim();
+        
+        if (!schemeCode) {
+            alert('Please enter a scheme code.');
+            return;
+        }
+        
+        // Show waiting status
+        const schemeDetailsElement = document.getElementById(`${tier}SchemeDetails`);
+        schemeDetailsElement.style.display = 'block';
+        document.getElementById(`${tier}SchemeName`).textContent = 'Fetching...';
+        document.getElementById(`${tier}CurrentNav`).textContent = 'Fetching...';
+        
+        console.log(`Fetching scheme details for code: ${schemeCode}`);
+        
+        try {
+            // Make the API call with proper CORS handling
+            const apiUrl = `https://npsnav.in/api/detailed/${schemeCode}`;
+            console.log(`API URL: ${apiUrl}`);
+            
+            // Use a proxy if CORS is an issue or make a direct call
+            const response = await fetch(apiUrl, {
+                method: 'GET',
+                headers: {
+                    'Accept': 'application/json'
+                },
+                mode: 'cors' // Try with cors mode first
+            });
+            
+            if (!response.ok) {
+                throw new Error(`API returned status: ${response.status}`);
+            }
+            
+            const data = await response.json();
+            console.log('API response data:', data);
+            
+            if (!data || !data['Scheme Name'] || !data['NAV']) {
+                throw new Error('Invalid API response format');
+            }
+            
+            // Create scheme data object
+            const schemeData = {
+                scheme_name: data['Scheme Name'],
+                current_nav: data['NAV']
+            };
+            
+            console.log(`Processed scheme data:`, schemeData);
+            
+            // Store the scheme data in the appropriate variable for later use
+            if (tier === 'tier1') {
+                tier1SchemeData = schemeData;
+            } else {
+                tier2SchemeData = schemeData;
+            }
+            
+            // Update UI with scheme details
+            document.getElementById(`${tier}SchemeName`).textContent = schemeData.scheme_name;
+            document.getElementById(`${tier}CurrentNav`).textContent = `₹${schemeData.current_nav}`;
+            
+        } catch (apiError) {
+            console.error('API Error:', apiError);
+            
+            // Fallback to mocked data for testing if API fails
+            console.log('Falling back to mock data for testing');
+            const mockData = {
+                scheme_name: `NPS ${schemeCode} Scheme`,
+                current_nav: (Math.random() * 30 + 20).toFixed(2)
+            };
+            
+            // Store the mock data
+            if (tier === 'tier1') {
+                tier1SchemeData = mockData;
+            } else {
+                tier2SchemeData = mockData;
+            }
+            
+            // Update UI with mock data
+            document.getElementById(`${tier}SchemeName`).textContent = mockData.scheme_name;
+            document.getElementById(`${tier}CurrentNav`).textContent = `₹${mockData.current_nav}`;
+            
+            // Show warning about using mock data
+            alert(`Could not fetch real data: ${apiError.message}. Using sample data for testing.`);
+        }
+    } catch (error) {
+        console.error(`Error in fetchSchemeDetails for ${tier}:`, error);
+        alert('Error fetching scheme details. Please try again.');
+        
+        // Reset UI on error
+        document.getElementById(`${tier}SchemeDetails`).style.display = 'none';
+    }
+}
+
+// Calculate investment amount from units and NAV
+function calculateInvestmentAmount(units, currentNav) {
+    if (!units || !currentNav || units <= 0 || currentNav <= 0) {
+        return 0;
+    }
+    return units * currentNav;
+}
+
+// Common function to validate form data
+function validateFormData(schemeData, units, tierPrefix) {
+    if (!schemeData) {
+        alert('Please fetch scheme details first');
+        return false;
+    }
+    
+    if (!units || isNaN(units) || units <= 0) {
+        alert('Please enter a valid number of units');
+        document.getElementById(`${tierPrefix}Units`).focus();
+        return false;
+    }
+    
+    return true;
+}
+
+// Fetch button click handlers
+tier1FetchBtn.addEventListener('click', () => {
+    fetchSchemeDetails('tier1');
+});
+
+tier2FetchBtn.addEventListener('click', () => {
+    fetchSchemeDetails('tier2');
+});
+
+// Function to update NPS holdings from Firestore
+async function updateNPSHoldings() {
+    console.log("Starting updateNPSHoldings function");
+    
+    // Clear tables first to prevent duplicates
+    document.getElementById('tier1Holdings').innerHTML = '';
+    document.getElementById('tier2Holdings').innerHTML = '';
+    
+    try {
+        const userId = firebase.auth().currentUser.uid;
+        if (!userId) {
+            console.error("No authenticated user found");
+            return;
+        }
+        
+        console.log(`Updating NPS holdings for user: ${userId}`);
+        
+        // Create a unique request ID to prevent duplicate updates
+        const requestId = Date.now();
+        console.log(`Update request ID: ${requestId}`);
+        
+        // Track processed scheme codes to prevent duplicates
+        const processedTier1Schemes = new Set();
+        const processedTier2Schemes = new Set();
+        
+        // Fetch metadata for tier total investments
+        const tier1MetaRef = db.collection('users').doc(userId).collection('nps_metadata').doc('tier1_total');
+        const tier2MetaRef = db.collection('users').doc(userId).collection('nps_metadata').doc('tier2_total');
+        
+        const [tier1Meta, tier2Meta] = await Promise.all([
+            tier1MetaRef.get(),
+            tier2MetaRef.get()
+        ]);
+        
+        // Get total investments from metadata
+        let tier1TotalInvestment = tier1Meta.exists ? tier1Meta.data().totalInvestment : 0;
+        let tier2TotalInvestment = tier2Meta.exists ? tier2Meta.data().totalInvestment : 0;
+        
+        // Store these values in global variables for use in other functions
+        window.tier1TotalInvestment = tier1TotalInvestment;
+        window.tier2TotalInvestment = tier2TotalInvestment;
+        
+        console.log(`Tier 1 total investment: ${tier1TotalInvestment}`);
+        console.log(`Tier 2 total investment: ${tier2TotalInvestment}`);
+        
+        // Maps to aggregate units for the same scheme code
+        const tier1SchemeMap = new Map();
+        const tier2SchemeMap = new Map();
+        
+        // Fetch holdings
+        const npsRef = db.collection('users').doc(userId).collection('nps');
+        const snapshot = await npsRef.get();
+        
+        if (snapshot.empty) {
+            console.log("No NPS holdings found");
+            
+            // Update empty tables
+            document.getElementById('tier1Holdings').innerHTML = `
+                <tr>
+                    <td colspan="5" class="px-6 py-4 text-center text-gray-500">
+                        <i class="fas fa-info-circle mr-2"></i>No Tier 1 investments found.
+                    </td>
+                </tr>
+            `;
+            
+            document.getElementById('tier2Holdings').innerHTML = `
+                <tr>
+                    <td colspan="5" class="px-6 py-4 text-center text-gray-500">
+                        <i class="fas fa-info-circle mr-2"></i>No Tier 2 investments found.
+                    </td>
+                </tr>
+            `;
+        } else {
+            console.log(`Processing ${snapshot.size} NPS documents`);
+            
+            // First pass: Aggregate data by scheme code
+            snapshot.forEach(doc => {
+                const data = doc.data();
+                const docId = doc.id;
+                
+                // Determine the tier
+                const tier = data.tier || (docId.includes('tier1') ? 'tier1' : 'tier2');
+                const schemeCode = data.scheme_code;
+                
+                if (!schemeCode) {
+                    console.warn(`Document ${docId} has no scheme code, skipping`);
+                    return;
+                }
+                
+                const units = parseFloat(data.units || 0);
+                const nav = parseFloat(data.current_nav || 0);
+                
+                // Create a composite key for unique identification
+                const key = `${schemeCode}`;
+                
+                if (tier === 'tier1') {
+                    if (tier1SchemeMap.has(key)) {
+                        // Update existing entry
+                        const existing = tier1SchemeMap.get(key);
+                        existing.units += units;
+                        existing.docIds.push(docId);
+                        // Use most recent NAV
+                        existing.current_nav = nav;
+                    } else {
+                        // Create new entry
+                        tier1SchemeMap.set(key, {
+                            scheme_code: schemeCode,
+                            scheme_name: data.scheme_name || `Scheme ${schemeCode}`,
+                            units: units,
+                            current_nav: nav,
+                            docIds: [docId]
+                        });
+                    }
+                } else {
+                    if (tier2SchemeMap.has(key)) {
+                        // Update existing entry
+                        const existing = tier2SchemeMap.get(key);
+                        existing.units += units;
+                        existing.docIds.push(docId);
+                        // Use most recent NAV
+                        existing.current_nav = nav;
+                    } else {
+                        // Create new entry
+                        tier2SchemeMap.set(key, {
+                            scheme_code: schemeCode,
+                            scheme_name: data.scheme_name || `Scheme ${schemeCode}`,
+                            units: units,
+                            current_nav: nav,
+                            docIds: [docId]
+                        });
+                    }
+                }
+            });
+            
+            console.log(`Aggregated ${tier1SchemeMap.size} unique Tier 1 schemes`);
+            console.log(`Aggregated ${tier2SchemeMap.size} unique Tier 2 schemes`);
+            
+            // Second pass: Calculate current values and populate tables
+            let tier1CurrentValue = 0;
+            let tier2CurrentValue = 0;
+            
+            // Convert maps to arrays for sorting
+            const tier1Entries = Array.from(tier1SchemeMap.entries()).map(([key, data]) => {
+                const currentValue = data.units * data.current_nav;
+                tier1CurrentValue += currentValue;
+                return {
+                    key,
+                    data,
+                    currentValue,
+                    multipleEntries: data.docIds.length > 1
+                };
+            });
+            
+            const tier2Entries = Array.from(tier2SchemeMap.entries()).map(([key, data]) => {
+                const currentValue = data.units * data.current_nav;
+                tier2CurrentValue += currentValue;
+                return {
+                    key,
+                    data,
+                    currentValue,
+                    multipleEntries: data.docIds.length > 1
+                };
+            });
+            
+            // Sort entries by scheme name
+            tier1Entries.sort((a, b) => a.data.scheme_name.localeCompare(b.data.scheme_name));
+            tier2Entries.sort((a, b) => a.data.scheme_name.localeCompare(b.data.scheme_name));
+            
+            // Populate Tier 1 table
+            const tier1Table = document.getElementById('tier1Holdings');
+            if (tier1Entries.length > 0) {
+                tier1Table.innerHTML = '';
+                
+                tier1Entries.forEach(({ key, data, currentValue, multipleEntries }) => {
+                    // Create a row
+                    const row = document.createElement('tr');
+                    
+                    // Add a visual indicator for combined entries
+                    const nameDisplay = multipleEntries ? 
+                        `${data.scheme_name} <span class="text-xs text-indigo-500">(combined entries)</span>` : 
+                        data.scheme_name;
+                    
+                    row.innerHTML = `
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <div class="text-sm font-medium text-gray-900">${nameDisplay}</div>
+                            <div class="text-xs text-gray-500">${data.scheme_code}</div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <div class="text-sm text-gray-900">₹${parseFloat(data.current_nav).toFixed(2)}</div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <div class="text-sm text-gray-900">${parseFloat(data.units).toFixed(2)}</div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <div class="text-sm text-gray-900">₹${currentValue.toFixed(2)}</div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                            <div class="flex space-x-2">
+                                <button class="btn-edit-nps text-blue-600 hover:text-blue-900 px-2 py-1 rounded border border-blue-300 hover:bg-blue-50 transition-colors"
+                                    data-id="${data.docIds[0]}" data-tier="tier1" data-scheme="${data.scheme_code}" data-units="${data.units}" data-multiple="${multipleEntries}">
+                                    <i class="fas fa-edit mr-1"></i>Edit
+                                </button>
+                                <button class="btn-delete-nps text-red-600 hover:text-red-900 px-2 py-1 rounded border border-red-300 hover:bg-red-50 transition-colors"
+                                    data-id="${data.docIds[0]}" data-tier="tier1" data-scheme="${data.scheme_code}" data-multiple="${multipleEntries}">
+                                    <i class="fas fa-trash mr-1"></i>Delete
+                                </button>
+                            </div>
+                        </td>
+                    `;
+                    tier1Table.appendChild(row);
+                });
+            } else {
+                tier1Table.innerHTML = `
+                    <tr>
+                        <td colspan="5" class="px-6 py-4 text-center text-gray-500">
+                            <i class="fas fa-info-circle mr-2"></i>No Tier 1 investments found.
+                        </td>
+                    </tr>
+                `;
+            }
+            
+            // Populate Tier 2 table
+            const tier2Table = document.getElementById('tier2Holdings');
+            if (tier2Entries.length > 0) {
+                tier2Table.innerHTML = '';
+                
+                tier2Entries.forEach(({ key, data, currentValue, multipleEntries }) => {
+                    // Create a row
+                    const row = document.createElement('tr');
+                    
+                    // Add a visual indicator for combined entries
+                    const nameDisplay = multipleEntries ? 
+                        `${data.scheme_name} <span class="text-xs text-green-500">(combined entries)</span>` : 
+                        data.scheme_name;
+                    
+                    row.innerHTML = `
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <div class="text-sm font-medium text-gray-900">${nameDisplay}</div>
+                            <div class="text-xs text-gray-500">${data.scheme_code}</div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <div class="text-sm text-gray-900">₹${parseFloat(data.current_nav).toFixed(2)}</div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <div class="text-sm text-gray-900">${parseFloat(data.units).toFixed(2)}</div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <div class="text-sm text-gray-900">₹${currentValue.toFixed(2)}</div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                            <div class="flex space-x-2">
+                                <button class="btn-edit-nps text-blue-600 hover:text-blue-900 px-2 py-1 rounded border border-blue-300 hover:bg-blue-50 transition-colors"
+                                    data-id="${data.docIds[0]}" data-tier="tier2" data-scheme="${data.scheme_code}" data-units="${data.units}" data-multiple="${multipleEntries}">
+                                    <i class="fas fa-edit mr-1"></i>Edit
+                                </button>
+                                <button class="btn-delete-nps text-red-600 hover:text-red-900 px-2 py-1 rounded border border-red-300 hover:bg-red-50 transition-colors"
+                                    data-id="${data.docIds[0]}" data-tier="tier2" data-scheme="${data.scheme_code}" data-multiple="${multipleEntries}">
+                                    <i class="fas fa-trash mr-1"></i>Delete
+                                </button>
+                            </div>
+                        </td>
+                    `;
+                    tier2Table.appendChild(row);
+                });
+            } else {
+                tier2Table.innerHTML = `
+                    <tr>
+                        <td colspan="5" class="px-6 py-4 text-center text-gray-500">
+                            <i class="fas fa-info-circle mr-2"></i>No Tier 2 investments found.
+                        </td>
+                    </tr>
+                `;
+            }
+            
+            // Calculate returns
+            const tier1Returns = tier1CurrentValue - tier1TotalInvestment;
+            const tier2Returns = tier2CurrentValue - tier2TotalInvestment;
+            
+            // Calculate return percentages
+            const tier1ReturnsPercentage = tier1TotalInvestment > 0 ? 
+                (tier1Returns / tier1TotalInvestment) * 100 : 0;
+            const tier2ReturnsPercentage = tier2TotalInvestment > 0 ? 
+                (tier2Returns / tier2TotalInvestment) * 100 : 0;
+            
+            // Update summary boxes for Tier 1
+            document.getElementById('tier1TotalInvestment').textContent = parseFloat(tier1TotalInvestment).toFixed(2);
+            document.getElementById('tier1CurrentValue').textContent = parseFloat(tier1CurrentValue).toFixed(2);
+            document.getElementById('tier1Returns').textContent = `${tier1Returns.toFixed(2)} (${tier1ReturnsPercentage.toFixed(2)}%)`;
+            
+            // Update summary boxes for Tier 2
+            document.getElementById('tier2TotalInvestment').textContent = parseFloat(tier2TotalInvestment).toFixed(2);
+            document.getElementById('tier2CurrentValue').textContent = parseFloat(tier2CurrentValue).toFixed(2);
+            document.getElementById('tier2Returns').textContent = `${tier2Returns.toFixed(2)} (${tier2ReturnsPercentage.toFixed(2)}%)`;
+            
+            // Update overall NPS summary
+            const totalInvestment = tier1TotalInvestment + tier2TotalInvestment;
+            const totalCurrentValue = tier1CurrentValue + tier2CurrentValue;
+            const totalReturns = totalCurrentValue - totalInvestment;
+            const totalReturnsPercentage = totalInvestment > 0 ? 
+                (totalReturns / totalInvestment) * 100 : 0;
+            
+            document.getElementById('totalNPSInvestment').textContent = parseFloat(totalInvestment).toFixed(2);
+            document.getElementById('currentNPSValue').textContent = parseFloat(totalCurrentValue).toFixed(2);
+            document.getElementById('totalNPSReturns').textContent = `${totalReturns.toFixed(2)} (${totalReturnsPercentage.toFixed(2)}%)`;
+        }
+        
+        console.log(`Update complete for request ${requestId}`);
+    } catch (error) {
+        console.error('Error updating NPS holdings:', error);
+        alert(`Error loading NPS holdings: ${error.message}`);
+    }
+}
+
+// Function to submit a new Tier 1 fund
+async function submitTier1Fund() {
+    try {
+        console.log("Submitting Tier 1 fund...");
+        
+        // Get form values
+        const schemeCode = document.getElementById('tier1SchemeCode').value.trim();
+        const units = document.getElementById('tier1Units').value.trim();
+        const schemeName = document.getElementById('tier1SchemeName').textContent.trim();
+        const currentNav = document.getElementById('tier1CurrentNav').textContent.replace('₹', '').trim();
+        
+        // Validation
+        if (!schemeCode) {
+            alert('Please enter a scheme code.');
+            return;
+        }
+        
+        if (!schemeName || schemeName === 'Waiting...' || schemeName === 'Fetching...') {
+            alert('Please fetch scheme details first.');
+            return;
+        }
+        
+        if (!units || isNaN(parseFloat(units)) || parseFloat(units) <= 0) {
+            alert('Please enter a valid number of units.');
+            return;
+        }
+        
+        // Parse values
+        const unitsValue = parseFloat(units);
+        const navValue = parseFloat(currentNav);
+        
+        // Get user ID
+        const userId = firebase.auth().currentUser.uid;
+        if (!userId) {
+            alert('You must be logged in to add funds.');
+            return;
+        }
+        
+        // Disable the add button to prevent multiple submissions
+        const addButton = document.getElementById('tier1AddFundBtn');
+        const originalButtonText = addButton.innerHTML;
+        addButton.disabled = true;
+        addButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Adding...';
+        
+        try {
+            // Check for existing document with the same scheme code in tier1
+            const npsRef = db.collection('users').doc(userId).collection('nps');
+            const query = await npsRef.where('scheme_code', '==', schemeCode)
+                                   .where('tier', '==', 'tier1')
+                                   .get();
+            
+            if (!query.empty) {
+                // Found existing entries - ask if user wants to update
+                const firstDoc = query.docs[0];
+                const existingData = firstDoc.data();
+                const existingUnits = parseFloat(existingData.units || 0);
+                
+                if (confirm(`You already have ${schemeName} (${existingUnits.toFixed(2)} units) in your Tier 1 investments. Do you want to add ${unitsValue.toFixed(2)} more units?`)) {
+                    // Update units in the first document
+                    const docId = firstDoc.id;
+                    const newTotalUnits = existingUnits + unitsValue;
+                    
+                    await npsRef.doc(docId).update({
+                        units: newTotalUnits,
+                        current_nav: navValue, // Update to latest NAV
+                        lastUpdated: firebase.firestore.FieldValue.serverTimestamp()
+                    });
+                    
+                    console.log(`Updated ${schemeName} from ${existingUnits.toFixed(2)} to ${newTotalUnits.toFixed(2)} units`);
+                    alert(`Updated ${schemeName} to a total of ${newTotalUnits.toFixed(2)} units.`);
+                } else {
+                    // User chose not to update
+                    console.log('Update cancelled by user');
+                    alert('Operation cancelled. No changes were made.');
+                }
+            } else {
+                // Create a new document with a unique ID
+                const timestamp = Date.now();
+                const docId = `${schemeCode}_tier1_${timestamp}`;
+                
+                await npsRef.doc(docId).set({
+                    scheme_code: schemeCode,
+                    scheme_name: schemeName,
+                    tier: 'tier1',
+                    units: unitsValue,
+                    current_nav: navValue,
+                    timestamp: firebase.firestore.FieldValue.serverTimestamp()
+                });
+                
+                console.log(`Added new Tier 1 fund: ${schemeName}, ${unitsValue} units`);
+                alert(`Added ${schemeName} with ${unitsValue.toFixed(2)} units to your Tier 1 investments.`);
+            }
+            
+            // Clear form inputs
+            document.getElementById('tier1SchemeCode').value = '';
+            document.getElementById('tier1Units').value = '';
+            document.getElementById('tier1SchemeDetails').style.display = 'none';
+            
+            // Reset scheme data
+            tier1SchemeData = null;
+            
+        } catch (error) {
+            console.error('Database error:', error);
+            alert(`Error: ${error.message}`);
+        } finally {
+            // Always re-enable the button regardless of outcome
+            addButton.disabled = false;
+            addButton.innerHTML = originalButtonText;
+            
+            // Update the display after a slight delay
+            setTimeout(() => {
+                updateNPSHoldings();
+            }, 500);
+        }
+    } catch (error) {
+        console.error('Error in submitTier1Fund:', error);
+        alert(`An unexpected error occurred: ${error.message}`);
+        
+        // Re-enable the button
+        const addButton = document.getElementById('tier1AddFundBtn');
+        if (addButton) {
+            addButton.disabled = false;
+            addButton.innerHTML = 'Add Fund';
+        }
+    }
+}
+
+// Function to submit a new Tier 2 fund
+async function submitTier2Fund() {
+    try {
+        console.log("Submitting Tier 2 fund...");
+        
+        // Get form values
+        const schemeCode = document.getElementById('tier2SchemeCode').value.trim();
+        const units = document.getElementById('tier2Units').value.trim();
+        const schemeName = document.getElementById('tier2SchemeName').textContent.trim();
+        const currentNav = document.getElementById('tier2CurrentNav').textContent.replace('₹', '').trim();
+        
+        // Validation
+        if (!schemeCode) {
+            alert('Please enter a scheme code.');
+            return;
+        }
+        
+        if (!schemeName || schemeName === 'Waiting...' || schemeName === 'Fetching...') {
+            alert('Please fetch scheme details first.');
+            return;
+        }
+        
+        if (!units || isNaN(parseFloat(units)) || parseFloat(units) <= 0) {
+            alert('Please enter a valid number of units.');
+            return;
+        }
+        
+        // Parse values
+        const unitsValue = parseFloat(units);
+        const navValue = parseFloat(currentNav);
+        
+        // Get user ID
+        const userId = firebase.auth().currentUser.uid;
+        if (!userId) {
+            alert('You must be logged in to add funds.');
+            return;
+        }
+        
+        // Disable the add button to prevent multiple submissions
+        const addButton = document.getElementById('tier2AddFundBtn');
+        const originalButtonText = addButton.innerHTML;
+        addButton.disabled = true;
+        addButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Adding...';
+        
+        try {
+            // Check for existing document with the same scheme code in tier2
+            const npsRef = db.collection('users').doc(userId).collection('nps');
+            const query = await npsRef.where('scheme_code', '==', schemeCode)
+                                   .where('tier', '==', 'tier2')
+                                   .get();
+            
+            if (!query.empty) {
+                // Found existing entries - ask if user wants to update
+                const firstDoc = query.docs[0];
+                const existingData = firstDoc.data();
+                const existingUnits = parseFloat(existingData.units || 0);
+                
+                if (confirm(`You already have ${schemeName} (${existingUnits.toFixed(2)} units) in your Tier 2 investments. Do you want to add ${unitsValue.toFixed(2)} more units?`)) {
+                    // Update units in the first document
+                    const docId = firstDoc.id;
+                    const newTotalUnits = existingUnits + unitsValue;
+                    
+                    await npsRef.doc(docId).update({
+                        units: newTotalUnits,
+                        current_nav: navValue, // Update to latest NAV
+                        lastUpdated: firebase.firestore.FieldValue.serverTimestamp()
+                    });
+                    
+                    console.log(`Updated ${schemeName} from ${existingUnits.toFixed(2)} to ${newTotalUnits.toFixed(2)} units`);
+                    alert(`Updated ${schemeName} to a total of ${newTotalUnits.toFixed(2)} units.`);
+                } else {
+                    // User chose not to update
+                    console.log('Update cancelled by user');
+                    alert('Operation cancelled. No changes were made.');
+                }
+            } else {
+                // Create a new document with a unique ID
+                const timestamp = Date.now();
+                const docId = `${schemeCode}_tier2_${timestamp}`;
+                
+                await npsRef.doc(docId).set({
+                    scheme_code: schemeCode,
+                    scheme_name: schemeName,
+                    tier: 'tier2',
+                    units: unitsValue,
+                    current_nav: navValue,
+                    timestamp: firebase.firestore.FieldValue.serverTimestamp()
+                });
+                
+                console.log(`Added new Tier 2 fund: ${schemeName}, ${unitsValue} units`);
+                alert(`Added ${schemeName} with ${unitsValue.toFixed(2)} units to your Tier 2 investments.`);
+            }
+            
+            // Clear form inputs
+            document.getElementById('tier2SchemeCode').value = '';
+            document.getElementById('tier2Units').value = '';
+            document.getElementById('tier2SchemeDetails').style.display = 'none';
+            
+            // Reset scheme data
+            tier2SchemeData = null;
+            
+        } catch (error) {
+            console.error('Database error:', error);
+            alert(`Error: ${error.message}`);
+        } finally {
+            // Always re-enable the button regardless of outcome
+            addButton.disabled = false;
+            addButton.innerHTML = originalButtonText;
+            
+            // Update the display after a slight delay
+            setTimeout(() => {
+                updateNPSHoldings();
+            }, 500);
+        }
+    } catch (error) {
+        console.error('Error in submitTier2Fund:', error);
+        alert(`An unexpected error occurred: ${error.message}`);
+        
+        // Re-enable the button
+        const addButton = document.getElementById('tier2AddFundBtn');
+        if (addButton) {
+            addButton.disabled = false;
+            addButton.innerHTML = 'Add Fund';
+        }
+    }
+}
+
+// Attach event listeners to edit and delete buttons with event delegation
+document.addEventListener('click', function(event) {
+    // Check if the clicked element is an edit button or a child of it
+    const editButton = event.target.closest('.btn-edit-nps');
+    if (editButton) {
+        const docId = editButton.getAttribute('data-id');
+        const tier = editButton.getAttribute('data-tier');
+        const schemeCode = editButton.getAttribute('data-scheme');
+        const units = editButton.getAttribute('data-units');
+        const isMultiple = editButton.getAttribute('data-multiple') === 'true';
+        editNPSUnits(docId, tier, schemeCode, units, isMultiple);
+    }
+    
+    // Check if the clicked element is a delete button or a child of it
+    const deleteButton = event.target.closest('.btn-delete-nps');
+    if (deleteButton) {
+        const docId = deleteButton.getAttribute('data-id');
+        const tier = deleteButton.getAttribute('data-tier');
+        const schemeCode = deleteButton.getAttribute('data-scheme');
+        const isMultiple = deleteButton.getAttribute('data-multiple') === 'true';
+        deleteNPS(docId, tier, schemeCode, isMultiple);
     }
 });
 
-// Function to update NPS holdings
-async function updateNPSHoldings() {
+// Function to edit NPS units
+async function editNPSUnits(docId, tier, schemeCode, currentUnits, isMultiple) {
     try {
+        // Get the current user ID
         const userId = firebase.auth().currentUser.uid;
-        const npsSnapshot = await db.collection('users').doc(userId).collection('nps').get();
+        if (!userId) {
+            alert('You must be logged in to edit funds.');
+            return;
+        }
         
-        const tbody = document.getElementById('npsHoldings');
-        tbody.innerHTML = '';
+        // Reference to the NPS collection
+        const npsRef = db.collection('users').doc(userId).collection('nps');
+        
+        // If this is a multiple entry case, handle specially
+        if (isMultiple) {
+            // Get all documents with this scheme code and tier
+            const tierValue = tier === 'tier1' ? 'tier1' : 'tier2';
+            const query = await npsRef.where('scheme_code', '==', schemeCode)
+                                    .where('tier', '==', tierValue)
+                                    .get();
+            
+            if (query.empty) {
+                alert('No matching schemes found.');
+                return;
+            }
+            
+            // Calculate total units across all documents
+            let totalUnits = 0;
+            query.forEach(doc => {
+                totalUnits += parseFloat(doc.data().units || 0);
+            });
+            
+            // Get the scheme name for the prompt
+            const firstDoc = query.docs[0];
+            const schemeName = firstDoc.data().scheme_name || schemeCode;
+            
+            // Prompt for new units with warning about multiple entries
+            const promptMessage = `This scheme "${schemeName}" has multiple entries with a total of ${totalUnits.toFixed(2)} units. 
+            
+Do you want to:
+1. Edit all entries at once (recommended)
+2. Edit just this specific entry (${parseFloat(currentUnits).toFixed(2)} units)
 
-        let totalInvestment = 0;
-        let currentValue = 0;
-        let totalReturns = 0;
-
-        npsSnapshot.forEach(doc => {
-            const nps = doc.data();
-            totalInvestment += nps.totalInvestment;
-            currentValue += nps.totalValue;
-            totalReturns += nps.returns;
-
-            const row = document.createElement('tr');
-            row.innerHTML = `
-                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                    ${nps.schemeCode}
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    ${nps.schemeName}
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    ${nps.units.toFixed(2)}
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    ₹${nps.avgPrice.toFixed(2)}
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    ₹${nps.currentNav.toFixed(2)}
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    ₹${nps.totalValue.toFixed(2)}
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm ${nps.returns >= 0 ? 'text-green-600' : 'text-red-600'}">
-                    ${nps.returnsPercentage.toFixed(2)}%
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    <button class="text-red-600 hover:text-red-900" onclick="deleteNPS('${nps.schemeCode}')">
-                        Delete
-                    </button>
-                </td>
-            `;
-            tbody.appendChild(row);
-        });
-
-        // Update summary stats
-        document.getElementById('totalNPSInvestment').textContent = totalInvestment.toFixed(2);
-        document.getElementById('currentNPSValue').textContent = currentValue.toFixed(2);
-        document.getElementById('totalNPSReturns').textContent = totalReturns.toFixed(2);
+Enter new units value:`;
+            
+            const newUnitsStr = prompt(promptMessage, totalUnits.toFixed(2));
+            
+            // Check if user cancelled
+            if (newUnitsStr === null) {
+                return;
+            }
+            
+            // Validate input
+            const newUnits = parseFloat(newUnitsStr);
+            if (isNaN(newUnits) || newUnits < 0) {
+                alert('Please enter a valid number of units.');
+                return;
+            }
+            
+            // Ask user which option they chose
+            const editOption = prompt('Which option did you choose? (1 for all entries, 2 for just this entry)', '1');
+            
+            if (editOption === '1') {
+                // Calculate the ratio to distribute new units proportionally
+                const ratio = newUnits / totalUnits;
+                
+                // Use a batch for multiple updates
+                const batch = db.batch();
+                
+                query.forEach(doc => {
+                    const docUnits = parseFloat(doc.data().units || 0);
+                    const newDocUnits = docUnits * ratio;
+                    batch.update(doc.ref, { 
+                        units: newDocUnits,
+                        lastUpdated: firebase.firestore.FieldValue.serverTimestamp()
+                    });
+                });
+                
+                // Commit the batch
+                await batch.commit();
+                alert(`Successfully updated all entries of ${schemeName} to a total of ${newUnits.toFixed(2)} units.`);
+            } else {
+                // Edit just the one entry
+                const docRef = npsRef.doc(docId);
+                await docRef.update({
+                    units: newUnits,
+                    lastUpdated: firebase.firestore.FieldValue.serverTimestamp()
+                });
+                alert(`Updated one entry of ${schemeName} to ${newUnits.toFixed(2)} units.`);
+            }
+        } else {
+            // This is a single entry case - simpler flow
+            const docRef = npsRef.doc(docId);
+            const doc = await docRef.get();
+            
+            if (!doc.exists) {
+                alert('Fund not found.');
+                return;
+            }
+            
+            const data = doc.data();
+            const schemeName = data.scheme_name || 'this scheme';
+            const tierLabel = tier === 'tier1' ? 'Tier 1' : 'Tier 2';
+            
+            // Prompt for new units
+            const newUnitsStr = prompt(`Edit units for ${schemeName} (${tierLabel}):`, parseFloat(currentUnits).toFixed(2));
+            
+            // Check if user cancelled
+            if (newUnitsStr === null) {
+                return;
+            }
+            
+            // Validate input
+            const newUnits = parseFloat(newUnitsStr);
+            if (isNaN(newUnits) || newUnits < 0) {
+                alert('Please enter a valid number of units.');
+                return;
+            }
+            
+            // Show loading state on the edit button
+            const buttons = document.querySelectorAll(`.btn-edit-nps[data-id="${docId}"]`);
+            buttons.forEach(button => {
+                button.disabled = true;
+                button.innerHTML = '<i class="fas fa-spinner fa-spin mr-1"></i>Updating...';
+            });
+            
+            // Update the document
+            await docRef.update({
+                units: newUnits,
+                lastUpdated: firebase.firestore.FieldValue.serverTimestamp()
+            });
+            
+            // Show success message
+            alert(`Successfully updated ${schemeName} to ${newUnits.toFixed(2)} units.`);
+        }
+        
+        // Update the display
+        updateNPSHoldings();
+        
     } catch (error) {
-        console.error('Error updating NPS holdings:', error);
+        console.error('Error editing NPS units:', error);
+        alert(`Error editing NPS units: ${error.message}. Please try again.`);
+        
+        // Reset buttons in case of error
+        const buttons = document.querySelectorAll(`.btn-edit-nps[data-id="${docId}"]`);
+        buttons.forEach(button => {
+            button.disabled = false;
+            button.innerHTML = '<i class="fas fa-edit mr-1"></i>Edit';
+        });
     }
 }
 
 // Function to delete NPS scheme
-async function deleteNPS(schemeCode) {
-    if (!confirm('Are you sure you want to delete this NPS scheme?')) {
-        return;
-    }
-
+async function deleteNPS(docId, tier, schemeCode, isMultiple) {
     try {
+        // Get the current user ID
         const userId = firebase.auth().currentUser.uid;
-        const npsRef = db.collection('users').doc(userId).collection('nps').doc(schemeCode);
-        const npsDoc = await npsRef.get();
-        const nps = npsDoc.data();
-
-        // Delete from Firestore
-        await npsRef.delete();
-
-        // Update user's total NPS value
-        const userRef = db.collection('users').doc(userId);
-        await userRef.update({
-            npsValue: firebase.firestore.FieldValue.increment(-nps.totalValue),
-            totalInvestment: firebase.firestore.FieldValue.increment(-nps.totalInvestment),
-            currentValue: firebase.firestore.FieldValue.increment(-nps.totalValue)
-        });
-
+        if (!userId) {
+            alert('You must be logged in to delete funds.');
+            return;
+        }
+        
+        // Reference to the NPS collection
+        const npsRef = db.collection('users').doc(userId).collection('nps');
+        
+        // If this is a single entry, just delete that document
+        if (!isMultiple) {
+            // Get the document to display details in the confirmation
+            const docRef = npsRef.doc(docId);
+            const doc = await docRef.get();
+            
+            if (!doc.exists) {
+                alert('NPS scheme not found.');
+                return;
+            }
+            
+            const data = doc.data();
+            const schemeName = data.scheme_name || 'this scheme';
+            const tierLabel = tier === 'tier1' ? 'Tier 1' : 'Tier 2';
+            
+            // Ask for confirmation
+            if (!confirm(`Are you sure you want to delete ${schemeName} (${tierLabel})? This action cannot be undone.`)) {
+                return;
+            }
+            
+            // Show loading state
+            const buttons = document.querySelectorAll(`.btn-delete-nps[data-id="${docId}"]`);
+            buttons.forEach(button => {
+                button.disabled = true;
+                button.innerHTML = '<i class="fas fa-spinner fa-spin mr-1"></i>Deleting...';
+            });
+            
+            // Delete the document
+            await docRef.delete();
+            
+            // Show success message
+            alert(`Successfully deleted ${schemeName} from your ${tierLabel} investments.`);
+        } else {
+            // Multiple entries found for this scheme - confirm deletion of all
+            // First get the scheme name for better UX
+            const tierValue = tier === 'tier1' ? 'tier1' : 'tier2';
+            const query = await npsRef.where('scheme_code', '==', schemeCode)
+                                    .where('tier', '==', tierValue)
+                                    .get();
+            
+            if (query.empty) {
+                alert('No matching schemes found.');
+                return;
+            }
+            
+            // Get the scheme name from the first document
+            const firstDoc = query.docs[0];
+            const schemeName = firstDoc.data().scheme_name || schemeCode;
+            const tierLabel = tier === 'tier1' ? 'Tier 1' : 'Tier 2';
+            
+            // Ask for confirmation - specially formatted for multiple entries
+            if (!confirm(`This scheme "${schemeName}" has multiple entries in your ${tierLabel} investments. Do you want to delete ALL entries for this scheme?`)) {
+                return;
+            }
+            
+            // Show loading state
+            const buttons = document.querySelectorAll(`.btn-delete-nps[data-scheme="${schemeCode}"][data-tier="${tier}"]`);
+            buttons.forEach(button => {
+                button.disabled = true;
+                button.innerHTML = '<i class="fas fa-spinner fa-spin mr-1"></i>Deleting...';
+            });
+            
+            // Delete all documents in batches (Firestore supports up to 500 operations per batch)
+            const batch = db.batch();
+            let count = 0;
+            
+            query.forEach(doc => {
+                batch.delete(doc.ref);
+                count++;
+            });
+            
+            // Commit the batch delete
+            await batch.commit();
+            
+            // Show success message
+            alert(`Successfully deleted all ${count} entries of ${schemeName} from your ${tierLabel} investments.`);
+        }
+        
+        // Update the display
         updateNPSHoldings();
+        
     } catch (error) {
         console.error('Error deleting NPS scheme:', error);
-        alert('Error deleting NPS scheme. Please try again.');
+        alert(`Error deleting NPS scheme: ${error.message}. Please try again.`);
+        
+        // Reset buttons in case of error
+        const buttons = document.querySelectorAll(`.btn-delete-nps[data-id="${docId}"]`);
+        buttons.forEach(button => {
+            button.disabled = false;
+            button.innerHTML = '<i class="fas fa-trash mr-1"></i>Delete';
+        });
     }
 }
 
-// Update NPS holdings when page loads
-document.addEventListener('DOMContentLoaded', updateNPSHoldings);
+// Make sure our editInvestment function is available globally
+// deleteNPS is no longer needed
 
-// Listen for real-time updates
-firebase.auth().onAuthStateChanged((user) => {
-    if (user) {
-        const userId = user.uid;
-        db.collection('users').doc(userId).collection('nps').onSnapshot((snapshot) => {
-            updateNPSHoldings();
-        });
+// Initialize with Tier 1 tab active
+document.addEventListener('DOMContentLoaded', () => {
+    console.log("DOM Content loaded - initializing NPS page");
+    
+    // Activate Tier 1 tab by default
+    tier1Tab.click();
+    
+    // Global variables to store unsubscribe functions
+    let npsUnsubscribe = null;
+    let metadataUnsubscribe = null;
+    
+    // Flag to control update scheduling
+    let updateScheduled = false;
+    let updateTimeout = null;
+    
+    // Track if initial load has completed
+    let initialLoadComplete = false;
+    
+    // Listen for Firebase auth state changes
+    firebase.auth().onAuthStateChanged((user) => {
+        console.log("Auth state changed:", user ? "User logged in" : "No user");
+        
+        // Clean up previous listeners to prevent duplicate events
+        if (npsUnsubscribe) {
+            console.log("Cleaning up previous NPS listener");
+            npsUnsubscribe();
+            npsUnsubscribe = null;
+        }
+        
+        if (metadataUnsubscribe) {
+            console.log("Cleaning up previous metadata listener");
+            metadataUnsubscribe();
+            metadataUnsubscribe = null;
+        }
+        
+        // Clear any pending updates
+        if (updateTimeout) {
+            clearTimeout(updateTimeout);
+            updateTimeout = null;
+        }
+        
+        if (user) {
+            const userId = user.uid;
+            console.log(`Setting up listeners for user: ${userId}`);
+            
+            // Initialize metadata if needed
+            initializeMetadata(userId);
+            
+            // Set up a listener for NPS holdings with debouncing
+            npsUnsubscribe = db.collection('users').doc(userId).collection('nps')
+                .onSnapshot((snapshot) => {
+                    const changes = snapshot.docChanges();
+                    if (changes.length > 0) {
+                        console.log(`Holdings updated: ${changes.length} changes`);
+                        scheduleUpdate();
+                    }
+                }, (error) => {
+                    console.error("Error in NPS holdings listener:", error);
+                });
+            
+            // Set up a listener for metadata with debouncing
+            metadataUnsubscribe = db.collection('users').doc(userId).collection('nps_metadata')
+                .onSnapshot((snapshot) => {
+                    const changes = snapshot.docChanges();
+                    if (changes.length > 0) {
+                        console.log(`Metadata updated: ${changes.length} changes`);
+                        scheduleUpdate();
+                    }
+                }, (error) => {
+                    console.error("Error in metadata listener:", error);
+                });
+            
+            // Helper function to schedule updates with debouncing
+            function scheduleUpdate() {
+                if (!updateScheduled) {
+                    console.log("Scheduling update");
+                    updateScheduled = true;
+                    
+                    // Clear any existing timeout
+                    if (updateTimeout) {
+                        clearTimeout(updateTimeout);
+                    }
+                    
+                    // Schedule a new update
+                    updateTimeout = setTimeout(() => {
+                        console.log("Executing scheduled update");
+                        updateNPSHoldings();
+                        updateScheduled = false;
+                        
+                        // Mark initial load as complete after first update
+                        if (!initialLoadComplete) {
+                            initialLoadComplete = true;
+                            console.log("Initial load complete");
+                        }
+                    }, 800); // Longer delay to ensure all changes are processed
+                } else {
+                    console.log("Update already scheduled, skipping");
+                }
+            }
+            
+            // Trigger initial update after a short delay
+            setTimeout(() => {
+                if (!initialLoadComplete) {
+                    console.log("Executing initial update");
+                    updateNPSHoldings();
+                    initialLoadComplete = true;
+                }
+            }, 500);
+            
+        } else {
+            console.log("No user logged in, redirecting to login");
+            window.location.href = '/login';
+        }
+    });
+});
+
+// Function to initialize metadata documents if they don't exist
+async function initializeMetadata(userId) {
+    try {
+        console.log("Initializing metadata for user:", userId);
+        const tier1Ref = db.collection('users').doc(userId).collection('nps_metadata').doc('tier1_total');
+        const tier2Ref = db.collection('users').doc(userId).collection('nps_metadata').doc('tier2_total');
+        
+        const tier1Doc = await tier1Ref.get();
+        const tier2Doc = await tier2Ref.get();
+        
+        // Create tier1 metadata if it doesn't exist
+        if (!tier1Doc.exists) {
+            console.log("Creating tier1 metadata document");
+            await tier1Ref.set({
+                totalInvestment: 0,
+                lastUpdated: firebase.firestore.FieldValue.serverTimestamp()
+            });
+        }
+        
+        // Create tier2 metadata if it doesn't exist
+        if (!tier2Doc.exists) {
+            console.log("Creating tier2 metadata document");
+            await tier2Ref.set({
+                totalInvestment: 0,
+                lastUpdated: firebase.firestore.FieldValue.serverTimestamp()
+            });
+        }
+        
+        console.log("Metadata initialization complete");
+    } catch (error) {
+        console.error('Error initializing metadata:', error);
+        alert('Error initializing metadata. Please refresh the page and try again.');
     }
+}
+
+// Scheme code buttons functionality
+document.addEventListener('DOMContentLoaded', () => {
+    const schemeCodeBtns = document.querySelectorAll('.scheme-code-btn');
+    
+    schemeCodeBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const code = btn.dataset.code;
+            const tier = code.endsWith('0') || code.endsWith('2') || code.endsWith('4') || code.endsWith('6') || code.endsWith('8') ? 2 : 1;
+            
+            // Set the code in the appropriate tier input
+            if (tier === 1) {
+                tier1SchemeCode.value = code;
+                tier1FetchBtn.click();
+                // Switch to Tier 1 tab if not already active
+                tier1Tab.click();
+            } else {
+                tier2SchemeCode.value = code;
+                tier2FetchBtn.click();
+                // Switch to Tier 2 tab if not already active
+                tier2Tab.click();
+            }
+        });
+    });
+});
+
+// Event listeners for the add fund buttons
+document.getElementById('tier1AddFundBtn').addEventListener('click', () => {
+    submitTier1Fund();
+});
+
+document.getElementById('tier2AddFundBtn').addEventListener('click', () => {
+    submitTier2Fund();
 });
 </script>
-{% endblock %} 
+{% endblock %}

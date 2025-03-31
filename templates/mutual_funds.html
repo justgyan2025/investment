@@ -1,3 +1,5 @@
+
+
 {% extends "base.html" %}
 
 {% block content %}
@@ -5,7 +7,7 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
         <div class="flex justify-between items-center">
             <h1 class="text-2xl font-semibold text-gray-900">Mutual Funds</h1>
-            <button id="addMFBtn" class="bg-indigo-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-indigo-700">
+            <button id="addMFBtn" class="bg-indigo-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-indigo-700 transition duration-300 ease-in-out">
                 Add Mutual Fund
             </button>
         </div>
@@ -25,7 +27,7 @@
                                 <div class="flex items-center">
                                     <div class="flex-shrink-0">
                                         <svg class="h-6 w-6 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                            <!-- SVG content -->
                                         </svg>
                                     </div>
                                     <div class="ml-5 w-0 flex-1">
@@ -33,23 +35,20 @@
                                             <dt class="text-sm font-medium text-gray-500 truncate">
                                                 Total Investment
                                             </dt>
-                                            <dd class="flex items-baseline">
-                                                <div class="text-2xl font-semibold text-gray-900">
-                                                    ₹<span id="totalMFInvestment">0</span>
-                                                </div>
+                                            <dd class="mt-1 text-3xl font-semibold text-gray-900">
+                                                <span id="totalMFInvestment">$100,000</span>
                                             </dd>
                                         </dl>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
                         <div class="bg-gray-50 overflow-hidden shadow rounded-lg">
                             <div class="p-5">
                                 <div class="flex items-center">
                                     <div class="flex-shrink-0">
                                         <svg class="h-6 w-6 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                                            <!-- SVG content -->
                                         </svg>
                                     </div>
                                     <div class="ml-5 w-0 flex-1">
@@ -57,34 +56,50 @@
                                             <dt class="text-sm font-medium text-gray-500 truncate">
                                                 Current Value
                                             </dt>
-                                            <dd class="flex items-baseline">
-                                                <div class="text-2xl font-semibold text-gray-900">
-                                                    ₹<span id="currentMFValue">0</span>
-                                                </div>
+                                            <dd class="mt-1 text-3xl font-semibold text-gray-900">
+                                                <span id="currentMFValue">$0</span>
                                             </dd>
                                         </dl>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
                         <div class="bg-gray-50 overflow-hidden shadow rounded-lg">
                             <div class="p-5">
                                 <div class="flex items-center">
                                     <div class="flex-shrink-0">
                                         <svg class="h-6 w-6 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                                            <!-- SVG content -->
                                         </svg>
                                     </div>
                                     <div class="ml-5 w-0 flex-1">
                                         <dl>
                                             <dt class="text-sm font-medium text-gray-500 truncate">
-                                                Total Returns
+                                                Total Profit/Loss
                                             </dt>
-                                            <dd class="flex items-baseline">
-                                                <div class="text-2xl font-semibold text-gray-900">
-                                                    ₹<span id="totalMFReturns">0</span>
-                                                </div>
+                                            <dd class="mt-1 text-3xl font-semibold text-gray-900">
+                                                <span id="totalMFReturns">$0</span>
+                                            </dd>
+                                        </dl>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-gray-50 overflow-hidden shadow rounded-lg">
+                            <div class="p-5">
+                                <div class="flex items-center">
+                                    <div class="flex-shrink-0">
+                                        <svg class="h-6 w-6 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <!-- SVG content -->
+                                        </svg>
+                                    </div>
+                                    <div class="ml-5 w-0 flex-1">
+                                        <dl>
+                                            <dt class="text-sm font-medium text-gray-500 truncate">
+                                                Return
+                                            </dt>
+                                            <dd class="mt-1 text-3xl font-semibold text-gray-900">
+                                                <span id="totalMFReturnsPercentage">0%</span>
                                             </dd>
                                         </dl>
                                     </div>
@@ -96,55 +111,43 @@
             </div>
         </div>
 
-        <!-- Mutual Fund Holdings Table -->
-        <div class="mt-8">
-            <div class="bg-white shadow rounded-lg">
-                <div class="px-4 py-5 sm:p-6">
-                    <h3 class="text-lg leading-6 font-medium text-gray-900">
-                        Mutual Fund Holdings
-                    </h3>
-                    <div class="mt-5">
-                        <div class="flex flex-col">
-                            <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-                                <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-                                    <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-                                        <table class="min-w-full divide-y divide-gray-200">
-                                            <thead class="bg-gray-50">
-                                                <tr>
-                                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                        Scheme Code
-                                                    </th>
-                                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                        Scheme Name
-                                                    </th>
-                                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                        Units
-                                                    </th>
-                                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                        Avg Price
-                                                    </th>
-                                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                        Current NAV
-                                                    </th>
-                                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                        Total Value
-                                                    </th>
-                                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                        Returns
-                                                    </th>
-                                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                        Actions
-                                                    </th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="mfHoldings" class="bg-white divide-y divide-gray-200">
-                                                <!-- Mutual fund holdings will be populated here -->
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+        <div class="mt-8 flex flex-col">
+            <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+                    <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        Scheme Name
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        Units
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        Current NAV
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        Investment
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        Total Value
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        Profit/Loss
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        Returns
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        Actions
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody id="mfHoldings" class="bg-white divide-y divide-gray-200">
+                                <!-- Mutual fund holdings will be populated here -->
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -173,8 +176,8 @@
                             <input type="number" name="units" id="units" step="0.01" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                         </div>
                         <div class="mt-4">
-                            <label for="avgPrice" class="block text-sm font-medium text-gray-700">Average Price</label>
-                            <input type="number" name="avgPrice" id="avgPrice" step="0.01" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                            <label for="investment" class="block text-sm font-medium text-gray-700">Investment</label>
+                            <input type="number" name="investment" id="investment" step="0.01" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                         </div>
                     </div>
                 </div>
@@ -215,7 +218,7 @@ cancelMFBtn.addEventListener('click', () => {
 saveMFBtn.addEventListener('click', async () => {
     const schemeCode = document.getElementById('schemeCode').value;
     const units = parseFloat(document.getElementById('units').value);
-    const avgPrice = parseFloat(document.getElementById('avgPrice').value);
+    const investment = parseFloat(document.getElementById('investment').value);
 
     try {
         // Fetch current NAV
@@ -229,19 +232,23 @@ saveMFBtn.addEventListener('click', async () => {
 
         const currentNav = parseFloat(data.nav);
         const totalValue = units * currentNav;
-        const totalInvestment = units * avgPrice;
+        const totalInvestment = investment;
         const returns = totalValue - totalInvestment;
         const returnsPercentage = (returns / totalInvestment) * 100;
 
         // Add to Firestore
-        const userId = firebase.auth().currentUser.uid;
+        const userId = firebase.auth().currentUser ? firebase.auth().currentUser.uid : null;
+        if (!userId) {
+            console.error('User is not authenticated');
+            return;
+        }
         const mfRef = db.collection('users').doc(userId).collection('mutual_funds').doc(schemeCode);
         
         await mfRef.set({
             schemeCode,
             schemeName: data.name,
             units,
-            avgPrice,
+            investment,
             currentNav,
             totalValue,
             totalInvestment,
@@ -288,22 +295,22 @@ async function updateMFHoldings() {
             const row = document.createElement('tr');
             row.innerHTML = `
                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                    ${mf.schemeCode}
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                     ${mf.schemeName}
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                     ${mf.units.toFixed(2)}
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    ₹${mf.avgPrice.toFixed(2)}
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                     ₹${mf.currentNav.toFixed(2)}
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    ₹${mf.investment.toFixed(2)}
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                     ₹${mf.totalValue.toFixed(2)}
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm ${mf.returns >= 0 ? 'text-green-600' : 'text-red-600'}">
+                    ₹${(mf.totalValue - mf.investment).toFixed(2)}
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm ${mf.returns >= 0 ? 'text-green-600' : 'text-red-600'}">
                     ${mf.returnsPercentage.toFixed(2)}%
@@ -318,9 +325,11 @@ async function updateMFHoldings() {
         });
 
         // Update summary stats
+        const totalReturnsPercentage = (totalReturns / totalInvestment) * 100;
         document.getElementById('totalMFInvestment').textContent = totalInvestment.toFixed(2);
         document.getElementById('currentMFValue').textContent = currentValue.toFixed(2);
         document.getElementById('totalMFReturns').textContent = totalReturns.toFixed(2);
+        document.getElementById('totalMFReturnsPercentage').textContent = totalReturnsPercentage.toFixed(2) + '%';
     } catch (error) {
         console.error('Error updating mutual fund holdings:', error);
     }
@@ -369,4 +378,4 @@ firebase.auth().onAuthStateChanged((user) => {
     }
 });
 </script>
-{% endblock %} 
+{% endblock %}

@@ -3,151 +3,245 @@
 {% block content %}
 <div class="py-6">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
-        <div class="flex justify-between items-center">
-            <h1 class="text-2xl font-semibold text-gray-900">Insurance</h1>
-            <button id="addInsuranceBtn" class="bg-indigo-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-indigo-700">
-                Add Insurance Policy
+        <h1 class="text-3xl font-bold text-gray-900 mb-8">Insurance Portfolio</h1>
+        
+        <!-- Insurance Type Tabs -->
+        <div class="border-b border-gray-200">
+            <nav class="-mb-px flex space-x-8" aria-label="Tabs">
+                <button onclick="showInsuranceSection('life')" class="tab-button border-indigo-500 text-indigo-600 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">
+                    Life Insurance
+                </button>
+                <button onclick="showInsuranceSection('health')" class="tab-button border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">
+                    Health Insurance
+                </button>
+                <button onclick="showInsuranceSection('motor')" class="tab-button border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">
+                    Motor Insurance
             </button>
+            </nav>
         </div>
+
+        <!-- Life Insurance Section -->
+        <div id="lifeInsurance" class="insurance-section">
+            <div class="mt-8">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-2xl font-semibold text-gray-900">Life Insurance</h2>
+                    <button onclick="showAddModal('life')" class="bg-indigo-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-indigo-700 flex items-center">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                        </svg>
+                        Add Life Insurance
+                    </button>
     </div>
 
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
-        <!-- Insurance Portfolio Summary -->
-        <div class="mt-8">
-            <div class="bg-white shadow rounded-lg">
-                <div class="px-4 py-5 sm:p-6">
-                    <h3 class="text-lg leading-6 font-medium text-gray-900">
-                        Portfolio Summary
-                    </h3>
-                    <div class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-3">
-                        <div class="bg-gray-50 overflow-hidden shadow rounded-lg">
-                            <div class="p-5">
+                <!-- Life Insurance Summary Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                    <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-indigo-500">
                                 <div class="flex items-center">
-                                    <div class="flex-shrink-0">
-                                        <svg class="h-6 w-6 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            <div class="p-3 rounded-full bg-indigo-100">
+                                <svg class="h-6 w-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                                         </svg>
                                     </div>
-                                    <div class="ml-5 w-0 flex-1">
-                                        <dl>
-                                            <dt class="text-sm font-medium text-gray-500 truncate">
-                                                Total Premium Paid
-                                            </dt>
-                                            <dd class="flex items-baseline">
-                                                <div class="text-2xl font-semibold text-gray-900">
-                                                    ₹<span id="totalPremiumPaid">0</span>
+                            <div class="ml-4">
+                                <h3 class="text-lg font-medium text-gray-900">Total Sum Assured</h3>
+                                <p class="text-2xl font-bold text-indigo-600">₹<span id="lifeTotalCoverage">0</span></p>
                                                 </div>
-                                            </dd>
-                                        </dl>
+                                    </div>
+                    </div>
+
+                    <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-green-500">
+                        <div class="flex items-center">
+                            <div class="p-3 rounded-full bg-green-100">
+                                <svg class="h-6 w-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                                </svg>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="text-lg font-medium text-gray-900">Annual Premium</h3>
+                                <p class="text-2xl font-bold text-green-600">₹<span id="lifeAnnualPremium">0</span></p>
+                                </div>
+                            </div>
+                        </div>
+
+                    <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-blue-500">
+                                <div class="flex items-center">
+                            <div class="p-3 rounded-full bg-blue-100">
+                                <svg class="h-6 w-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                                        </svg>
+                                    </div>
+                            <div class="ml-4">
+                                <h3 class="text-lg font-medium text-gray-900">Total Investment</h3>
+                                <p class="text-2xl font-bold text-blue-600">₹<span id="lifeTotalReturns">0</span></p>
+                            </div>
+                        </div>
+                    </div>
+                                                </div>
+
+                <!-- Life Insurance Policies Table -->
+                <div class="bg-white shadow rounded-lg overflow-hidden">
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Policy Holder</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Company Name</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Type</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Sum Assured</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Premium</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Premium Mode</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Renewal Date</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Start Date</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Maturity Date</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Invested Amount</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="lifeInsurancePolicies" class="bg-white divide-y divide-gray-200">
+                                <!-- Life insurance policies will be populated here -->
+                            </tbody>
+                        </table>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="bg-gray-50 overflow-hidden shadow rounded-lg">
-                            <div class="p-5">
-                                <div class="flex items-center">
-                                    <div class="flex-shrink-0">
-                                        <svg class="h-6 w-6 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-                                        </svg>
-                                    </div>
-                                    <div class="ml-5 w-0 flex-1">
-                                        <dl>
-                                            <dt class="text-sm font-medium text-gray-500 truncate">
-                                                Current Value
-                                            </dt>
-                                            <dd class="flex items-baseline">
-                                                <div class="text-2xl font-semibold text-gray-900">
-                                                    ₹<span id="currentInsuranceValue">0</span>
-                                                </div>
-                                            </dd>
-                                        </dl>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+        <!-- Health Insurance Section -->
+        <div id="healthInsurance" class="insurance-section hidden">
+            <div class="mt-8">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-2xl font-semibold text-gray-900">Health Insurance</h2>
+                    <button onclick="showAddModal('health')" class="bg-indigo-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-indigo-700 flex items-center">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                        </svg>
+                        Add Health Insurance
+                    </button>
+                </div>
 
-                        <div class="bg-gray-50 overflow-hidden shadow rounded-lg">
-                            <div class="p-5">
+                <!-- Health Insurance Summary Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                    <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-indigo-500">
                                 <div class="flex items-center">
-                                    <div class="flex-shrink-0">
-                                        <svg class="h-6 w-6 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                            <div class="p-3 rounded-full bg-indigo-100">
+                                <svg class="h-6 w-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                                         </svg>
                                     </div>
-                                    <div class="ml-5 w-0 flex-1">
-                                        <dl>
-                                            <dt class="text-sm font-medium text-gray-500 truncate">
-                                                Total Returns
-                                            </dt>
-                                            <dd class="flex items-baseline">
-                                                <div class="text-2xl font-semibold text-gray-900">
-                                                    ₹<span id="totalInsuranceReturns">0</span>
+                            <div class="ml-4">
+                                <h3 class="text-lg font-medium text-gray-900">Total Coverage</h3>
+                                <p class="text-2xl font-bold text-indigo-600">₹<span id="healthTotalCoverage">0</span></p>
                                                 </div>
-                                            </dd>
-                                        </dl>
                                     </div>
                                 </div>
+
+                    <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-green-500">
+                        <div class="flex items-center">
+                            <div class="p-3 rounded-full bg-green-100">
+                                <svg class="h-6 w-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
                             </div>
-                        </div>
+                            <div class="ml-4">
+                                <h3 class="text-lg font-medium text-gray-900">Annual Premium</h3>
+                                <p class="text-2xl font-bold text-green-600">₹<span id="healthAnnualPremium">0</span></p>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Insurance Policies Table -->
-        <div class="mt-8">
-            <div class="bg-white shadow rounded-lg">
-                <div class="px-4 py-5 sm:p-6">
-                    <h3 class="text-lg leading-6 font-medium text-gray-900">
-                        Insurance Policies
-                    </h3>
-                    <div class="mt-5">
-                        <div class="flex flex-col">
-                            <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-                                <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-                                    <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+                <!-- Health Insurance Policies Table -->
+                <div class="bg-white shadow rounded-lg overflow-hidden">
+                    <div class="overflow-x-auto">
                                         <table class="min-w-full divide-y divide-gray-200">
                                             <thead class="bg-gray-50">
                                                 <tr>
-                                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                        Policy Number
-                                                    </th>
-                                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                        Policy Name
-                                                    </th>
-                                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                        Type
-                                                    </th>
-                                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                        Premium Amount
-                                                    </th>
-                                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                        Premium Frequency
-                                                    </th>
-                                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                        Start Date
-                                                    </th>
-                                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                        Maturity Date
-                                                    </th>
-                                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                        Current Value
-                                                    </th>
-                                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                        Actions
-                                                    </th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Policy Holder</th>
+                                    
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Type</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Coverage</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Premium</th>
+                                    
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Renewal Date</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Start Date</th>
+                                    
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">End Date</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
                                                 </tr>
                                             </thead>
-                                            <tbody id="insurancePolicies" class="bg-white divide-y divide-gray-200">
-                                                <!-- Insurance policies will be populated here -->
+                            <tbody id="healthInsurancePolicies" class="bg-white divide-y divide-gray-200">
+                                <!-- Health insurance policies will be populated here -->
                                             </tbody>
                                         </table>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
+        <!-- Motor Insurance Section -->
+        <div id="motorInsurance" class="insurance-section hidden">
+            <div class="mt-8">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-2xl font-semibold text-gray-900">Motor Insurance</h2>
+                    <button onclick="showAddModal('motor')" class="bg-indigo-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-indigo-700 flex items-center">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                        </svg>
+                        Add Motor Insurance
+                    </button>
+                </div>
+
+                <!-- Motor Insurance Summary Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                    <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-indigo-500">
+                        <div class="flex items-center">
+                            <div class="p-3 rounded-full bg-indigo-100">
+                                <svg class="h-6 w-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                                </svg>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="text-lg font-medium text-gray-900">Total Coverage</h3>
+                                <p class="text-2xl font-bold text-indigo-600">₹<span id="motorTotalCoverage">0</span></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-green-500">
+                        <div class="flex items-center">
+                            <div class="p-3 rounded-full bg-green-100">
+                                <svg class="h-6 w-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="text-lg font-medium text-gray-900">Annual Premium</h3>
+                                <p class="text-2xl font-bold text-green-600">₹<span id="motorAnnualPremium">0</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Motor Insurance Policies Table -->
+                <div class="bg-white shadow rounded-lg overflow-hidden">
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Policy Holder</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Vehicle Type</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Coverage</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Premium</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Renewal Date</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Start Date</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">End Date</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="motorInsurancePolicies" class="bg-white divide-y divide-gray-200">
+                                <!-- Motor insurance policies will be populated here -->
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -168,42 +262,56 @@
                             Add New Insurance Policy
                         </h3>
                         <div class="mt-4">
+                            <label for="policyName" class="block text-sm font-medium text-gray-700">Policy Holder</label>
+                            <input type="text" name="policyName" id="policyName" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                        </div>
+                        <div class="mt-4">
+                            <label for="companyName" class="block text-sm font-medium text-gray-700">Company Name</label>
+                            <input type="text" name="companyName" id="companyName" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                        </div>
+                        <div class="mt-4">
                             <label for="policyNumber" class="block text-sm font-medium text-gray-700">Policy Number</label>
                             <input type="text" name="policyNumber" id="policyNumber" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                         </div>
                         <div class="mt-4">
-                            <label for="policyName" class="block text-sm font-medium text-gray-700">Policy Name</label>
-                            <input type="text" name="policyName" id="policyName" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                        </div>
-                        <div class="mt-4">
                             <label for="policyType" class="block text-sm font-medium text-gray-700">Policy Type</label>
                             <select name="policyType" id="policyType" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
-                                <option value="term">Term Insurance</option>
-                                <option value="endowment">Endowment</option>
-                                <option value="ulip">ULIP</option>
-                                <option value="whole">Whole Life</option>
+                                <!-- Options will be populated based on insurance type -->
                             </select>
                         </div>
                         <div class="mt-4">
+                            <label for="premiumMode" class="block text-sm font-medium text-gray-700">Premium Mode</label>
+                            <select name="premiumMode" id="premiumMode" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                                <option value="yearly">Yearly</option>
+                                <option value="monthly">Monthly</option>
+                                <option value="quarterly">Quarterly</option>
+                                <option value="halferly">Halferly</option>
+                                <option value="oneTime">One Time</option>
+                            </select>
+                        </div>
+                        <div class="mt-4">
+                            <label for="coverageAmount" class="block text-sm font-medium text-gray-700">Sum Assured</label>
+                            <input type="number" name="coverageAmount" id="coverageAmount" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                        </div>
+                        <div class="mt-4" id="premiumAmountContainer">
                             <label for="premiumAmount" class="block text-sm font-medium text-gray-700">Premium Amount</label>
                             <input type="number" name="premiumAmount" id="premiumAmount" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                         </div>
-                        <div class="mt-4">
-                            <label for="premiumFrequency" class="block text-sm font-medium text-gray-700">Premium Frequency</label>
-                            <select name="premiumFrequency" id="premiumFrequency" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
-                                <option value="monthly">Monthly</option>
-                                <option value="quarterly">Quarterly</option>
-                                <option value="half-yearly">Half Yearly</option>
-                                <option value="yearly">Yearly</option>
-                            </select>
+                        <div class="mt-4" id="investedAmountContainer">
+                            <label for="investedAmount" class="block text-sm font-medium text-gray-700">Invested Amount</label>
+                            <input type="number" name="investedAmount" id="investedAmount" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                        </div>
+                        <div class="mt-4" id="nextPremiumDueContainer">
+                            <label for="nextPremiumDue" class="block text-sm font-medium text-gray-700">Renewal Date</label>
+                            <input type="date" name="nextPremiumDue" id="nextPremiumDue" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                         </div>
                         <div class="mt-4">
                             <label for="startDate" class="block text-sm font-medium text-gray-700">Start Date</label>
                             <input type="date" name="startDate" id="startDate" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                         </div>
                         <div class="mt-4">
-                            <label for="maturityDate" class="block text-sm font-medium text-gray-700">Maturity Date</label>
-                            <input type="date" name="maturityDate" id="maturityDate" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                            <label for="endDate" class="block text-sm font-medium text-gray-700">End Date</label>
+                            <input type="date" name="endDate" id="endDate" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                         </div>
                     </div>
                 </div>
@@ -220,20 +328,229 @@
     </div>
 </div>
 
+<!-- Add Health Insurance Modal -->
+<div id="addHealthInsuranceModal" class="fixed z-10 inset-0 overflow-y-auto hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+    <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+        <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
+        <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+        <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+            <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                <div class="sm:flex sm:items-start">
+                    <div class="mt-3 text-center sm:mt-0 sm:text-left w-full">
+                        <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">
+                            Add New Health Insurance Policy
+                        </h3>
+                        <div class="mt-4">
+                            <label for="healthPolicyName" class="block text-sm font-medium text-gray-700">Policy Holder</label>
+                            <input type="text" name="healthPolicyName" id="healthPolicyName" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                        </div>
+                        
+                        <div class="mt-4">
+                            <label for="healthPolicyType" class="block text-sm font-medium text-gray-700">Policy Type</label>
+                            <select name="healthPolicyType" id="healthPolicyType" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                                <option value="individual">Individual Health Insurance</option>
+                                <option value="family">Family Floater</option>
+                                <option value="senior">Senior Citizen</option>
+                                <option value="critical">Critical Illness</option>
+                                <option value="topup">Top Up</option>
+                            </select>
+                        </div>
+                        <div class="mt-4">
+                            <label for="healthCoverageAmount" class="block text-sm font-medium text-gray-700">Coverage Amount</label>
+                            <input type="number" name="healthCoverageAmount" id="healthCoverageAmount" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                        </div>
+                        
+                        <div class="mt-4">
+                            <label for="healthPremiumAmount" class="block text-sm font-medium text-gray-700">Premium Amount</label>
+                            <input type="number" name="healthPremiumAmount" id="healthPremiumAmount" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                        </div>
+                        <div class="mt-4">
+                            <label for="healthStartDate" class="block text-sm font-medium text-gray-700">Start Date</label>
+                            <input type="date" name="healthStartDate" id="healthStartDate" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                        </div>
+                        <div class="mt-4">
+                            <label for="healthRenewalDate" class="block text-sm font-medium text-gray-700">Renewal Date</label>
+                            <input type="date" name="healthRenewalDate" id="healthRenewalDate" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                        </div>
+                        <div class="mt-4">
+                            <label for="healthEndDate" class="block text-sm font-medium text-gray-700">End Date</label>
+                            <input type="date" name="healthEndDate" id="healthEndDate" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                <button type="button" id="saveHealthInsuranceBtn" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:ml-3 sm:w-auto sm:text-sm">
+                    Save
+                </button>
+                <button type="button" id="cancelHealthInsuranceBtn" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
+                    Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add Motor Insurance Modal -->
+<div id="addMotorInsuranceModal" class="fixed z-10 inset-0 overflow-y-auto hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+    <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+        <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
+        <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+        <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+            <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                <div class="sm:flex sm:items-start">
+                    <div class="mt-3 text-center sm:mt-0 sm:text-left w-full">
+                        <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">
+                            Add New Motor Insurance Policy
+                        </h3>
+                        <div class="mt-4">
+                            <label for="motorPolicyName" class="block text-sm font-medium text-gray-700">Policy Holder</label>
+                            <input type="text" name="motorPolicyName" id="motorPolicyName" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                        </div>
+                        <div class="mt-4">
+                            <label for="motorVehicleType" class="block text-sm font-medium text-gray-700">Vehicle Type</label>
+                            <select name="motorVehicleType" id="motorVehicleType" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                                <option value="Four Wheeler">Four Wheeler</option>
+                                <option value="Two Wheeler">Two Wheeler</option>
+                            </select>
+                        </div>
+                        <div class="mt-4">
+                            <label for="motorCoverageAmount" class="block text-sm font-medium text-gray-700">Coverage Amount</label>
+                            <input type="number" name="motorCoverageAmount" id="motorCoverageAmount" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                        </div>
+                        <div class="mt-4">
+                            <label for="motorPremiumAmount" class="block text-sm font-medium text-gray-700">Premium Amount</label>
+                            <input type="number" name="motorPremiumAmount" id="motorPremiumAmount" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                        </div>
+                        <div class="mt-4">
+                            <label for="motorStartDate" class="block text-sm font-medium text-gray-700">Start Date</label>
+                            <input type="date" name="motorStartDate" id="motorStartDate" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                        </div>
+                        <div class="mt-4">
+                            <label for="motorRenewalDate" class="block text-sm font-medium text-gray-700">Renewal Date</label>
+                            <input type="date" name="motorRenewalDate" id="motorRenewalDate" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                        </div>
+                        <div class="mt-4">
+                            <label for="motorEndDate" class="block text-sm font-medium text-gray-700">End Date</label>
+                            <input type="date" name="motorEndDate" id="motorEndDate" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                <button type="button" id="saveMotorInsuranceBtn" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:ml-3 sm:w-auto sm:text-sm">
+                    Save
+                </button>
+                <button type="button" id="cancelMotorInsuranceBtn" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
+                    Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
 // Initialize Firebase
 const db = firebase.firestore();
 
 // Modal elements
 const modal = document.getElementById('addInsuranceModal');
-const addInsuranceBtn = document.getElementById('addInsuranceBtn');
 const cancelInsuranceBtn = document.getElementById('cancelInsuranceBtn');
 const saveInsuranceBtn = document.getElementById('saveInsuranceBtn');
+let currentInsuranceType = '';
 
-// Show modal
-addInsuranceBtn.addEventListener('click', () => {
+// Show modal with appropriate fields based on insurance type
+function showAddModal(type) {
+    currentInsuranceType = type;
+    const modalTitle = document.getElementById('modal-title');
+    const policyTypeSelect = document.getElementById('policyType');
+    const policyNumberInput = document.getElementById('policyNumber').parentElement;
+    const companyNameInput = document.getElementById('companyName').parentElement;
+    const nextPremiumDueLabel = document.querySelector('label[for="nextPremiumDue"]');
+    const endDateLabel = document.querySelector('label[for="endDate"]');
+    const nextPremiumDueContainer = document.getElementById('nextPremiumDueContainer');
+    const premiumModeSelect = document.getElementById('premiumMode');
+    const premiumAmountContainer = document.getElementById('premiumAmountContainer');
+    const investedAmountContainer = document.getElementById('investedAmountContainer');
+    
+    // Clear previous options
+    policyTypeSelect.innerHTML = '';
+    
+    // Set modal title
+    modalTitle.textContent = `Add New ${type.charAt(0).toUpperCase() + type.slice(1)} Insurance`;
+    
+    // Show/hide fields based on insurance type
+    if (type === 'motor') {
+        policyNumberInput.style.display = 'none';
+        companyNameInput.style.display = 'none';
+        nextPremiumDueLabel.textContent = 'Renewal Date';
+        endDateLabel.textContent = 'End Date';
+        premiumModeSelect.style.display = 'none';
+        premiumAmountContainer.style.display = 'block';
+        investedAmountContainer.style.display = 'none';
+    } else if (type === 'life') {
+        policyNumberInput.style.display = 'none';
+        companyNameInput.style.display = 'block';
+        nextPremiumDueLabel.textContent = 'Renewal Date';
+        endDateLabel.textContent = 'Maturity Date';
+        premiumModeSelect.style.display = 'block';
+        premiumAmountContainer.style.display = 'block';
+        investedAmountContainer.style.display = 'block'; // Default to show
+        
+        // Show/hide next premium due based on premium mode
+        premiumModeSelect.addEventListener('change', function() {
+            nextPremiumDueContainer.style.display = this.value === 'oneTime' ? 'none' : 'block';
+            premiumAmountContainer.style.display = this.value === 'oneTime' ? 'none' : 'block';
+        });
+        
+        // Show/hide invested amount based on policy type
+        policyTypeSelect.addEventListener('change', function() {
+            investedAmountContainer.style.display = this.value === 'term' ? 'none' : 'block'; // Hide if term
+        });
+        
+        // Initial state
+        nextPremiumDueContainer.style.display = premiumModeSelect.value === 'oneTime' ? 'none' : 'block';
+        premiumAmountContainer.style.display = premiumModeSelect.value === 'oneTime' ? 'none' : 'block';
+        investedAmountContainer.style.display = policyTypeSelect.value === 'term' ? 'none' : 'block'; // Initial check
+    } else {
+        policyNumberInput.style.display = 'block';
+        companyNameInput.style.display = 'none';
+        nextPremiumDueLabel.textContent = 'Next Premium Due Date';
+        endDateLabel.textContent = 'Maturity Date';
+        premiumModeSelect.style.display = 'none';
+        premiumAmountContainer.style.display = 'block';
+        investedAmountContainer.style.display = 'none';
+    }
+    
+    // Add appropriate options based on insurance type
+    switch(type) {
+        case 'life':
+            policyTypeSelect.innerHTML = `
+                <option value="term">Term Insurance</option>
+                <option value="endowment">Endowment</option>
+                <option value="ulip">ULIP</option>
+                <option value="whole">Whole Life</option>
+            `;
+            break;
+        case 'health':
+            policyTypeSelect.innerHTML = `
+                <option value="individual">Individual Health Insurance</option>
+                <option value="family">Family Floater</option>
+                <option value="senior">Senior Citizen</option>
+                <option value="critical">Critical Illness</option>
+                <option value="topup">Top Up</option>
+            `;
+            break;
+        case 'motor':
+            policyTypeSelect.innerHTML = `
+                <option value="Four Wheeler">Four Wheeler</option>
+                <option value="Two Wheeler">Two Wheeler</option>
+            `;
+            break;
+    }
+    
     modal.classList.remove('hidden');
-});
+}
 
 // Hide modal
 cancelInsuranceBtn.addEventListener('click', () => {
@@ -242,50 +559,47 @@ cancelInsuranceBtn.addEventListener('click', () => {
 
 // Save insurance policy
 saveInsuranceBtn.addEventListener('click', async () => {
-    const policyNumber = document.getElementById('policyNumber').value;
-    const policyName = document.getElementById('policyName').value;
-    const policyType = document.getElementById('policyType').value;
-    const premiumAmount = parseFloat(document.getElementById('premiumAmount').value);
-    const premiumFrequency = document.getElementById('premiumFrequency').value;
-    const startDate = document.getElementById('startDate').value;
-    const maturityDate = document.getElementById('maturityDate').value;
+    const policyData = {
+        policyName: document.getElementById('policyName').value,
+        companyName: document.getElementById('companyName').value,
+        policyNumber: document.getElementById('policyNumber').value,
+        policyType: document.getElementById('policyType').value,
+        premiumMode: document.getElementById('premiumMode').value,
+        coverageAmount: parseFloat(document.getElementById('coverageAmount').value),
+        premiumAmount: parseFloat(document.getElementById('premiumAmount').value),
+        investedAmount: document.getElementById('investedAmount').value ? parseFloat(document.getElementById('investedAmount').value) : null,
+        startDate: document.getElementById('startDate').value,
+        nextPremiumDue: document.getElementById('nextPremiumDue').value,
+        endDate: document.getElementById('endDate').value,
+        insuranceType: currentInsuranceType,
+        lastUpdated: firebase.firestore.FieldValue.serverTimestamp()
+    };
+
+    // Convert premium amount to annual if necessary
+    switch (policyData.premiumMode) {
+        case 'monthly':
+            policyData.premiumAmount *= 12; // Convert to annual
+            break;
+        case 'quarterly':
+            policyData.premiumAmount *= 4; // Convert to annual
+            break;
+        case 'halferly':
+            policyData.premiumAmount *= 2; // Convert to annual
+            break;
+        // No conversion needed for yearly and oneTime
+    }
 
     try {
-        // Calculate current value based on policy type and duration
-        const start = new Date(startDate);
-        const maturity = new Date(maturityDate);
-        const today = new Date();
-        
-        // Simple calculation for current value (can be enhanced based on policy type)
-        const totalDuration = maturity - start;
-        const elapsedDuration = today - start;
-        const progress = elapsedDuration / totalDuration;
-        
-        // Assuming linear growth for simplicity
-        const currentValue = premiumAmount * (1 + progress);
-
-        // Add to Firestore
         const userId = firebase.auth().currentUser.uid;
-        const insuranceRef = db.collection('users').doc(userId).collection('insurance').doc(policyNumber);
+        const insuranceRef = db.collection('users').doc(userId).collection('insurance').doc(policyData.policyNumber || policyData.policyName);
         
-        await insuranceRef.set({
-            policyNumber,
-            policyName,
-            policyType,
-            premiumAmount,
-            premiumFrequency,
-            startDate,
-            maturityDate,
-            currentValue,
-            lastUpdated: firebase.firestore.FieldValue.serverTimestamp()
-        });
+        await insuranceRef.set(policyData);
 
         // Update user's total insurance value
         const userRef = db.collection('users').doc(userId);
         await userRef.update({
-            insuranceValue: firebase.firestore.FieldValue.increment(currentValue),
-            totalInvestment: firebase.firestore.FieldValue.increment(premiumAmount),
-            currentValue: firebase.firestore.FieldValue.increment(currentValue)
+            [`${currentInsuranceType}InsuranceValue`]: firebase.firestore.FieldValue.increment(policyData.coverageAmount),
+            totalInvestment: firebase.firestore.FieldValue.increment(policyData.premiumAmount)
         });
 
         modal.classList.add('hidden');
@@ -296,67 +610,161 @@ saveInsuranceBtn.addEventListener('click', async () => {
     }
 });
 
+// Function to show insurance section
+function showInsuranceSection(type) {
+    // Hide all sections
+    document.querySelectorAll('.insurance-section').forEach(section => {
+        section.classList.add('hidden');
+    });
+    
+    // Show selected section
+    document.getElementById(`${type}Insurance`).classList.remove('hidden');
+    
+    // Update tab styling
+    document.querySelectorAll('.tab-button').forEach(button => {
+        button.classList.remove('border-indigo-500', 'text-indigo-600');
+        button.classList.add('border-transparent', 'text-gray-500');
+    });
+    
+    // Highlight selected tab
+    event.target.classList.remove('border-transparent', 'text-gray-500');
+    event.target.classList.add('border-indigo-500', 'text-indigo-600');
+}
+
 // Function to update insurance policies
 async function updateInsurancePolicies() {
     try {
         const userId = firebase.auth().currentUser.uid;
         const insuranceSnapshot = await db.collection('users').doc(userId).collection('insurance').get();
         
-        const tbody = document.getElementById('insurancePolicies');
-        tbody.innerHTML = '';
-
-        let totalPremiumPaid = 0;
-        let currentValue = 0;
-        let totalReturns = 0;
+        // Reset all tables
+        document.getElementById('lifeInsurancePolicies').innerHTML = '';
+        document.getElementById('healthInsurancePolicies').innerHTML = '';
+        document.getElementById('motorInsurancePolicies').innerHTML = '';
+        
+        let lifeTotalCoverage = 0;
+        let lifeAnnualPremium = 0;
+        let lifeTotalInvestment = 0;
+        let healthTotalCoverage = 0;
+        let healthAnnualPremium = 0;
+        let motorTotalCoverage = 0;
+        let motorAnnualPremium = 0;
 
         insuranceSnapshot.forEach(doc => {
             const policy = doc.data();
-            totalPremiumPaid += policy.premiumAmount;
-            currentValue += policy.currentValue;
-            totalReturns += (policy.currentValue - policy.premiumAmount);
+            
+            // Update summary statistics based on insurance type
+            switch(policy.insuranceType) {
+                case 'life':
+                    lifeTotalCoverage += policy.coverageAmount;
+                    // Calculate annual premium based on premium mode
+                    let annualPremium = policy.premiumAmount;
+                    switch (policy.premiumMode) {
+                        case 'monthly':
+                            annualPremium *= 12;
+                            break;
+                        case 'quarterly':
+                            annualPremium *= 4;
+                            break;
+                        case 'halferly':
+                            annualPremium *= 2;
+                            break;
+                        // No conversion needed for yearly and oneTime
+                    }
+                    lifeAnnualPremium += annualPremium; // Use annualized premium for total
+                    lifeTotalInvestment += policy.investedAmount || 0;
+                    addPolicyToTable('lifeInsurancePolicies', policy);
+                    break;
+                case 'health':
+                    healthTotalCoverage += policy.coverageAmount;
+                    healthAnnualPremium += policy.premiumAmount;
+                    addPolicyToTable('healthInsurancePolicies', policy);
+                    break;
+                case 'motor':
+                    motorTotalCoverage += policy.coverageAmount;
+                    motorAnnualPremium += policy.premiumAmount;
+                    addPolicyToTable('motorInsurancePolicies', policy);
+                    break;
+            }
+        });
 
+        // Update summary statistics
+        document.getElementById('lifeTotalCoverage').textContent = lifeTotalCoverage.toFixed(2);
+        document.getElementById('lifeAnnualPremium').textContent = lifeAnnualPremium.toFixed(2);
+        document.getElementById('lifeTotalReturns').textContent = lifeTotalInvestment.toFixed(2);
+        
+        document.getElementById('healthTotalCoverage').textContent = healthTotalCoverage.toFixed(2);
+        document.getElementById('healthAnnualPremium').textContent = healthAnnualPremium.toFixed(2);
+        
+        document.getElementById('motorTotalCoverage').textContent = motorTotalCoverage.toFixed(2);
+        document.getElementById('motorAnnualPremium').textContent = motorAnnualPremium.toFixed(2);
+    } catch (error) {
+        console.error('Error updating insurance policies:', error);
+    }
+}
+
+// Function to add policy to appropriate table
+function addPolicyToTable(tableId, policy) {
+    const tbody = document.getElementById(tableId);
             const row = document.createElement('tr');
-            row.innerHTML = `
-                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                    ${policy.policyNumber}
-                </td>
+    
+    let rowContent = '';
+    switch(policy.insuranceType) {
+        case 'life':
+            rowContent = `
+                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${policy.policyName}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${policy.companyName}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${policy.policyType}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">₹${policy.coverageAmount.toFixed(2)}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${policy.premiumMode === 'oneTime' ? 'N/A' : `₹${policy.premiumAmount.toFixed(2)}`}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${policy.premiumMode}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${policy.premiumMode === 'oneTime' ? 'N/A' : new Date(policy.nextPremiumDue).toLocaleDateString()}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${new Date(policy.startDate).toLocaleDateString()}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${new Date(policy.endDate).toLocaleDateString()}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${policy.policyType === 'term' ? 'N/A' : `₹${(policy.investedAmount || 0).toFixed(2)}`}</td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    ${policy.policyName}
+                    <button class="text-red-600 hover:text-red-900" onclick="deleteInsurance('${policy.policyNumber || policy.policyName}')">
+                        Delete
+                    </button>
                 </td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    ${policy.policyType}
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    ₹${policy.premiumAmount.toFixed(2)}
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    ${policy.premiumFrequency}
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    ${new Date(policy.startDate).toLocaleDateString()}
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    ${new Date(policy.maturityDate).toLocaleDateString()}
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    ₹${policy.currentValue.toFixed(2)}
-                </td>
+            `;
+            break;
+        case 'health':
+            rowContent = `
+                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${policy.policyName}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${policy.policyNumber}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${policy.policyType}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">₹${policy.coverageAmount.toFixed(2)}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">₹${policy.premiumAmount.toFixed(2)}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${new Date(policy.startDate).toLocaleDateString()}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${new Date(policy.endDate).toLocaleDateString()}</td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                     <button class="text-red-600 hover:text-red-900" onclick="deleteInsurance('${policy.policyNumber}')">
                         Delete
                     </button>
                 </td>
             `;
-            tbody.appendChild(row);
-        });
-
-        // Update summary stats
-        document.getElementById('totalPremiumPaid').textContent = totalPremiumPaid.toFixed(2);
-        document.getElementById('currentInsuranceValue').textContent = currentValue.toFixed(2);
-        document.getElementById('totalInsuranceReturns').textContent = totalReturns.toFixed(2);
-    } catch (error) {
-        console.error('Error updating insurance policies:', error);
+            break;
+        case 'motor':
+            rowContent = `
+                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${policy.policyName}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${policy.policyType}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">₹${policy.coverageAmount.toFixed(2)}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">₹${policy.premiumAmount.toFixed(2)}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${new Date(policy.nextPremiumDue).toLocaleDateString()}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${new Date(policy.startDate).toLocaleDateString()}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${new Date(policy.endDate).toLocaleDateString()}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    <button class="text-red-600 hover:text-red-900" onclick="deleteInsurance('${policy.policyNumber || policy.policyName}')">
+                        Delete
+                    </button>
+                </td>
+            `;
+            break;
     }
+    
+    row.innerHTML = rowContent;
+    tbody.appendChild(row);
 }
 
 // Function to delete insurance policy
@@ -377,9 +785,8 @@ async function deleteInsurance(policyNumber) {
         // Update user's total insurance value
         const userRef = db.collection('users').doc(userId);
         await userRef.update({
-            insuranceValue: firebase.firestore.FieldValue.increment(-insurance.currentValue),
-            totalInvestment: firebase.firestore.FieldValue.increment(-insurance.premiumAmount),
-            currentValue: firebase.firestore.FieldValue.increment(-insurance.currentValue)
+            [`${insurance.insuranceType}InsuranceValue`]: firebase.firestore.FieldValue.increment(-insurance.coverageAmount),
+            totalInvestment: firebase.firestore.FieldValue.increment(-insurance.premiumAmount)
         });
 
         updateInsurancePolicies();
@@ -390,7 +797,10 @@ async function deleteInsurance(policyNumber) {
 }
 
 // Update insurance policies when page loads
-document.addEventListener('DOMContentLoaded', updateInsurancePolicies);
+document.addEventListener('DOMContentLoaded', () => {
+    updateInsurancePolicies();
+    showInsuranceSection('life'); // Show life insurance section by default
+});
 
 // Listen for real-time updates
 firebase.auth().onAuthStateChanged((user) => {
