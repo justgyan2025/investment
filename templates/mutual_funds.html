@@ -1,107 +1,106 @@
-
-
 {% extends "base.html" %}
 
 {% block content %}
+<link rel="stylesheet" href="/static/css/shared.css">
 <div class="py-6">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
         <div class="flex justify-between items-center">
-            <h1 class="text-2xl font-semibold text-gray-900">Mutual Funds</h1>
-            <button id="addMFBtn" class="bg-indigo-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-indigo-700 transition duration-300 ease-in-out">
-                Add Mutual Fund
-            </button>
+            <div class="flex items-center space-x-3">
+                <img src="/static/images/mutualfund.jpg" alt="Mutual Funds" class="w-10 h-10 rounded-full object-cover">
+                <h1 class="text-2xl font-semibold text-gray-900">Mutual Funds</h1>
+            </div>
+            <div class="flex space-x-3">
+                <button id="refreshMFBtn" class="bg-green-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-green-700 transition duration-300 ease-in-out flex items-center">
+                    <svg class="w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                    </svg>
+                    Refresh NAV
+                </button>
+                <button id="addMFBtn" class="bg-indigo-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-indigo-700 transition duration-300 ease-in-out">
+                    Add Mutual Fund
+                </button>
+            </div>
         </div>
     </div>
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
         <!-- Mutual Fund Portfolio Summary -->
         <div class="mt-8">
-            <div class="bg-white shadow rounded-lg">
-                <div class="px-4 py-5 sm:p-6">
-                    <h3 class="text-lg leading-6 font-medium text-gray-900">
-                        Portfolio Summary
-                    </h3>
-                    <div class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-3">
-                        <div class="bg-gray-50 overflow-hidden shadow rounded-lg">
-                            <div class="p-5">
-                                <div class="flex items-center">
-                                    <div class="flex-shrink-0">
-                                        <svg class="h-6 w-6 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <!-- SVG content -->
-                                        </svg>
+            <div class="bg-white shadow-sm rounded-2xl overflow-hidden border border-gray-100">
+                <div class="px-6 py-5 sm:p-8">
+                    <div class="flex items-center justify-between mb-8">
+                        <div>
+                            <h3 class="text-2xl font-bold text-gray-900 tracking-tight">
+                                Portfolio Summary
+                            </h3>
+                            <p class="mt-1 text-sm text-gray-500">
+                                Overview of your mutual fund investments
+                            </p>
+                        </div>
+                        <div class="flex items-center space-x-2 text-sm text-gray-500">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            <span>Last updated: <span id="lastUpdated" class="font-medium">Just now</span></span>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                        <!-- Total Investment Card -->
+                        <div class="group relative bg-gradient-to-br from-indigo-50 to-indigo-100 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 border border-indigo-100">
+                            <div class="absolute inset-0 bg-gradient-to-br from-indigo-500/5 to-indigo-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl"></div>
+                            <div class="p-6 relative">
+                                <div class="flex items-center justify-between mb-6">
+                                    <div>
+                                        <p class="text-sm font-medium text-indigo-600">Total Investment</p>
+                                        <p class="mt-2 text-2xl font-bold text-gray-900">
+                                            ₹<span id="totalMFInvestment" class="animate-number">0</span>
+                                        </p>
                                     </div>
-                                    <div class="ml-5 w-0 flex-1">
-                                        <dl>
-                                            <dt class="text-sm font-medium text-gray-500 truncate">
-                                                Total Investment
-                                            </dt>
-                                            <dd class="mt-1 text-3xl font-semibold text-gray-900">
-                                                <span id="totalMFInvestment">$100,000</span>
-                                            </dd>
-                                        </dl>
+                                </div>
+                                <div class="mt-4">
+                                    <div class="flex items-center text-sm text-gray-500">
+                                        <span class="font-medium">Investment Overview</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="bg-gray-50 overflow-hidden shadow rounded-lg">
-                            <div class="p-5">
-                                <div class="flex items-center">
-                                    <div class="flex-shrink-0">
-                                        <svg class="h-6 w-6 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <!-- SVG content -->
-                                        </svg>
+
+                        <!-- Current Value Card -->
+                        <div class="group relative bg-gradient-to-br from-green-50 to-green-100 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 border border-green-100">
+                            <div class="absolute inset-0 bg-gradient-to-br from-green-500/5 to-green-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl"></div>
+                            <div class="p-6 relative">
+                                <div class="flex items-center justify-between mb-6">
+                                    <div>
+                                        <p class="text-sm font-medium text-green-600">Current Value</p>
+                                        <p class="mt-2 text-2xl font-bold text-gray-900">
+                                            ₹<span id="currentMFValue" class="animate-number">0</span>
+                                        </p>
                                     </div>
-                                    <div class="ml-5 w-0 flex-1">
-                                        <dl>
-                                            <dt class="text-sm font-medium text-gray-500 truncate">
-                                                Current Value
-                                            </dt>
-                                            <dd class="mt-1 text-3xl font-semibold text-gray-900">
-                                                <span id="currentMFValue">$0</span>
-                                            </dd>
-                                        </dl>
+                                </div>
+                                <div class="mt-4">
+                                    <div class="flex items-center text-sm text-gray-500">
+                                        <span class="font-medium">Portfolio Value</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="bg-gray-50 overflow-hidden shadow rounded-lg">
-                            <div class="p-5">
-                                <div class="flex items-center">
-                                    <div class="flex-shrink-0">
-                                        <svg class="h-6 w-6 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <!-- SVG content -->
-                                        </svg>
-                                    </div>
-                                    <div class="ml-5 w-0 flex-1">
-                                        <dl>
-                                            <dt class="text-sm font-medium text-gray-500 truncate">
-                                                Total Profit/Loss
-                                            </dt>
-                                            <dd class="mt-1 text-3xl font-semibold text-gray-900">
-                                                <span id="totalMFReturns">$0</span>
-                                            </dd>
-                                        </dl>
+
+                        <!-- Total Profit/Loss Card -->
+                        <div class="group relative bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 border border-blue-100">
+                            <div class="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-blue-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl"></div>
+                            <div class="p-6 relative">
+                                <div class="flex items-center justify-between mb-6">
+                                    <div>
+                                        <p class="text-sm font-medium text-blue-600">Total Profit/Loss</p>
+                                        <p class="mt-2 text-2xl font-bold text-gray-900">
+                                            ₹<span id="totalMFReturns" class="animate-number">0</span>
+                                        </p>
+                                        <p class="mt-1 text-sm font-medium" id="totalMFReturnsPercentage">(0%)</p>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="bg-gray-50 overflow-hidden shadow rounded-lg">
-                            <div class="p-5">
-                                <div class="flex items-center">
-                                    <div class="flex-shrink-0">
-                                        <svg class="h-6 w-6 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <!-- SVG content -->
-                                        </svg>
-                                    </div>
-                                    <div class="ml-5 w-0 flex-1">
-                                        <dl>
-                                            <dt class="text-sm font-medium text-gray-500 truncate">
-                                                Return
-                                            </dt>
-                                            <dd class="mt-1 text-3xl font-semibold text-gray-900">
-                                                <span id="totalMFReturnsPercentage">0%</span>
-                                            </dd>
-                                        </dl>
+                                <div class="mt-4">
+                                    <div class="flex items-center text-sm text-gray-500">
+                                        <span class="font-medium">Performance</span>
                                     </div>
                                 </div>
                             </div>
@@ -112,43 +111,45 @@
         </div>
 
         <div class="mt-8 flex flex-col">
-            <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-                <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-                    <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-                        <table class="min-w-full divide-y divide-gray-200">
-                            <thead class="bg-gray-50">
-                                <tr>
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Scheme Name
-                                    </th>
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Units
-                                    </th>
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Current NAV
-                                    </th>
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Investment
-                                    </th>
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Total Value
-                                    </th>
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Profit/Loss
-                                    </th>
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Returns
-                                    </th>
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Actions
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody id="mfHoldings" class="bg-white divide-y divide-gray-200">
-                                <!-- Mutual fund holdings will be populated here -->
-                            </tbody>
-                        </table>
-                    </div>
+            <div class="table-container">
+                <div class="view-toggle-container">
+                    <button class="view-toggle active" onclick="toggleTableView('table')">
+                        <svg class="table-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                        </svg>
+                        <span>Table View</span>
+                    </button>
+                    <button class="view-toggle" onclick="toggleTableView('card')">
+                        <svg class="table-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+                        </svg>
+                        <span>Card View</span>
+                    </button>
+                </div>
+                
+                <!-- Desktop Table View -->
+                <div class="table-wrapper active">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Scheme Name</th>
+                                <th>Units</th>
+                                <th>Current NAV</th>
+                                <th>Investment</th>
+                                <th>Total Value</th>
+                                <th>Profit/Loss</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="mutualFundsTableBody">
+                            <!-- Loading skeleton will be shown here -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Mobile Card View -->
+                <div id="mobileTableView" class="table-mobile-view">
+                    <!-- Mobile cards will be inserted here -->
                 </div>
             </div>
         </div>
@@ -169,7 +170,26 @@
                         </h3>
                         <div class="mt-4">
                             <label for="schemeCode" class="block text-sm font-medium text-gray-700">Scheme Code</label>
-                            <input type="text" name="schemeCode" id="schemeCode" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                            <div class="mt-1 flex rounded-md shadow-sm">
+                                <input type="text" name="schemeCode" id="schemeCode" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-l-md sm:text-sm border-gray-300" placeholder="Enter scheme code">
+                                <button type="button" id="fetchMFBtn" class="inline-flex items-center px-3 py-2 border border-gray-300 shadow-sm text-sm leading-4 font-medium rounded-r-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                    Fetch
+                                </button>
+                            </div>
+                        </div>
+                        <div id="schemeDetails" class="mt-4 hidden">
+                            <div class="bg-gray-50 rounded-md p-4">
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-500">Scheme Name</label>
+                                        <div id="schemeName" class="mt-1 text-sm text-gray-900"></div>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-500">Current NAV</label>
+                                        <div id="currentNav" class="mt-1 text-sm text-gray-900"></div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="mt-4">
                             <label for="units" class="block text-sm font-medium text-gray-700">Units</label>
@@ -193,6 +213,313 @@
         </div>
     </div>
 </div>
+
+<!-- Edit Mutual Fund Modal -->
+<div id="editMFModal" class="fixed z-10 inset-0 overflow-y-auto hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+    <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+        <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
+        <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+        <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+            <form id="editMFForm">
+                <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                    <div class="sm:flex sm:items-start">
+                        <div class="mt-3 text-center sm:mt-0 sm:text-left w-full">
+                            <h3 class="text-lg leading-6 font-medium text-gray-900">
+                                Edit Mutual Fund
+                            </h3>
+                            <input type="hidden" id="editMFId">
+                            <div class="mt-4">
+                                <label for="editSchemeCode" class="block text-sm font-medium text-gray-700">Scheme Code</label>
+                                <input type="text" name="schemeCode" id="editSchemeCode" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                            </div>
+                            <div class="mt-4">
+                                <label for="editUnits" class="block text-sm font-medium text-gray-700">Units</label>
+                                <input type="number" name="units" id="editUnits" step="0.01" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                            </div>
+                            <div class="mt-4">
+                                <label for="editInvestment" class="block text-sm font-medium text-gray-700">Investment</label>
+                                <input type="number" name="investment" id="editInvestment" step="0.01" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                    <button type="submit" id="updateMFBtn" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:ml-3 sm:w-auto sm:text-sm">
+                        Update
+                    </button>
+                    <button type="button" id="cancelEditMFBtn" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
+                        Cancel
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<style>
+    @keyframes shimmer {
+        0% {
+            background-position: -1000px 0;
+        }
+        100% {
+            background-position: 1000px 0;
+        }
+    }
+
+    .skeleton {
+        background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+        background-size: 1000px 100%;
+        animation: shimmer 2s infinite linear;
+    }
+
+    .skeleton-text {
+        height: 1em;
+        width: 100%;
+        border-radius: 4px;
+    }
+
+    .skeleton-text.short {
+        width: 60%;
+    }
+
+    .skeleton-text.medium {
+        width: 80%;
+    }
+
+    .skeleton-text.long {
+        width: 100%;
+    }
+
+    .skeleton-button {
+        height: 2em;
+        width: 6em;
+        border-radius: 4px;
+    }
+
+    @keyframes numberAnimation {
+        from {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .animate-number {
+        animation: numberAnimation 0.5s ease-out forwards;
+    }
+
+    .gradient-text {
+        background: linear-gradient(45deg, #4F46E5, #10B981);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    /* Add smooth transitions for all interactive elements */
+    * {
+        transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        transition-duration: 150ms;
+    }
+
+    /* Add new styles for table animations */
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .table-row {
+        animation: fadeIn 0.5s ease-out forwards;
+    }
+
+    .table-row:hover {
+        background-color: rgba(79, 70, 229, 0.05);
+        transition: background-color 0.2s ease-in-out;
+    }
+
+    /* Mobile responsive table */
+    @media (max-width: 640px) {
+        .table-responsive {
+            display: block;
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        .table-responsive table {
+            min-width: 800px;
+        }
+    }
+
+    /* Enhanced Toggle View Styles */
+    .view-toggle-container {
+        display: flex;
+        justify-content: flex-end;
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+        padding: 0.5rem;
+        background: #F9FAFB;
+        border-radius: 0.5rem;
+    }
+
+    .view-toggle {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.5rem 1rem;
+        background: white;
+        border: 1px solid #E5E7EB;
+        border-radius: 0.375rem;
+        font-size: 0.875rem;
+        color: #6B7280;
+        cursor: pointer;
+        transition: all 0.2s ease-in-out;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    }
+
+    .view-toggle:hover {
+        background: #F3F4F6;
+        transform: translateY(-1px);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .view-toggle.active {
+        background: #4F46E5;
+        color: white;
+        border-color: #4F46E5;
+    }
+
+    .view-toggle.active:hover {
+        background: #4338CA;
+        transform: translateY(-1px);
+        box-shadow: 0 2px 4px rgba(79, 70, 229, 0.2);
+    }
+
+    .view-toggle svg {
+        width: 1.25rem;
+        height: 1.25rem;
+    }
+
+    .table-wrapper {
+        display: none;
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out;
+    }
+
+    .table-wrapper.active {
+        display: block;
+        opacity: 1;
+    }
+
+    .table-mobile-view {
+        display: none;
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out;
+    }
+
+    .table-mobile-view.active {
+        display: block;
+        opacity: 1;
+    }
+
+    /* Enhanced Mobile Card Styles */
+    .table-mobile-card {
+        background: white;
+        border-radius: 0.75rem;
+        padding: 1.25rem;
+        margin-bottom: 1rem;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        transition: all 0.2s ease-in-out;
+    }
+
+    .table-mobile-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    }
+
+    .table-mobile-card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.25rem;
+        padding-bottom: 0.75rem;
+        border-bottom: 1px solid #E5E7EB;
+    }
+
+    .table-mobile-card-header h3 {
+        font-size: 1rem;
+        font-weight: 600;
+        color: #111827;
+    }
+
+    .table-mobile-card-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+    }
+
+    .table-mobile-item {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+
+    .table-mobile-label {
+        font-size: 0.75rem;
+        color: #6B7280;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+
+    .table-mobile-value {
+        font-size: 0.875rem;
+        color: #111827;
+        font-weight: 500;
+    }
+
+    .table-mobile-actions {
+        display: flex;
+        justify-content: flex-end;
+        gap: 0.75rem;
+        margin-top: 1.25rem;
+        padding-top: 0.75rem;
+        border-top: 1px solid #E5E7EB;
+    }
+
+    .table-mobile-actions button {
+        padding: 0.5rem 1rem;
+        border-radius: 0.375rem;
+        font-size: 0.875rem;
+        font-weight: 500;
+        transition: all 0.2s ease-in-out;
+    }
+
+    .table-mobile-actions button:first-child {
+        background: #EEF2FF;
+        color: #4F46E5;
+    }
+
+    .table-mobile-actions button:first-child:hover {
+        background: #E0E7FF;
+    }
+
+    .table-mobile-actions button:last-child {
+        background: #FEE2E2;
+        color: #EF4444;
+    }
+
+    .table-mobile-actions button:last-child:hover {
+        background: #FECACA;
+    }
+</style>
 
 <script>
 // Initialize Firebase
@@ -273,18 +600,164 @@ saveMFBtn.addEventListener('click', async () => {
     }
 });
 
-// Function to update mutual fund holdings
+// Add edit modal elements
+const editMFModal = document.getElementById('editMFModal');
+const cancelEditMFBtn = document.getElementById('cancelEditMFBtn');
+const editMFForm = document.getElementById('editMFForm');
+
+// Hide edit modal
+cancelEditMFBtn.addEventListener('click', () => {
+    editMFModal.classList.add('hidden');
+});
+
+// Function to handle MF edit
+async function handleMFEdit(schemeCode) {
+    try {
+        const currentUser = firebase.auth().currentUser;
+        if (!currentUser) {
+            throw new Error('You must be logged in to edit data');
+        }
+        const userId = currentUser.uid;
+        const mfRef = db.collection('users').doc(userId).collection('mutual_funds').doc(schemeCode);
+        const doc = await mfRef.get();
+        
+        if (!doc.exists) {
+            throw new Error('Document not found');
+        }
+
+        const data = doc.data();
+        
+        // Populate the edit form
+        document.getElementById('editMFId').value = schemeCode;
+        document.getElementById('editSchemeCode').value = data.schemeCode || '';
+        document.getElementById('editUnits').value = data.units || '';
+        document.getElementById('editInvestment').value = data.investment || '';
+
+        // Show the modal
+        editMFModal.classList.remove('hidden');
+    } catch (error) {
+        console.error('Error preparing MF edit:', error);
+        alert(error.message || 'Error preparing edit');
+    }
+}
+
+// Handle MF edit form submission
+editMFForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    try {
+        const currentUser = firebase.auth().currentUser;
+        if (!currentUser) {
+            throw new Error('You must be logged in to update data');
+        }
+        const userId = currentUser.uid;
+        const schemeCode = document.getElementById('editMFId').value;
+
+        const units = parseFloat(document.getElementById('editUnits').value);
+        const investment = parseFloat(document.getElementById('editInvestment').value);
+
+        // Fetch current NAV
+        const response = await fetch(`/api/mf/${schemeCode}`);
+        const data = await response.json();
+        
+        if (data.error) {
+            throw new Error(data.error);
+        }
+
+        const currentNav = parseFloat(data.nav);
+        const totalValue = units * currentNav;
+        const returns = totalValue - investment;
+        const returnsPercentage = (returns / investment) * 100;
+
+        // Update in Firestore
+        const mfRef = db.collection('users').doc(userId).collection('mutual_funds').doc(schemeCode);
+        await mfRef.update({
+            units,
+            investment,
+            currentNav,
+            totalValue,
+            returns,
+            returnsPercentage,
+            lastUpdated: firebase.firestore.FieldValue.serverTimestamp()
+        });
+
+        // Close modal and show success message
+        editMFModal.classList.add('hidden');
+        alert('Mutual fund updated successfully!');
+    } catch (error) {
+        console.error('Error updating mutual fund:', error);
+        alert(error.message || 'Error updating mutual fund');
+    }
+});
+
+// Updated toggle function
+function toggleTableView(view) {
+    const tableWrapper = document.querySelector('.table-wrapper');
+    const mobileView = document.getElementById('mobileTableView');
+    const toggleButtons = document.querySelectorAll('.view-toggle');
+    
+    // Update active state of toggle buttons
+    toggleButtons.forEach(button => {
+        if (button.querySelector('span').textContent.toLowerCase().includes(view)) {
+            button.classList.add('active');
+        } else {
+            button.classList.remove('active');
+        }
+    });
+
+    // Show/hide views with animation
+    if (view === 'table') {
+        tableWrapper.classList.add('active');
+        mobileView.classList.remove('active');
+    } else {
+        tableWrapper.classList.remove('active');
+        mobileView.classList.add('active');
+    }
+}
+
+// Update the updateMFHoldings function to include mobile view
 async function updateMFHoldings() {
     try {
+        createLoadingSkeleton();
+        
         const userId = firebase.auth().currentUser.uid;
         const mfSnapshot = await db.collection('users').doc(userId).collection('mutual_funds').get();
         
-        const tbody = document.getElementById('mfHoldings');
+        const tbody = document.getElementById('mutualFundsTableBody');
+        const mobileView = document.getElementById('mobileTableView');
         tbody.innerHTML = '';
+        mobileView.innerHTML = '';
 
         let totalInvestment = 0;
         let currentValue = 0;
         let totalReturns = 0;
+
+        if (mfSnapshot.empty) {
+            const emptyMessage = `
+                <tr>
+                    <td colspan="7" class="px-6 py-4 text-center text-gray-500">
+                        <div class="flex flex-col items-center">
+                            <svg class="w-12 h-12 text-gray-400 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                            </svg>
+                            <p class="text-lg font-medium">No mutual funds found</p>
+                            <p class="text-sm text-gray-400">Add your first mutual fund to get started</p>
+                        </div>
+                    </td>
+                </tr>
+            `;
+            tbody.innerHTML = emptyMessage;
+            mobileView.innerHTML = `
+                <div class="text-center text-gray-500 py-8">
+                    <svg class="w-12 h-12 text-gray-400 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                    </svg>
+                    <p class="text-lg font-medium">No mutual funds found</p>
+                    <p class="text-sm text-gray-400">Add your first mutual fund to get started</p>
+                </div>
+            `;
+            return;
+        }
 
         mfSnapshot.forEach(doc => {
             const mf = doc.data();
@@ -292,46 +765,142 @@ async function updateMFHoldings() {
             currentValue += mf.totalValue;
             totalReturns += mf.returns;
 
+            // Desktop table row
             const row = document.createElement('tr');
+            row.className = 'animate-fade-in';
             row.innerHTML = `
                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                     ${mf.schemeName}
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    ${mf.units.toFixed(2)}
+                    ${formatIndianNumber(mf.units.toFixed(2))}
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    ₹${mf.currentNav.toFixed(2)}
+                    ₹${formatIndianNumber(mf.currentNav.toFixed(2))}
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    ₹${mf.investment.toFixed(2)}
+                    ₹${formatIndianNumber(mf.investment.toFixed(2))}
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    ₹${mf.totalValue.toFixed(2)}
+                    ₹${formatIndianNumber(mf.totalValue.toFixed(2))}
                 </td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm ${mf.returns >= 0 ? 'text-green-600' : 'text-red-600'}">
-                    ₹${(mf.totalValue - mf.investment).toFixed(2)}
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm ${mf.returns >= 0 ? 'text-green-600' : 'text-red-600'}">
-                    ${mf.returnsPercentage.toFixed(2)}%
+                <td class="px-6 py-4 whitespace-nowrap">
+                    <div class="flex flex-col">
+                        <span class="text-sm ${mf.returns >= 0 ? 'text-green-600' : 'text-red-600'}">
+                            ₹${formatIndianNumber((mf.totalValue - mf.investment).toFixed(2))}
+                        </span>
+                        <span class="text-xs ${mf.returns >= 0 ? 'text-green-500' : 'text-red-500'}">
+                            ${formatIndianNumber(mf.returnsPercentage.toFixed(2))}%
+                        </span>
+                    </div>
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    <button class="text-red-600 hover:text-red-900" onclick="deleteMF('${mf.schemeCode}')">
-                        Delete
-                    </button>
+                    <div class="flex space-x-2">
+                        <button class="text-blue-600 hover:text-blue-900 transition-colors duration-200" onclick="handleMFEdit('${mf.schemeCode}')">
+                            Edit
+                        </button>
+                        <button class="text-red-600 hover:text-red-900 transition-colors duration-200" onclick="deleteMF('${mf.schemeCode}')">
+                            Delete
+                        </button>
+                    </div>
                 </td>
             `;
             tbody.appendChild(row);
+
+            // Mobile card view
+            const card = document.createElement('div');
+            card.className = 'table-mobile-card animate-fade-in';
+            card.innerHTML = `
+                <div class="table-mobile-card-header">
+                    <h3 class="text-sm font-medium text-gray-900">${mf.schemeName}</h3>
+                    <span class="text-xs ${mf.returns >= 0 ? 'text-green-600' : 'text-red-600'}">
+                        ${formatIndianNumber(mf.returnsPercentage.toFixed(2))}%
+                    </span>
+                </div>
+                <div class="table-mobile-card-content">
+                    <div class="table-mobile-item">
+                        <span class="table-mobile-label">Units</span>
+                        <span class="table-mobile-value">${formatIndianNumber(mf.units.toFixed(2))}</span>
+                    </div>
+                    <div class="table-mobile-item">
+                        <span class="table-mobile-label">Current NAV</span>
+                        <span class="table-mobile-value">₹${formatIndianNumber(mf.currentNav.toFixed(2))}</span>
+                    </div>
+                    <div class="table-mobile-item">
+                        <span class="table-mobile-label">Investment</span>
+                        <span class="table-mobile-value">₹${formatIndianNumber(mf.investment.toFixed(2))}</span>
+                    </div>
+                    <div class="table-mobile-item">
+                        <span class="table-mobile-label">Total Value</span>
+                        <span class="table-mobile-value">₹${formatIndianNumber(mf.totalValue.toFixed(2))}</span>
+                    </div>
+                    <div class="table-mobile-item">
+                        <span class="table-mobile-label">Profit/Loss</span>
+                        <span class="table-mobile-value ${mf.returns >= 0 ? 'text-green-600' : 'text-red-600'}">
+                            ₹${formatIndianNumber((mf.totalValue - mf.investment).toFixed(2))}
+                        </span>
+                    </div>
+                </div>
+                <div class="table-mobile-actions">
+                    <button class="text-blue-600 hover:text-blue-900 transition-colors duration-200" onclick="handleMFEdit('${mf.schemeCode}')">
+                        Edit
+                    </button>
+                    <button class="text-red-600 hover:text-red-900 transition-colors duration-200" onclick="deleteMF('${mf.schemeCode}')">
+                        Delete
+                    </button>
+                </div>
+            `;
+            mobileView.appendChild(card);
         });
 
-        // Update summary stats
+        // Update summary stats with animation
         const totalReturnsPercentage = (totalReturns / totalInvestment) * 100;
-        document.getElementById('totalMFInvestment').textContent = totalInvestment.toFixed(2);
-        document.getElementById('currentMFValue').textContent = currentValue.toFixed(2);
-        document.getElementById('totalMFReturns').textContent = totalReturns.toFixed(2);
-        document.getElementById('totalMFReturnsPercentage').textContent = totalReturnsPercentage.toFixed(2) + '%';
+        
+        // Animate each value
+        const totalInvestmentElement = document.getElementById('totalMFInvestment');
+        const currentValueElement = document.getElementById('currentMFValue');
+        const totalReturnsElement = document.getElementById('totalMFReturns');
+        const totalReturnsPercentageElement = document.getElementById('totalMFReturnsPercentage');
+
+        animateValue(totalInvestmentElement, 0, totalInvestment, 1000);
+        animateValue(currentValueElement, 0, currentValue, 1000);
+        animateValue(totalReturnsElement, 0, totalReturns, 1000);
+        animateValue(totalReturnsPercentageElement, 0, totalReturnsPercentage, 1000);
+
+        // Update last updated time
+        const now = new Date();
+        const timeString = now.toLocaleTimeString('en-US', { 
+            hour: '2-digit', 
+            minute: '2-digit',
+            second: '2-digit',
+            hour12: true 
+        });
+        document.getElementById('lastUpdated').textContent = timeString;
     } catch (error) {
         console.error('Error updating mutual fund holdings:', error);
+        const errorMessage = `
+            <tr>
+                <td colspan="7" class="px-6 py-4 text-center text-red-500">
+                    <div class="flex flex-col items-center">
+                        <svg class="w-12 h-12 text-red-400 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        <p class="text-lg font-medium">Error loading mutual funds</p>
+                        <p class="text-sm text-gray-400">Please try refreshing the page</p>
+                    </div>
+                </td>
+            </tr>
+        `;
+        tbody.innerHTML = errorMessage;
+        mobileView.innerHTML = `
+            <div class="text-center text-red-500 py-8">
+                <svg class="w-12 h-12 text-red-400 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                <p class="text-lg font-medium">Error loading mutual funds</p>
+                <p class="text-sm text-gray-400">Please try refreshing the page</p>
+            </div>
+        `;
     }
 }
 
@@ -365,8 +934,11 @@ async function deleteMF(schemeCode) {
     }
 }
 
-// Update mutual fund holdings when page loads
-document.addEventListener('DOMContentLoaded', updateMFHoldings);
+// Update the initial load to show loading skeleton
+document.addEventListener('DOMContentLoaded', () => {
+    createLoadingSkeleton(); // Show loading skeleton immediately
+    updateMFHoldings(); // Then fetch and update the data
+});
 
 // Listen for real-time updates
 firebase.auth().onAuthStateChanged((user) => {
@@ -377,5 +949,236 @@ firebase.auth().onAuthStateChanged((user) => {
         });
     }
 });
+
+// Add fetch button functionality
+const fetchMFBtn = document.getElementById('fetchMFBtn');
+const schemeCodeInput = document.getElementById('schemeCode');
+const schemeDetails = document.getElementById('schemeDetails');
+const schemeNameDisplay = document.getElementById('schemeName');
+const currentNavDisplay = document.getElementById('currentNav');
+
+fetchMFBtn.addEventListener('click', async () => {
+    const userId = firebase.auth().currentUser?.uid;
+    if (!userId) {
+        alert('Please sign in to fetch mutual fund details');
+        return;
+    }
+    
+    const schemeCode = schemeCodeInput.value.trim();
+    if (!schemeCode) {
+        alert('Please enter a scheme code');
+        return;
+    }
+
+    try {
+        fetchMFBtn.disabled = true;
+        fetchMFBtn.innerHTML = `
+            <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+            Fetching...
+        `;
+        
+        const response = await fetch(`/api/mf/${schemeCode}`);
+        const data = await response.json();
+        
+        if (!response.ok) {
+            throw new Error(data.error || 'Failed to fetch mutual fund details');
+        }
+        
+        if (data.error) {
+            throw new Error(data.error);
+        }
+
+        if (!data.name || !data.nav) {
+            throw new Error('Invalid mutual fund data received');
+        }
+
+        // Display the fetched details
+        schemeNameDisplay.textContent = data.name;
+        currentNavDisplay.textContent = `₹${parseFloat(data.nav).toFixed(2)}`;
+        schemeDetails.classList.remove('hidden');
+        
+    } catch (error) {
+        console.error('Error fetching mutual fund details:', error);
+        alert(error.message || 'Error fetching mutual fund details. Please try again.');
+        schemeDetails.classList.add('hidden');
+        schemeNameDisplay.textContent = '';
+        currentNavDisplay.textContent = '';
+    } finally {
+        fetchMFBtn.disabled = false;
+        fetchMFBtn.textContent = 'Fetch';
+    }
+});
+
+// Clear form and hide details when modal is hidden
+cancelMFBtn.addEventListener('click', () => {
+    modal.classList.add('hidden');
+    schemeCodeInput.value = '';
+    document.getElementById('units').value = '';
+    document.getElementById('investment').value = '';
+    schemeDetails.classList.add('hidden');
+    schemeNameDisplay.textContent = '';
+    currentNavDisplay.textContent = '';
+});
+
+// Add refresh button functionality
+const refreshMFBtn = document.getElementById('refreshMFBtn');
+
+refreshMFBtn.addEventListener('click', async () => {
+    try {
+        refreshMFBtn.disabled = true;
+        refreshMFBtn.innerHTML = `
+            <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+            Refreshing...
+        `;
+
+        // Show loading skeleton while refreshing
+        createLoadingSkeleton();
+
+        const userId = firebase.auth().currentUser?.uid;
+        if (!userId) {
+            throw new Error('User not authenticated');
+        }
+
+        const mfSnapshot = await db.collection('users').doc(userId).collection('mutual_funds').get();
+        const updatePromises = [];
+
+        for (const doc of mfSnapshot.docs) {
+            const mf = doc.data();
+            const schemeCode = mf.schemeCode;
+
+            try {
+                const response = await fetch(`/api/mf/${schemeCode}`);
+                const data = await response.json();
+                
+                if (data.error) {
+                    console.error(`Error fetching ${schemeCode}:`, data.error);
+                    continue;
+                }
+
+                const currentNav = parseFloat(data.nav);
+                if (isNaN(currentNav)) {
+                    console.error(`Invalid NAV for ${schemeCode}`);
+                    continue;
+                }
+
+                const totalValue = mf.units * currentNav;
+                const returns = totalValue - mf.investment;
+                const returnsPercentage = (returns / mf.investment) * 100;
+
+                updatePromises.push(
+                    doc.ref.update({
+                        currentNav,
+                        totalValue,
+                        returns,
+                        returnsPercentage,
+                        lastUpdated: firebase.firestore.FieldValue.serverTimestamp()
+                    })
+                );
+            } catch (error) {
+                console.error(`Error updating ${schemeCode}:`, error);
+            }
+        }
+
+        await Promise.all(updatePromises);
+        updateMFHoldings();
+        
+        refreshMFBtn.disabled = false;
+        refreshMFBtn.innerHTML = `
+            <svg class="w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+            </svg>
+            Refresh NAV
+        `;
+        
+        alert('Mutual fund NAVs updated successfully!');
+    } catch (error) {
+        console.error('Error refreshing mutual fund NAVs:', error);
+        alert('Error refreshing mutual fund NAVs. Please try again.');
+        refreshMFBtn.disabled = false;
+        refreshMFBtn.innerHTML = `
+            <svg class="w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+            </svg>
+            Refresh NAV
+        `;
+    }
+});
+
+// Function to create loading skeleton
+function createLoadingSkeleton() {
+    const tbody = document.getElementById('mutualFundsTableBody');
+    tbody.innerHTML = ''; // Clear existing content
+    
+    // Create 5 skeleton rows
+    for (let i = 0; i < 5; i++) {
+        const row = document.createElement('tr');
+        row.className = 'animate-pulse';
+        
+        row.innerHTML = `
+            <td class="px-6 py-4 whitespace-nowrap">
+                <div class="flex items-center">
+                    <div class="skeleton skeleton-text short"></div>
+                </div>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+                <div class="skeleton skeleton-text medium"></div>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+                <div class="skeleton skeleton-text short"></div>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+                <div class="skeleton skeleton-text medium"></div>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+                <div class="skeleton skeleton-text short"></div>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+                <div class="skeleton skeleton-text medium"></div>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+                <div class="skeleton skeleton-text short"></div>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                <div class="flex space-x-2">
+                    <div class="skeleton skeleton-button"></div>
+                    <div class="skeleton skeleton-button"></div>
+                </div>
+            </td>
+        `;
+        
+        tbody.appendChild(row);
+    }
+}
+
+// Function to format number in Indian format
+function formatIndianNumber(num) {
+    const numStr = num.toString();
+    const [wholePart, decimalPart] = numStr.split('.');
+    const lastThree = wholePart.substring(wholePart.length - 3);
+    const otherNumbers = wholePart.substring(0, wholePart.length - 3);
+    const formatted = otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ",") + (otherNumbers ? "," : "") + lastThree;
+    return decimalPart ? formatted + "." + decimalPart : formatted;
+}
+
+// Update the animateValue function to use Indian number format
+function animateValue(element, start, end, duration) {
+    let startTimestamp = null;
+    const step = (timestamp) => {
+        if (!startTimestamp) startTimestamp = timestamp;
+        const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+        const currentValue = Math.floor(progress * (end - start) + start);
+        element.textContent = formatIndianNumber(currentValue.toFixed(2));
+        if (progress < 1) {
+            window.requestAnimationFrame(step);
+        }
+    };
+    window.requestAnimationFrame(step);
+}
 </script>
 {% endblock %}

@@ -5,60 +5,71 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
         <div class="flex justify-between items-center">
             <h1 class="text-2xl font-semibold text-gray-900">Stocks</h1>
-            <button id="addStockBtn" class="bg-indigo-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-indigo-700">
-                Add Stock
-            </button>
+            <div class="flex space-x-3">
+                <button id="refreshStocksBtn" class="bg-green-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-green-700 transition duration-300 ease-in-out flex items-center">
+                    <svg class="w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                    </svg>
+                    Refresh Prices
+                </button>
+                <button id="addStockBtn" class="bg-indigo-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-indigo-700">
+                    Add Stock
+                </button>
+            </div>
         </div>
     </div>
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
         <!-- Stock Portfolio Summary -->
         <div class="mt-8">
-            <div class="bg-white shadow rounded-lg">
-                <div class="px-4 py-5 sm:p-6">
-                    <h3 class="text-lg leading-6 font-medium text-gray-900">
+            <div class="bg-white shadow-lg rounded-xl overflow-hidden">
+                <div class="px-6 py-8">
+                    <h3 class="text-xl font-bold text-gray-900 mb-8">
                         Portfolio Summary
                     </h3>
-                    <div class="mt-5 flex flex-wrap justify-between">
-                        <div class="w-full sm:w-1/3 p-4">
-                            <div class="bg-green-100 rounded-lg shadow-md p-6 flex items-center">
-                                <div class="w-16 h-16 flex items-center justify-center rounded-full bg-green-200 mr-4">
-                                    <svg class="w-8 h-8 text-green-700" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                    </svg>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <!-- Total Investment Card -->
+                        <div class="bg-gradient-to-br from-green-50 to-green-100 rounded-xl shadow-md p-6 transform transition-all duration-300 hover:scale-105">
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="w-12 h-12 flex items-center justify-center rounded-full bg-green-200">
+                                    <img src="/static/images/bull-bear.jpg" alt="Stocks" class="w-10 h-10 rounded-full object-cover">
                                 </div>
-                                <div>
-                                    <div class="text-gray-600 font-semibold">Total Investment</div>
-                                    <div class="text-xl font-bold">₹<span id="totalStockInvestment">0</span></div>
-                                </div>
+                                <div class="text-green-600 font-semibold text-xs">Total Investment</div>
+                            </div>
+                            <div class="space-y-2">
+                                <div class="text-xl font-bold text-gray-900">₹<span id="totalStockInvestment">0</span></div>
+                                <div class="text-xs text-gray-600">Total amount invested in stocks</div>
                             </div>
                         </div>
 
-                        <div class="w-full sm:w-1/3 p-4">
-                            <div class="bg-blue-100 rounded-lg shadow-md p-6 flex items-center">
-                                <div class="w-16 h-16 flex items-center justify-center rounded-full bg-blue-200 mr-4">
-                                    <svg class="w-8 h-8 text-blue-700" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-                                    </svg>
+                        <!-- Current Value Card -->
+                        <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl shadow-md p-6 transform transition-all duration-300 hover:scale-105">
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="w-12 h-12 flex items-center justify-center rounded-full bg-blue-200">
+                                    <img src="/static/images/chart.png" alt="Stocks" class="w-10 h-10 rounded-full object-cover">
                                 </div>
-                                <div>
-                                    <div class="text-gray-600 font-semibold">Current Value</div>
-                                    <div class="text-xl font-bold">₹<span id="currentStockValue">0</span></div>
-                                </div>
+                                <div class="text-blue-600 font-semibold text-xs">Current Value</div>
+                            </div>
+                            <div class="space-y-2">
+                                <div class="text-xl font-bold text-gray-900">₹<span id="currentStockValue">0</span></div>
+                                <div class="text-xs text-gray-600">Present market value of holdings</div>
                             </div>
                         </div>
 
-                        <div class="w-full sm:w-1/3 p-4">
-                            <div class="bg-yellow-100 rounded-lg shadow-md p-6 flex items-center">
-                                <div class="w-16 h-16 flex items-center justify-center rounded-full bg-yellow-200 mr-4">
-                                    <svg class="w-8 h-8 text-yellow-700" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                                    </svg>
+                        <!-- Total Returns Card -->
+                        <div class="bg-gradient-to-br from-yellow-50 to-yellow-100 rounded-xl shadow-md p-6 transform transition-all duration-300 hover:scale-105">
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="w-12 h-12 flex items-center justify-center rounded-full bg-yellow-200">
+                                    <img src="/static/images/profit.jpg" alt="Stocks" class="w-10 h-10 rounded-full object-cover">
                                 </div>
-                                <div>
-                                    <div class="text-gray-600 font-semibold">Total Returns</div>
-                                    <div class="text-xl font-bold">₹<span id="totalStockReturns">0</span></div>
+                                <div class="text-yellow-600 font-semibold text-xs">Total Returns</div>
+                            </div>
+                            <div class="space-y-2">
+                                <div class="flex items-baseline space-x-2">
+                                    <div class="text-xl font-bold text-gray-900">₹<span id="totalStockReturns">0</span></div>
+                                    <div class="text-xs font-semibold" id="totalStockReturnsPercentage">(0%)</div>
                                 </div>
+                                <div class="text-xs text-gray-600">Total profit/loss from investments</div>
                             </div>
                         </div>
                     </div>
@@ -70,56 +81,72 @@
         <div class="mt-8">
             <div class="bg-white shadow rounded-lg">
                 <div class="px-4 py-5 sm:p-6">
-                    <h3 class="text-lg leading-6 font-medium text-gray-900">
-                        Stock Holdings
-                    </h3>
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="text-lg leading-6 font-medium text-gray-900">
+                            Stock Holdings
+                        </h3>
+                        <div class="flex space-x-2">
+                            <button class="view-toggle active" onclick="toggleTableView('table')">
+                                <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                </svg>
+                            </button>
+                            <button class="view-toggle" onclick="toggleTableView('card')">
+                                <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
                     <div class="mt-5">
                         <div>
-                            Number of Stocks: <span id="numberOfStocks">${numberOfStocks}</span>
+                            Number of Stocks: <span id="numberOfStocks">0</span>
                         </div>
-                        <div class="flex flex-col">
-                            <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-                                <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-                                    <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-                                        <table class="min-w-full divide-y divide-gray-200">
-                                            <thead class="bg-gray-50">
-                                                <tr>
-                                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                        Symbol
-                                                    </th>
-                                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                        Company Name
-                                                    </th>
-                                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                        Quantity
-                                                    </th>
-                                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                        Avg Price
-                                                    </th>
-                                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                        Current Price
-                                                    </th>
-                                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                        Total Value
-                                                    </th>
-                                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                     Profit/Loss
-                                                    </th>
-                                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                        Returns
-                                                    </th>
-                                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                        Actions
-                                                    </th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="stockHoldings" class="bg-white divide-y divide-gray-200 hover:bg-gray-50!">
-                                                <!-- Stock holdings will be populated here -->
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
+                        <!-- Desktop Table View -->
+                        <div class="table-wrapper active">
+                            <div class="overflow-x-auto">
+                                <table class="min-w-full divide-y divide-gray-200">
+                                    <thead class="bg-gray-50">
+                                        <tr>
+                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                Symbol
+                                            </th>
+                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                Company Name
+                                            </th>
+                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                Quantity
+                                            </th>
+                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                Avg Price
+                                            </th>
+                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                Current Price
+                                            </th>
+                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                Total Value
+                                            </th>
+                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                Profit/Loss
+                                            </th>
+                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                Returns
+                                            </th>
+                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                Actions
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="stockHoldings" class="bg-white divide-y divide-gray-200">
+                                        <!-- Stock holdings will be populated here -->
+                                    </tbody>
+                                </table>
                             </div>
+                        </div>
+
+                        <!-- Mobile Card View -->
+                        <div id="mobileTableView" class="table-mobile-view">
+                            <!-- Mobile cards will be inserted here -->
                         </div>
                     </div>
                 </div>
@@ -127,6 +154,177 @@
         </div>
     </div>
 </div>
+
+<style>
+    /* View Toggle Styles */
+    .view-toggle {
+        padding: 0.5rem;
+        border-radius: 0.375rem;
+        color: #6B7280;
+        background: white;
+        border: 1px solid #E5E7EB;
+        transition: all 0.2s ease-in-out;
+    }
+
+    .view-toggle:hover {
+        background: #F3F4F6;
+        transform: translateY(-1px);
+    }
+
+    .view-toggle.active {
+        background: #4F46E5;
+        color: white;
+        border-color: #4F46E5;
+    }
+
+    /* Table Wrapper Styles */
+    .table-wrapper {
+        display: none;
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out;
+    }
+
+    .table-wrapper.active {
+        display: block;
+        opacity: 1;
+    }
+
+    /* Mobile Card View Styles */
+    .table-mobile-view {
+        display: none;
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out;
+    }
+
+    .table-mobile-view.active {
+        display: block;
+        opacity: 1;
+    }
+
+    .table-mobile-card {
+        background: white;
+        border-radius: 0.75rem;
+        padding: 1.25rem;
+        margin-bottom: 1rem;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        transition: all 0.2s ease-in-out;
+    }
+
+    .table-mobile-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    }
+
+    .table-mobile-card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.25rem;
+        padding-bottom: 0.75rem;
+        border-bottom: 1px solid #E5E7EB;
+    }
+
+    .table-mobile-card-header h3 {
+        font-size: 1rem;
+        font-weight: 600;
+        color: #111827;
+    }
+
+    .table-mobile-card-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+    }
+
+    .table-mobile-item {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+
+    .table-mobile-label {
+        font-size: 0.75rem;
+        color: #6B7280;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+
+    .table-mobile-value {
+        font-size: 0.875rem;
+        color: #111827;
+        font-weight: 500;
+    }
+
+    .table-mobile-actions {
+        display: flex;
+        justify-content: flex-end;
+        gap: 0.75rem;
+        margin-top: 1.25rem;
+        padding-top: 0.75rem;
+        border-top: 1px solid #E5E7EB;
+    }
+
+    .table-mobile-actions button {
+        padding: 0.5rem 1rem;
+        border-radius: 0.375rem;
+        font-size: 0.875rem;
+        font-weight: 500;
+        transition: all 0.2s ease-in-out;
+    }
+
+    .table-mobile-actions button:first-child {
+        background: #EEF2FF;
+        color: #4F46E5;
+    }
+
+    .table-mobile-actions button:first-child:hover {
+        background: #E0E7FF;
+    }
+
+    .table-mobile-actions button:last-child {
+        background: #FEE2E2;
+        color: #EF4444;
+    }
+
+    .table-mobile-actions button:last-child:hover {
+        background: #FECACA;
+    }
+
+    /* Responsive Table Styles */
+    @media (max-width: 640px) {
+        .table-responsive {
+            display: block;
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        .table-responsive table {
+            min-width: 800px;
+        }
+    }
+
+    /* Animation Styles */
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .table-row {
+        animation: fadeIn 0.5s ease-out forwards;
+    }
+
+    .table-row:hover {
+        background-color: rgba(79, 70, 229, 0.05);
+        transition: background-color 0.2s ease-in-out;
+    }
+</style>
 
 <!-- Edit Stock Modal -->
 <div id="editStockModal" class="fixed z-10 inset-0 overflow-y-auto hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
@@ -495,15 +693,14 @@ saveStockBtn.addEventListener('click', async () => {
     modal.classList.add('hidden');
     // Clear form
     stockSymbolInput.value = '';
-        companyNameInput.value = '';
-        currentPriceInput.value = '';
-        currentPriceInput.classList.remove('text-red-600', 'text-green-600');
-        document.getElementById('quantity').value = '';
-        document.getElementById('avgPrice').value = '';
-        
-        updateStockHoldings();
-    }
-);
+    companyNameInput.value = '';
+    currentPriceInput.value = '';
+    currentPriceInput.classList.remove('text-red-600', 'text-green-600');
+    document.getElementById('quantity').value = '';
+    document.getElementById('avgPrice').value = '';
+    
+    updateStockHoldings();
+});
 
 // Function to update stock holdings
 async function updateStockHoldings() {
@@ -517,7 +714,9 @@ async function updateStockHoldings() {
         const stocksSnapshot = await db.collection('users').doc(userId).collection('stocks').get();
         
         const tbody = document.getElementById('stockHoldings');
+        const mobileView = document.getElementById('mobileTableView');
         tbody.innerHTML = '';
+        mobileView.innerHTML = '';
 
         let totalInvestment = 0;
         let currentValue = 0;
@@ -526,54 +725,54 @@ async function updateStockHoldings() {
 
         document.getElementById('numberOfStocks').textContent = numberOfStocks;
 
+        if (stocksSnapshot.empty) {
+            const emptyMessage = `
+                <tr>
+                    <td colspan="9" class="px-6 py-4 text-center text-gray-500">
+                        <div class="flex flex-col items-center">
+                            <svg class="w-12 h-12 text-gray-400 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                            </svg>
+                            <p class="text-lg font-medium">No stocks found</p>
+                            <p class="text-sm text-gray-400">Add your first stock to get started</p>
+                        </div>
+                    </td>
+                </tr>
+            `;
+            tbody.innerHTML = emptyMessage;
+            mobileView.innerHTML = `
+                <div class="text-center text-gray-500 py-8">
+                    <svg class="w-12 h-12 text-gray-400 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                    </svg>
+                    <p class="text-lg font-medium">No stocks found</p>
+                    <p class="text-sm text-gray-400">Add your first stock to get started</p>
+                </div>
+            `;
+            return;
+        }
+
         stocksSnapshot.forEach(doc => {
             const stock = doc.data();
             totalInvestment += stock.totalInvestment;
             currentValue += stock.totalValue;
             totalReturns += stock.returns;
 
-            const profitLoss = stock.totalValue - stock.totalInvestment;
-
-            const row = document.createElement('tr');
-            row.innerHTML = `
-                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                    ${stock.symbol}
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    ${stock.companyName}
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    ${stock.quantity}
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    ₹${stock.avgPrice.toFixed(2)}
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    ₹${stock.currentPrice.toFixed(2)}
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    ₹${stock.totalValue.toFixed(2)}
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm ${profitLoss >= 0 ? 'text-green-600' : 'text-red-600'}">
-                    ₹${profitLoss.toFixed(2)}
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm ${stock.returns >= 0 ? 'text-green-600' : 'text-red-600'}">
-                    ${stock.returnsPercentage.toFixed(2)}%
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    <button class="text-indigo-600 hover:text-indigo-900 edit-stock-btn mr-2" data-id="${stock.symbol}">Edit</button>
-                    <button class="text-red-600 hover:text-red-900" onclick="deleteStock('${stock.symbol}')">
-                        Delete
-                    </button>
-                </td>
-            `;
-            tbody.appendChild(row);
+            const { tableRow, mobileCard } = generateStockRow(stock);
+            tbody.insertAdjacentHTML('beforeend', tableRow);
+            mobileView.insertAdjacentHTML('beforeend', mobileCard);
         });
 
-        // Update summary stats
-        document.getElementById('totalStockInvestment').textContent = totalInvestment.toFixed(2);
-        document.getElementById('currentStockValue').textContent = currentValue.toFixed(2);
-        document.getElementById('totalStockReturns').textContent = totalReturns.toFixed(2);
+        // Calculate total returns percentage
+        const totalReturnsPercentage = totalInvestment > 0 ? (totalReturns / totalInvestment) * 100 : 0;
+        const returnsPercentageElement = document.getElementById('totalStockReturnsPercentage');
+        returnsPercentageElement.textContent = `(${totalReturnsPercentage.toFixed(2)}%)`;
+        returnsPercentageElement.className = `text-xs font-semibold ${totalReturnsPercentage >= 0 ? 'text-green-600' : 'text-red-600'}`;
+
+        // Update summary stats with animation
+        animateValue(document.getElementById('totalStockInvestment'), 0, totalInvestment, 1000);
+        animateValue(document.getElementById('currentStockValue'), 0, currentValue, 1000);
+        animateValue(document.getElementById('totalStockReturns'), 0, totalReturns, 1000);
     } catch (error) {
         console.error('Error updating stock holdings:', error);
     }
@@ -621,5 +820,234 @@ firebase.auth().onAuthStateChanged((user) => {
         });
     }
 });
+
+// Add refresh button functionality
+const refreshStocksBtn = document.getElementById('refreshStocksBtn');
+
+refreshStocksBtn.addEventListener('click', async () => {
+    try {
+        refreshStocksBtn.disabled = true;
+        refreshStocksBtn.innerHTML = `
+            <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+            Refreshing...
+        `;
+
+        const userId = firebase.auth().currentUser?.uid;
+        if (!userId) {
+            throw new Error('User not authenticated');
+        }
+
+        const stocksSnapshot = await db.collection('users').doc(userId).collection('stocks').get();
+        const updatePromises = [];
+
+        for (const doc of stocksSnapshot.docs) {
+            const stock = doc.data();
+            const symbol = stock.symbol;
+
+            try {
+                const response = await fetch(`/api/stock/${symbol}`);
+                const data = await response.json();
+
+                if (data.error) {
+                    console.error(`Error fetching ${symbol}:`, data.error);
+                    continue;
+                }
+
+                const currentPrice = parseFloat(data.price);
+                if (isNaN(currentPrice)) {
+                    console.error(`Invalid price for ${symbol}`);
+                    continue;
+                }
+
+                const totalValue = stock.quantity * currentPrice;
+                const totalInvestment = stock.quantity * stock.avgPrice;
+                const returns = totalValue - totalInvestment;
+                const returnsPercentage = (returns / totalInvestment) * 100;
+
+                updatePromises.push(
+                    doc.ref.update({
+                        currentPrice,
+                        totalValue,
+                        returns,
+                        returnsPercentage,
+                        lastUpdated: firebase.firestore.FieldValue.serverTimestamp()
+                    })
+                );
+            } catch (error) {
+                console.error(`Error updating ${symbol}:`, error);
+            }
+        }
+
+        await Promise.all(updatePromises);
+        updateStockHoldings();
+        
+        refreshStocksBtn.disabled = false;
+        refreshStocksBtn.innerHTML = `
+            <svg class="w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+            </svg>
+            Refresh Prices
+        `;
+        
+        alert('Stock prices updated successfully!');
+    } catch (error) {
+        console.error('Error refreshing stock prices:', error);
+        alert('Error refreshing stock prices. Please try again.');
+        refreshStocksBtn.disabled = false;
+        refreshStocksBtn.innerHTML = `
+            <svg class="w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+            </svg>
+            Refresh Prices
+        `;
+    }
+});
+
+// Function to format number in Indian format
+function formatIndianNumber(num) {
+    const numStr = num.toString();
+    const [wholePart, decimalPart] = numStr.split('.');
+    const lastThree = wholePart.substring(wholePart.length - 3);
+    const otherNumbers = wholePart.substring(0, wholePart.length - 3);
+    const formatted = otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ",") + (otherNumbers ? "," : "") + lastThree;
+    return decimalPart ? formatted + "." + decimalPart : formatted;
+}
+
+// Update the animateValue function to use Indian number format
+function animateValue(element, start, end, duration) {
+    let startTimestamp = null;
+    const step = (timestamp) => {
+        if (!startTimestamp) startTimestamp = timestamp;
+        const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+        const currentValue = Math.floor(progress * (end - start) + start);
+        element.textContent = formatIndianNumber(currentValue.toFixed(2));
+        if (progress < 1) {
+            window.requestAnimationFrame(step);
+        }
+    };
+    window.requestAnimationFrame(step);
+}
+
+// Update the generateStockRow function to include mobile card view
+function generateStockRow(stock) {
+    // Desktop table row
+    const tableRow = `
+        <tr class="table-row">
+            <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm font-medium text-gray-900">${stock.symbol}</div>
+                <div class="text-xs text-gray-500">${stock.companyName}</div>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm text-gray-900">₹${formatIndianNumber(stock.currentPrice.toFixed(2))}</div>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm text-gray-900">${stock.quantity}</div>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm text-gray-900">₹${formatIndianNumber(stock.avgPrice.toFixed(2))}</div>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm text-gray-900">₹${formatIndianNumber(stock.totalValue.toFixed(2))}</div>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm text-gray-900">₹${formatIndianNumber(stock.totalInvestment.toFixed(2))}</div>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm ${stock.returns >= 0 ? 'text-green-600' : 'text-red-600'}">
+                    ₹${formatIndianNumber(stock.returns.toFixed(2))}
+                </div>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm ${stock.returnsPercentage >= 0 ? 'text-green-600' : 'text-red-600'}">
+                    ${stock.returnsPercentage.toFixed(2)}%
+                </div>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                <div class="flex space-x-2">
+                    <button class="text-blue-600 hover:text-blue-900" onclick="editStock('${stock.symbol}')">
+                        Edit
+                    </button>
+                    <button class="text-red-600 hover:text-red-900" onclick="deleteStock('${stock.symbol}')">
+                        Delete
+                    </button>
+                </div>
+            </td>
+        </tr>
+    `;
+
+    // Mobile card view
+    const mobileCard = `
+        <div class="table-mobile-card">
+            <div class="table-mobile-card-header">
+                <h3>${stock.symbol}</h3>
+                <span class="text-sm ${stock.returnsPercentage >= 0 ? 'text-green-600' : 'text-red-600'}">
+                    ${stock.returnsPercentage.toFixed(2)}%
+                </span>
+            </div>
+            <div class="table-mobile-card-content">
+                <div class="table-mobile-item">
+                    <span class="table-mobile-label">Company</span>
+                    <span class="table-mobile-value">${stock.companyName}</span>
+                </div>
+                <div class="table-mobile-item">
+                    <span class="table-mobile-label">Quantity</span>
+                    <span class="table-mobile-value">${stock.quantity}</span>
+                </div>
+                <div class="table-mobile-item">
+                    <span class="table-mobile-label">Current Price</span>
+                    <span class="table-mobile-value">₹${formatIndianNumber(stock.currentPrice.toFixed(2))}</span>
+                </div>
+                <div class="table-mobile-item">
+                    <span class="table-mobile-label">Avg Price</span>
+                    <span class="table-mobile-value">₹${formatIndianNumber(stock.avgPrice.toFixed(2))}</span>
+                </div>
+                <div class="table-mobile-item">
+                    <span class="table-mobile-label">Total Value</span>
+                    <span class="table-mobile-value">₹${formatIndianNumber(stock.totalValue.toFixed(2))}</span>
+                </div>
+                <div class="table-mobile-item">
+                    <span class="table-mobile-label">Profit/Loss</span>
+                    <span class="table-mobile-value ${stock.returns >= 0 ? 'text-green-600' : 'text-red-600'}">
+                        ₹${formatIndianNumber(stock.returns.toFixed(2))}
+                    </span>
+                </div>
+            </div>
+            <div class="table-mobile-actions">
+                <button onclick="editStock('${stock.symbol}')">Edit</button>
+                <button onclick="deleteStock('${stock.symbol}')">Delete</button>
+            </div>
+        </div>
+    `;
+
+    return { tableRow, mobileCard };
+}
+
+// Add toggle view function
+function toggleTableView(view) {
+    const tableWrapper = document.querySelector('.table-wrapper');
+    const mobileView = document.getElementById('mobileTableView');
+    const toggleButtons = document.querySelectorAll('.view-toggle');
+    
+    // Update active state of toggle buttons
+    toggleButtons.forEach(button => {
+        if (button.querySelector('svg').getAttribute('viewBox').includes(view === 'table' ? 'M3 10h18' : 'M4 6a2')) {
+            button.classList.add('active');
+        } else {
+            button.classList.remove('active');
+        }
+    });
+
+    // Show/hide views with animation
+    if (view === 'table') {
+        tableWrapper.classList.add('active');
+        mobileView.classList.remove('active');
+    } else {
+        tableWrapper.classList.remove('active');
+        mobileView.classList.add('active');
+    }
+}
 </script>
 {% endblock %}

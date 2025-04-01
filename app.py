@@ -57,7 +57,12 @@ def logout():
 @app.route('/dashboard')
 @login_required
 def dashboard():
-    return render_template('dashboard.html', firebase_config=firebase_config)
+    # Reverted: Just render the template; JavaScript handles data fetching from Firestore.
+    return render_template(
+        'dashboard.html',
+        firebase_config=firebase_config
+        # Removed investment_totals and grand_total passed to template
+    )
 
 @app.route('/stocks')
 @login_required

@@ -1,110 +1,231 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="py-6">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
-        <h1 class="text-2xl font-semibold text-gray-900">Dashboard</h1>
-    </div>
+<!-- Main Dashboard Container -->
+<div class="min-h-screen bg-gradient-to-br from-gray-50 via-gray-100 to-gray-200 py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Header Section with Modern Design -->
+        <div class="mb-8 flex items-center justify-between bg-white rounded-2xl p-6 shadow-lg glass-effect">
+            <div class="relative">
+                <h1 class="text-4xl font-bold gradient-text transform transition-all duration-300 hover:scale-105">
+                    Portfolio Overview
+                    <div class="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-full transform scale-x-0 transition-transform duration-300 origin-left hover:scale-x-100"></div>
+                </h1>
+            </div>
+            <div class="text-sm text-gray-500 flex items-center space-x-2 bg-gray-50 px-4 py-2 rounded-full">
+                <i class="fas fa-clock text-indigo-500"></i>
+                <span>Last updated: <span id="lastUpdated" class="font-medium">Loading...</span></span>
+            </div>
+        </div>
 
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
-        <!-- Stats -->
-        <div class="mt-8">
-            <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
-                <!-- Total Investment -->
-                <div class="bg-white overflow-hidden shadow rounded-lg">
-                    <div class="p-5">
-                        <div class="flex items-center">
-                            <div class="flex-shrink-0">
-                                <svg class="h-6 w-6 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
+        <!-- Stats Cards Grid with Modern Design -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            <!-- Total Investment Card -->
+            <div class="stats-card glass-effect">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="icon-container h-12 w-12 rounded-full bg-indigo-100 flex items-center justify-center">
+                        <svg class="h-6 w-6 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                    <span class="text-xs font-semibold text-indigo-600 bg-indigo-100 px-2 py-1 rounded-full">Total</span>
+                </div>
+                <h3 class="text-gray-500 text-sm font-medium">Total Investment</h3>
+                <div class="mt-2">
+                    <p class="value-display">₹<span id="totalInvestment" class="animate-value">0</span></p>
+                </div>
+            </div>
+
+            <!-- Current Value Card -->
+            <div class="stats-card glass-effect">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="icon-container h-12 w-12 rounded-full bg-green-100 flex items-center justify-center">
+                        <svg class="h-6 w-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                        </svg>
+                    </div>
+                    <span class="text-xs font-semibold text-green-600 bg-green-100 px-2 py-1 rounded-full">Current</span>
+                </div>
+                <h3 class="text-gray-500 text-sm font-medium">Current Value</h3>
+                <div class="mt-2">
+                    <p class="value-display">₹<span id="currentValue" class="animate-value">0</span></p>
+                </div>
+            </div>
+
+            <!-- Total Returns Card -->
+            <div class="stats-card glass-effect">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="icon-container h-12 w-12 rounded-full bg-purple-100 flex items-center justify-center">
+                        <svg class="h-6 w-6 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                        </svg>
+                    </div>
+                    <span class="text-xs font-semibold text-purple-600 bg-purple-100 px-2 py-1 rounded-full">Returns</span>
+                </div>
+                <h3 class="text-gray-500 text-sm font-medium">Total Returns</h3>
+                <div class="mt-2">
+                    <p class="value-display">₹<span id="totalReturns" class="animate-value">0</span></p>
+                    <span id="returnsTrend" class="percentage-display"></span>
+                </div>
+            </div>
+
+            <!-- Returns Percentage Card -->
+            <div class="stats-card glass-effect">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="icon-container h-12 w-12 rounded-full bg-blue-100 flex items-center justify-center">
+                        <svg class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                        </svg>
+                    </div>
+                    <span class="text-xs font-semibold text-blue-600 bg-blue-100 px-2 py-1 rounded-full">Growth</span>
+                </div>
+                <h3 class="text-gray-500 text-sm font-medium">Returns Percentage</h3>
+                <div class="mt-2">
+                    <p class="value-display"><span id="returnsPercentage">0.00</span>%</p>
+                    <span id="percentageTrend" class="percentage-display"></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Asset Distribution and Current Values Section -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+            <!-- Asset Distribution Doughnut Chart -->
+            <div class="chart-container glass-effect">
+                <h3 class="text-lg font-semibold gradient-text mb-4 flex items-center">
+                    <i class="fas fa-chart-pie text-purple-500 mr-2"></i>
+                    Asset Distribution
+                </h3>
+                <div class="h-[300px] relative">
+                    <canvas id="distributionChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Current Asset Values List -->
+            <div class="lg:col-span-2 chart-container glass-effect">
+                <div class="flex items-center justify-between mb-6">
+                    <h3 class="text-lg font-semibold gradient-text flex items-center">
+                        <i class="fas fa-list text-indigo-500 mr-2"></i>
+                        Current Asset Values
+                    </h3>
+                    <div class="flex items-center space-x-2 bg-indigo-50 px-4 py-2 rounded-full">
+                        <i class="fas fa-chart-pie text-indigo-500"></i>
+                        <span class="text-sm font-medium text-indigo-600">
+                            <span id="activeAssetCount" class="animate-value">0</span> Active Assets
+                        </span>
+                    </div>
+                </div>
+                <div class="space-y-4">
+                    <!-- Asset Cards -->
+                    <div class="asset-card p-4 rounded-xl transform transition-all duration-300 hover:scale-[1.02] hover:shadow-xl">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-4">
+                                <div class="icon-container h-12 w-12 rounded-full bg-indigo-100 flex items-center justify-center transform transition-all duration-300 hover:rotate-12 overflow-hidden">
+                                    <img src="/static/images/stocks.jpg" alt="Stocks" class="w-full h-full object-cover">
+                                </div>
+                                <div>
+                                    <h4 class="text-sm font-medium text-gray-900">Stocks</h4>
+                                    <p class="text-xs text-gray-500">Equity Investments</p>
+                                </div>
                             </div>
-                            <div class="ml-5 w-0 flex-1">
-                                <dl>
-                                    <dt class="text-sm font-medium text-gray-500 truncate">
-                                        Total Investment
-                                    </dt>
-                                    <dd class="flex items-baseline">
-                                        <div class="text-2xl font-semibold text-gray-900">
-                                            ₹<span id="totalInvestment">0</span>
-                                        </div>
-                                    </dd>
-                                </dl>
+                            <div class="text-right">
+                                <p class="value-display">₹<span id="stocksValue" class="animate-value">0</span></p>
+                                <p class="percentage-display"><span id="stocksPercentage">0.0</span>% of portfolio</p>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <!-- Current Value -->
-                <div class="bg-white overflow-hidden shadow rounded-lg">
-                    <div class="p-5">
-                        <div class="flex items-center">
-                            <div class="flex-shrink-0">
-                                <svg class="h-6 w-6 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-                                </svg>
+                    <!-- Mutual Funds -->
+                    <div class="asset-card p-4 rounded-xl transform transition-all duration-300 hover:scale-[1.02] hover:shadow-xl">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-4">
+                                <div class="icon-container h-12 w-12 rounded-full bg-green-100 flex items-center justify-center transform transition-all duration-300 hover:rotate-12 overflow-hidden">
+                                    <img src="/static/images/mutualfund.jpg" alt="Mutual Funds" class="w-full h-full object-cover">
+                                </div>
+                                <div>
+                                    <h4 class="text-sm font-medium text-gray-900">Mutual Funds</h4>
+                                    <p class="text-xs text-gray-500">Fund Investments</p>
+                                </div>
                             </div>
-                            <div class="ml-5 w-0 flex-1">
-                                <dl>
-                                    <dt class="text-sm font-medium text-gray-500 truncate">
-                                        Current Value
-                                    </dt>
-                                    <dd class="flex items-baseline">
-                                        <div class="text-2xl font-semibold text-gray-900">
-                                            ₹<span id="currentValue">0</span>
-                                        </div>
-                                    </dd>
-                                </dl>
+                            <div class="text-right">
+                                <p class="value-display">₹<span id="mutual_fundsValue" class="animate-value">0</span></p>
+                                <p class="percentage-display"><span id="mutual_fundsPercentage">0.0</span>% of portfolio</p>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <!-- Total Returns -->
-                <div class="bg-white overflow-hidden shadow rounded-lg">
-                    <div class="p-5">
-                        <div class="flex items-center">
-                            <div class="flex-shrink-0">
-                                <svg class="h-6 w-6 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                                </svg>
+                    <!-- NPS -->
+                    <div class="asset-card p-4 rounded-xl transform transition-all duration-300 hover:scale-[1.02] hover:shadow-xl">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-4">
+                                <div class="icon-container h-12 w-12 rounded-full bg-red-100 flex items-center justify-center transform transition-all duration-300 hover:rotate-12 overflow-hidden">
+                                    <img src="/static/images/nps.png" alt="NPS" class="w-full h-full object-cover">
+                                </div>
+                                <div>
+                                    <h4 class="text-sm font-medium text-gray-900">NPS</h4>
+                                    <p class="text-xs text-gray-500">Pension Scheme</p>
+                                </div>
                             </div>
-                            <div class="ml-5 w-0 flex-1">
-                                <dl>
-                                    <dt class="text-sm font-medium text-gray-500 truncate">
-                                        Total Returns
-                                    </dt>
-                                    <dd class="flex items-baseline">
-                                        <div class="text-2xl font-semibold text-gray-900">
-                                            ₹<span id="totalReturns">0</span>
-                                        </div>
-                                    </dd>
-                                </dl>
+                            <div class="text-right">
+                                <p class="value-display">₹<span id="npsValue" class="animate-value">0</span></p>
+                                <p class="percentage-display"><span id="npsPercentage">0.0</span>% of portfolio</p>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <!-- Returns Percentage -->
-                <div class="bg-white overflow-hidden shadow rounded-lg">
-                    <div class="p-5">
-                        <div class="flex items-center">
-                            <div class="flex-shrink-0">
-                                <svg class="h-6 w-6 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-                                </svg>
+                    <!-- Insurance -->
+                    <div class="asset-card p-4 rounded-xl transform transition-all duration-300 hover:scale-[1.02] hover:shadow-xl">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-4">
+                                <div class="icon-container h-12 w-12 rounded-full bg-yellow-100 flex items-center justify-center transform transition-all duration-300 hover:rotate-12 overflow-hidden">
+                                    <img src="/static/images/insurance.png" alt="Insurance" class="w-full h-full object-cover">
+                                </div>
+                                <div>
+                                    <h4 class="text-sm font-medium text-gray-900">Insurance</h4>
+                                    <p class="text-xs text-gray-500">Life Insurance</p>
+                                </div>
                             </div>
-                            <div class="ml-5 w-0 flex-1">
-                                <dl>
-                                    <dt class="text-sm font-medium text-gray-500 truncate">
-                                        Returns %
-                                    </dt>
-                                    <dd class="flex items-baseline">
-                                        <div class="text-2xl font-semibold text-gray-900">
-                                            <span id="returnsPercentage">0</span>%
-                                        </div>
-                                    </dd>
-                                </dl>
+                            <div class="text-right">
+                                <p class="value-display">₹<span id="insuranceValue" class="animate-value">0</span></p>
+                                <p class="percentage-display"><span id="insurancePercentage">0.0</span>% of portfolio</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Post Office RD -->
+                    <div class="asset-card p-4 rounded-xl transform transition-all duration-300 hover:scale-[1.02] hover:shadow-xl">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-4">
+                                <div class="icon-container h-12 w-12 rounded-full bg-orange-100 flex items-center justify-center transform transition-all duration-300 hover:rotate-12 overflow-hidden">
+                                    <img src="/static/images/postoffice.png" alt="Post Office RD" class="w-full h-full object-cover">
+                                </div>
+                                <div>
+                                    <h4 class="text-sm font-medium text-gray-900">Post Office RD</h4>
+                                    <p class="text-xs text-gray-500">Recurring Deposit</p>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <p class="value-display">₹<span id="post_office_rdValue" class="animate-value">0</span></p>
+                                <p class="percentage-display"><span id="post_office_rdPercentage">0.0</span>% of portfolio</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sukanya Samriddhi -->
+                    <div class="asset-card p-4 rounded-xl transform transition-all duration-300 hover:scale-[1.02] hover:shadow-xl">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-4">
+                                <div class="icon-container h-12 w-12 rounded-full bg-pink-100 flex items-center justify-center transform transition-all duration-300 hover:rotate-12 overflow-hidden">
+                                    <img src="/static/images/sukanya.png" alt="Sukanya Samriddhi" class="w-full h-full object-cover">
+                                </div>
+                                <div>
+                                    <h4 class="text-sm font-medium text-gray-900">Sukanya Samriddhi</h4>
+                                    <p class="text-xs text-gray-500">Girl Child Scheme</p>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <p class="value-display">₹<span id="sukanyaValue" class="animate-value">0</span></p>
+                                <p class="percentage-display"><span id="sukanyaPercentage">0.0</span>% of portfolio</p>
                             </div>
                         </div>
                     </div>
@@ -112,201 +233,929 @@
             </div>
         </div>
 
-        <!-- Asset Allocation -->
-        <div class="mt-8">
-            <div class="bg-white shadow rounded-lg">
-                <div class="px-4 py-5 sm:p-6">
-                    <h3 class="text-lg leading-6 font-medium text-gray-900">
-                        Asset Allocation
-                    </h3>
-                    <div class="mt-5">
-                        <div class="relative pt-1">
-                            <div class="flex mb-2 items-center justify-between">
-                                <div>
-                                    <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-indigo-600 bg-indigo-200">
-                                        Stocks
-                                    </span>
-                                </div>
-                                <div class="text-right">
-                                    <span class="text-xs font-semibold inline-block text-indigo-600">
-                                        <span id="stocksPercentage">0</span>%
-                                    </span>
-                                </div>
-                            </div>
-                            <div class="overflow-hidden h-2 mb-4 text-xs flex rounded bg-indigo-200">
-                                <div id="stocksBar" style="width:0%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-indigo-500"></div>
-                            </div>
-
-                            <div class="flex mb-2 items-center justify-between">
-                                <div>
-                                    <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-green-600 bg-green-200">
-                                        Mutual Funds
-                                    </span>
-                                </div>
-                                <div class="text-right">
-                                    <span class="text-xs font-semibold inline-block text-green-600">
-                                        <span id="mfPercentage">0</span>%
-                                    </span>
-                                </div>
-                            </div>
-                            <div class="overflow-hidden h-2 mb-4 text-xs flex rounded bg-green-200">
-                                <div id="mfBar" style="width:0%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-green-500"></div>
-                            </div>
-
-                            <div class="flex mb-2 items-center justify-between">
-                                <div>
-                                    <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-yellow-600 bg-yellow-200">
-                                        Insurance
-                                    </span>
-                                </div>
-                                <div class="text-right">
-                                    <span class="text-xs font-semibold inline-block text-yellow-600">
-                                        <span id="insurancePercentage">0</span>%
-                                    </span>
-                                </div>
-                            </div>
-                            <div class="overflow-hidden h-2 mb-4 text-xs flex rounded bg-yellow-200">
-                                <div id="insuranceBar" style="width:0%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-yellow-500"></div>
-                            </div>
-
-                            <div class="flex mb-2 items-center justify-between">
-                                <div>
-                                    <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-red-600 bg-red-200">
-                                        NPS
-                                    </span>
-                                </div>
-                                <div class="text-right">
-                                    <span class="text-xs font-semibold inline-block text-red-600">
-                                        <span id="npsPercentage">0</span>%
-                                    </span>
-                                </div>
-                            </div>
-                            <div class="overflow-hidden h-2 mb-4 text-xs flex rounded bg-red-200">
-                                <div id="npsBar" style="width:0%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-red-500"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Recent Transactions -->
-        <div class="mt-8">
-            <div class="bg-white shadow rounded-lg">
-                <div class="px-4 py-5 sm:p-6">
-                    <h3 class="text-lg leading-6 font-medium text-gray-900">
-                        Recent Transactions
-                    </h3>
-                    <div class="mt-5">
-                        <div class="flex flex-col">
-                            <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-                                <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-                                    <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-                                        <table class="min-w-full divide-y divide-gray-200">
-                                            <thead class="bg-gray-50">
-                                                <tr>
-                                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                        Date
-                                                    </th>
-                                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                        Type
-                                                    </th>
-                                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                        Amount
-                                                    </th>
-                                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                        Status
-                                                    </th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="recentTransactions" class="bg-white divide-y divide-gray-200">
-                                                <!-- Transactions will be populated here -->
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <!-- Asset Allocation Section -->
+        <div class="allocation-section glass-effect p-6 rounded-xl">
+            <h3 class="text-lg font-semibold gradient-text mb-6 flex items-center">
+                <i class="fas fa-balance-scale text-green-500 mr-2"></i>
+                Asset Allocation
+            </h3>
+            <div class="h-[300px] relative">
+                <canvas id="allocationChart"></canvas>
             </div>
         </div>
     </div>
 </div>
 
+<!-- Add required Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+
 <script>
-// Initialize Firebase
-const db = firebase.firestore();
+// Make sure firebase and firestore are initialized (likely in base.html or similar)
+// const db = firebase.firestore();
+let performanceChartInstance = null;
+let distributionChartInstance = null;
+let allocationChartInstance = null;
+let activeListeners = []; // Keep track of active listeners
 
-// Function to update dashboard data
-async function updateDashboard() {
+// --- Helper Functions ---
+
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
+
+function animateValue(element, start, end, duration) {
+    if (!element) { console.warn("animateValue: Element not found"); return; }
+    let startTimestamp = null;
+    const step = (timestamp) => {
+        if (!startTimestamp) startTimestamp = timestamp;
+        const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+        const safeEnd = isFinite(end) ? end : 0;
+        const safeStart = isFinite(start) ? start : 0;
+        
+        // Special handling for active asset count (whole numbers only)
+        if (element.id === 'activeAssetCount') {
+            if (safeStart !== safeEnd) {
+                const current = Math.round(progress * (safeEnd - safeStart) + safeStart);
+                element.textContent = current;
+            } else {
+                element.textContent = Math.round(safeEnd);
+            }
+        } else {
+            // Regular number formatting for other values
+            if (safeStart !== safeEnd) {
+                const current = Math.floor(progress * (safeEnd - safeStart) + safeStart);
+                element.textContent = formatIndianNumber(current.toFixed(2));
+            } else {
+                element.textContent = formatIndianNumber(safeEnd.toFixed(2));
+            }
+        }
+
+        if (progress < 1) {
+            window.requestAnimationFrame(step);
+        } else {
+            // Ensure final value is exact
+            if (element.id === 'activeAssetCount') {
+                element.textContent = Math.round(safeEnd);
+            } else {
+                element.textContent = formatIndianNumber(safeEnd.toFixed(2));
+            }
+        }
+    };
+    window.requestAnimationFrame(step);
+}
+
+function safeParseFloat(value) {
+    // Handle potential strings like "₹1,000" or just "1000"
+    if (typeof value === 'string') {
+        // Remove currency symbols and commas
+        value = value.replace(/[₹,]/g, '');
+    }
+    const parsed = parseFloat(value);
+    // Return 0 if parsing results in NaN or if the original value was null/undefined
+    return isNaN(parsed) || value == null ? 0 : parsed;
+}
+
+// Function to format number in Indian format
+function formatIndianNumber(num) {
+    const numStr = num.toString();
+    const [wholePart, decimalPart] = numStr.split('.');
+    const lastThree = wholePart.substring(wholePart.length - 3);
+    const otherNumbers = wholePart.substring(0, wholePart.length - 3);
+    const formatted = otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ",") + (otherNumbers ? "," : "") + lastThree;
+    return decimalPart ? formatted + "." + decimalPart : formatted;
+}
+
+// --- Data Fetching Functions (ASSUMES FIRESTORE STRUCTURE) ---
+// Modify these functions based on your actual Firestore data organization
+
+// Option 1: Fetching from summary documents
+async function getDataFromSummary(userId, type, field) {
     try {
-        const userId = firebase.auth().currentUser.uid;
-        const userDoc = await db.collection('users').doc(userId).get();
-        const userData = userDoc.data();
-
-        // Update stats
-        document.getElementById('totalInvestment').textContent = userData.totalInvestment || 0;
-        document.getElementById('currentValue').textContent = userData.currentValue || 0;
-        document.getElementById('totalReturns').textContent = userData.totalReturns || 0;
-        document.getElementById('returnsPercentage').textContent = userData.returnsPercentage || 0;
-
-        // Update asset allocation
-        const total = userData.totalInvestment || 1;
-        const stocks = (userData.stocksValue || 0) / total * 100;
-        const mf = (userData.mfValue || 0) / total * 100;
-        const insurance = (userData.insuranceValue || 0) / total * 100;
-        const nps = (userData.npsValue || 0) / total * 100;
-
-        document.getElementById('stocksPercentage').textContent = stocks.toFixed(1);
-        document.getElementById('mfPercentage').textContent = mf.toFixed(1);
-        document.getElementById('insurancePercentage').textContent = insurance.toFixed(1);
-        document.getElementById('npsPercentage').textContent = nps.toFixed(1);
-
-        document.getElementById('stocksBar').style.width = `${stocks}%`;
-        document.getElementById('mfBar').style.width = `${mf}%`;
-        document.getElementById('insuranceBar').style.width = `${insurance}%`;
-        document.getElementById('npsBar').style.width = `${nps}%`;
-
-        // Update recent transactions
-        const transactions = userData.recentTransactions || [];
-        const tbody = document.getElementById('recentTransactions');
-        tbody.innerHTML = transactions.map(transaction => `
-            <tr>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    ${new Date(transaction.date).toLocaleDateString()}
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    ${transaction.type}
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    ₹${transaction.amount}
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap">
-                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${transaction.status === 'completed' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'}">
-                        ${transaction.status}
-                    </span>
-                </td>
-            </tr>
-        `).join('');
+        const docRef = firebase.firestore().collection('users').doc(userId).collection('summary').doc(type);
+        const docSnap = await docRef.get();
+        if (docSnap.exists && docSnap.data()?.[field] !== undefined) {
+            return safeParseFloat(docSnap.data()[field]);
+        } else {
+            console.log(`Summary field '${field}' for type '${type}' not found or undefined.`);
+            return 0;
+        }
     } catch (error) {
-        console.error('Error updating dashboard:', error);
+        console.error(`Error fetching summary field '${field}' for ${type}:`, error);
+        return 0;
     }
 }
 
-// Update dashboard when page loads
-document.addEventListener('DOMContentLoaded', updateDashboard);
+// *** CONFIGURED Data Fetching Strategy ***
+// Based on review of individual pages (stocks, mutual_funds, nps, insurance, others)
 
-// Listen for real-time updates
-firebase.auth().onAuthStateChanged((user) => {
-    if (user) {
-        const userId = user.uid;
-        db.collection('users').doc(userId).onSnapshot((doc) => {
-            if (doc.exists) {
-                updateDashboard();
+// Helper to calculate total from individual item documents
+async function calculateTotalFromItems(userId, collectionName, amountField) {
+    let total = 0;
+    try {
+        console.log(`Calculating total for ${collectionName}, field: ${amountField}`);
+        const snapshot = await firebase.firestore().collection('users').doc(userId).collection(collectionName).get();
+        snapshot.forEach(doc => {
+            const data = doc.data();
+            if (data && data[amountField] !== undefined && data[amountField] !== null) {
+                total += safeParseFloat(data[amountField]);
+            } else {
+                // console.warn(`Document ${doc.id} in ${collectionName} missing or has null/undefined field: ${amountField}`);
             }
         });
+        console.log(`Calculated total for ${collectionName}, field: ${amountField} = ${total}`);
+        return total;
+    } catch (error) {
+        console.error(`Error calculating total for ${collectionName} (${amountField}):`, error);
+        return 0;
     }
+}
+
+// Helper specifically for Life Insurance Invested Amount
+async function calculateLifeInsuranceInvestedTotal(userId) {
+    let total = 0;
+    try {
+        console.log(`Calculating total invested amount for LIFE insurance`);
+        const snapshot = await firebase.firestore().collection('users').doc(userId).collection('insurance').where('insuranceType', '==', 'life').get();
+        snapshot.forEach(doc => {
+            const policy = doc.data();
+            // Only sum if investedAmount exists and is a valid number
+            if (policy && policy.investedAmount !== undefined && policy.investedAmount !== null) {
+                total += safeParseFloat(policy.investedAmount);
+            } else {
+                 // console.warn(`Life insurance policy ${doc.id} missing or has null/undefined field: investedAmount`);
+            }
+        });
+        console.log(`Calculated total LIFE insurance invested amount = ${total}`);
+        return total;
+    } catch (error) {
+        console.error('Error calculating total life insurance invested amount:', error);
+        return 0;
+    }
+}
+
+// Helper to get total investment from NPS metadata
+async function getNpsTotalInvestment(userId) {
+    let total = 0;
+    try {
+        console.log('Fetching NPS metadata for total investment');
+        const tier1Ref = firebase.firestore().collection('users').doc(userId).collection('nps_metadata').doc('tier1_total');
+        const tier2Ref = firebase.firestore().collection('users').doc(userId).collection('nps_metadata').doc('tier2_total');
+        
+        const [tier1Doc, tier2Doc] = await Promise.all([tier1Ref.get(), tier2Ref.get()]);
+        
+        if (tier1Doc.exists && tier1Doc.data().totalInvestment !== undefined) {
+            total += safeParseFloat(tier1Doc.data().totalInvestment);
+        }
+        if (tier2Doc.exists && tier2Doc.data().totalInvestment !== undefined) {
+            total += safeParseFloat(tier2Doc.data().totalInvestment);
+        }
+        console.log(`Calculated NPS total investment from metadata = ${total}`);
+        return total;
+    } catch (error) {
+        console.error('Error fetching NPS total investment from metadata:', error);
+        return 0;
+    }
+}
+
+// Helper to calculate current value for NPS from holdings
+async function calculateNpsCurrentValue(userId) {
+    let total = 0;
+    try {
+        console.log('Calculating NPS current value from holdings');
+        const snapshot = await firebase.firestore().collection('users').doc(userId).collection('nps').get();
+        snapshot.forEach(doc => {
+            const data = doc.data();
+            if (data && data.units !== undefined && data.current_nav !== undefined) {
+                total += safeParseFloat(data.units) * safeParseFloat(data.current_nav);
+            } else {
+                // console.warn(`Document ${doc.id} in nps missing units or current_nav`);
+            }
+        });
+        console.log(`Calculated NPS current value from holdings = ${total}`);
+        return total;
+    } catch (error) {
+        console.error('Error calculating NPS current value:', error);
+        return 0;
+    }
+}
+
+// Main function to get Total Investment based on asset type
+async function getTotalInvestment(userId, type) {
+    switch (type) {
+        case 'stocks':
+            return await calculateTotalFromItems(userId, 'stocks', 'totalInvestment');
+        case 'mutual_funds':
+            return await calculateTotalFromItems(userId, 'mutual_funds', 'totalInvestment');
+        case 'nps':
+            return await getNpsTotalInvestment(userId);
+        case 'insurance':
+            return await calculateLifeInsuranceInvestedTotal(userId);
+        case 'sukanya':
+            return await calculateTotalFromItems(userId, 'ssy', 'investedAmount');
+        case 'post_office_rd':
+            // For PORD, use investedAmount field
+            return await calculateTotalFromItems(userId, 'pord', 'investedAmount');
+        default:
+            console.warn(`Unknown asset type for getTotalInvestment: ${type}`);
+            return 0;
+    }
+}
+
+// Main function to get Current Value based on asset type
+async function getCurrentValue(userId, type) {
+    switch (type) {
+        case 'stocks':
+            return await calculateTotalFromItems(userId, 'stocks', 'totalValue');
+        case 'mutual_funds':
+            let total = 0;
+            try {
+                const snapshot = await firebase.firestore().collection('users').doc(userId).collection('mutual_funds').get();
+                snapshot.forEach(doc => {
+                    const data = doc.data();
+                    const value = data.currentValue || data.totalValue || 0;
+                    if (value !== undefined && value !== null) {
+                        total += safeParseFloat(value);
+                    }
+                });
+                console.log(`Calculated mutual funds current value: ${total}`);
+                return total;
+            } catch (error) {
+                console.error('Error calculating mutual funds current value:', error);
+                return 0;
+            }
+        case 'nps':
+            return await calculateNpsCurrentValue(userId);
+        case 'insurance':
+            return await calculateLifeInsuranceInvestedTotal(userId);
+        case 'sukanya':
+            return await calculateTotalFromItems(userId, 'ssy', 'currentValue');
+        case 'post_office_rd':
+            // For PORD, use investedAmount as current value
+            let pordTotal = 0;
+            try {
+                const snapshot = await firebase.firestore().collection('users').doc(userId).collection('pord').get();
+                snapshot.forEach(doc => {
+                    const data = doc.data();
+                    if (data && data.investedAmount !== undefined && data.investedAmount !== null) {
+                        pordTotal += safeParseFloat(data.investedAmount);
+                    }
+                });
+                console.log(`Calculated post office RD current value: ${pordTotal}`);
+                return pordTotal;
+            } catch (error) {
+                console.error('Error calculating post office RD current value:', error);
+                return 0;
+            }
+        default:
+            console.warn(`Unknown asset type for getCurrentValue: ${type}`);
+            return 0;
+    }
+}
+
+// --- Chart Initialization and Update ---
+function initializeOrUpdateCharts(performanceData, distributionData) {
+    const distributionCtx = document.getElementById('distributionChart')?.getContext('2d');
+    const allocationCtx = document.getElementById('allocationChart')?.getContext('2d');
+
+    if (!distributionCtx || !allocationCtx) {
+        console.error("Chart canvas elements not found.");
+        return;
+    }
+
+    // Consistent labels and colors used across charts and bars
+    const assetLabels = ['Stocks', 'Mutual Funds', 'NPS', 'Insurance', 'Post Office RD', 'Sukanya'];
+    const assetColors = ['#6366F1', '#10B981', '#EF4444', '#FBBF24', '#F97316', '#EC4899']; // Indigo, Green, Red, Yellow, Orange, Pink
+
+    // Destroy existing charts before creating new ones
+    if (distributionChartInstance) { distributionChartInstance.destroy(); }
+    if (allocationChartInstance) { allocationChartInstance.destroy(); }
+
+    // Filter out assets with zero value for a cleaner chart
+    const filteredLabels = [];
+    const filteredData = [];
+    const filteredColors = [];
+    
+    distributionData.forEach((value, index) => {
+        if (value > 0) {
+            filteredLabels.push(assetLabels[index]);
+            filteredData.push(value);
+            filteredColors.push(assetColors[index]);
+        }
+    });
+
+    // Create Distribution Doughnut Chart
+    distributionChartInstance = new Chart(distributionCtx, {
+        type: 'doughnut',
+        data: {
+            labels: filteredLabels.length > 0 ? filteredLabels : ['No Data'],
+            datasets: [{
+                data: filteredData.length > 0 ? filteredData : [1],
+                backgroundColor: filteredColors.length > 0 ? filteredColors : ['#E5E7EB'],
+                hoverOffset: 4,
+                borderWidth: 2,
+                borderColor: '#ffffff'
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        padding: 15,
+                        font: {
+                            size: 12
+                        },
+                        usePointStyle: true,
+                        pointStyle: 'circle'
+                    }
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            const value = context.raw;
+                            const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                            const percentage = ((value / total) * 100).toFixed(1);
+                            return `${context.label}: ₹${formatIndianNumber(value)} (${percentage}%)`;
+                        }
+                    }
+                }
+            },
+            cutout: '70%',
+            animation: {
+                animateScale: true,
+                animateRotate: true
+            }
+        }
+    });
+
+    // Create Allocation Bar Chart
+    allocationChartInstance = new Chart(allocationCtx, {
+        type: 'bar',
+        data: {
+            labels: filteredLabels.length > 0 ? filteredLabels : ['No Data'],
+            datasets: [{
+                data: filteredData.length > 0 ? filteredData : [1],
+                backgroundColor: filteredColors.length > 0 ? filteredColors : ['#E5E7EB'],
+                borderRadius: 8,
+                maxBarThickness: 40
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            indexAxis: 'y',
+            plugins: {
+                legend: {
+                    display: false
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            const value = context.raw;
+                            const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                            const percentage = ((value / total) * 100).toFixed(1);
+                            return `₹${formatIndianNumber(value)} (${percentage}%)`;
+                        }
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    beginAtZero: true,
+                    grid: {
+                        display: false
+                    },
+                    ticks: {
+                        callback: function(value) {
+                            return '₹' + formatIndianNumber(value);
+                        }
+                    }
+                },
+                y: {
+                    grid: {
+                        display: false
+                    }
+                }
+            },
+            animation: {
+                duration: 1000
+            }
+        }
+    });
+}
+
+// --- UI Update Function ---
+function updateTrendIndicator(elementId, value) {
+    const element = document.getElementById(elementId);
+    if (!element) { console.warn(`Trend indicator element '${elementId}' not found.`); return; }
+
+    let text = '--';
+    let colorClass = 'text-gray-500';
+
+    if (isFinite(value) && Math.abs(value) > 0.001) {
+         if (value > 0) {
+            text = `+${value.toFixed(2)}% ↑`; colorClass = 'text-green-600';
+        } else {
+            text = `${value.toFixed(2)}% ↓`; colorClass = 'text-red-600';
+        }
+    } else if (isFinite(value)) {
+         text = `0.00%`;
+    }
+
+    element.textContent = text;
+    element.className = `ml-2 text-sm font-medium ${colorClass}`;
+}
+
+// --- Main Dashboard Update Logic ---
+async function updateDashboard() {
+    console.log("Attempting dashboard update...");
+    try {
+        const user = firebase.auth().currentUser;
+        if (!user) { console.log("User not authenticated. Aborting dashboard update."); return; }
+        const userId = user.uid;
+        console.log(`Updating dashboard for user: ${userId}`);
+
+        // Define the asset types we track on the dashboard
+        const assetTypes = ['stocks', 'mutual_funds', 'nps', 'insurance', 'post_office_rd', 'sukanya'];
+
+        // Fetch data using Promise.all for concurrency
+        const dataPromises = assetTypes.map(async (type) => {
+            console.log(`Fetching data for ${type}...`);
+            const total = await getTotalInvestment(userId, type);
+            const current = await getCurrentValue(userId, type);
+            console.log(`${type} data:`, { total, current });
+            return { type, total, current };
+        });
+        const assetResults = await Promise.all(dataPromises);
+
+        // Process results into a more usable structure
+        const investmentData = assetResults.reduce((acc, data) => {
+            acc[data.type] = { total: data.total, current: data.current };
+            return acc;
+        }, {});
+
+        // Calculate overall totals
+        const totalInvestment = assetTypes.reduce((sum, type) => sum + (investmentData[type]?.total ?? 0), 0);
+        const currentValue = assetTypes.reduce((sum, type) => sum + (investmentData[type]?.current ?? 0), 0);
+        const totalReturns = currentValue - totalInvestment;
+        const returnsPercentage = totalInvestment !== 0 ? (totalReturns / totalInvestment) * 100 : 0;
+
+        // Count active assets (those with non-zero current value)
+        const activeAssetCount = assetTypes.filter(type => (investmentData[type]?.current ?? 0) > 0).length;
+
+        console.log("--- Dashboard Update ---");
+        console.log("Totals:", { totalInvestment, currentValue, totalReturns, returnsPercentage });
+        console.log("Asset Data:", investmentData);
+        console.log("Active Asset Count:", activeAssetCount);
+
+        // Update Active Asset Count
+        const activeAssetCountElement = document.getElementById('activeAssetCount');
+        if (activeAssetCountElement) {
+            animateValue(activeAssetCountElement, parseInt(activeAssetCountElement.textContent), activeAssetCount, 500);
+        }
+
+        // Update Stat Cards
+        const currentTotalInv = safeParseFloat(document.getElementById('totalInvestment')?.textContent);
+        const currentCurrVal = safeParseFloat(document.getElementById('currentValue')?.textContent);
+        const currentTotalRet = safeParseFloat(document.getElementById('totalReturns')?.textContent);
+
+        animateValue(document.getElementById('totalInvestment'), currentTotalInv, totalInvestment, 500);
+        animateValue(document.getElementById('currentValue'), currentCurrVal, currentValue, 500);
+        animateValue(document.getElementById('totalReturns'), currentTotalRet, totalReturns, 500);
+
+        const returnsPercentageEl = document.getElementById('returnsPercentage');
+        if (returnsPercentageEl) { returnsPercentageEl.textContent = returnsPercentage.toFixed(2); }
+
+        // Update trend indicators
+        updateTrendIndicator('returnsTrend', returnsPercentage);
+        updateTrendIndicator('percentageTrend', returnsPercentage);
+
+        // Update Asset Values List and prepare distribution data
+        const totalForAllocation = Math.max(currentValue, 1);
+        const distributionData = [];
+        
+        assetTypes.forEach(type => {
+            const currentVal = investmentData[type]?.current ?? 0;
+            const percentage = (currentVal / totalForAllocation) * 100;
+            distributionData.push(currentVal);
+            
+            // Update value display
+            const valueElement = document.getElementById(`${type}Value`);
+            if (valueElement) {
+                console.log(`Updating ${type} value display:`, currentVal);
+                animateValue(valueElement, safeParseFloat(valueElement.textContent), currentVal, 500);
+            }
+            
+            // Update percentage display
+            const percentageElement = document.getElementById(`${type}Percentage`);
+            if (percentageElement) {
+                console.log(`Updating ${type} percentage display:`, percentage);
+                percentageElement.textContent = percentage.toFixed(1);
+            }
+        });
+
+        // Initialize/Update Charts with actual data
+        initializeOrUpdateCharts({ labels: [], values: [] }, distributionData);
+
+        // Update Last Updated Time
+        const lastUpdatedEl = document.getElementById('lastUpdated');
+        if(lastUpdatedEl) lastUpdatedEl.textContent = new Date().toLocaleTimeString();
+
+        console.log("Dashboard update complete.");
+
+    } catch (error) {
+        console.error('FATAL: Error during dashboard update:', error);
+    }
+}
+
+// --- Initialization and Listeners ---
+const debouncedUpdateDashboard = debounce(updateDashboard, 500); // Debounce updates
+
+function cleanupListeners() {
+    console.log(`Cleaning up ${activeListeners.length} listeners.`);
+    activeListeners.forEach(unsubscribe => {
+        try { unsubscribe(); } catch (e) { console.warn("Error unsubscribing:", e); }
+    });
+    activeListeners = [];
+}
+
+function setupDataListeners(userId) {
+    cleanupListeners(); // Ensure no duplicate listeners
+    console.log(`Setting up Firestore listeners for user: ${userId}`);
+    const assetTypes = ['stocks', 'mutual_funds', 'nps', 'insurance', 'post_office_rd', 'sukanya'];
+    const summaryTypes = ['stocks', 'mutual_funds', 'nps', 'insurance', 'post_office_rd', 'sukanya']; // Assuming summary docs exist for all
+
+    // Listen to changes in individual item collections (if applicable)
+    assetTypes.forEach(type => {
+        // ** ADJUST Collection Name if it differs from 'type' **
+        const collectionName = type; // e.g., if MF is stored in 'mutual_funds_data', change here
+        const colRef = firebase.firestore().collection('users').doc(userId).collection(collectionName);
+        const colUnsubscribe = colRef.onSnapshot(() => {
+            console.log(`Change detected in ${collectionName} collection.`);
+            debouncedUpdateDashboard();
+        }, error => console.error(`Error listening to ${collectionName} collection:`, error));
+        activeListeners.push(colUnsubscribe);
+    });
+
+    // Listen to changes in summary documents (if applicable)
+    summaryTypes.forEach(type => {
+         const sumRef = firebase.firestore().collection('users').doc(userId).collection('summary').doc(type);
+         const sumUnsubscribe = sumRef.onSnapshot(() => {
+             console.log(`Change detected in ${type} summary document.`);
+             debouncedUpdateDashboard();
+         }, error => console.error(`Error listening to ${type} summary:`, error));
+         activeListeners.push(sumUnsubscribe);
+    });
+
+    console.log(`Added ${activeListeners.length} listeners.`);
+}
+
+// Main Initialization Logic
+document.addEventListener('DOMContentLoaded', () => {
+    console.log("DOM Content Loaded - initializing dashboard script");
+
+    // Ensure Firebase is initialized before proceeding
+    const firebaseCheckInterval = setInterval(() => {
+        if (typeof firebase !== 'undefined' && firebase.auth && firebase.firestore) {
+            clearInterval(firebaseCheckInterval);
+            console.log("Firebase is ready.");
+
+            firebase.auth().onAuthStateChanged((user) => {
+                if (user) {
+                    console.log("Auth state changed: User authenticated:", user.uid);
+                    updateDashboard(); // Initial data load
+                    setupDataListeners(user.uid); // Setup Firestore listeners
+                } else {
+                    console.log("Auth state changed: User logged out or not authenticated.");
+                    cleanupListeners(); // Clean up listeners if user logs out
+                    // Optionally reset dashboard UI elements to 0 or default state here
+                    document.getElementById('totalInvestment').textContent = '0';
+                    document.getElementById('currentValue').textContent = '0';
+                    document.getElementById('totalReturns').textContent = '0';
+                    document.getElementById('returnsPercentage').textContent = '0.00';
+                    // Reset bars and charts if desired
+                    console.log("Dashboard UI reset (optional).");
+                }
+            });
+        } else {
+            console.log("Waiting for Firebase to initialize...");
+        }
+    }, 100); // Check every 100ms
 });
+
 </script>
+
+<style>
+/* Modern Glassmorphism Effect */
+.glass-effect {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+}
+
+/* Enhanced Gradient Text */
+.gradient-text {
+    background: linear-gradient(45deg, #3b82f6, #8b5cf6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Modern Card Styles */
+.stats-card {
+    padding: 1.5rem;
+    border-radius: 1rem;
+    transition: all 0.3s ease-in-out;
+}
+
+.stats-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Enhanced Icon Containers */
+.icon-container {
+    transition: all 0.3s ease-in-out;
+}
+
+.icon-container:hover {
+    transform: rotate(12deg) scale(1.1);
+}
+
+/* Modern Value Display */
+.value-display {
+    font-size: 1.5rem;
+    font-weight: 600;
+    background: linear-gradient(45deg, #1a365d, #2d3748);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Enhanced Progress Bar */
+.progress-bar {
+    height: 8px;
+    border-radius: 4px;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.2));
+    overflow: hidden;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Modern Asset Cards */
+.asset-card {
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7));
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.asset-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    border-color: rgba(99, 102, 241, 0.2);
+}
+
+/* Enhanced Chart Container */
+.chart-container {
+    padding: 1.5rem;
+    border-radius: 1rem;
+}
+
+/* Modern Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+/* Loading Animation */
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+
+.loading {
+    animation: pulse 1.5s infinite;
+}
+
+/* Enhanced Transitions */
+.transition-all {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Modern Background */
+.bg-gradient-to-br {
+    background-image: linear-gradient(to bottom right, #f8fafc, #f1f5f9, #e2e8f0);
+}
+
+/* Enhanced Shadows */
+.shadow-lg {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+/* Modern Color Scheme */
+.text-indigo-600 { color: #4f46e5; }
+.text-green-600 { color: #059669; }
+.text-purple-600 { color: #7c3aed; }
+.text-blue-600 { color: #2563eb; }
+.text-orange-600 { color: #ea580c; }
+.text-pink-600 { color: #db2777; }
+
+/* Enhanced Hover Effects */
+.hover\:scale-105:hover {
+    transform: scale(1.02);
+}
+
+/* Modern Spacing */
+.space-y-4 > * + * {
+    margin-top: 1rem;
+}
+
+/* Enhanced Typography */
+.font-semibold {
+    font-weight: 600;
+}
+
+/* Modern Rounded Corners */
+.rounded-2xl {
+    border-radius: 1rem;
+}
+
+.rounded-xl {
+    border-radius: 0.75rem;
+}
+
+/* Enhanced Grid Layout */
+.grid {
+    display: grid;
+    gap: 1.5rem;
+}
+
+/* Modern Flex Layout */
+.flex {
+    display: flex;
+}
+
+.items-center {
+    align-items: center;
+}
+
+.justify-between {
+    justify-content: space-between;
+}
+
+/* Enhanced Responsive Design */
+@media (min-width: 768px) {
+    .md\:grid-cols-2 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (min-width: 1024px) {
+    .lg\:grid-cols-3 {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    
+    .lg\:grid-cols-4 {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+    
+    .lg\:col-span-2 {
+        grid-column: span 2 / span 2;
+    }
+}
+
+/* Enhanced Asset Card Styles */
+.asset-card {
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7));
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.asset-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    border-color: rgba(99, 102, 241, 0.2);
+}
+
+/* Enhanced Icon Container with Image */
+.icon-container {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+}
+
+.icon-container img {
+    transition: all 0.3s ease;
+}
+
+.icon-container:hover img {
+    transform: scale(1.1);
+}
+
+/* Fallback for missing images */
+.icon-container img:not([src]), 
+.icon-container img[src=""], 
+.icon-container img[src="null"] {
+    display: none;
+}
+
+.icon-container:has(img:not([src])), 
+.icon-container:has(img[src=""]), 
+.icon-container:has(img[src="null"]) {
+    background: linear-gradient(145deg, #f3f4f6, #e5e7eb);
+}
+
+.icon-container:has(img:not([src]))::after,
+.icon-container:has(img[src=""])::after,
+.icon-container:has(img[src="null"])::after {
+    content: attr(data-fallback-icon);
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.5rem;
+    color: #6B7280;
+}
+
+/* Enhanced Value Display Animation */
+.value-display {
+    font-size: 1.25rem;
+    font-weight: 600;
+    background: linear-gradient(45deg, #1a365d, #2d3748);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    transition: all 0.3s ease;
+}
+
+/* Enhanced Percentage Display */
+.percentage-display {
+    font-size: 0.875rem;
+    color: #6B7280;
+    transition: all 0.3s ease;
+}
+
+/* Active Asset Count Badge */
+#activeAssetCount {
+    font-weight: 600;
+    color: #4F46E5;
+}
+
+/* Add smooth fade-in animation for cards */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.asset-card {
+    animation: fadeInUp 0.5s ease-out forwards;
+    opacity: 0;
+}
+
+.asset-card:nth-child(1) { animation-delay: 0.1s; }
+.asset-card:nth-child(2) { animation-delay: 0.2s; }
+.asset-card:nth-child(3) { animation-delay: 0.3s; }
+.asset-card:nth-child(4) { animation-delay: 0.4s; }
+.asset-card:nth-child(5) { animation-delay: 0.5s; }
+.asset-card:nth-child(6) { animation-delay: 0.6s; }
+</style>
 {% endblock %} 

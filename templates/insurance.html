@@ -7,16 +7,19 @@
         
         <!-- Insurance Type Tabs -->
         <div class="border-b border-gray-200">
-            <nav class="-mb-px flex space-x-8" aria-label="Tabs">
-                <button onclick="showInsuranceSection('life')" class="tab-button border-indigo-500 text-indigo-600 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">
+            <nav class="-mb-px flex space-x-12" aria-label="Tabs">
+                <button onclick="showInsuranceSection('life')" class="tab-button border-indigo-500 text-indigo-600 whitespace-nowrap py-6 px-4 border-b-2 font-medium text-base flex items-center">
+                    <img src="/static/images/life-insurance.png" alt="Life Insurance" class="w-6 h-6 mr-3">
                     Life Insurance
                 </button>
-                <button onclick="showInsuranceSection('health')" class="tab-button border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">
+                <button onclick="showInsuranceSection('health')" class="tab-button border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-6 px-4 border-b-2 font-medium text-base flex items-center">
+                    <img src="/static/images/health-insurance.png" alt="Health Insurance" class="w-6 h-6 mr-3">
                     Health Insurance
                 </button>
-                <button onclick="showInsuranceSection('motor')" class="tab-button border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">
+                <button onclick="showInsuranceSection('motor')" class="tab-button border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-6 px-4 border-b-2 font-medium text-base flex items-center">
+                    <img src="/static/images/car-insurance.jpg" alt="Motor Insurance" class="w-6 h-6 mr-3">
                     Motor Insurance
-            </button>
+                </button>
             </nav>
         </div>
 
@@ -157,14 +160,12 @@
                                             <thead class="bg-gray-50">
                                                 <tr>
                                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Policy Holder</th>
-                                    
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Company Name</th>
                                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Type</th>
                                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Coverage</th>
                                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Premium</th>
-                                    
                                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Renewal Date</th>
                                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Start Date</th>
-                                    
                                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">End Date</th>
                                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
                                                 </tr>
@@ -229,6 +230,7 @@
                             <thead class="bg-gray-50">
                                 <tr>
                                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Policy Holder</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Company Name</th>
                                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Vehicle Type</th>
                                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Coverage</th>
                                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Premium</th>
@@ -344,7 +346,10 @@
                             <label for="healthPolicyName" class="block text-sm font-medium text-gray-700">Policy Holder</label>
                             <input type="text" name="healthPolicyName" id="healthPolicyName" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                         </div>
-                        
+                        <div class="mt-4">
+                            <label for="healthCompanyName" class="block text-sm font-medium text-gray-700">Company Name</label>
+                            <input type="text" name="healthCompanyName" id="healthCompanyName" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                        </div>
                         <div class="mt-4">
                             <label for="healthPolicyType" class="block text-sm font-medium text-gray-700">Policy Type</label>
                             <select name="healthPolicyType" id="healthPolicyType" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
@@ -406,6 +411,10 @@
                         <div class="mt-4">
                             <label for="motorPolicyName" class="block text-sm font-medium text-gray-700">Policy Holder</label>
                             <input type="text" name="motorPolicyName" id="motorPolicyName" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                        </div>
+                        <div class="mt-4">
+                            <label for="motorCompanyName" class="block text-sm font-medium text-gray-700">Company Name</label>
+                            <input type="text" name="motorCompanyName" id="motorCompanyName" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                         </div>
                         <div class="mt-4">
                             <label for="motorVehicleType" class="block text-sm font-medium text-gray-700">Vehicle Type</label>
@@ -482,10 +491,20 @@ function showAddModal(type) {
     // Show/hide fields based on insurance type
     if (type === 'motor') {
         policyNumberInput.style.display = 'none';
-        companyNameInput.style.display = 'none';
+        companyNameInput.style.display = 'block';
         nextPremiumDueLabel.textContent = 'Renewal Date';
         endDateLabel.textContent = 'End Date';
         premiumModeSelect.style.display = 'none';
+        premiumModeSelect.parentElement.style.display = 'none';
+        premiumAmountContainer.style.display = 'block';
+        investedAmountContainer.style.display = 'none';
+    } else if (type === 'health') {
+        policyNumberInput.style.display = 'none';
+        companyNameInput.style.display = 'block';
+        nextPremiumDueLabel.textContent = 'Renewal Date';
+        endDateLabel.textContent = 'End Date';
+        premiumModeSelect.style.display = 'none';
+        premiumModeSelect.parentElement.style.display = 'none';
         premiumAmountContainer.style.display = 'block';
         investedAmountContainer.style.display = 'none';
     } else if (type === 'life') {
@@ -512,14 +531,6 @@ function showAddModal(type) {
         nextPremiumDueContainer.style.display = premiumModeSelect.value === 'oneTime' ? 'none' : 'block';
         premiumAmountContainer.style.display = premiumModeSelect.value === 'oneTime' ? 'none' : 'block';
         investedAmountContainer.style.display = policyTypeSelect.value === 'term' ? 'none' : 'block'; // Initial check
-    } else {
-        policyNumberInput.style.display = 'block';
-        companyNameInput.style.display = 'none';
-        nextPremiumDueLabel.textContent = 'Next Premium Due Date';
-        endDateLabel.textContent = 'Maturity Date';
-        premiumModeSelect.style.display = 'none';
-        premiumAmountContainer.style.display = 'block';
-        investedAmountContainer.style.display = 'none';
     }
     
     // Add appropriate options based on insurance type
@@ -631,7 +642,108 @@ function showInsuranceSection(type) {
     event.target.classList.add('border-indigo-500', 'text-indigo-600');
 }
 
-// Function to update insurance policies
+// Function to format number in Indian format
+function formatIndianNumber(num) {
+    const numStr = num.toString();
+    const [wholePart, decimalPart] = numStr.split('.');
+    const lastThree = wholePart.substring(wholePart.length - 3);
+    const otherNumbers = wholePart.substring(0, wholePart.length - 3);
+    const formatted = otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ",") + (otherNumbers ? "," : "") + lastThree;
+    return decimalPart ? formatted + "." + decimalPart : formatted;
+}
+
+// Update the animateValue function to use Indian number format
+function animateValue(element, start, end, duration) {
+    let startTimestamp = null;
+    const step = (timestamp) => {
+        if (!startTimestamp) startTimestamp = timestamp;
+        const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+        const currentValue = Math.floor(progress * (end - start) + start);
+        element.textContent = formatIndianNumber(currentValue.toFixed(2));
+        if (progress < 1) {
+            window.requestAnimationFrame(step);
+        }
+    };
+    window.requestAnimationFrame(step);
+}
+
+// Update the insurance policy row generation
+function generateInsuranceRow(policy, type) {
+    let rowContent = '';
+    switch(type) {
+        case 'life':
+            rowContent = `
+                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${policy.policyName}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${policy.companyName || ''}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${policy.policyType}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">₹${formatIndianNumber(policy.coverageAmount.toFixed(2))}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">₹${formatIndianNumber(policy.premiumAmount.toFixed(2))}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${policy.premiumMode}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${new Date(policy.nextPremiumDue).toLocaleDateString()}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${new Date(policy.startDate).toLocaleDateString()}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${new Date(policy.endDate).toLocaleDateString()}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">₹${formatIndianNumber(policy.investedAmount.toFixed(2))}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    <div class="flex space-x-2">
+                        <button class="text-blue-600 hover:text-blue-900" onclick="editInsurance('${policy.policyNumber}')">
+                            Edit
+                        </button>
+                        <button class="text-red-600 hover:text-red-900" onclick="deleteInsurance('${policy.policyNumber}')">
+                        Delete
+                    </button>
+                    </div>
+                </td>
+            `;
+            break;
+        case 'health':
+            rowContent = `
+                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${policy.policyName}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${policy.companyName || ''}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${policy.policyType}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">₹${formatIndianNumber(policy.coverageAmount.toFixed(2))}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">₹${formatIndianNumber(policy.premiumAmount.toFixed(2))}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${new Date(policy.nextPremiumDue).toLocaleDateString()}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${new Date(policy.startDate).toLocaleDateString()}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${new Date(policy.endDate).toLocaleDateString()}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    <div class="flex space-x-2">
+                        <button class="text-blue-600 hover:text-blue-900" onclick="editInsurance('${policy.policyName}')">
+                            Edit
+                        </button>
+                        <button class="text-red-600 hover:text-red-900" onclick="deleteInsurance('${policy.policyName}')">
+                        Delete
+                    </button>
+                    </div>
+                </td>
+            `;
+            break;
+        case 'motor':
+            rowContent = `
+                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${policy.policyName}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${policy.companyName || ''}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${policy.vehicleType}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">₹${formatIndianNumber(policy.coverageAmount.toFixed(2))}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">₹${formatIndianNumber(policy.premiumAmount.toFixed(2))}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${new Date(policy.nextPremiumDue).toLocaleDateString()}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${new Date(policy.startDate).toLocaleDateString()}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${new Date(policy.endDate).toLocaleDateString()}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    <div class="flex space-x-2">
+                        <button class="text-blue-600 hover:text-blue-900" onclick="editInsurance('${policy.policyName}')">
+                            Edit
+                        </button>
+                        <button class="text-red-600 hover:text-red-900" onclick="deleteInsurance('${policy.policyName}')">
+                        Delete
+                    </button>
+                    </div>
+                </td>
+            `;
+            break;
+    }
+    return rowContent;
+}
+
+// Update the updateInsurancePolicies function to use the new row generation
 async function updateInsurancePolicies() {
     try {
         const userId = firebase.auth().currentUser.uid;
@@ -656,115 +768,35 @@ async function updateInsurancePolicies() {
             // Update summary statistics based on insurance type
             switch(policy.insuranceType) {
                 case 'life':
-                    lifeTotalCoverage += policy.coverageAmount;
-                    // Calculate annual premium based on premium mode
-                    let annualPremium = policy.premiumAmount;
-                    switch (policy.premiumMode) {
-                        case 'monthly':
-                            annualPremium *= 12;
-                            break;
-                        case 'quarterly':
-                            annualPremium *= 4;
-                            break;
-                        case 'halferly':
-                            annualPremium *= 2;
-                            break;
-                        // No conversion needed for yearly and oneTime
-                    }
-                    lifeAnnualPremium += annualPremium; // Use annualized premium for total
+                    lifeTotalCoverage += policy.coverageAmount || 0;
+                    lifeAnnualPremium += policy.premiumAmount || 0;
                     lifeTotalInvestment += policy.investedAmount || 0;
-                    addPolicyToTable('lifeInsurancePolicies', policy);
+                    document.getElementById('lifeInsurancePolicies').innerHTML += generateInsuranceRow(policy, 'life');
                     break;
                 case 'health':
-                    healthTotalCoverage += policy.coverageAmount;
-                    healthAnnualPremium += policy.premiumAmount;
-                    addPolicyToTable('healthInsurancePolicies', policy);
+                    healthTotalCoverage += policy.coverageAmount || 0;
+                    healthAnnualPremium += policy.premiumAmount || 0;
+                    document.getElementById('healthInsurancePolicies').innerHTML += generateInsuranceRow(policy, 'health');
                     break;
                 case 'motor':
-                    motorTotalCoverage += policy.coverageAmount;
-                    motorAnnualPremium += policy.premiumAmount;
-                    addPolicyToTable('motorInsurancePolicies', policy);
+                    motorTotalCoverage += policy.coverageAmount || 0;
+                    motorAnnualPremium += policy.premiumAmount || 0;
+                    document.getElementById('motorInsurancePolicies').innerHTML += generateInsuranceRow(policy, 'motor');
                     break;
             }
         });
 
-        // Update summary statistics
-        document.getElementById('lifeTotalCoverage').textContent = lifeTotalCoverage.toFixed(2);
-        document.getElementById('lifeAnnualPremium').textContent = lifeAnnualPremium.toFixed(2);
-        document.getElementById('lifeTotalReturns').textContent = lifeTotalInvestment.toFixed(2);
-        
-        document.getElementById('healthTotalCoverage').textContent = healthTotalCoverage.toFixed(2);
-        document.getElementById('healthAnnualPremium').textContent = healthAnnualPremium.toFixed(2);
-        
-        document.getElementById('motorTotalCoverage').textContent = motorTotalCoverage.toFixed(2);
-        document.getElementById('motorAnnualPremium').textContent = motorAnnualPremium.toFixed(2);
+        // Update summary cards with formatted numbers
+        document.getElementById('lifeTotalCoverage').textContent = formatIndianNumber(lifeTotalCoverage.toFixed(2));
+        document.getElementById('lifeAnnualPremium').textContent = formatIndianNumber(lifeAnnualPremium.toFixed(2));
+        document.getElementById('lifeTotalReturns').textContent = formatIndianNumber(lifeTotalInvestment.toFixed(2));
+        document.getElementById('healthTotalCoverage').textContent = formatIndianNumber(healthTotalCoverage.toFixed(2));
+        document.getElementById('healthAnnualPremium').textContent = formatIndianNumber(healthAnnualPremium.toFixed(2));
+        document.getElementById('motorTotalCoverage').textContent = formatIndianNumber(motorTotalCoverage.toFixed(2));
+        document.getElementById('motorAnnualPremium').textContent = formatIndianNumber(motorAnnualPremium.toFixed(2));
     } catch (error) {
         console.error('Error updating insurance policies:', error);
     }
-}
-
-// Function to add policy to appropriate table
-function addPolicyToTable(tableId, policy) {
-    const tbody = document.getElementById(tableId);
-            const row = document.createElement('tr');
-    
-    let rowContent = '';
-    switch(policy.insuranceType) {
-        case 'life':
-            rowContent = `
-                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${policy.policyName}</td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${policy.companyName}</td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${policy.policyType}</td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">₹${policy.coverageAmount.toFixed(2)}</td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${policy.premiumMode === 'oneTime' ? 'N/A' : `₹${policy.premiumAmount.toFixed(2)}`}</td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${policy.premiumMode}</td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${policy.premiumMode === 'oneTime' ? 'N/A' : new Date(policy.nextPremiumDue).toLocaleDateString()}</td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${new Date(policy.startDate).toLocaleDateString()}</td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${new Date(policy.endDate).toLocaleDateString()}</td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${policy.policyType === 'term' ? 'N/A' : `₹${(policy.investedAmount || 0).toFixed(2)}`}</td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    <button class="text-red-600 hover:text-red-900" onclick="deleteInsurance('${policy.policyNumber || policy.policyName}')">
-                        Delete
-                    </button>
-                </td>
-            `;
-            break;
-        case 'health':
-            rowContent = `
-                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${policy.policyName}</td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${policy.policyNumber}</td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${policy.policyType}</td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">₹${policy.coverageAmount.toFixed(2)}</td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">₹${policy.premiumAmount.toFixed(2)}</td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${new Date(policy.startDate).toLocaleDateString()}</td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${new Date(policy.endDate).toLocaleDateString()}</td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    <button class="text-red-600 hover:text-red-900" onclick="deleteInsurance('${policy.policyNumber}')">
-                        Delete
-                    </button>
-                </td>
-            `;
-            break;
-        case 'motor':
-            rowContent = `
-                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${policy.policyName}</td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${policy.policyType}</td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">₹${policy.coverageAmount.toFixed(2)}</td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">₹${policy.premiumAmount.toFixed(2)}</td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${new Date(policy.nextPremiumDue).toLocaleDateString()}</td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${new Date(policy.startDate).toLocaleDateString()}</td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${new Date(policy.endDate).toLocaleDateString()}</td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    <button class="text-red-600 hover:text-red-900" onclick="deleteInsurance('${policy.policyNumber || policy.policyName}')">
-                        Delete
-                    </button>
-                </td>
-            `;
-            break;
-    }
-    
-    row.innerHTML = rowContent;
-    tbody.appendChild(row);
 }
 
 // Function to delete insurance policy
@@ -793,6 +825,109 @@ async function deleteInsurance(policyNumber) {
     } catch (error) {
         console.error('Error deleting insurance policy:', error);
         alert('Error deleting insurance policy. Please try again.');
+    }
+}
+
+// Add edit insurance functionality
+async function editInsurance(policyNumber) {
+    try {
+        const userId = firebase.auth().currentUser.uid;
+        const insuranceRef = db.collection('users').doc(userId).collection('insurance').doc(policyNumber);
+        const insuranceDoc = await insuranceRef.get();
+        const insurance = insuranceDoc.data();
+
+        // Show the appropriate modal based on insurance type
+        showAddModal(insurance.insuranceType);
+
+        // Populate form fields with existing data
+        document.getElementById('policyName').value = insurance.policyName;
+        document.getElementById('companyName').value = insurance.companyName || '';
+        document.getElementById('policyNumber').value = insurance.policyNumber || '';
+        document.getElementById('policyType').value = insurance.policyType;
+        document.getElementById('premiumMode').value = insurance.premiumMode || 'yearly';
+        document.getElementById('coverageAmount').value = insurance.coverageAmount;
+        document.getElementById('premiumAmount').value = insurance.premiumAmount;
+        document.getElementById('investedAmount').value = insurance.investedAmount || '';
+        document.getElementById('startDate').value = insurance.startDate;
+        document.getElementById('nextPremiumDue').value = insurance.nextPremiumDue;
+        document.getElementById('endDate').value = insurance.endDate;
+
+        // Change save button text and functionality
+        const saveBtn = document.getElementById('saveInsuranceBtn');
+        saveBtn.textContent = 'Update';
+        saveBtn.onclick = async () => {
+            try {
+                const updatedData = {
+                    policyName: document.getElementById('policyName').value,
+                    companyName: document.getElementById('companyName').value,
+                    policyNumber: document.getElementById('policyNumber').value,
+                    policyType: document.getElementById('policyType').value,
+                    premiumMode: document.getElementById('premiumMode').value,
+                    coverageAmount: parseFloat(document.getElementById('coverageAmount').value),
+                    premiumAmount: parseFloat(document.getElementById('premiumAmount').value),
+                    investedAmount: document.getElementById('investedAmount').value ? parseFloat(document.getElementById('investedAmount').value) : null,
+                    startDate: document.getElementById('startDate').value,
+                    nextPremiumDue: document.getElementById('nextPremiumDue').value,
+                    endDate: document.getElementById('endDate').value,
+                    lastUpdated: firebase.firestore.FieldValue.serverTimestamp()
+                };
+
+                // Remove policyNumber and premiumMode for health insurance
+                if (insurance.insuranceType === 'health') {
+                    delete updatedData.policyNumber;
+                    delete updatedData.premiumMode;
+                }
+
+                // Convert premium amount to annual if necessary
+                if (insurance.insuranceType !== 'health') {
+                    switch (updatedData.premiumMode) {
+                        case 'monthly':
+                            updatedData.premiumAmount *= 12;
+                            break;
+                        case 'quarterly':
+                            updatedData.premiumAmount *= 4;
+                            break;
+                        case 'halferly':
+                            updatedData.premiumAmount *= 2;
+                            break;
+                    }
+                }
+
+                // Calculate the difference in coverage amount
+                const coverageDiff = updatedData.coverageAmount - insurance.coverageAmount;
+                const premiumDiff = updatedData.premiumAmount - insurance.premiumAmount;
+                const investmentDiff = (updatedData.investedAmount || 0) - (insurance.investedAmount || 0);
+
+                // Update the insurance document
+                await insuranceRef.update(updatedData);
+
+                // Update user's total insurance value
+                const userRef = db.collection('users').doc(userId);
+                await userRef.update({
+                    [`${insurance.insuranceType}InsuranceValue`]: firebase.firestore.FieldValue.increment(coverageDiff),
+                    totalInvestment: firebase.firestore.FieldValue.increment(premiumDiff)
+                });
+
+                modal.classList.add('hidden');
+                updateInsurancePolicies();
+                alert('Insurance policy updated successfully!');
+            } catch (error) {
+                console.error('Error updating insurance policy:', error);
+                alert('Error updating insurance policy. Please try again.');
+            }
+        };
+
+        // Change cancel button to reset save button
+        const cancelBtn = document.getElementById('cancelInsuranceBtn');
+        cancelBtn.onclick = () => {
+            modal.classList.add('hidden');
+            saveBtn.textContent = 'Save';
+            saveBtn.onclick = null; // Reset to original save functionality
+        };
+
+    } catch (error) {
+        console.error('Error loading insurance policy:', error);
+        alert('Error loading insurance policy. Please try again.');
     }
 }
 

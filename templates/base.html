@@ -9,6 +9,10 @@
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
     <style>
         /* Custom form styling */
         .input-group {
@@ -43,11 +47,12 @@
             padding: 0.5rem 1rem;
             border-radius: 0.375rem;
             cursor: pointer;
-            transition: background-color 0.2s;
+            transition: all 0.3s ease;
         }
         
         .fetch-button:hover {
             background-color: #4338CA;
+            transform: translateY(-1px);
         }
         
         .fetch-button:disabled {
@@ -62,11 +67,12 @@
             padding: 0.5rem 1rem;
             border-radius: 0.375rem;
             cursor: pointer;
-            transition: background-color 0.2s;
+            transition: all 0.3s ease;
         }
         
         .add-fund-button:hover {
             background-color: #059669;
+            transform: translateY(-1px);
         }
         
         .add-fund-button:disabled {
@@ -100,12 +106,371 @@
         }
         
         .scheme-code-btn {
-            transition: all 0.2s;
+            transition: all 0.3s ease;
         }
         
         .scheme-code-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Enhanced Mobile Navbar Styles */
+        .navbar {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(229, 231, 235, 0.5);
+            transition: all 0.3s ease;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 50;
+            height: 4rem;
+        }
+
+        .navbar.scrolled {
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        .nav-brand {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 1.5rem;
+            background: linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .nav-brand:hover {
+            transform: translateY(-1px);
+        }
+
+        .nav-link {
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+            position: relative;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background: linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .nav-link.active {
+            color: #4F46E5;
+            border-bottom: 2px solid #4F46E5;
+        }
+
+        .mobile-menu {
+            position: fixed;
+            top: 4rem;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            transform: translateX(-100%);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease-in-out;
+            overflow-y: auto;
+            z-index: 40;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .mobile-menu.active {
+            transform: translateX(0);
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .mobile-menu-content {
+            padding: 1rem;
+            max-width: 24rem;
+            margin: 0 auto;
+            padding-bottom: 5rem;
+        }
+
+        .mobile-menu-link {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 1rem;
+            margin: 0.5rem 0;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .mobile-menu-link:hover {
+            background-color: rgba(79, 70, 229, 0.1);
+            transform: translateX(4px);
+        }
+
+        .mobile-menu-link.active {
+            background-color: rgba(79, 70, 229, 0.1);
+            color: #4F46E5;
+            font-weight: 600;
+        }
+
+        .mobile-menu-link svg {
+            width: 1.5rem;
+            height: 1.5rem;
+            margin-right: 0.75rem;
+            opacity: 0.5;
+            flex-shrink: 0;
+        }
+
+        .mobile-menu-link.active svg {
+            opacity: 1;
+        }
+
+        .mobile-menu-button {
+            padding: 0.5rem;
+            border-radius: 0.375rem;
+            transition: all 0.3s ease;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .mobile-menu-button:hover {
+            background-color: rgba(79, 70, 229, 0.1);
+        }
+
+        .mobile-menu-button:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+        }
+
+        .mobile-menu-button svg {
+            transition: transform 0.3s ease;
+        }
+
+        .mobile-menu.active + .mobile-menu-button svg {
+            transform: rotate(90deg);
+        }
+
+        .mobile-logout-section {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 1rem;
+            border-top: 1px solid rgba(229, 231, 235, 0.5);
+            z-index: 41;
+        }
+
+        .mobile-logout-btn {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .mobile-logout-btn svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.5rem;
+            flex-shrink: 0;
+        }
+
+        .mobile-logout-btn:active {
+            transform: scale(0.98);
+        }
+
+        @media (max-width: 640px) {
+            .nav-brand {
+                font-size: 1.25rem;
+            }
+
+            .navbar {
+                height: 3.5rem;
+            }
+
+            .mobile-menu {
+                top: 3.5rem;
+            }
+
+            .mobile-menu-content {
+                padding-bottom: 4rem;
+            }
+        }
+
+        /* Prevent body scroll when mobile menu is open */
+        body.menu-open {
+            overflow: hidden;
+            position: fixed;
+            width: 100%;
+            height: 100%;
+        }
+
+        .logout-btn {
+            background: linear-gradient(135deg, #EF4444 0%, #DC2626 100%);
+            color: white;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .logout-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 6px -1px rgba(220, 38, 38, 0.2);
+        }
+
+        .logout-btn:active {
+            transform: translateY(0);
+        }
+
+        .logout-btn svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .logout-btn:hover svg {
+            transform: translateX(2px);
+        }
+
+        .logout-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .logout-btn:disabled svg {
+            transform: none;
+        }
+
+        .mobile-menu {
+            position: fixed;
+            top: 4rem;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            transform: translateX(-100%);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease-in-out;
+            overflow-y: auto;
+            z-index: 40;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .mobile-menu-content {
+            padding: 1rem;
+            max-width: 24rem;
+            margin: 0 auto;
+            padding-bottom: 5rem;
+        }
+
+        .mobile-menu-link {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 1rem;
+            margin: 0.5rem 0;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .mobile-menu-link:hover {
+            background-color: rgba(79, 70, 229, 0.1);
+            transform: translateX(4px);
+        }
+
+        .mobile-menu-link.active {
+            background-color: rgba(79, 70, 229, 0.1);
+            color: #4F46E5;
+            font-weight: 600;
+        }
+
+        .mobile-menu-link:last-child {
+            margin-bottom: 0;
+        }
+
+        .mobile-menu-divider {
+            height: 1px;
+            background: rgba(229, 231, 235, 0.5);
+            margin: 1rem 0;
+        }
+
+        .mobile-logout-btn {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            -webkit-tap-highlight-color: transparent;
+            background: linear-gradient(135deg, #EF4444 0%, #DC2626 100%);
+            color: white;
+            margin-top: 0.5rem;
+        }
+
+        .mobile-logout-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 6px -1px rgba(220, 38, 38, 0.2);
+        }
+
+        .mobile-logout-btn:active {
+            transform: translateY(0);
+        }
+
+        .mobile-logout-btn svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .mobile-logout-btn:hover svg {
+            transform: translateX(2px);
+        }
+
+        .mobile-logout-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .mobile-logout-btn:disabled svg {
+            transform: none;
         }
     </style>
     <script>
@@ -116,90 +481,131 @@
 </head>
 <body class="bg-gray-100">
     <!-- Navigation -->
-    <nav class="bg-white shadow-lg">
+    <nav class="navbar">
         <div class="max-w-7xl mx-auto px-4">
             <div class="flex justify-between h-16">
                 <div class="flex">
                     <div class="flex-shrink-0 flex items-center">
-                        <a href="/" class="text-xl font-bold text-indigo-600">Investment Tracker</a>
+                        <a href="/" class="nav-brand">Investment Tracker</a>
                     </div>
-                    {% if request.path != '/login' %}
+                    {% if request.path != '/login' and request.path != '/' %}
                     <div id="navLinks" class="hidden sm:ml-6 sm:flex sm:space-x-8">
-                        <a href="/dashboard" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+                        <a href="/dashboard" class="nav-link {% if request.path == '/dashboard' %}active{% endif %} inline-flex items-center px-1 pt-1 text-sm font-medium">
+                            <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+                            </svg>
                             Dashboard
                         </a>
-                        <a href="/stocks" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+                        <a href="/stocks" class="nav-link {% if request.path == '/stocks' %}active{% endif %} inline-flex items-center px-1 pt-1 text-sm font-medium">
+                            <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                            </svg>
                             Stocks
                         </a>
-                        <a href="/mutual_funds" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+                        <a href="/mutual_funds" class="nav-link {% if request.path == '/mutual_funds' %}active{% endif %} inline-flex items-center px-1 pt-1 text-sm font-medium">
+                            <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
                             Mutual Funds
                         </a>
-                        <a href="/insurance" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+                        <a href="/insurance" class="nav-link {% if request.path == '/insurance' %}active{% endif %} inline-flex items-center px-1 pt-1 text-sm font-medium">
+                            <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                            </svg>
                             Insurance
                         </a>
-                        <a href="/nps" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+                        <a href="/nps" class="nav-link {% if request.path == '/nps' %}active{% endif %} inline-flex items-center px-1 pt-1 text-sm font-medium">
+                            <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
                             NPS
                         </a>
-                        <a href="/others" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+                        <a href="/others" class="nav-link {% if request.path == '/others' %}active{% endif %} inline-flex items-center px-1 pt-1 text-sm font-medium">
+                            <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+                            </svg>
                             Others
                         </a>
                     </div>
                     {% endif %}
                 </div>
-                {% if request.path != '/login' %}
-                <div id="logoutContainer" class="hidden sm:ml-6 sm:flex sm:items-center">
-                    <button id="logoutBtn" class="bg-red-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-red-700">
-                        Logout
-                    </button>
-                </div>
-                <div class="-mr-2 flex items-center sm:hidden">
-                    <button type="button" class="mobile-menu-button inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
-                        <span class="sr-only">Open main menu</span>
-                        <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                        </svg>
-                    </button>
+                {% if request.path != '/login' and request.path != '/' %}
+                <div class="flex items-center">
+                    <div id="logoutContainer" class="hidden sm:flex sm:items-center">
+                        <button id="logoutBtn" class="logout-btn">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+                            </svg>
+                            Logout
+                        </button>
+                    </div>
+                    <div class="flex items-center sm:hidden">
+                        <button type="button" class="mobile-menu-button inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+                            <span class="sr-only">Open main menu</span>
+                            <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                            </svg>
+                        </button>
+                    </div>
                 </div>
                 {% endif %}
             </div>
         </div>
 
         <!-- Mobile menu -->
-        {% if request.path != '/login' %}
-        <div class="sm:hidden mobile-menu hidden">
-            <div class="pt-2 pb-3 space-y-1">
-                <a href="/dashboard" class="block pl-3 pr-4 py-2 border-l-4 text-base font-medium border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700">
+        {% if request.path != '/login' and request.path != '/' %}
+        <div class="sm:hidden mobile-menu">
+            <div class="mobile-menu-content">
+                <a href="/dashboard" class="mobile-menu-link {% if request.path == '/dashboard' %}active{% endif %}">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+                    </svg>
                     Dashboard
                 </a>
-                <a href="/stocks" class="block pl-3 pr-4 py-2 border-l-4 text-base font-medium border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700">
+                <a href="/stocks" class="mobile-menu-link {% if request.path == '/stocks' %}active{% endif %}">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                    </svg>
                     Stocks
                 </a>
-                <a href="/mutual_funds" class="block pl-3 pr-4 py-2 border-l-4 text-base font-medium border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700">
+                <a href="/mutual_funds" class="mobile-menu-link {% if request.path == '/mutual_funds' %}active{% endif %}">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
                     Mutual Funds
                 </a>
-                <a href="/insurance" class="block pl-3 pr-4 py-2 border-l-4 text-base font-medium border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700">
+                <a href="/insurance" class="mobile-menu-link {% if request.path == '/insurance' %}active{% endif %}">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                    </svg>
                     Insurance
                 </a>
-                <a href="/nps" class="block pl-3 pr-4 py-2 border-l-4 text-base font-medium border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700">
+                <a href="/nps" class="mobile-menu-link {% if request.path == '/nps' %}active{% endif %}">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
                     NPS
                 </a>
-                <a href="/others" class="block pl-3 pr-4 py-2 border-l-4 text-base font-medium border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700">
+                <a href="/others" class="mobile-menu-link {% if request.path == '/others' %}active{% endif %}">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+                    </svg>
                     Others
                 </a>
-                <div id="mobileLogoutContainer" class="pt-4 pb-3 border-t border-gray-200">
-                    <div class="flex items-center px-4">
-                        <button id="mobileLogoutBtn" class="w-full bg-red-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-red-700">
-                            Logout
-                        </button>
-                    </div>
-                </div>
+                <div class="mobile-menu-divider"></div>
+                <button id="mobileLogoutBtn" class="mobile-logout-btn">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+                    </svg>
+                    Logout
+                </button>
             </div>
         </div>
         {% endif %}
     </nav>
 
     <!-- Main content -->
-    <main>
+    <main class="pt-16">
         {% block content %}{% endblock %}
     </main>
 
@@ -211,11 +617,57 @@
         const logoutContainer = document.getElementById('logoutContainer');
         const mobileLogoutContainer = document.getElementById('mobileLogoutContainer');
 
-        if (mobileMenuButton) {
-            mobileMenuButton.addEventListener('click', () => {
-                mobileMenu.classList.toggle('hidden');
-            });
+        function toggleMobileMenu() {
+            mobileMenu.classList.toggle('active');
+            document.body.classList.toggle('menu-open');
         }
+
+        if (mobileMenuButton) {
+            mobileMenuButton.addEventListener('click', toggleMobileMenu);
+        }
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (mobileMenu && mobileMenu.classList.contains('active') && 
+                !mobileMenu.contains(e.target) && 
+                !mobileMenuButton.contains(e.target)) {
+                toggleMobileMenu();
+            }
+        });
+
+        // Close mobile menu when clicking a link
+        const mobileLinks = document.querySelectorAll('.mobile-menu-link');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                toggleMobileMenu();
+            });
+        });
+
+        // Handle window resize
+        let resizeTimer;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(() => {
+                if (window.innerWidth >= 640 && mobileMenu.classList.contains('active')) {
+                    toggleMobileMenu();
+                }
+            }, 250);
+        });
+
+        // Navbar scroll effect
+        let lastScroll = 0;
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            const currentScroll = window.pageYOffset;
+
+            if (currentScroll > 0) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+
+            lastScroll = currentScroll;
+        });
 
         // Logout functionality
         const logoutBtn = document.getElementById('logoutBtn');
@@ -227,6 +679,16 @@
                     // Disable logout buttons to prevent multiple clicks
                     logoutBtn.disabled = true;
                     mobileLogoutBtn.disabled = true;
+                    
+                    // Show loading state
+                    const originalText = mobileLogoutBtn.innerHTML;
+                    mobileLogoutBtn.innerHTML = `
+                        <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                        Logging out...
+                    `;
                     
                     // Sign out from Firebase
                     await firebase.auth().signOut();
@@ -242,9 +704,10 @@
                     console.error('Error signing out:', error);
                     alert('Error signing out. Please try again.');
                     
-                    // Re-enable logout buttons
+                    // Re-enable logout buttons and restore original text
                     logoutBtn.disabled = false;
                     mobileLogoutBtn.disabled = false;
+                    mobileLogoutBtn.innerHTML = originalText;
                 }
             }
 

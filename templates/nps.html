@@ -7,120 +7,54 @@
             <h1 class="text-2xl font-semibold text-gray-900">National Pension System (NPS)</h1>
         </div>
 
-        <!-- NPS Information Section -->
-        <div class="mt-6 bg-white shadow rounded-lg">
-            <div class="px-4 py-5 sm:p-6">
-                <h3 class="text-lg leading-6 font-medium text-gray-900 mb-4">
-                    About NPS Accounts
-                </h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div class="bg-gray-50 p-4 rounded-lg">
-                        <h4 class="font-medium text-indigo-600 mb-2">Tier 1 Account</h4>
-                        <p class="text-gray-600 text-sm">Tier 1 is a mandatory retirement account with restrictions on withdrawals until retirement. Contributions to Tier 1 qualify for tax benefits under Section 80C and Section 80CCD(1B) of the Income Tax Act.</p>
-                        <p class="text-gray-600 text-sm mt-2">Key features:</p>
-                        <ul class="list-disc list-inside text-sm text-gray-600 mt-1">
-                            <li>Partial withdrawals allowed after 3 years for specific needs</li>
-                            <li>Tax benefits on contributions up to ₹1.5 lakhs under Section 80C</li>
-                            <li>Additional tax deduction of up to ₹50,000 under Section 80CCD(1B)</li>
-                            <li>Mandatory 40% annuity purchase at retirement</li>
-                        </ul>
+        <!-- Portfolio Summary Section -->
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+            <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                <svg class="w-8 h-8 mr-3 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                </svg>
+                        Portfolio Summary
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Total Investment Card -->
+                <div class="bg-gradient-to-br from-indigo-50 to-indigo-100 rounded-xl p-6 transform transition-all duration-300 hover:scale-105 hover:shadow-lg">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="p-3 rounded-full bg-indigo-100">
+                            <img src="/static/images/nps.png" alt="NPS" class="w-6 h-6">
+                        </div>
+                        <span class="text-sm font-medium text-indigo-600">Total Investment</span>
                     </div>
-                    <div class="bg-gray-50 p-4 rounded-lg">
-                        <h4 class="font-medium text-indigo-600 mb-2">Tier 2 Account</h4>
-                        <p class="text-gray-600 text-sm">Tier 2 is a voluntary savings account with no withdrawal restrictions. It works similar to a mutual fund investment but with typically lower fund management charges.</p>
-                        <p class="text-gray-600 text-sm mt-2">Key features:</p>
-                        <ul class="list-disc list-inside text-sm text-gray-600 mt-1">
-                            <li>No restrictions on withdrawals</li>
-                            <li>No tax benefits on contributions (except for government employees)</li>
-                            <li>Lower expense ratio compared to mutual funds</li>
-                            <li>Must have an active Tier 1 account to open Tier 2</li>
-                        </ul>
+                    <div class="flex items-baseline">
+                        <span class="text-2xl font-bold text-indigo-900">₹<span id="totalNPSInvestment">0</span></span>
+                        <span class="ml-2 text-sm text-indigo-600">total invested</span>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
 
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
-        <!-- NPS Portfolio Summary -->
-        <div class="mt-8">
-            <div class="bg-white shadow rounded-lg">
-                <div class="px-4 py-5 sm:p-6">
-                    <h3 class="text-lg leading-6 font-medium text-gray-900">
-                        Portfolio Summary
-                    </h3>
-                    <div class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-3">
-                        <div class="bg-gray-50 overflow-hidden shadow rounded-lg">
-                            <div class="p-5">
-                                <div class="flex items-center">
-                                    <div class="flex-shrink-0">
-                                        <svg class="h-6 w-6 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                        </svg>
-                                    </div>
-                                    <div class="ml-5 w-0 flex-1">
-                                        <dl>
-                                            <dt class="text-sm font-medium text-gray-500 truncate">
-                                                Total Investment
-                                            </dt>
-                                            <dd class="flex items-baseline">
-                                                <div class="text-2xl font-semibold text-gray-900">
-                                                    ₹<span id="totalNPSInvestment">0</span>
-                                                </div>
-                                            </dd>
-                                        </dl>
-                                    </div>
-                                </div>
-                            </div>
+                <!-- Current Value Card -->
+                <div class="bg-gradient-to-br from-green-50 to-green-100 rounded-xl p-6 transform transition-all duration-300 hover:scale-105 hover:shadow-lg">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="p-3 rounded-full bg-green-100">
+                            <img src="/static/images/nps.png" alt="NPS" class="w-6 h-6">
                         </div>
+                        <span class="text-sm font-medium text-green-600">Current Value</span>
+                    </div>
+                    <div class="flex items-baseline">
+                        <span class="text-2xl font-bold text-green-900">₹<span id="currentNPSValue">0</span></span>
+                        <span class="ml-2 text-sm text-green-600">market value</span>
+                    </div>
+                </div>
 
-                        <div class="bg-gray-50 overflow-hidden shadow rounded-lg">
-                            <div class="p-5">
-                                <div class="flex items-center">
-                                    <div class="flex-shrink-0">
-                                        <svg class="h-6 w-6 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-                                        </svg>
-                                    </div>
-                                    <div class="ml-5 w-0 flex-1">
-                                        <dl>
-                                            <dt class="text-sm font-medium text-gray-500 truncate">
-                                                Current Value
-                                            </dt>
-                                            <dd class="flex items-baseline">
-                                                <div class="text-2xl font-semibold text-gray-900">
-                                                    ₹<span id="currentNPSValue">0</span>
-                                                </div>
-                                            </dd>
-                                        </dl>
-                                    </div>
-                                </div>
-                            </div>
+                <!-- Returns Card -->
+                <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-6 transform transition-all duration-300 hover:scale-105 hover:shadow-lg">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="p-3 rounded-full bg-blue-100">
+                            <img src="/static/images/nps.png" alt="NPS" class="w-6 h-6">
                         </div>
-
-                        <div class="bg-gray-50 overflow-hidden shadow rounded-lg">
-                            <div class="p-5">
-                                <div class="flex items-center">
-                                    <div class="flex-shrink-0">
-                                        <svg class="h-6 w-6 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                                        </svg>
-                                    </div>
-                                    <div class="ml-5 w-0 flex-1">
-                                        <dl>
-                                            <dt class="text-sm font-medium text-gray-500 truncate">
-                                                Total Returns
-                                            </dt>
-                                            <dd class="flex items-baseline">
-                                                <div class="text-2xl font-semibold text-gray-900">
-                                                    ₹<span id="totalNPSReturns">0</span>
-                                                </div>
-                                            </dd>
-                                        </dl>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <span class="text-sm font-medium text-blue-600">Total Returns</span>
+                    </div>
+                    <div class="flex items-baseline">
+                        <span class="text-2xl font-bold text-blue-900">₹<span id="totalNPSReturns">0</span></span>
+                        <span class="ml-2 text-sm text-blue-600">absolute returns</span>
                     </div>
                 </div>
             </div>
@@ -133,6 +67,16 @@
                     <h3 class="text-lg leading-6 font-medium text-gray-900">
                         NPS Holdings
                     </h3>
+                    
+                    <!-- Add Refresh Button -->
+                    <div class="mt-4 flex justify-end">
+                        <button id="refreshNPSBtn" class="bg-green-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-green-700 transition duration-300 ease-in-out flex items-center">
+                            <svg class="w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                            </svg>
+                            Refresh NAV
+                        </button>
+                    </div>
                     
                     <!-- Tabs -->
                     <div class="mt-4 border-b border-gray-200">
@@ -236,11 +180,6 @@
                                                 </thead>
                                                 <tbody id="tier1Holdings" class="bg-white divide-y divide-gray-200">
                                                     <!-- Tier 1 holdings will be populated here -->
-                                                    <tr>
-                                                        <td colspan="5" class="px-6 py-4 text-center text-gray-500">
-                                                            <i class="fas fa-info-circle mr-2"></i>No Tier 1 investments found.
-                                                        </td>
-                                                    </tr>
                                                 </tbody>
                                             </table>
                                         </div>
@@ -340,11 +279,6 @@
                                                 </thead>
                                                 <tbody id="tier2Holdings" class="bg-white divide-y divide-gray-200">
                                                     <!-- Tier 2 holdings will be populated here -->
-                                                    <tr>
-                                                        <td colspan="5" class="px-6 py-4 text-center text-gray-500">
-                                                            <i class="fas fa-info-circle mr-2"></i>No Tier 2 investments found.
-                                                        </td>
-                                                    </tr>
                                                 </tbody>
                                             </table>
                                         </div>
@@ -405,50 +339,7 @@
     </div>
 </div>
 
-<!-- Common scheme codes info section -->
-<div class="form-section mt-6">
-    <h3 class="form-title">Common NPS Scheme Codes</h3>
-    <p class="text-sm text-gray-600 mb-4">You can use any of these common scheme codes to fetch details:</p>
-    
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div>
-            <h4 class="text-base font-semibold text-indigo-700 mb-2">SBI Pension Fund</h4>
-            <ul class="text-sm">
-                <li><strong>SM001149</strong> - SBI Scheme E (Equity) - Tier 1</li>
-                <li><strong>SM001150</strong> - SBI Scheme E (Equity) - Tier 2</li>
-                <li><strong>SM001151</strong> - SBI Scheme C (Corporate Bond) - Tier 1</li>
-                <li><strong>SM001152</strong> - SBI Scheme C (Corporate Bond) - Tier 2</li>
-                <li><strong>SM001153</strong> - SBI Scheme G (Govt. Securities) - Tier 1</li>
-                <li><strong>SM001154</strong> - SBI Scheme G (Govt. Securities) - Tier 2</li>
-            </ul>
-        </div>
-        <div>
-            <h4 class="text-base font-semibold text-indigo-700 mb-2">HDFC Pension Fund</h4>
-            <ul class="text-sm">
-                <li><strong>SM001173</strong> - HDFC Scheme E (Equity) - Tier 1</li>
-                <li><strong>SM001174</strong> - HDFC Scheme E (Equity) - Tier 2</li>
-                <li><strong>SM001175</strong> - HDFC Scheme C (Corporate Bond) - Tier 1</li>
-                <li><strong>SM001176</strong> - HDFC Scheme C (Corporate Bond) - Tier 2</li>
-                <li><strong>SM001177</strong> - HDFC Scheme G (Govt. Securities) - Tier 1</li>
-                <li><strong>SM001178</strong> - HDFC Scheme G (Govt. Securities) - Tier 2</li>
-            </ul>
-        </div>
-    </div>
-    
-    <div class="mt-4 text-sm text-gray-600">
-        <p>Click on any scheme code to copy it to clipboard:</p>
-        <div class="flex flex-wrap gap-2 mt-2">
-            <button class="scheme-code-btn px-3 py-1 bg-blue-100 text-blue-800 rounded hover:bg-blue-200" data-code="SM001149">SM001149</button>
-            <button class="scheme-code-btn px-3 py-1 bg-blue-100 text-blue-800 rounded hover:bg-blue-200" data-code="SM001150">SM001150</button>
-            <button class="scheme-code-btn px-3 py-1 bg-blue-100 text-blue-800 rounded hover:bg-blue-200" data-code="SM001151">SM001151</button>
-            <button class="scheme-code-btn px-3 py-1 bg-blue-100 text-blue-800 rounded hover:bg-blue-200" data-code="SM001152">SM001152</button>
-            <button class="scheme-code-btn px-3 py-1 bg-blue-100 text-blue-800 rounded hover:bg-blue-200" data-code="SM001153">SM001153</button>
-            <button class="scheme-code-btn px-3 py-1 bg-blue-100 text-blue-800 rounded hover:bg-blue-200" data-code="SM001154">SM001154</button>
-            <button class="scheme-code-btn px-3 py-1 bg-blue-100 text-blue-800 rounded hover:bg-blue-200" data-code="SM001173">SM001173</button>
-            <button class="scheme-code-btn px-3 py-1 bg-blue-100 text-blue-800 rounded hover:bg-blue-200" data-code="SM001174">SM001174</button>
-        </div>
-    </div>
-</div>
+
 
 <script>
 // Initialize Firebase
@@ -739,12 +630,6 @@ tier2FetchBtn.addEventListener('click', () => {
 
 // Function to update NPS holdings from Firestore
 async function updateNPSHoldings() {
-    console.log("Starting updateNPSHoldings function");
-    
-    // Clear tables first to prevent duplicates
-    document.getElementById('tier1Holdings').innerHTML = '';
-    document.getElementById('tier2Holdings').innerHTML = '';
-    
     try {
         const userId = firebase.auth().currentUser.uid;
         if (!userId) {
@@ -752,298 +637,170 @@ async function updateNPSHoldings() {
             return;
         }
         
-        console.log(`Updating NPS holdings for user: ${userId}`);
+        // Clear tables first
+        document.getElementById('tier1Holdings').innerHTML = '';
+        document.getElementById('tier2Holdings').innerHTML = '';
         
-        // Create a unique request ID to prevent duplicate updates
-        const requestId = Date.now();
-        console.log(`Update request ID: ${requestId}`);
-        
-        // Track processed scheme codes to prevent duplicates
-        const processedTier1Schemes = new Set();
-        const processedTier2Schemes = new Set();
-        
-        // Fetch metadata for tier total investments
+        // Fetch holdings and metadata
+        const npsRef = db.collection('users').doc(userId).collection('nps');
         const tier1MetaRef = db.collection('users').doc(userId).collection('nps_metadata').doc('tier1_total');
         const tier2MetaRef = db.collection('users').doc(userId).collection('nps_metadata').doc('tier2_total');
         
-        const [tier1Meta, tier2Meta] = await Promise.all([
+        const [snapshot, tier1MetaDoc, tier2MetaDoc] = await Promise.all([
+            npsRef.get(),
             tier1MetaRef.get(),
             tier2MetaRef.get()
         ]);
         
-        // Get total investments from metadata
-        let tier1TotalInvestment = tier1Meta.exists ? tier1Meta.data().totalInvestment : 0;
-        let tier2TotalInvestment = tier2Meta.exists ? tier2Meta.data().totalInvestment : 0;
-        
-        // Store these values in global variables for use in other functions
-        window.tier1TotalInvestment = tier1TotalInvestment;
-        window.tier2TotalInvestment = tier2TotalInvestment;
-        
-        console.log(`Tier 1 total investment: ${tier1TotalInvestment}`);
-        console.log(`Tier 2 total investment: ${tier2TotalInvestment}`);
-        
-        // Maps to aggregate units for the same scheme code
-        const tier1SchemeMap = new Map();
-        const tier2SchemeMap = new Map();
-        
-        // Fetch holdings
-        const npsRef = db.collection('users').doc(userId).collection('nps');
-        const snapshot = await npsRef.get();
-        
         if (snapshot.empty) {
-            console.log("No NPS holdings found");
-            
-            // Update empty tables
             document.getElementById('tier1Holdings').innerHTML = `
-                <tr>
-                    <td colspan="5" class="px-6 py-4 text-center text-gray-500">
-                        <i class="fas fa-info-circle mr-2"></i>No Tier 1 investments found.
-                    </td>
-                </tr>
+                <tr><td colspan="5" class="px-6 py-4 text-center text-gray-500">No Tier 1 investments found.</td></tr>
             `;
-            
             document.getElementById('tier2Holdings').innerHTML = `
-                <tr>
-                    <td colspan="5" class="px-6 py-4 text-center text-gray-500">
-                        <i class="fas fa-info-circle mr-2"></i>No Tier 2 investments found.
-                    </td>
-                </tr>
+                <tr><td colspan="5" class="px-6 py-4 text-center text-gray-500">No Tier 2 investments found.</td></tr>
             `;
-        } else {
-            console.log(`Processing ${snapshot.size} NPS documents`);
-            
-            // First pass: Aggregate data by scheme code
-            snapshot.forEach(doc => {
-                const data = doc.data();
-                const docId = doc.id;
-                
-                // Determine the tier
-                const tier = data.tier || (docId.includes('tier1') ? 'tier1' : 'tier2');
-                const schemeCode = data.scheme_code;
-                
-                if (!schemeCode) {
-                    console.warn(`Document ${docId} has no scheme code, skipping`);
-                    return;
-                }
-                
-                const units = parseFloat(data.units || 0);
-                const nav = parseFloat(data.current_nav || 0);
-                
-                // Create a composite key for unique identification
-                const key = `${schemeCode}`;
-                
-                if (tier === 'tier1') {
-                    if (tier1SchemeMap.has(key)) {
-                        // Update existing entry
-                        const existing = tier1SchemeMap.get(key);
-                        existing.units += units;
-                        existing.docIds.push(docId);
-                        // Use most recent NAV
-                        existing.current_nav = nav;
-                    } else {
-                        // Create new entry
-                        tier1SchemeMap.set(key, {
-                            scheme_code: schemeCode,
-                            scheme_name: data.scheme_name || `Scheme ${schemeCode}`,
-                            units: units,
-                            current_nav: nav,
-                            docIds: [docId]
-                        });
-                    }
-                } else {
-                    if (tier2SchemeMap.has(key)) {
-                        // Update existing entry
-                        const existing = tier2SchemeMap.get(key);
-                        existing.units += units;
-                        existing.docIds.push(docId);
-                        // Use most recent NAV
-                        existing.current_nav = nav;
-                    } else {
-                        // Create new entry
-                        tier2SchemeMap.set(key, {
-                            scheme_code: schemeCode,
-                            scheme_name: data.scheme_name || `Scheme ${schemeCode}`,
-                            units: units,
-                            current_nav: nav,
-                            docIds: [docId]
-                        });
-                    }
-                }
-            });
-            
-            console.log(`Aggregated ${tier1SchemeMap.size} unique Tier 1 schemes`);
-            console.log(`Aggregated ${tier2SchemeMap.size} unique Tier 2 schemes`);
-            
-            // Second pass: Calculate current values and populate tables
-            let tier1CurrentValue = 0;
-            let tier2CurrentValue = 0;
-            
-            // Convert maps to arrays for sorting
-            const tier1Entries = Array.from(tier1SchemeMap.entries()).map(([key, data]) => {
-                const currentValue = data.units * data.current_nav;
-                tier1CurrentValue += currentValue;
-                return {
-                    key,
-                    data,
-                    currentValue,
-                    multipleEntries: data.docIds.length > 1
-                };
-            });
-            
-            const tier2Entries = Array.from(tier2SchemeMap.entries()).map(([key, data]) => {
-                const currentValue = data.units * data.current_nav;
-                tier2CurrentValue += currentValue;
-                return {
-                    key,
-                    data,
-                    currentValue,
-                    multipleEntries: data.docIds.length > 1
-                };
-            });
-            
-            // Sort entries by scheme name
-            tier1Entries.sort((a, b) => a.data.scheme_name.localeCompare(b.data.scheme_name));
-            tier2Entries.sort((a, b) => a.data.scheme_name.localeCompare(b.data.scheme_name));
-            
-            // Populate Tier 1 table
-            const tier1Table = document.getElementById('tier1Holdings');
-            if (tier1Entries.length > 0) {
-                tier1Table.innerHTML = '';
-                
-                tier1Entries.forEach(({ key, data, currentValue, multipleEntries }) => {
-                    // Create a row
-                    const row = document.createElement('tr');
-                    
-                    // Add a visual indicator for combined entries
-                    const nameDisplay = multipleEntries ? 
-                        `${data.scheme_name} <span class="text-xs text-indigo-500">(combined entries)</span>` : 
-                        data.scheme_name;
-                    
-                    row.innerHTML = `
-                        <td class="px-6 py-4 whitespace-nowrap">
-                            <div class="text-sm font-medium text-gray-900">${nameDisplay}</div>
-                            <div class="text-xs text-gray-500">${data.scheme_code}</div>
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap">
-                            <div class="text-sm text-gray-900">₹${parseFloat(data.current_nav).toFixed(2)}</div>
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap">
-                            <div class="text-sm text-gray-900">${parseFloat(data.units).toFixed(2)}</div>
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap">
-                            <div class="text-sm text-gray-900">₹${currentValue.toFixed(2)}</div>
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                            <div class="flex space-x-2">
-                                <button class="btn-edit-nps text-blue-600 hover:text-blue-900 px-2 py-1 rounded border border-blue-300 hover:bg-blue-50 transition-colors"
-                                    data-id="${data.docIds[0]}" data-tier="tier1" data-scheme="${data.scheme_code}" data-units="${data.units}" data-multiple="${multipleEntries}">
-                                    <i class="fas fa-edit mr-1"></i>Edit
-                                </button>
-                                <button class="btn-delete-nps text-red-600 hover:text-red-900 px-2 py-1 rounded border border-red-300 hover:bg-red-50 transition-colors"
-                                    data-id="${data.docIds[0]}" data-tier="tier1" data-scheme="${data.scheme_code}" data-multiple="${multipleEntries}">
-                                    <i class="fas fa-trash mr-1"></i>Delete
-                                </button>
-                            </div>
-                        </td>
-                    `;
-                    tier1Table.appendChild(row);
-                });
-            } else {
-                tier1Table.innerHTML = `
-                    <tr>
-                        <td colspan="5" class="px-6 py-4 text-center text-gray-500">
-                            <i class="fas fa-info-circle mr-2"></i>No Tier 1 investments found.
-                        </td>
-                    </tr>
-                `;
-            }
-            
-            // Populate Tier 2 table
-            const tier2Table = document.getElementById('tier2Holdings');
-            if (tier2Entries.length > 0) {
-                tier2Table.innerHTML = '';
-                
-                tier2Entries.forEach(({ key, data, currentValue, multipleEntries }) => {
-                    // Create a row
-                    const row = document.createElement('tr');
-                    
-                    // Add a visual indicator for combined entries
-                    const nameDisplay = multipleEntries ? 
-                        `${data.scheme_name} <span class="text-xs text-green-500">(combined entries)</span>` : 
-                        data.scheme_name;
-                    
-                    row.innerHTML = `
-                        <td class="px-6 py-4 whitespace-nowrap">
-                            <div class="text-sm font-medium text-gray-900">${nameDisplay}</div>
-                            <div class="text-xs text-gray-500">${data.scheme_code}</div>
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap">
-                            <div class="text-sm text-gray-900">₹${parseFloat(data.current_nav).toFixed(2)}</div>
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap">
-                            <div class="text-sm text-gray-900">${parseFloat(data.units).toFixed(2)}</div>
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap">
-                            <div class="text-sm text-gray-900">₹${currentValue.toFixed(2)}</div>
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                            <div class="flex space-x-2">
-                                <button class="btn-edit-nps text-blue-600 hover:text-blue-900 px-2 py-1 rounded border border-blue-300 hover:bg-blue-50 transition-colors"
-                                    data-id="${data.docIds[0]}" data-tier="tier2" data-scheme="${data.scheme_code}" data-units="${data.units}" data-multiple="${multipleEntries}">
-                                    <i class="fas fa-edit mr-1"></i>Edit
-                                </button>
-                                <button class="btn-delete-nps text-red-600 hover:text-red-900 px-2 py-1 rounded border border-red-300 hover:bg-red-50 transition-colors"
-                                    data-id="${data.docIds[0]}" data-tier="tier2" data-scheme="${data.scheme_code}" data-multiple="${multipleEntries}">
-                                    <i class="fas fa-trash mr-1"></i>Delete
-                                </button>
-                            </div>
-                        </td>
-                    `;
-                    tier2Table.appendChild(row);
-                });
-            } else {
-                tier2Table.innerHTML = `
-                    <tr>
-                        <td colspan="5" class="px-6 py-4 text-center text-gray-500">
-                            <i class="fas fa-info-circle mr-2"></i>No Tier 2 investments found.
-                        </td>
-                    </tr>
-                `;
-            }
-            
-            // Calculate returns
-            const tier1Returns = tier1CurrentValue - tier1TotalInvestment;
-            const tier2Returns = tier2CurrentValue - tier2TotalInvestment;
-            
-            // Calculate return percentages
-            const tier1ReturnsPercentage = tier1TotalInvestment > 0 ? 
-                (tier1Returns / tier1TotalInvestment) * 100 : 0;
-            const tier2ReturnsPercentage = tier2TotalInvestment > 0 ? 
-                (tier2Returns / tier2TotalInvestment) * 100 : 0;
-            
-            // Update summary boxes for Tier 1
-            document.getElementById('tier1TotalInvestment').textContent = parseFloat(tier1TotalInvestment).toFixed(2);
-            document.getElementById('tier1CurrentValue').textContent = parseFloat(tier1CurrentValue).toFixed(2);
-            document.getElementById('tier1Returns').textContent = `${tier1Returns.toFixed(2)} (${tier1ReturnsPercentage.toFixed(2)}%)`;
-            
-            // Update summary boxes for Tier 2
-            document.getElementById('tier2TotalInvestment').textContent = parseFloat(tier2TotalInvestment).toFixed(2);
-            document.getElementById('tier2CurrentValue').textContent = parseFloat(tier2CurrentValue).toFixed(2);
-            document.getElementById('tier2Returns').textContent = `${tier2Returns.toFixed(2)} (${tier2ReturnsPercentage.toFixed(2)}%)`;
-            
-            // Update overall NPS summary
-            const totalInvestment = tier1TotalInvestment + tier2TotalInvestment;
-            const totalCurrentValue = tier1CurrentValue + tier2CurrentValue;
-            const totalReturns = totalCurrentValue - totalInvestment;
-            const totalReturnsPercentage = totalInvestment > 0 ? 
-                (totalReturns / totalInvestment) * 100 : 0;
-            
-            document.getElementById('totalNPSInvestment').textContent = parseFloat(totalInvestment).toFixed(2);
-            document.getElementById('currentNPSValue').textContent = parseFloat(totalCurrentValue).toFixed(2);
-            document.getElementById('totalNPSReturns').textContent = `${totalReturns.toFixed(2)} (${totalReturnsPercentage.toFixed(2)}%)`;
+            return;
         }
         
-        console.log(`Update complete for request ${requestId}`);
+        // Process holdings
+        let tier1TotalInvestment = tier1MetaDoc.exists ? parseFloat(tier1MetaDoc.data().totalInvestment || 0) : 0;
+        let tier2TotalInvestment = tier2MetaDoc.exists ? parseFloat(tier2MetaDoc.data().totalInvestment || 0) : 0;
+        let tier1TotalCurrentValue = 0;
+        let tier2TotalCurrentValue = 0;
+        
+        // Group holdings by scheme code to check for multiple entries
+        const tier1Holdings = new Map();
+        const tier2Holdings = new Map();
+        
+        snapshot.forEach(doc => {
+            const data = doc.data();
+            const tier = data.tier;
+            const schemeCode = data.scheme_code;
+            const units = parseFloat(data.units || 0);
+            const currentNav = parseFloat(data.current_nav || 0);
+            const currentValue = units * currentNav;
+            
+            // Add to appropriate tier map
+            if (tier === 1 || tier === 'tier1') {
+                if (!tier1Holdings.has(schemeCode)) {
+                    tier1Holdings.set(schemeCode, []);
+                }
+                tier1Holdings.get(schemeCode).push({ doc, data, currentValue });
+                tier1TotalCurrentValue += currentValue;
+            } else if (tier === 2 || tier === 'tier2') {
+                if (!tier2Holdings.has(schemeCode)) {
+                    tier2Holdings.set(schemeCode, []);
+                }
+                tier2Holdings.get(schemeCode).push({ doc, data, currentValue });
+                tier2TotalCurrentValue += currentValue;
+            }
+        });
+        
+        // Generate table rows for Tier 1
+        tier1Holdings.forEach((holdings, schemeCode) => {
+            const isMultiple = holdings.length > 1;
+            holdings.forEach(({ doc, data, currentValue }) => {
+                const row = `
+                    <tr>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                            ${data.scheme_name}
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                            ₹${formatIndianNumber(data.current_nav.toFixed(2))}
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                            ${formatIndianNumber(data.units.toFixed(2))}
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                            ₹${formatIndianNumber(currentValue.toFixed(2))}
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                            <button class="btn-edit-nps text-blue-600 hover:text-blue-900 mr-2" 
+                                    data-id="${doc.id}" 
+                                    data-tier="tier1"
+                                    data-scheme="${schemeCode}"
+                                    data-units="${data.units}"
+                                    data-multiple="${isMultiple}">
+                                <i class="fas fa-edit mr-1"></i>Edit
+                            </button>
+                            <button class="btn-delete-nps text-red-600 hover:text-red-900" 
+                                    data-id="${doc.id}" 
+                                    data-tier="tier1"
+                                    data-scheme="${schemeCode}"
+                                    data-multiple="${isMultiple}">
+                                <i class="fas fa-trash mr-1"></i>Delete
+                            </button>
+                        </td>
+                    </tr>
+                `;
+                document.getElementById('tier1Holdings').insertAdjacentHTML('beforeend', row);
+            });
+        });
+        
+        // Generate table rows for Tier 2
+        tier2Holdings.forEach((holdings, schemeCode) => {
+            const isMultiple = holdings.length > 1;
+            holdings.forEach(({ doc, data, currentValue }) => {
+                const row = `
+                    <tr>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                            ${data.scheme_name}
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                            ₹${formatIndianNumber(data.current_nav.toFixed(2))}
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                            ${formatIndianNumber(data.units.toFixed(2))}
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                            ₹${formatIndianNumber(currentValue.toFixed(2))}
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                            <button class="btn-edit-nps text-blue-600 hover:text-blue-900 mr-2" 
+                                    data-id="${doc.id}" 
+                                    data-tier="tier2"
+                                    data-scheme="${schemeCode}"
+                                    data-units="${data.units}"
+                                    data-multiple="${isMultiple}">
+                                <i class="fas fa-edit mr-1"></i>Edit
+                            </button>
+                            <button class="btn-delete-nps text-red-600 hover:text-red-900" 
+                                    data-id="${doc.id}" 
+                                    data-tier="tier2"
+                                    data-scheme="${schemeCode}"
+                                    data-multiple="${isMultiple}">
+                                <i class="fas fa-trash mr-1"></i>Delete
+                            </button>
+                        </td>
+                    </tr>
+                `;
+                document.getElementById('tier2Holdings').insertAdjacentHTML('beforeend', row);
+            });
+        });
+        
+        // Update tier summaries
+        const tier1Returns = tier1TotalCurrentValue - tier1TotalInvestment;
+        const tier2Returns = tier2TotalCurrentValue - tier2TotalInvestment;
+        
+        // Update Tier 1 summary
+        document.getElementById('tier1TotalInvestment').textContent = formatIndianNumber(tier1TotalInvestment.toFixed(2));
+        document.getElementById('tier1CurrentValue').textContent = formatIndianNumber(tier1TotalCurrentValue.toFixed(2));
+        document.getElementById('tier1Returns').textContent = formatIndianNumber(tier1Returns.toFixed(2));
+        
+        // Update Tier 2 summary
+        document.getElementById('tier2TotalInvestment').textContent = formatIndianNumber(tier2TotalInvestment.toFixed(2));
+        document.getElementById('tier2CurrentValue').textContent = formatIndianNumber(tier2TotalCurrentValue.toFixed(2));
+        document.getElementById('tier2Returns').textContent = formatIndianNumber(tier2Returns.toFixed(2));
+        
+        // Update portfolio summary
+        const totalInvestment = tier1TotalInvestment + tier2TotalInvestment;
+        const totalCurrentValue = tier1TotalCurrentValue + tier2TotalCurrentValue;
+        const totalReturns = totalCurrentValue - totalInvestment;
+        
+        document.getElementById('totalNPSInvestment').textContent = formatIndianNumber(totalInvestment.toFixed(2));
+        document.getElementById('currentNPSValue').textContent = formatIndianNumber(totalCurrentValue.toFixed(2));
+        document.getElementById('totalNPSReturns').textContent = formatIndianNumber(totalReturns.toFixed(2));
+        
     } catch (error) {
         console.error('Error updating NPS holdings:', error);
         alert(`Error loading NPS holdings: ${error.message}`);
@@ -1342,7 +1099,7 @@ async function editNPSUnits(docId, tier, schemeCode, currentUnits, isMultiple) {
         const npsRef = db.collection('users').doc(userId).collection('nps');
         
         // If this is a multiple entry case, handle specially
-        if (isMultiple) {
+        if (isMultiple === 'true' || isMultiple === true) {
             // Get all documents with this scheme code and tier
             const tierValue = tier === 'tier1' ? 'tier1' : 'tier2';
             const query = await npsRef.where('scheme_code', '==', schemeCode)
@@ -1773,6 +1530,176 @@ document.getElementById('tier1AddFundBtn').addEventListener('click', () => {
 
 document.getElementById('tier2AddFundBtn').addEventListener('click', () => {
     submitTier2Fund();
+});
+
+// Add refresh button functionality
+const refreshNPSBtn = document.getElementById('refreshNPSBtn');
+
+refreshNPSBtn.addEventListener('click', async () => {
+    try {
+        refreshNPSBtn.disabled = true;
+        refreshNPSBtn.innerHTML = `
+            <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+            Refreshing...
+        `;
+
+        const userId = firebase.auth().currentUser?.uid;
+        if (!userId) {
+            throw new Error('User not authenticated');
+        }
+
+        const npsSnapshot = await db.collection('users').doc(userId).collection('nps').get();
+        const updatePromises = [];
+
+        for (const doc of npsSnapshot.docs) {
+            const nps = doc.data();
+            const schemeCode = nps.scheme_code;
+
+            try {
+                const response = await fetch(`https://npsnav.in/api/detailed/${schemeCode}`);
+                const data = await response.json();
+                
+                if (!data || !data['NAV']) {
+                    console.error(`Invalid data for ${schemeCode}`);
+                    continue;
+                }
+
+                const currentNav = parseFloat(data['NAV']);
+                if (isNaN(currentNav)) {
+                    console.error(`Invalid NAV for ${schemeCode}`);
+                    continue;
+                }
+
+                const currentValue = nps.units * currentNav;
+
+                updatePromises.push(
+                    doc.ref.update({
+                        current_nav: currentNav,
+                        lastUpdated: firebase.firestore.FieldValue.serverTimestamp()
+                    })
+                );
+            } catch (error) {
+                console.error(`Error updating ${schemeCode}:`, error);
+            }
+        }
+
+        await Promise.all(updatePromises);
+        updateNPSHoldings();
+        
+        refreshNPSBtn.disabled = false;
+        refreshNPSBtn.innerHTML = `
+            <svg class="w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+            </svg>
+            Refresh NAV
+        `;
+        
+        alert('NPS NAVs updated successfully!');
+    } catch (error) {
+        console.error('Error refreshing NPS NAVs:', error);
+        alert('Error refreshing NPS NAVs. Please try again.');
+        refreshNPSBtn.disabled = false;
+        refreshNPSBtn.innerHTML = `
+            <svg class="w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+            </svg>
+            Refresh NAV
+        `;
+    }
+});
+
+// Update the updateSummary function to use correct element IDs
+function updateSummary() {
+    const tier1Total = tier1Holdings.reduce((sum, holding) => sum + (holding.investedAmount || 0), 0);
+    const tier2Total = tier2Holdings.reduce((sum, holding) => sum + (holding.investedAmount || 0), 0);
+    const totalInvestment = tier1Total + tier2Total;
+    
+    const tier1Current = tier1Holdings.reduce((sum, holding) => sum + (holding.currentValue || 0), 0);
+    const tier2Current = tier2Holdings.reduce((sum, holding) => sum + (holding.currentValue || 0), 0);
+    const currentValue = tier1Current + tier2Current;
+    
+    const totalReturns = currentValue - totalInvestment;
+    
+    // Add animation classes
+    document.getElementById('totalNPSInvestment').classList.add('animate-number');
+    document.getElementById('currentNPSValue').classList.add('animate-number');
+    document.getElementById('totalNPSReturns').classList.add('animate-number');
+    
+    // Update values with animation
+    animateValue('totalNPSInvestment', totalInvestment.toFixed(2));
+    animateValue('currentNPSValue', currentValue.toFixed(2));
+    animateValue('totalNPSReturns', totalReturns.toFixed(2));
+    
+    // Remove animation classes after animation completes
+    setTimeout(() => {
+        document.getElementById('totalNPSInvestment').classList.remove('animate-number');
+        document.getElementById('currentNPSValue').classList.remove('animate-number');
+        document.getElementById('totalNPSReturns').classList.remove('animate-number');
+    }, 1000);
+}
+
+// Function to format number in Indian format
+function formatIndianNumber(num) {
+    const numStr = num.toString();
+    const [wholePart, decimalPart] = numStr.split('.');
+    const lastThree = wholePart.substring(wholePart.length - 3);
+    const otherNumbers = wholePart.substring(0, wholePart.length - 3);
+    const formatted = otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ",") + (otherNumbers ? "," : "") + lastThree;
+    return decimalPart ? formatted + "." + decimalPart : formatted;
+}
+
+// Update the animateValue function to use Indian number format
+function animateValue(element, start, end, duration) {
+    let startTimestamp = null;
+    const step = (timestamp) => {
+        if (!startTimestamp) startTimestamp = timestamp;
+        const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+        const currentValue = Math.floor(progress * (end - start) + start);
+        element.textContent = formatIndianNumber(currentValue.toFixed(2));
+        if (progress < 1) {
+            window.requestAnimationFrame(step);
+        }
+    };
+    window.requestAnimationFrame(step);
+}
+
+// Update the table row generation in updateNPSHoldings function
+npsSnapshot.forEach(doc => {
+    const nps = doc.data();
+    totalInvestment += nps.investment;
+    currentValue += nps.currentValue;
+    totalReturns += nps.returns;
+
+    const row = document.createElement('tr');
+    row.innerHTML = `
+        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+            ${nps.name}
+        </td>
+        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+            ₹${formatIndianNumber(nps.investment.toFixed(2))}
+        </td>
+        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+            ₹${formatIndianNumber(nps.currentValue.toFixed(2))}
+        </td>
+        <td class="px-6 py-4 whitespace-nowrap text-sm ${nps.returns >= 0 ? 'text-green-600' : 'text-red-600'}">
+            ₹${formatIndianNumber(nps.returns.toFixed(2))}
+        </td>
+        <td class="px-6 py-4 whitespace-nowrap text-sm ${nps.returns >= 0 ? 'text-green-600' : 'text-red-600'}">
+            ${formatIndianNumber(nps.returnsPercentage.toFixed(2))}%
+        </td>
+        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+            <button class="text-blue-600 hover:text-blue-900 mr-2" onclick="handleNPSEdit('${nps.id}')">
+                Edit
+            </button>
+            <button class="text-red-600 hover:text-red-900" onclick="deleteNPS('${nps.id}')">
+                Delete
+            </button>
+        </td>
+    `;
+    tbody.appendChild(row);
 });
 </script>
 {% endblock %}
