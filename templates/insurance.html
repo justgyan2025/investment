@@ -7,17 +7,17 @@
         
         <!-- Insurance Type Tabs -->
         <div class="border-b border-gray-200">
-            <nav class="-mb-px flex space-x-12" aria-label="Tabs">
-                <button onclick="showInsuranceSection('life')" class="tab-button border-indigo-500 text-indigo-600 whitespace-nowrap py-6 px-4 border-b-2 font-medium text-base flex items-center">
-                    <img src="/static/images/life-insurance.png" alt="Life Insurance" class="w-6 h-6 mr-3">
+            <nav class="-mb-px flex space-x-8 md:space-x-12 overflow-x-auto" aria-label="Tabs">
+                <button onclick="showInsuranceSection('life')" class="tab-button border-indigo-500 text-indigo-600 whitespace-nowrap py-4 md:py-6 px-2 md:px-4 border-b-2 font-medium text-sm md:text-base flex items-center">
+                    <img src="/static/images/life-insurance.png" alt="Life Insurance" class="w-5 h-5 md:w-6 md:h-6 mr-2 md:mr-3">
                     Life Insurance
                 </button>
-                <button onclick="showInsuranceSection('health')" class="tab-button border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-6 px-4 border-b-2 font-medium text-base flex items-center">
-                    <img src="/static/images/health-insurance.png" alt="Health Insurance" class="w-6 h-6 mr-3">
+                <button onclick="showInsuranceSection('health')" class="tab-button border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 md:py-6 px-2 md:px-4 border-b-2 font-medium text-sm md:text-base flex items-center">
+                    <img src="/static/images/health-insurance.png" alt="Health Insurance" class="w-5 h-5 md:w-6 md:h-6 mr-2 md:mr-3">
                     Health Insurance
                 </button>
-                <button onclick="showInsuranceSection('motor')" class="tab-button border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-6 px-4 border-b-2 font-medium text-base flex items-center">
-                    <img src="/static/images/car-insurance.jpg" alt="Motor Insurance" class="w-6 h-6 mr-3">
+                <button onclick="showInsuranceSection('motor')" class="tab-button border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 md:py-6 px-2 md:px-4 border-b-2 font-medium text-sm md:text-base flex items-center">
+                    <img src="/static/images/car-insurance.jpg" alt="Motor Insurance" class="w-5 h-5 md:w-6 md:h-6 mr-2 md:mr-3">
                     Motor Insurance
                 </button>
             </nav>
@@ -27,17 +27,28 @@
         <div id="lifeInsurance" class="insurance-section">
             <div class="mt-8">
                 <div class="flex justify-between items-center mb-6">
-                    <h2 class="text-2xl font-semibold text-gray-900">Life Insurance</h2>
-                    <button onclick="showAddModal('life')" class="bg-indigo-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-indigo-700 flex items-center">
-                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
-                        </svg>
-                        Add Life Insurance
-                    </button>
-    </div>
+                    <h2 class="text-xl md:text-2xl font-semibold text-gray-900">Life Insurance</h2>
+                    <div class="flex items-center space-x-4">
+                        <!-- Toggle View Button (Mobile Only) -->
+                        <button onclick="toggleView('life')" class="md:hidden bg-gray-100 text-gray-700 px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-200">
+                            <span id="lifeViewIcon">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"></path>
+                                </svg>
+                            </span>
+                        </button>
+                        <button onclick="showAddModal('life')" class="bg-indigo-600 text-white px-3 md:px-4 py-2 rounded-md text-sm font-medium hover:bg-indigo-700 flex items-center">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                            </svg>
+                            <span class="hidden md:inline">Add Life Insurance</span>
+                            <span class="md:hidden">Add</span>
+                        </button>
+                    </div>
+                </div>
 
                 <!-- Life Insurance Summary Cards -->
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-8">
                     <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-indigo-500">
                                 <div class="flex items-center">
                             <div class="p-3 rounded-full bg-indigo-100">
@@ -81,8 +92,13 @@
                     </div>
                                                 </div>
 
-                <!-- Life Insurance Policies Table -->
-                <div class="bg-white shadow rounded-lg overflow-hidden">
+                <!-- Mobile Card View -->
+                <div id="lifeInsuranceMobileCards" class="md:hidden space-y-4">
+                    <!-- Mobile cards will be populated here by JavaScript -->
+                </div>
+
+                <!-- Desktop Table View -->
+                <div id="lifeInsuranceTable" class="hidden md:block bg-white shadow rounded-lg overflow-hidden">
                     <div class="overflow-x-auto">
                         <table class="min-w-full divide-y divide-gray-200">
                             <thead class="bg-gray-50">
@@ -104,26 +120,37 @@
                                 <!-- Life insurance policies will be populated here -->
                             </tbody>
                         </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <!-- Health Insurance Section -->
         <div id="healthInsurance" class="insurance-section hidden">
             <div class="mt-8">
                 <div class="flex justify-between items-center mb-6">
-                    <h2 class="text-2xl font-semibold text-gray-900">Health Insurance</h2>
-                    <button onclick="showAddModal('health')" class="bg-indigo-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-indigo-700 flex items-center">
-                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
-                        </svg>
-                        Add Health Insurance
-                    </button>
+                    <h2 class="text-xl md:text-2xl font-semibold text-gray-900">Health Insurance</h2>
+                    <div class="flex items-center space-x-4">
+                        <!-- Toggle View Button (Mobile Only) -->
+                        <button onclick="toggleView('health')" class="md:hidden bg-gray-100 text-gray-700 px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-200">
+                            <span id="healthViewIcon">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"></path>
+                                </svg>
+                            </span>
+                        </button>
+                        <button onclick="showAddModal('health')" class="bg-indigo-600 text-white px-3 md:px-4 py-2 rounded-md text-sm font-medium hover:bg-indigo-700 flex items-center">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                            </svg>
+                            <span class="hidden md:inline">Add Health Insurance</span>
+                            <span class="md:hidden">Add</span>
+                        </button>
+                    </div>
                 </div>
 
                 <!-- Health Insurance Summary Cards -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mb-8">
                     <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-indigo-500">
                                 <div class="flex items-center">
                             <div class="p-3 rounded-full bg-indigo-100">
@@ -153,8 +180,13 @@
             </div>
         </div>
 
-                <!-- Health Insurance Policies Table -->
-                <div class="bg-white shadow rounded-lg overflow-hidden">
+                <!-- Mobile Card View -->
+                <div id="healthInsuranceMobileCards" class="md:hidden space-y-4">
+                    <!-- Mobile cards will be populated here by JavaScript -->
+                </div>
+
+                <!-- Desktop Table View -->
+                <div id="healthInsuranceTable" class="hidden md:block bg-white shadow rounded-lg overflow-hidden">
                     <div class="overflow-x-auto">
                                         <table class="min-w-full divide-y divide-gray-200">
                                             <thead class="bg-gray-50">
@@ -183,17 +215,28 @@
         <div id="motorInsurance" class="insurance-section hidden">
             <div class="mt-8">
                 <div class="flex justify-between items-center mb-6">
-                    <h2 class="text-2xl font-semibold text-gray-900">Motor Insurance</h2>
-                    <button onclick="showAddModal('motor')" class="bg-indigo-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-indigo-700 flex items-center">
-                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
-                        </svg>
-                        Add Motor Insurance
-                    </button>
+                    <h2 class="text-xl md:text-2xl font-semibold text-gray-900">Motor Insurance</h2>
+                    <div class="flex items-center space-x-4">
+                        <!-- Toggle View Button (Mobile Only) -->
+                        <button onclick="toggleView('motor')" class="md:hidden bg-gray-100 text-gray-700 px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-200">
+                            <span id="motorViewIcon">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"></path>
+                                </svg>
+                            </span>
+                        </button>
+                        <button onclick="showAddModal('motor')" class="bg-indigo-600 text-white px-3 md:px-4 py-2 rounded-md text-sm font-medium hover:bg-indigo-700 flex items-center">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                            </svg>
+                            <span class="hidden md:inline">Add Motor Insurance</span>
+                            <span class="md:hidden">Add</span>
+                        </button>
+                    </div>
                 </div>
 
                 <!-- Motor Insurance Summary Cards -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mb-8">
                     <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-indigo-500">
                         <div class="flex items-center">
                             <div class="p-3 rounded-full bg-indigo-100">
@@ -223,8 +266,13 @@
                     </div>
                 </div>
 
-                <!-- Motor Insurance Policies Table -->
-                <div class="bg-white shadow rounded-lg overflow-hidden">
+                <!-- Mobile Card View -->
+                <div id="motorInsuranceMobileCards" class="md:hidden space-y-4">
+                    <!-- Mobile cards will be populated here by JavaScript -->
+                </div>
+
+                <!-- Desktop Table View -->
+                <div id="motorInsuranceTable" class="hidden md:block bg-white shadow rounded-lg overflow-hidden">
                     <div class="overflow-x-auto">
                         <table class="min-w-full divide-y divide-gray-200">
                             <thead class="bg-gray-50">
@@ -457,6 +505,61 @@
         </div>
     </div>
 </div>
+
+<style>
+    /* Mobile Card Styles */
+    .insurance-card {
+        @apply bg-white rounded-lg shadow-md p-4 border border-gray-200;
+    }
+    
+    .insurance-card-header {
+        @apply flex justify-between items-center mb-3;
+    }
+    
+    .insurance-card-title {
+        @apply text-lg font-semibold text-gray-900;
+    }
+    
+    .insurance-card-body {
+        @apply space-y-2;
+    }
+    
+    .insurance-card-field {
+        @apply flex justify-between items-center text-sm;
+    }
+    
+    .insurance-card-label {
+        @apply text-gray-600;
+    }
+    
+    .insurance-card-value {
+        @apply font-medium text-gray-900;
+    }
+    
+    .insurance-card-actions {
+        @apply mt-4 flex justify-end space-x-2;
+    }
+    
+    /* Toggle Animation */
+    .view-transition {
+        @apply transition-all duration-300 ease-in-out;
+    }
+    
+    /* Mobile Optimizations */
+    @media (max-width: 768px) {
+        .overflow-x-auto {
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        .tab-button {
+            @apply text-sm py-3 px-3;
+        }
+        
+        .insurance-card {
+            @apply text-sm;
+        }
+    }
+</style>
 
 <script>
 // Initialize Firebase
@@ -946,5 +1049,105 @@ firebase.auth().onAuthStateChanged((user) => {
         });
     }
 });
+
+// View state for each insurance type
+const viewStates = {
+    life: 'card',
+    health: 'card',
+    motor: 'card'
+};
+
+// Toggle between card and table view on mobile
+function toggleView(type) {
+    const cardsDiv = document.getElementById(`${type}InsuranceMobileCards`);
+    const tableDiv = document.getElementById(`${type}InsuranceTable`);
+    const viewIcon = document.getElementById(`${type}ViewIcon`);
+    
+    viewStates[type] = viewStates[type] === 'card' ? 'table' : 'card';
+    
+    if (viewStates[type] === 'card') {
+        cardsDiv.classList.remove('hidden');
+        tableDiv.classList.add('hidden', 'md:block');
+        viewIcon.innerHTML = `
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 1h16a2 2 0 012 2v16a2 2 0 01-2 2H4a2 2 0 01-2-2V3a2 2 0 012-2z"></path>
+            </svg>
+        `;
+    } else {
+        cardsDiv.classList.add('hidden');
+        tableDiv.classList.remove('hidden');
+        viewIcon.innerHTML = `
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 1h16a2 2 0 012 2v16a2 2 0 01-2 2H4a2 2 0 01-2-2V3a2 2 0 012-2z"></path>
+            </svg>
+        `;
+    }
+}
+
+// Function to create mobile card HTML
+function createInsuranceCard(policy, type) {
+    return `
+        <div class="insurance-card view-transition">
+            <div class="insurance-card-header">
+                <h3 class="insurance-card-title">${policy.policyHolder}</h3>
+                <span class="text-sm text-gray-500">${policy.companyName}</span>
+            </div>
+            <div class="insurance-card-body">
+                <div class="insurance-card-field">
+                    <span class="insurance-card-label">Type:</span>
+                    <span class="insurance-card-value">${type === 'motor' ? policy.vehicleType : policy.type}</span>
+                </div>
+                <div class="insurance-card-field">
+                    <span class="insurance-card-label">${type === 'life' ? 'Sum Assured' : 'Coverage'}:</span>
+                    <span class="insurance-card-value">₹${formatIndianNumber(policy.coverage || policy.sumAssured)}</span>
+                </div>
+                <div class="insurance-card-field">
+                    <span class="insurance-card-label">Premium:</span>
+                    <span class="insurance-card-value">₹${formatIndianNumber(policy.premium)}</span>
+                </div>
+                <div class="insurance-card-field">
+                    <span class="insurance-card-label">Renewal Date:</span>
+                    <span class="insurance-card-value">${formatDate(policy.renewalDate)}</span>
+                </div>
+            </div>
+            <div class="insurance-card-actions">
+                <button onclick="editInsurance('${type}', '${policy.id}')" class="text-indigo-600 hover:text-indigo-800">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+                    </svg>
+                </button>
+                <button onclick="deleteInsurance('${type}', '${policy.id}')" class="text-red-600 hover:text-red-800">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    `;
+}
+
+// Function to update the mobile cards view
+function updateMobileCards(type, policies) {
+    const cardsContainer = document.getElementById(`${type}InsuranceMobileCards`);
+    if (!cardsContainer) return;
+
+    cardsContainer.innerHTML = policies.map(policy => createInsuranceCard(policy, type)).join('');
+}
+
+// Modify the existing renderPolicies functions to include mobile card updates
+function renderLifeInsurancePolicies(policies) {
+    // Existing table rendering code...
+    updateMobileCards('life', policies);
+}
+
+function renderHealthInsurancePolicies(policies) {
+    // Existing table rendering code...
+    updateMobileCards('health', policies);
+}
+
+function renderMotorInsurancePolicies(policies) {
+    // Existing table rendering code...
+    updateMobileCards('motor', policies);
+}
 </script>
 {% endblock %} 

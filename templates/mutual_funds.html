@@ -7,7 +7,7 @@
         <div class="flex justify-between items-center">
             <div class="flex items-center space-x-3">
                 <img src="/static/images/mutualfund.jpg" alt="Mutual Funds" class="w-10 h-10 rounded-full object-cover">
-                <h1 class="text-2xl font-semibold text-gray-900">Mutual Funds</h1>
+            <h1 class="text-2xl font-semibold text-gray-900">Mutual Funds</h1>
             </div>
             <div class="flex space-x-3">
                 <button id="refreshMFBtn" class="bg-green-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-green-700 transition duration-300 ease-in-out flex items-center">
@@ -16,9 +16,9 @@
                     </svg>
                     Refresh NAV
                 </button>
-                <button id="addMFBtn" class="bg-indigo-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-indigo-700 transition duration-300 ease-in-out">
-                    Add Mutual Fund
-                </button>
+            <button id="addMFBtn" class="bg-indigo-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-indigo-700 transition duration-300 ease-in-out">
+                Add Mutual Fund
+            </button>
             </div>
         </div>
     </div>
@@ -31,8 +31,8 @@
                     <div class="flex items-center justify-between mb-8">
                         <div>
                             <h3 class="text-2xl font-bold text-gray-900 tracking-tight">
-                                Portfolio Summary
-                            </h3>
+                        Portfolio Summary
+                    </h3>
                             <p class="mt-1 text-sm text-gray-500">
                                 Overview of your mutual fund investments
                             </p>
@@ -40,10 +40,10 @@
                         <div class="flex items-center space-x-2 text-sm text-gray-500">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                            </svg>
+                                        </svg>
                             <span>Last updated: <span id="lastUpdated" class="font-medium">Just now</span></span>
-                        </div>
-                    </div>
+                                    </div>
+                                    </div>
                     <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
                         <!-- Total Investment Card -->
                         <div class="group relative bg-gradient-to-br from-indigo-50 to-indigo-100 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 border border-indigo-100">
@@ -55,15 +55,15 @@
                                         <p class="mt-2 text-2xl font-bold text-gray-900">
                                             ₹<span id="totalMFInvestment" class="animate-number">0</span>
                                         </p>
-                                    </div>
                                 </div>
+                            </div>
                                 <div class="mt-4">
                                     <div class="flex items-center text-sm text-gray-500">
                                         <span class="font-medium">Investment Overview</span>
+                        </div>
+                                    </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
 
                         <!-- Current Value Card -->
                         <div class="group relative bg-gradient-to-br from-green-50 to-green-100 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 border border-green-100">
@@ -75,15 +75,15 @@
                                         <p class="mt-2 text-2xl font-bold text-gray-900">
                                             ₹<span id="currentMFValue" class="animate-number">0</span>
                                         </p>
-                                    </div>
-                                </div>
+                            </div>
+                        </div>
                                 <div class="mt-4">
                                     <div class="flex items-center text-sm text-gray-500">
                                         <span class="font-medium">Portfolio Value</span>
                                     </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
                         <!-- Total Profit/Loss Card -->
                         <div class="group relative bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 border border-blue-100">
@@ -96,8 +96,8 @@
                                             ₹<span id="totalMFReturns" class="animate-number">0</span>
                                         </p>
                                         <p class="mt-1 text-sm font-medium" id="totalMFReturnsPercentage">(0%)</p>
+                        </div>
                                     </div>
-                                </div>
                                 <div class="mt-4">
                                     <div class="flex items-center text-sm text-gray-500">
                                         <span class="font-medium">Performance</span>
@@ -111,46 +111,44 @@
         </div>
 
         <div class="mt-8 flex flex-col">
-            <div class="table-container">
-                <div class="view-toggle-container">
-                    <button class="view-toggle active" onclick="toggleTableView('table')">
-                        <svg class="table-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                        </svg>
-                        <span>Table View</span>
-                    </button>
-                    <button class="view-toggle" onclick="toggleTableView('card')">
-                        <svg class="table-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
-                        </svg>
-                        <span>Card View</span>
-                    </button>
-                </div>
-                
-                <!-- Desktop Table View -->
-                <div class="table-wrapper active">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Scheme Name</th>
-                                <th>Units</th>
-                                <th>Current NAV</th>
-                                <th>Investment</th>
-                                <th>Total Value</th>
-                                <th>Profit/Loss</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody id="mutualFundsTableBody">
-                            <!-- Loading skeleton will be shown here -->
-                        </tbody>
-                    </table>
-                </div>
+            <div class="view-toggle-container">
+                <button class="view-toggle active" onclick="toggleTableView('table')">
+                    <svg class="table-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                    </svg>
+                    <span>Table View</span>
+                </button>
+                <button class="view-toggle" onclick="toggleTableView('card')">
+                    <svg class="table-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+                    </svg>
+                    <span>Card View</span>
+                </button>
+            </div>
+            
+            <!-- Desktop Table View -->
+            <div class="table-wrapper active">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Scheme Name</th>
+                            <th>Units</th>
+                            <th>Current NAV</th>
+                            <th>Investment</th>
+                            <th>Total Value</th>
+                            <th>Profit/Loss</th>
+                            <th>Actions</th>
+                                </tr>
+                            </thead>
+                    <tbody id="mutualFundsTableBody">
+                        <!-- Loading skeleton will be shown here -->
+                            </tbody>
+                        </table>
+                    </div>
 
-                <!-- Mobile Card View -->
-                <div id="mobileTableView" class="table-mobile-view">
-                    <!-- Mobile cards will be inserted here -->
-                </div>
+            <!-- Mobile Card View -->
+            <div id="mobileTableView" class="table-mobile-view">
+                <!-- Mobile cards will be inserted here -->
             </div>
         </div>
     </div>
@@ -519,6 +517,147 @@
     .table-mobile-actions button:last-child:hover {
         background: #FECACA;
     }
+
+    /* Add these new styles at the beginning of the style section */
+    @media (min-width: 768px) {
+        .view-toggle-container {
+            display: none;
+        }
+        .table-wrapper {
+            display: block !important;
+            opacity: 1 !important;
+        }
+        .table-mobile-view {
+            display: none !important;
+            opacity: 0 !important;
+        }
+    }
+
+    @media (max-width: 767px) {
+        .view-toggle-container {
+            display: none !important;
+        }
+        .table-wrapper {
+            display: none !important;
+            opacity: 0 !important;
+        }
+        .table-mobile-view {
+            display: block !important;
+            opacity: 1 !important;
+        }
+
+        /* Mobile button styles */
+        #refreshMFBtn, #addMFBtn {
+            padding: 0.375rem 0.75rem;
+            font-size: 0.75rem;
+            line-height: 1;
+        }
+
+        #refreshMFBtn svg {
+            width: 0.875rem;
+            height: 0.875rem;
+            margin-right: 0.375rem;
+        }
+
+        /* Adjust button container spacing */
+        .flex.space-x-3 {
+            gap: 0.5rem;
+        }
+
+        /* Mobile text size adjustments */
+        h1 {
+            font-size: 1.5rem !important;
+        }
+
+        h3 {
+            font-size: 1.25rem !important;
+        }
+
+        .text-2xl {
+            font-size: 1.25rem !important;
+        }
+
+        .text-lg {
+            font-size: 1rem !important;
+        }
+
+        .text-base {
+            font-size: 0.875rem !important;
+        }
+
+        .text-sm {
+            font-size: 0.75rem !important;
+        }
+
+        .text-xs {
+            font-size: 0.625rem !important;
+        }
+
+        /* Adjust spacing for mobile */
+        .px-6 {
+            padding-left: 1rem !important;
+            padding-right: 1rem !important;
+        }
+
+        .py-4 {
+            padding-top: 0.75rem !important;
+            padding-bottom: 0.75rem !important;
+        }
+
+        .mt-8 {
+            margin-top: 1.5rem !important;
+        }
+
+        .mb-8 {
+            margin-bottom: 1.5rem !important;
+        }
+
+        /* Adjust card padding */
+        .p-6 {
+            padding: 1rem !important;
+        }
+
+        /* Adjust table cell padding */
+        .table td, .table th {
+            padding: 0.5rem !important;
+        }
+
+        /* Adjust summary cards */
+        .grid.grid-cols-1.gap-6 {
+            gap: 0.75rem !important;
+        }
+
+        /* Adjust modal content */
+        .modal-content {
+            padding: 1rem !important;
+        }
+
+        /* Adjust form labels and inputs */
+        label {
+            font-size: 0.75rem !important;
+        }
+
+        input {
+            font-size: 0.875rem !important;
+        }
+
+        /* Adjust mobile card styles */
+        .table-mobile-card {
+            padding: 1rem !important;
+        }
+
+        .table-mobile-card-header h3 {
+            font-size: 0.875rem !important;
+        }
+
+        .table-mobile-label {
+            font-size: 0.625rem !important;
+        }
+
+        .table-mobile-value {
+            font-size: 0.75rem !important;
+        }
+    }
 </style>
 
 <script>
@@ -692,28 +831,36 @@ editMFForm.addEventListener('submit', async (e) => {
 
 // Updated toggle function
 function toggleTableView(view) {
-    const tableWrapper = document.querySelector('.table-wrapper');
-    const mobileView = document.getElementById('mobileTableView');
-    const toggleButtons = document.querySelectorAll('.view-toggle');
-    
-    // Update active state of toggle buttons
-    toggleButtons.forEach(button => {
-        if (button.querySelector('span').textContent.toLowerCase().includes(view)) {
-            button.classList.add('active');
-        } else {
-            button.classList.remove('active');
-        }
-    });
+    // This function is no longer needed as we're not showing toggle buttons on mobile
+    return;
+}
 
-    // Show/hide views with animation
-    if (view === 'table') {
+// Update the window resize handler
+window.addEventListener('resize', () => {
+    if (window.innerWidth >= 768) {
+        // On desktop, force table view
+        const tableWrapper = document.querySelector('.table-wrapper');
+        const mobileView = document.getElementById('mobileTableView');
+        
         tableWrapper.classList.add('active');
         mobileView.classList.remove('active');
-    } else {
-        tableWrapper.classList.remove('active');
-        mobileView.classList.add('active');
     }
-}
+});
+
+// Update the initial load to respect screen size
+document.addEventListener('DOMContentLoaded', () => {
+    createLoadingSkeleton();
+    updateMFHoldings();
+    
+    // Set initial view based on screen size
+    if (window.innerWidth >= 768) {
+        const tableWrapper = document.querySelector('.table-wrapper');
+        const mobileView = document.getElementById('mobileTableView');
+        
+        tableWrapper.classList.add('active');
+        mobileView.classList.remove('active');
+    }
+});
 
 // Update the updateMFHoldings function to include mobile view
 async function updateMFHoldings() {
@@ -800,8 +947,8 @@ async function updateMFHoldings() {
                             Edit
                         </button>
                         <button class="text-red-600 hover:text-red-900 transition-colors duration-200" onclick="deleteMF('${mf.schemeCode}')">
-                            Delete
-                        </button>
+                        Delete
+                    </button>
                     </div>
                 </td>
             `;
@@ -933,12 +1080,6 @@ async function deleteMF(schemeCode) {
         alert('Error deleting mutual fund. Please try again.');
     }
 }
-
-// Update the initial load to show loading skeleton
-document.addEventListener('DOMContentLoaded', () => {
-    createLoadingSkeleton(); // Show loading skeleton immediately
-    updateMFHoldings(); // Then fetch and update the data
-});
 
 // Listen for real-time updates
 firebase.auth().onAuthStateChanged((user) => {

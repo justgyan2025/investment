@@ -1,6 +1,9 @@
 {% extends "base.html" %}
 
 {% block content %}
+<!-- Add Font Awesome CDN -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
 <div class="py-6">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
         <div class="flex justify-between items-center">
@@ -12,7 +15,7 @@
             <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
                 <svg class="w-8 h-8 mr-3 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
-                </svg>
+                                        </svg>
                         Portfolio Summary
             </h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -21,40 +24,46 @@
                     <div class="flex items-center justify-between mb-4">
                         <div class="p-3 rounded-full bg-indigo-100">
                             <img src="/static/images/nps.png" alt="NPS" class="w-6 h-6">
-                        </div>
+                    </div>
                         <span class="text-sm font-medium text-indigo-600">Total Investment</span>
                     </div>
                     <div class="flex items-baseline">
                         <span class="text-2xl font-bold text-indigo-900">₹<span id="totalNPSInvestment">0</span></span>
-                        <span class="ml-2 text-sm text-indigo-600">total invested</span>
-                    </div>
+                        
                 </div>
+            </div>
 
                 <!-- Current Value Card -->
                 <div class="bg-gradient-to-br from-green-50 to-green-100 rounded-xl p-6 transform transition-all duration-300 hover:scale-105 hover:shadow-lg">
                     <div class="flex items-center justify-between mb-4">
                         <div class="p-3 rounded-full bg-green-100">
                             <img src="/static/images/nps.png" alt="NPS" class="w-6 h-6">
-                        </div>
+        </div>
                         <span class="text-sm font-medium text-green-600">Current Value</span>
-                    </div>
+    </div>
                     <div class="flex items-baseline">
                         <span class="text-2xl font-bold text-green-900">₹<span id="currentNPSValue">0</span></span>
-                        <span class="ml-2 text-sm text-green-600">market value</span>
-                    </div>
-                </div>
+                      
+                                    </div>
+                                                </div>
 
                 <!-- Returns Card -->
                 <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-6 transform transition-all duration-300 hover:scale-105 hover:shadow-lg">
                     <div class="flex items-center justify-between mb-4">
                         <div class="p-3 rounded-full bg-blue-100">
                             <img src="/static/images/nps.png" alt="NPS" class="w-6 h-6">
-                        </div>
+                                    </div>
                         <span class="text-sm font-medium text-blue-600">Total Returns</span>
-                    </div>
-                    <div class="flex items-baseline">
-                        <span class="text-2xl font-bold text-blue-900">₹<span id="totalNPSReturns">0</span></span>
-                        <span class="ml-2 text-sm text-blue-600">absolute returns</span>
+                                </div>
+                    <div class="flex flex-col">
+                        <div class="flex items-baseline">
+                            <span class="text-2xl font-bold text-blue-900">₹<span id="totalNPSReturns">0</span></span>
+                         
+                                    </div>
+                        <div class="mt-1">
+                            <span class="text-lg font-semibold text-blue-900"><span id="totalNPSReturnsPercentage">0</span>%</span>
+                            
+                                    </div>
                     </div>
                 </div>
             </div>
@@ -92,25 +101,32 @@
                     
                     <!-- Tier 1 Content -->
                     <div id="tier1Content" class="tab-content mt-6">
-                        <div class="bg-indigo-50 p-4 mb-4 rounded-lg">
-                            <h4 class="font-medium text-indigo-800">Tier 1 Summary</h4>
-                            <div class="grid grid-cols-3 gap-4 mt-2">
-                                <div>
-                                    <p class="text-xs text-gray-500">Total Investment</p>
-                                    <div class="flex items-center">
-                                        <p class="font-medium">₹<span id="tier1TotalInvestment">0</span></p>
-                                        <button id="editTier1InvestmentBtn" class="ml-2 p-1 bg-indigo-500 text-white rounded hover:bg-indigo-600 focus:outline-none px-2 text-xs">
-                                            Update
+                        <!-- Tier 1 Summary Card -->
+                        <div class="tier-summary-card tier1-summary-card bg-white rounded-lg shadow-lg overflow-hidden">
+                            <div class="tier-summary-header bg-gradient-to-r from-indigo-500 to-indigo-600 p-4">
+                                <div class="flex justify-between items-center">
+                                    <h4 class="text-lg font-semibold text-white">Tier 1 Summary</h4>
+                                </div>
+                            </div>
+                            <div class="tier-summary-content p-4">
+                                <div class="tier-summary-grid grid grid-cols-1 md:grid-cols-3 gap-4">
+                                    <div class="tier-summary-item bg-indigo-50 rounded-lg p-4 transform transition-all duration-300 hover:scale-105">
+                                        <span class="tier-summary-label text-sm font-medium text-indigo-600">Total Investment</span>
+                                        <div class="tier-summary-edit flex items-center justify-between mt-2">
+                                            <span class="tier-summary-value text-xl font-bold text-indigo-900">₹<span id="tier1TotalInvestment">0</span></span>
+                                            <button id="editTier1InvestmentBtn" class="p-2 text-indigo-600 hover:text-indigo-800 transition-colors rounded-full hover:bg-indigo-50">
+                                                <i class="fas fa-edit"></i>
                                         </button>
                                     </div>
                                 </div>
-                                <div>
-                                    <p class="text-xs text-gray-500">Current Value</p>
-                                    <p class="font-medium">₹<span id="tier1CurrentValue">0</span></p>
+                                    <div class="tier-summary-item bg-indigo-50 rounded-lg p-4 transform transition-all duration-300 hover:scale-105">
+                                        <span class="tier-summary-label text-sm font-medium text-indigo-600">Current Value</span>
+                                        <span class="tier-summary-value text-xl font-bold text-indigo-900 block mt-2">₹<span id="tier1CurrentValue">0</span></span>
                                 </div>
-                                <div>
-                                    <p class="text-xs text-gray-500">Returns</p>
-                                    <p class="font-medium">₹<span id="tier1Returns">0</span></p>
+                                    <div class="tier-summary-item bg-indigo-50 rounded-lg p-4 transform transition-all duration-300 hover:scale-105">
+                                        <span class="tier-summary-label text-sm font-medium text-indigo-600">Returns</span>
+                                        <span class="tier-summary-value text-xl font-bold text-indigo-900 block mt-2">₹<span id="tier1Returns">0</span></span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -152,30 +168,18 @@
                         </div>
                         
                         <!-- Tier 1 Holdings Table -->
-                        <div class="mt-6">
-                            <h3 class="text-base font-medium text-gray-700 mb-2">Your Tier 1 Holdings</h3>
-                            <div class="flex flex-col">
+                        <div class="table-view hidden md:block">
                                 <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                                     <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
                                         <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
                                             <table class="min-w-full divide-y divide-gray-200">
                                                 <thead class="bg-gray-50">
                                                     <tr>
-                                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                            Scheme Name
-                                                        </th>
-                                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                            Current NAV
-                                                        </th>
-                                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                            Units
-                                                        </th>
-                                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                            Current Value
-                                                        </th>
-                                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                            Actions
-                                                        </th>
+                                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Scheme Name</th>
+                                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Current NAV</th>
+                                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Units</th>
+                                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Current Value</th>
+                                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody id="tier1Holdings" class="bg-white divide-y divide-gray-200">
@@ -186,30 +190,41 @@
                                     </div>
                                 </div>
                             </div>
+
+                        <!-- Mobile Card View -->
+                        <div id="tier1MobileHoldings" class="mobile-card-view block md:hidden">
+                            <!-- Tier 1 mobile cards will be populated here -->
                         </div>
                     </div>
                     
                     <!-- Tier 2 Content -->
                     <div id="tier2Content" class="tab-content mt-6 hidden">
-                        <div class="bg-green-50 p-4 mb-4 rounded-lg">
-                            <h4 class="font-medium text-green-800">Tier 2 Summary</h4>
-                            <div class="grid grid-cols-3 gap-4 mt-2">
-                                <div>
-                                    <p class="text-xs text-gray-500">Total Investment</p>
-                                    <div class="flex items-center">
-                                        <p class="font-medium">₹<span id="tier2TotalInvestment">0</span></p>
-                                        <button id="editTier2InvestmentBtn" class="ml-2 p-1 bg-green-500 text-white rounded hover:bg-green-600 focus:outline-none px-2 text-xs">
-                                            Update
+                        <!-- Tier 2 Summary Card -->
+                        <div class="tier-summary-card tier2-summary-card bg-white rounded-lg shadow-lg overflow-hidden">
+                            <div class="tier-summary-header bg-gradient-to-r from-green-500 to-green-600 p-4">
+                                <div class="flex justify-between items-center">
+                                    <h4 class="text-lg font-semibold text-white">Tier 2 Summary</h4>
+                                </div>
+                            </div>
+                            <div class="tier-summary-content p-4">
+                                <div class="tier-summary-grid grid grid-cols-1 md:grid-cols-3 gap-4">
+                                    <div class="tier-summary-item bg-green-50 rounded-lg p-4 transform transition-all duration-300 hover:scale-105">
+                                        <span class="tier-summary-label text-sm font-medium text-green-600">Total Investment</span>
+                                        <div class="tier-summary-edit flex items-center justify-between mt-2">
+                                            <span class="tier-summary-value text-xl font-bold text-green-900">₹<span id="tier2TotalInvestment">0</span></span>
+                                            <button id="editTier2InvestmentBtn" class="p-2 text-green-600 hover:text-green-800 transition-colors rounded-full hover:bg-green-50">
+                                                <i class="fas fa-edit"></i>
                                         </button>
                                     </div>
                                 </div>
-                                <div>
-                                    <p class="text-xs text-gray-500">Current Value</p>
-                                    <p class="font-medium">₹<span id="tier2CurrentValue">0</span></p>
+                                    <div class="tier-summary-item bg-green-50 rounded-lg p-4 transform transition-all duration-300 hover:scale-105">
+                                        <span class="tier-summary-label text-sm font-medium text-green-600">Current Value</span>
+                                        <span class="tier-summary-value text-xl font-bold text-green-900 block mt-2">₹<span id="tier2CurrentValue">0</span></span>
                                 </div>
-                                <div>
-                                    <p class="text-xs text-gray-500">Returns</p>
-                                    <p class="font-medium">₹<span id="tier2Returns">0</span></p>
+                                    <div class="tier-summary-item bg-green-50 rounded-lg p-4 transform transition-all duration-300 hover:scale-105">
+                                        <span class="tier-summary-label text-sm font-medium text-green-600">Returns</span>
+                                        <span class="tier-summary-value text-xl font-bold text-green-900 block mt-2">₹<span id="tier2Returns">0</span></span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -251,30 +266,18 @@
                         </div>
                         
                         <!-- Tier 2 Holdings Table -->
-                        <div class="mt-6">
-                            <h3 class="text-base font-medium text-gray-700 mb-2">Your Tier 2 Holdings</h3>
-                            <div class="flex flex-col">
+                        <div class="table-view hidden md:block">
                                 <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                                     <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
                                         <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
                                             <table class="min-w-full divide-y divide-gray-200">
                                                 <thead class="bg-gray-50">
                                                     <tr>
-                                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                            Scheme Name
-                                                        </th>
-                                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                            Current NAV
-                                                        </th>
-                                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                            Units
-                                                        </th>
-                                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                            Current Value
-                                                        </th>
-                                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                            Actions
-                                                        </th>
+                                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Scheme Name</th>
+                                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Current NAV</th>
+                                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Units</th>
+                                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Current Value</th>
+                                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody id="tier2Holdings" class="bg-white divide-y divide-gray-200">
@@ -285,6 +288,10 @@
                                     </div>
                                 </div>
                             </div>
+
+                        <!-- Mobile Card View -->
+                        <div id="tier2MobileHoldings" class="mobile-card-view block md:hidden">
+                            <!-- Tier 2 mobile cards will be populated here -->
                         </div>
                     </div>
                 </div>
@@ -339,7 +346,35 @@
     </div>
 </div>
 
+<style>
+    /* Remove view toggle styles since we're not using them anymore */
+    .view-toggle,
+    .view-toggle-btn,
+    .view-toggle-btn:hover,
+    .view-toggle-btn.active {
+        display: none;
+    }
 
+    /* Update mobile card view styles for better mobile experience */
+    .mobile-card-view {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        padding: 1rem;
+    }
+
+    @media (min-width: 768px) {
+        .mobile-card-view {
+            display: none;
+        }
+    }
+
+    @media (max-width: 767px) {
+        .table-view {
+            display: none;
+        }
+    }
+</style>
 
 <script>
 // Initialize Firebase
@@ -422,33 +457,36 @@ async function editTierTotalInvestment(tier, currentAmount) {
     try {
         console.log(`Editing tier ${tier} with current amount:`, currentAmount);
         
-        // Ensure we have a number for currentAmount, not a DOM element
-        if (currentAmount && typeof currentAmount === 'object') {
-            console.log("currentAmount is a DOM element, extracting numeric value");
-            currentAmount = 0;
-        }
+        // Ensure we have a number for currentAmount
+        let numericAmount = 0;
         
+        if (typeof currentAmount === 'number') {
+            numericAmount = currentAmount;
+        } else if (typeof currentAmount === 'string') {
+            numericAmount = parseFloat(currentAmount) || 0;
+        } else if (currentAmount && typeof currentAmount === 'object') {
+            // If it's a DOM element, try to get its text content
+            const textContent = currentAmount.textContent || '0';
+            numericAmount = parseFloat(textContent.replace(/[^0-9.-]+/g, '')) || 0;
+        } else {
         // Use the global tier investment amount if currentAmount is not a valid number
-        if (currentAmount === undefined || isNaN(parseFloat(currentAmount))) {
             if (tier === 'tier1' || tier === 1) {
-                currentAmount = window.tier1TotalInvestment || 0;
-                console.log("Using window.tier1TotalInvestment:", currentAmount);
+                numericAmount = parseFloat(window.tier1TotalInvestment) || 0;
+                console.log("Using window.tier1TotalInvestment:", numericAmount);
             } else if (tier === 'tier2' || tier === 2) {
-                currentAmount = window.tier2TotalInvestment || 0;
-                console.log("Using window.tier2TotalInvestment:", currentAmount);
+                numericAmount = parseFloat(window.tier2TotalInvestment) || 0;
+                console.log("Using window.tier2TotalInvestment:", numericAmount);
             } else {
                 console.error("Invalid tier parameter:", tier);
                 alert("Error: Invalid tier parameter");
                 return;
             }
-        } else {
-            currentAmount = parseFloat(currentAmount);
         }
         
         const tierLabel = (tier === 'tier1' || tier === 1) ? 'Tier 1' : 'Tier 2';
         
         // Prompt for new investment amount
-        const newAmountStr = prompt(`Edit total ${tierLabel} investment amount:`, currentAmount.toFixed(2));
+        const newAmountStr = prompt(`Edit total ${tierLabel} investment amount:`, numericAmount.toFixed(2));
         
         // Check if user cancelled
         if (newAmountStr === null) {
@@ -476,8 +514,8 @@ async function editTierTotalInvestment(tier, currentAmount) {
         });
         
         // Calculate the change in total investment
-        const difference = newAmount - currentAmount;
-        console.log(`Investment change: ${difference} (${currentAmount} → ${newAmount})`);
+        const difference = newAmount - numericAmount;
+        console.log(`Investment change: ${difference} (${numericAmount} → ${newAmount})`);
         
         // Update the user's total investment
         if (difference !== 0) {
@@ -631,7 +669,7 @@ tier2FetchBtn.addEventListener('click', () => {
 // Function to update NPS holdings from Firestore
 async function updateNPSHoldings() {
     try {
-        const userId = firebase.auth().currentUser.uid;
+        const userId = firebase.auth().currentUser?.uid;
         if (!userId) {
             console.error("No authenticated user found");
             return;
@@ -640,6 +678,8 @@ async function updateNPSHoldings() {
         // Clear tables first
         document.getElementById('tier1Holdings').innerHTML = '';
         document.getElementById('tier2Holdings').innerHTML = '';
+        document.getElementById('tier1MobileHoldings').innerHTML = '';
+        document.getElementById('tier2MobileHoldings').innerHTML = '';
         
         // Fetch holdings and metadata
         const npsRef = db.collection('users').doc(userId).collection('nps');
@@ -653,12 +693,35 @@ async function updateNPSHoldings() {
         ]);
         
         if (snapshot.empty) {
-            document.getElementById('tier1Holdings').innerHTML = `
-                <tr><td colspan="5" class="px-6 py-4 text-center text-gray-500">No Tier 1 investments found.</td></tr>
+            const emptyMessage = `
+                <tr><td colspan="5" class="px-6 py-4 text-center text-gray-500">No investments found.</td></tr>
             `;
-            document.getElementById('tier2Holdings').innerHTML = `
-                <tr><td colspan="5" class="px-6 py-4 text-center text-gray-500">No Tier 2 investments found.</td></tr>
+            document.getElementById('tier1Holdings').innerHTML = emptyMessage;
+            document.getElementById('tier2Holdings').innerHTML = emptyMessage;
+            document.getElementById('tier1MobileHoldings').innerHTML = `
+                <div class="text-center text-gray-500 py-8">
+                    <p class="text-lg font-medium">No investments found</p>
+                    <p class="text-sm text-gray-400">Add your first investment to get started</p>
+                </div>
             `;
+            document.getElementById('tier2MobileHoldings').innerHTML = `
+                <div class="text-center text-gray-500 py-8">
+                    <p class="text-lg font-medium">No investments found</p>
+                    <p class="text-sm text-gray-400">Add your first investment to get started</p>
+                </div>
+            `;
+            
+            // Reset all summary values to 0
+            document.getElementById('tier1TotalInvestment').textContent = '0';
+            document.getElementById('tier1CurrentValue').textContent = '0';
+            document.getElementById('tier1Returns').textContent = '0';
+            document.getElementById('tier2TotalInvestment').textContent = '0';
+            document.getElementById('tier2CurrentValue').textContent = '0';
+            document.getElementById('tier2Returns').textContent = '0';
+            document.getElementById('totalNPSInvestment').textContent = '0';
+            document.getElementById('currentNPSValue').textContent = '0';
+            document.getElementById('totalNPSReturns').textContent = '0';
+            
             return;
         }
         
@@ -668,143 +731,271 @@ async function updateNPSHoldings() {
         let tier1TotalCurrentValue = 0;
         let tier2TotalCurrentValue = 0;
         
-        // Group holdings by scheme code to check for multiple entries
+        // Initialize Maps for holdings
         const tier1Holdings = new Map();
         const tier2Holdings = new Map();
         
-        snapshot.forEach(doc => {
-            const data = doc.data();
+        // Process each document
+            snapshot.forEach(doc => {
+                const data = doc.data();
+            if (!data || !data.scheme_code || !data.tier) {
+                console.warn(`Invalid document data in ${doc.id}`);
+                return;
+            }
+                
+                const schemeCode = data.scheme_code;
             const tier = data.tier;
-            const schemeCode = data.scheme_code;
             const units = parseFloat(data.units || 0);
             const currentNav = parseFloat(data.current_nav || 0);
+            const investment = parseFloat(data.investment || 0);
+                
+            if (isNaN(units) || isNaN(currentNav) || isNaN(investment)) {
+                console.warn(`Invalid numeric values in document ${doc.id}`);
+                    return;
+                }
+                
             const currentValue = units * currentNav;
-            
-            // Add to appropriate tier map
-            if (tier === 1 || tier === 'tier1') {
-                if (!tier1Holdings.has(schemeCode)) {
-                    tier1Holdings.set(schemeCode, []);
-                }
-                tier1Holdings.get(schemeCode).push({ doc, data, currentValue });
+                
+                if (tier === 'tier1') {
                 tier1TotalCurrentValue += currentValue;
-            } else if (tier === 2 || tier === 'tier2') {
-                if (!tier2Holdings.has(schemeCode)) {
-                    tier2Holdings.set(schemeCode, []);
-                }
-                tier2Holdings.get(schemeCode).push({ doc, data, currentValue });
+                tier1Holdings.set(schemeCode, {
+                    ...data,
+                    currentValue,
+                    investment,
+                    docId: doc.id
+                });
+            } else if (tier === 'tier2') {
                 tier2TotalCurrentValue += currentValue;
+                tier2Holdings.set(schemeCode, {
+                    ...data,
+                    currentValue,
+                    investment,
+                    docId: doc.id
+                });
             }
         });
         
-        // Generate table rows for Tier 1
-        tier1Holdings.forEach((holdings, schemeCode) => {
-            const isMultiple = holdings.length > 1;
-            holdings.forEach(({ doc, data, currentValue }) => {
-                const row = `
-                    <tr>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                            ${data.scheme_name}
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                            ₹${formatIndianNumber(data.current_nav.toFixed(2))}
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                            ${formatIndianNumber(data.units.toFixed(2))}
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                            ₹${formatIndianNumber(currentValue.toFixed(2))}
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                            <button class="btn-edit-nps text-blue-600 hover:text-blue-900 mr-2" 
-                                    data-id="${doc.id}" 
-                                    data-tier="tier1"
-                                    data-scheme="${schemeCode}"
-                                    data-units="${data.units}"
-                                    data-multiple="${isMultiple}">
-                                <i class="fas fa-edit mr-1"></i>Edit
-                            </button>
-                            <button class="btn-delete-nps text-red-600 hover:text-red-900" 
-                                    data-id="${doc.id}" 
-                                    data-tier="tier1"
-                                    data-scheme="${schemeCode}"
-                                    data-multiple="${isMultiple}">
-                                <i class="fas fa-trash mr-1"></i>Delete
-                            </button>
-                        </td>
-                    </tr>
-                `;
-                document.getElementById('tier1Holdings').insertAdjacentHTML('beforeend', row);
-            });
-        });
-        
-        // Generate table rows for Tier 2
-        tier2Holdings.forEach((holdings, schemeCode) => {
-            const isMultiple = holdings.length > 1;
-            holdings.forEach(({ doc, data, currentValue }) => {
-                const row = `
-                    <tr>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                            ${data.scheme_name}
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                            ₹${formatIndianNumber(data.current_nav.toFixed(2))}
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                            ${formatIndianNumber(data.units.toFixed(2))}
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                            ₹${formatIndianNumber(currentValue.toFixed(2))}
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                            <button class="btn-edit-nps text-blue-600 hover:text-blue-900 mr-2" 
-                                    data-id="${doc.id}" 
-                                    data-tier="tier2"
-                                    data-scheme="${schemeCode}"
-                                    data-units="${data.units}"
-                                    data-multiple="${isMultiple}">
-                                <i class="fas fa-edit mr-1"></i>Edit
-                            </button>
-                            <button class="btn-delete-nps text-red-600 hover:text-red-900" 
-                                    data-id="${doc.id}" 
-                                    data-tier="tier2"
-                                    data-scheme="${schemeCode}"
-                                    data-multiple="${isMultiple}">
-                                <i class="fas fa-trash mr-1"></i>Delete
-                            </button>
-                        </td>
-                    </tr>
-                `;
-                document.getElementById('tier2Holdings').insertAdjacentHTML('beforeend', row);
-            });
-        });
-        
-        // Update tier summaries
+        // Calculate returns for each tier
         const tier1Returns = tier1TotalCurrentValue - tier1TotalInvestment;
         const tier2Returns = tier2TotalCurrentValue - tier2TotalInvestment;
         
-        // Update Tier 1 summary
-        document.getElementById('tier1TotalInvestment').textContent = formatIndianNumber(tier1TotalInvestment.toFixed(2));
-        document.getElementById('tier1CurrentValue').textContent = formatIndianNumber(tier1TotalCurrentValue.toFixed(2));
-        document.getElementById('tier1Returns').textContent = formatIndianNumber(tier1Returns.toFixed(2));
-        
-        // Update Tier 2 summary
-        document.getElementById('tier2TotalInvestment').textContent = formatIndianNumber(tier2TotalInvestment.toFixed(2));
-        document.getElementById('tier2CurrentValue').textContent = formatIndianNumber(tier2TotalCurrentValue.toFixed(2));
-        document.getElementById('tier2Returns').textContent = formatIndianNumber(tier2Returns.toFixed(2));
-        
-        // Update portfolio summary
+        // Calculate portfolio totals
         const totalInvestment = tier1TotalInvestment + tier2TotalInvestment;
         const totalCurrentValue = tier1TotalCurrentValue + tier2TotalCurrentValue;
         const totalReturns = totalCurrentValue - totalInvestment;
+        const totalReturnsPercentage = totalInvestment > 0 ? (totalReturns / totalInvestment) * 100 : 0;
         
-        document.getElementById('totalNPSInvestment').textContent = formatIndianNumber(totalInvestment.toFixed(2));
-        document.getElementById('currentNPSValue').textContent = formatIndianNumber(totalCurrentValue.toFixed(2));
-        document.getElementById('totalNPSReturns').textContent = formatIndianNumber(totalReturns.toFixed(2));
+        // Update Tier 1 summary with animation
+        animateValue('tier1TotalInvestment', tier1TotalInvestment.toFixed(2));
+        animateValue('tier1CurrentValue', tier1TotalCurrentValue.toFixed(2));
+        animateValue('tier1Returns', tier1Returns.toFixed(2));
+        
+        // Update Tier 2 summary with animation
+        animateValue('tier2TotalInvestment', tier2TotalInvestment.toFixed(2));
+        animateValue('tier2CurrentValue', tier2TotalCurrentValue.toFixed(2));
+        animateValue('tier2Returns', tier2Returns.toFixed(2));
+        
+        // Update portfolio summary with animation
+        animateValue('totalNPSInvestment', totalInvestment.toFixed(2));
+        animateValue('currentNPSValue', totalCurrentValue.toFixed(2));
+        animateValue('totalNPSReturns', totalReturns.toFixed(2));
+        animateValue('totalNPSReturnsPercentage', totalReturnsPercentage.toFixed(2));
+        
+        // Generate table rows and mobile cards for Tier 1
+        const tier1TableBody = document.getElementById('tier1Holdings');
+        const tier1MobileContainer = document.getElementById('tier1MobileHoldings');
+        
+        // Iterate over Tier 1 holdings using Map.forEach
+        tier1Holdings.forEach((holding, schemeCode) => {
+            const returns = holding.currentValue - holding.investment;
+            const returnsPercentage = (returns / holding.investment) * 100;
+            
+            // Generate table row
+            const row = document.createElement('tr');
+                    row.innerHTML = `
+                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                    ${holding.scheme_name}
+                        </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    ₹${formatIndianNumber(holding.current_nav.toFixed(2))}
+                        </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    ${formatIndianNumber(holding.units.toFixed(2))}
+                        </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    ₹${formatIndianNumber(holding.currentValue.toFixed(2))}
+                        </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    <button class="btn-edit-nps text-blue-600 hover:text-blue-900 mr-2" data-id="${holding.docId}" data-tier="tier1" data-scheme="${schemeCode}" data-units="${holding.units}" data-multiple="false">
+                                    <i class="fas fa-edit mr-1"></i>Edit
+                                </button>
+                    <button class="btn-delete-nps text-red-600 hover:text-red-900" data-id="${holding.docId}" data-tier="tier1" data-scheme="${schemeCode}" data-multiple="false">
+                                    <i class="fas fa-trash mr-1"></i>Delete
+                                </button>
+                        </td>
+                    `;
+            tier1TableBody.appendChild(row);
+            
+            // Generate mobile card
+            const card = document.createElement('div');
+            card.className = 'nps-mobile-card';
+            card.innerHTML = `
+                <div class="nps-mobile-card-content">
+                    <div class="nps-mobile-card-header">
+                        <h4 class="nps-mobile-card-title">${holding.scheme_name}</h4>
+                    </div>
+                    <div class="nps-mobile-card-details">
+                        <div class="nps-mobile-card-item">
+                            <span class="nps-mobile-card-label">Current NAV</span>
+                            <span class="nps-mobile-card-value">₹${formatIndianNumber(holding.current_nav.toFixed(2))}</span>
+                        </div>
+                        <div class="nps-mobile-card-item">
+                            <span class="nps-mobile-card-label">Units</span>
+                            <span class="nps-mobile-card-value">${formatIndianNumber(holding.units.toFixed(2))}</span>
+                        </div>
+                        <div class="nps-mobile-card-item">
+                            <span class="nps-mobile-card-label">Current Value</span>
+                            <span class="nps-mobile-card-value">₹${formatIndianNumber(holding.currentValue.toFixed(2))}</span>
+                        </div>
+                    </div>
+                    <div class="nps-mobile-card-actions">
+                        <button class="btn-edit-nps text-blue-600 hover:text-blue-900 mr-2" data-id="${holding.docId}" data-tier="tier1" data-scheme="${schemeCode}" data-units="${holding.units}" data-multiple="false">
+                            <i class="fas fa-edit mr-1"></i>Edit
+                        </button>
+                        <button class="btn-delete-nps text-red-600 hover:text-red-900" data-id="${holding.docId}" data-tier="tier1" data-scheme="${schemeCode}" data-multiple="false">
+                            <i class="fas fa-trash mr-1"></i>Delete
+                        </button>
+                    </div>
+                </div>
+            `;
+            tier1MobileContainer.appendChild(card);
+            
+            // Add animation for new cards
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            setTimeout(() => {
+                card.style.opacity = '1';
+                card.style.transform = 'translateY(0)';
+            }, 50);
+        });
+        
+        // Generate table rows and mobile cards for Tier 2
+        const tier2TableBody = document.getElementById('tier2Holdings');
+        const tier2MobileContainer = document.getElementById('tier2MobileHoldings');
+        
+        // Iterate over Tier 2 holdings using Map.forEach
+        tier2Holdings.forEach((holding, schemeCode) => {
+            const returns = holding.currentValue - holding.investment;
+            const returnsPercentage = (returns / holding.investment) * 100;
+            
+            // Generate table row
+            const row = document.createElement('tr');
+                    row.innerHTML = `
+                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                    ${holding.scheme_name}
+                        </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    ₹${formatIndianNumber(holding.current_nav.toFixed(2))}
+                        </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    ${formatIndianNumber(holding.units.toFixed(2))}
+                        </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    ₹${formatIndianNumber(holding.currentValue.toFixed(2))}
+                        </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    <button class="btn-edit-nps text-blue-600 hover:text-blue-900 mr-2" data-id="${holding.docId}" data-tier="tier2" data-scheme="${schemeCode}" data-units="${holding.units}" data-multiple="false">
+                                    <i class="fas fa-edit mr-1"></i>Edit
+                                </button>
+                    <button class="btn-delete-nps text-red-600 hover:text-red-900" data-id="${holding.docId}" data-tier="tier2" data-scheme="${schemeCode}" data-multiple="false">
+                                    <i class="fas fa-trash mr-1"></i>Delete
+                                </button>
+                        </td>
+                    `;
+            tier2TableBody.appendChild(row);
+            
+            // Generate mobile card
+            const card = document.createElement('div');
+            card.className = 'nps-mobile-card';
+            card.innerHTML = `
+                <div class="nps-mobile-card-content">
+                    <div class="nps-mobile-card-header">
+                        <h4 class="nps-mobile-card-title">${holding.scheme_name}</h4>
+                    </div>
+                    <div class="nps-mobile-card-details">
+                        <div class="nps-mobile-card-item">
+                            <span class="nps-mobile-card-label">Current NAV</span>
+                            <span class="nps-mobile-card-value">₹${formatIndianNumber(holding.current_nav.toFixed(2))}</span>
+                        </div>
+                        <div class="nps-mobile-card-item">
+                            <span class="nps-mobile-card-label">Units</span>
+                            <span class="nps-mobile-card-value">${formatIndianNumber(holding.units.toFixed(2))}</span>
+                        </div>
+                        <div class="nps-mobile-card-item">
+                            <span class="nps-mobile-card-label">Current Value</span>
+                            <span class="nps-mobile-card-value">₹${formatIndianNumber(holding.currentValue.toFixed(2))}</span>
+                        </div>
+                    </div>
+                    <div class="nps-mobile-card-actions">
+                        <button class="btn-edit-nps text-blue-600 hover:text-blue-900 mr-2" data-id="${holding.docId}" data-tier="tier2" data-scheme="${schemeCode}" data-units="${holding.units}" data-multiple="false">
+                            <i class="fas fa-edit mr-1"></i>Edit
+                        </button>
+                        <button class="btn-delete-nps text-red-600 hover:text-red-900" data-id="${holding.docId}" data-tier="tier2" data-scheme="${schemeCode}" data-multiple="false">
+                            <i class="fas fa-trash mr-1"></i>Delete
+                        </button>
+                    </div>
+                </div>
+            `;
+            tier2MobileContainer.appendChild(card);
+            
+            // Add animation for new cards
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            setTimeout(() => {
+                card.style.opacity = '1';
+                card.style.transform = 'translateY(0)';
+            }, 50);
+        });
         
     } catch (error) {
         console.error('Error updating NPS holdings:', error);
         alert(`Error loading NPS holdings: ${error.message}`);
     }
+}
+
+// Function to animate value changes
+function animateValue(elementId, targetValue, duration = 1000) {
+    const element = document.getElementById(elementId);
+    if (!element) return;
+    
+    const startValue = parseFloat(element.textContent) || 0;
+    const target = parseFloat(targetValue);
+    const startTime = performance.now();
+    
+    function update(currentTime) {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        
+        // Easing function for smooth animation
+        const easeProgress = progress < 0.5
+            ? 2 * progress * progress
+            : 1 - Math.pow(-2 * progress + 2, 2) / 2;
+        
+        const currentValue = startValue + (target - startValue) * easeProgress;
+        
+        // Format the value based on whether it's a percentage or currency
+        if (elementId === 'totalNPSReturnsPercentage') {
+            element.textContent = formatIndianNumber(currentValue.toFixed(2));
+        } else {
+            element.textContent = formatIndianNumber(currentValue.toFixed(2));
+        }
+        
+        if (progress < 1) {
+            requestAnimationFrame(update);
+        }
+    }
+    
+    requestAnimationFrame(update);
 }
 
 // Function to submit a new Tier 1 fund
@@ -837,9 +1028,10 @@ async function submitTier1Fund() {
         // Parse values
         const unitsValue = parseFloat(units);
         const navValue = parseFloat(currentNav);
+        const investmentValue = unitsValue * navValue;
         
         // Get user ID
-        const userId = firebase.auth().currentUser.uid;
+        const userId = firebase.auth().currentUser?.uid;
         if (!userId) {
             alert('You must be logged in to add funds.');
             return;
@@ -871,7 +1063,8 @@ async function submitTier1Fund() {
                     
                     await npsRef.doc(docId).update({
                         units: newTotalUnits,
-                        current_nav: navValue, // Update to latest NAV
+                        current_nav: navValue,
+                        investment: newTotalUnits * navValue,
                         lastUpdated: firebase.firestore.FieldValue.serverTimestamp()
                     });
                     
@@ -893,6 +1086,7 @@ async function submitTier1Fund() {
                     tier: 'tier1',
                     units: unitsValue,
                     current_nav: navValue,
+                    investment: investmentValue,
                     timestamp: firebase.firestore.FieldValue.serverTimestamp()
                 });
                 
@@ -964,9 +1158,10 @@ async function submitTier2Fund() {
         // Parse values
         const unitsValue = parseFloat(units);
         const navValue = parseFloat(currentNav);
+        const investmentValue = unitsValue * navValue;
         
         // Get user ID
-        const userId = firebase.auth().currentUser.uid;
+        const userId = firebase.auth().currentUser?.uid;
         if (!userId) {
             alert('You must be logged in to add funds.');
             return;
@@ -998,7 +1193,8 @@ async function submitTier2Fund() {
                     
                     await npsRef.doc(docId).update({
                         units: newTotalUnits,
-                        current_nav: navValue, // Update to latest NAV
+                        current_nav: navValue,
+                        investment: newTotalUnits * navValue,
                         lastUpdated: firebase.firestore.FieldValue.serverTimestamp()
                     });
                     
@@ -1020,6 +1216,7 @@ async function submitTier2Fund() {
                     tier: 'tier2',
                     units: unitsValue,
                     current_nav: navValue,
+                    investment: investmentValue,
                     timestamp: firebase.firestore.FieldValue.serverTimestamp()
                 });
                 
@@ -1651,55 +1848,106 @@ function formatIndianNumber(num) {
     return decimalPart ? formatted + "." + decimalPart : formatted;
 }
 
-// Update the animateValue function to use Indian number format
-function animateValue(element, start, end, duration) {
-    let startTimestamp = null;
-    const step = (timestamp) => {
-        if (!startTimestamp) startTimestamp = timestamp;
-        const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-        const currentValue = Math.floor(progress * (end - start) + start);
-        element.textContent = formatIndianNumber(currentValue.toFixed(2));
-        if (progress < 1) {
-            window.requestAnimationFrame(step);
-        }
-    };
-    window.requestAnimationFrame(step);
-}
-
-// Update the table row generation in updateNPSHoldings function
-npsSnapshot.forEach(doc => {
-    const nps = doc.data();
-    totalInvestment += nps.investment;
-    currentValue += nps.currentValue;
-    totalReturns += nps.returns;
-
-    const row = document.createElement('tr');
-    row.innerHTML = `
-        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-            ${nps.name}
-        </td>
-        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-            ₹${formatIndianNumber(nps.investment.toFixed(2))}
-        </td>
-        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-            ₹${formatIndianNumber(nps.currentValue.toFixed(2))}
-        </td>
-        <td class="px-6 py-4 whitespace-nowrap text-sm ${nps.returns >= 0 ? 'text-green-600' : 'text-red-600'}">
-            ₹${formatIndianNumber(nps.returns.toFixed(2))}
-        </td>
-        <td class="px-6 py-4 whitespace-nowrap text-sm ${nps.returns >= 0 ? 'text-green-600' : 'text-red-600'}">
-            ${formatIndianNumber(nps.returnsPercentage.toFixed(2))}%
-        </td>
-        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-            <button class="text-blue-600 hover:text-blue-900 mr-2" onclick="handleNPSEdit('${nps.id}')">
-                Edit
-            </button>
-            <button class="text-red-600 hover:text-red-900" onclick="deleteNPS('${nps.id}')">
-                Delete
-            </button>
-        </td>
-    `;
-    tbody.appendChild(row);
+// Remove view toggle functionality since we're not using it anymore
+document.addEventListener('DOMContentLoaded', () => {
+    // ... existing DOMContentLoaded code ...
+    
+    // Remove view toggle event listeners
+    const viewToggleBtns = document.querySelectorAll('.view-toggle-btn');
+    viewToggleBtns.forEach(btn => {
+        btn.remove();
+    });
 });
+
+// ... rest of the existing code ...
+
+// Add toggle functionality for tier summaries
+document.addEventListener('DOMContentLoaded', () => {
+    // Tier 1 Toggle
+    const tier1Toggle = document.getElementById('tier1Toggle');
+    const tier1Details = document.getElementById('tier1Details');
+    
+    tier1Toggle.addEventListener('change', () => {
+        if (tier1Toggle.checked) {
+            tier1Details.classList.remove('hidden');
+            tier1Details.classList.add('animate-fade-in');
+            setTimeout(() => {
+                tier1Details.classList.remove('animate-fade-in');
+            }, 300);
+        } else {
+            tier1Details.classList.add('animate-fade-out');
+            setTimeout(() => {
+                tier1Details.classList.add('hidden');
+                tier1Details.classList.remove('animate-fade-out');
+            }, 300);
+        }
+    });
+    
+    // Tier 2 Toggle
+    const tier2Toggle = document.getElementById('tier2Toggle');
+    const tier2Details = document.getElementById('tier2Details');
+    
+    tier2Toggle.addEventListener('change', () => {
+        if (tier2Toggle.checked) {
+            tier2Details.classList.remove('hidden');
+            tier2Details.classList.add('animate-fade-in');
+            setTimeout(() => {
+                tier2Details.classList.remove('animate-fade-in');
+            }, 300);
+        } else {
+            tier2Details.classList.add('animate-fade-out');
+            setTimeout(() => {
+                tier2Details.classList.add('hidden');
+                tier2Details.classList.remove('animate-fade-out');
+            }, 300);
+        }
+    });
+});
+
+// Add these styles to your existing styles
+const styles = `
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(-10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    
+    @keyframes fadeOut {
+        from { opacity: 1; transform: translateY(0); }
+        to { opacity: 0; transform: translateY(-10px); }
+    }
+    
+    .animate-fade-in {
+        animation: fadeIn 0.3s ease-out forwards;
+    }
+    
+    .animate-fade-out {
+        animation: fadeOut 0.3s ease-out forwards;
+    }
+    
+    .tier-summary-card {
+        transition: all 0.3s ease;
+    }
+    
+    .tier-summary-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    }
+    
+    .tier-summary-item {
+        transition: all 0.3s ease;
+    }
+    
+    .tier-summary-item:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+`;
+
+// Add the styles to the document
+const styleSheet = document.createElement("style");
+styleSheet.textContent = styles;
+document.head.appendChild(styleSheet);
+
+// ... rest of your existing script code ...
 </script>
 {% endblock %}

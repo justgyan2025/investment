@@ -38,7 +38,7 @@
                             </div>
                             <div class="space-y-2">
                                 <div class="text-xl font-bold text-gray-900">₹<span id="totalStockInvestment">0</span></div>
-                                <div class="text-xs text-gray-600">Total amount invested in stocks</div>
+                                
                             </div>
                         </div>
 
@@ -52,7 +52,7 @@
                             </div>
                             <div class="space-y-2">
                                 <div class="text-xl font-bold text-gray-900">₹<span id="currentStockValue">0</span></div>
-                                <div class="text-xs text-gray-600">Present market value of holdings</div>
+                                
                             </div>
                         </div>
 
@@ -69,7 +69,7 @@
                                     <div class="text-xl font-bold text-gray-900">₹<span id="totalStockReturns">0</span></div>
                                     <div class="text-xs font-semibold" id="totalStockReturnsPercentage">(0%)</div>
                                 </div>
-                                <div class="text-xs text-gray-600">Total profit/loss from investments</div>
+                                
                             </div>
                         </div>
                     </div>
@@ -156,6 +156,147 @@
 </div>
 
 <style>
+    /* Add these new styles at the beginning of the style section */
+    @media (min-width: 768px) {
+        .view-toggle-container {
+            display: none !important;
+        }
+        .table-wrapper {
+            display: block !important;
+            opacity: 1 !important;
+        }
+        .table-mobile-view {
+            display: none !important;
+            opacity: 0 !important;
+        }
+    }
+
+    @media (max-width: 767px) {
+        .view-toggle-container {
+            display: none !important;
+        }
+        .table-wrapper {
+            display: none !important;
+            opacity: 0 !important;
+        }
+        .table-mobile-view {
+            display: block !important;
+            opacity: 1 !important;
+        }
+
+        /* Mobile button styles */
+        #refreshStocksBtn, #addStockBtn {
+            padding: 0.375rem 0.75rem;
+            font-size: 0.75rem;
+            line-height: 1;
+        }
+
+        #refreshStocksBtn svg {
+            width: 0.875rem;
+            height: 0.875rem;
+            margin-right: 0.375rem;
+        }
+
+        /* Adjust button container spacing */
+        .flex.space-x-3 {
+            gap: 0.5rem;
+        }
+
+        /* Mobile text size adjustments */
+        h1 {
+            font-size: 1.5rem !important;
+        }
+
+        h3 {
+            font-size: 1.25rem !important;
+        }
+
+        .text-2xl {
+            font-size: 1.25rem !important;
+        }
+
+        .text-lg {
+            font-size: 1rem !important;
+        }
+
+        .text-base {
+            font-size: 0.875rem !important;
+        }
+
+        .text-sm {
+            font-size: 0.75rem !important;
+        }
+
+        .text-xs {
+            font-size: 0.625rem !important;
+        }
+
+        /* Adjust spacing for mobile */
+        .px-6 {
+            padding-left: 1rem !important;
+            padding-right: 1rem !important;
+        }
+
+        .py-4 {
+            padding-top: 0.75rem !important;
+            padding-bottom: 0.75rem !important;
+        }
+
+        .mt-8 {
+            margin-top: 1.5rem !important;
+        }
+
+        .mb-8 {
+            margin-bottom: 1.5rem !important;
+        }
+
+        /* Adjust card padding */
+        .p-6 {
+            padding: 1rem !important;
+        }
+
+        /* Adjust table cell padding */
+        .table td, .table th {
+            padding: 0.5rem !important;
+        }
+
+        /* Adjust summary cards */
+        .grid.grid-cols-1.gap-6 {
+            gap: 0.75rem !important;
+        }
+
+        /* Adjust modal content */
+        .modal-content {
+            padding: 1rem !important;
+        }
+
+        /* Adjust form labels and inputs */
+        label {
+            font-size: 0.75rem !important;
+        }
+
+        input {
+            font-size: 0.875rem !important;
+        }
+
+        /* Adjust mobile card styles */
+        .table-mobile-card {
+            padding: 1rem !important;
+        }
+
+        .table-mobile-card-header h3 {
+            font-size: 0.875rem !important;
+        }
+
+        .table-mobile-label {
+            font-size: 0.625rem !important;
+        }
+
+        .table-mobile-value {
+            font-size: 0.75rem !important;
+        }
+    }
+
     /* View Toggle Styles */
     .view-toggle {
         padding: 0.5rem;
@@ -1025,29 +1166,31 @@ function generateStockRow(stock) {
     return { tableRow, mobileCard };
 }
 
-// Add toggle view function
-function toggleTableView(view) {
-    const tableWrapper = document.querySelector('.table-wrapper');
-    const mobileView = document.getElementById('mobileTableView');
-    const toggleButtons = document.querySelectorAll('.view-toggle');
-    
-    // Update active state of toggle buttons
-    toggleButtons.forEach(button => {
-        if (button.querySelector('svg').getAttribute('viewBox').includes(view === 'table' ? 'M3 10h18' : 'M4 6a2')) {
-            button.classList.add('active');
-        } else {
-            button.classList.remove('active');
-        }
-    });
-
-    // Show/hide views with animation
-    if (view === 'table') {
+// Update the window resize handler
+window.addEventListener('resize', () => {
+    if (window.innerWidth >= 768) {
+        // On desktop, force table view
+        const tableWrapper = document.querySelector('.table-wrapper');
+        const mobileView = document.getElementById('mobileTableView');
+        
         tableWrapper.classList.add('active');
         mobileView.classList.remove('active');
-    } else {
-        tableWrapper.classList.remove('active');
-        mobileView.classList.add('active');
     }
-}
+});
+
+// Update the initial load to respect screen size
+document.addEventListener('DOMContentLoaded', () => {
+    createLoadingSkeleton();
+    updateStockHoldings();
+    
+    // Set initial view based on screen size
+    if (window.innerWidth >= 768) {
+        const tableWrapper = document.querySelector('.table-wrapper');
+        const mobileView = document.getElementById('mobileTableView');
+        
+        tableWrapper.classList.add('active');
+        mobileView.classList.remove('active');
+    }
+});
 </script>
 {% endblock %}
