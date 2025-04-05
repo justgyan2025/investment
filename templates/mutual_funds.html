@@ -33,9 +33,7 @@
                             <h3 class="text-2xl font-bold text-gray-900 tracking-tight">
                         Portfolio Summary
                     </h3>
-                            <p class="mt-1 text-sm text-gray-500">
-                                Overview of your mutual fund investments
-                            </p>
+                            
                         </div>
                         <div class="flex items-center space-x-2 text-sm text-gray-500">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -59,7 +57,7 @@
                             </div>
                                 <div class="mt-4">
                                     <div class="flex items-center text-sm text-gray-500">
-                                        <span class="font-medium">Investment Overview</span>
+                                       
                         </div>
                                     </div>
                                     </div>
@@ -79,7 +77,7 @@
                         </div>
                                 <div class="mt-4">
                                     <div class="flex items-center text-sm text-gray-500">
-                                        <span class="font-medium">Portfolio Value</span>
+                                        
                                     </div>
                                     </div>
                                 </div>
@@ -100,7 +98,7 @@
                                     </div>
                                 <div class="mt-4">
                                     <div class="flex items-center text-sm text-gray-500">
-                                        <span class="font-medium">Performance</span>
+                                     
                                     </div>
                                 </div>
                             </div>
@@ -1012,7 +1010,21 @@ async function updateMFHoldings() {
         animateValue(totalInvestmentElement, 0, totalInvestment, 1000);
         animateValue(currentValueElement, 0, currentValue, 1000);
         animateValue(totalReturnsElement, 0, totalReturns, 1000);
-        animateValue(totalReturnsPercentageElement, 0, totalReturnsPercentage, 1000);
+        
+        // Update the returns percentage text and apply color
+        if (totalReturns >= 0) {
+            totalReturnsElement.classList.remove('text-red-600');
+            totalReturnsElement.classList.add('text-green-600');
+            totalReturnsPercentageElement.classList.remove('text-red-600');
+            totalReturnsPercentageElement.classList.add('text-green-600');
+            totalReturnsPercentageElement.textContent = `(+${totalReturnsPercentage.toFixed(2)}%)`;
+        } else {
+            totalReturnsElement.classList.remove('text-green-600');
+            totalReturnsElement.classList.add('text-red-600');
+            totalReturnsPercentageElement.classList.remove('text-green-600');
+            totalReturnsPercentageElement.classList.add('text-red-600');
+            totalReturnsPercentageElement.textContent = `(${totalReturnsPercentage.toFixed(2)}%)`;
+        }
 
         // Update last updated time
         const now = new Date();

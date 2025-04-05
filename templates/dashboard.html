@@ -173,6 +173,25 @@
                         </div>
                     </div>
 
+                    <!-- Add NPS Vatsalya card after NPS card -->
+                    <div class="asset-card p-4 rounded-xl transform transition-all duration-300 hover:scale-[1.02] hover:shadow-xl">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-4">
+                                <div class="icon-container h-12 w-12 rounded-full bg-blue-100 flex items-center justify-center transform transition-all duration-300 hover:rotate-12 overflow-hidden">
+                                    <img src="/static/images/nps.png" alt="NPS Vatsalya" class="w-full h-full object-cover">
+                                </div>
+                                <div>
+                                    <h4 class="text-sm font-medium text-gray-900">NPS Vatsalya</h4>
+                                    <p class="text-xs text-gray-500">Child Pension Scheme</p>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <p class="value-display">₹<span id="nps_vatsalyaValue" class="animate-value">0</span></p>
+                                <p class="percentage-display"><span id="nps_vatsalyaPercentage">0.0</span>% of portfolio</p>
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- Insurance -->
                     <div class="asset-card p-4 rounded-xl transform transition-all duration-300 hover:scale-[1.02] hover:shadow-xl">
                         <div class="flex items-center justify-between">
@@ -457,6 +476,9 @@ async function getTotalInvestment(userId, type) {
             return await calculateTotalFromItems(userId, 'mutual_funds', 'totalInvestment');
         case 'nps':
             return await getNpsTotalInvestment(userId);
+        case 'nps_vatsalya':
+            const npsVatsalyaData = await getNpsVatsalyaData(userId);
+            return npsVatsalyaData.total;
         case 'insurance':
             return await calculateLifeInsuranceInvestedTotal(userId);
         case 'sukanya':
@@ -494,6 +516,9 @@ async function getCurrentValue(userId, type) {
             }
         case 'nps':
             return await calculateNpsCurrentValue(userId);
+        case 'nps_vatsalya':
+            const npsVatsalyaData = await getNpsVatsalyaData(userId);
+            return npsVatsalyaData.current;
         case 'insurance':
             return await calculateLifeInsuranceInvestedTotal(userId);
         case 'sukanya':
@@ -532,8 +557,8 @@ function initializeOrUpdateCharts(performanceData, distributionData) {
     }
 
     // Consistent labels and colors used across charts and bars
-    const assetLabels = ['Stocks', 'Mutual Funds', 'NPS', 'Insurance', 'Post Office RD', 'Sukanya'];
-    const assetColors = ['#6366F1', '#10B981', '#EF4444', '#FBBF24', '#F97316', '#EC4899']; // Indigo, Green, Red, Yellow, Orange, Pink
+    const assetLabels = ['Stocks', 'Mutual Funds', 'NPS', 'NPS Vatsalya', 'Insurance', 'Post Office RD', 'Sukanya'];
+    const assetColors = ['#6366F1', '#10B981', '#EF4444', '#3B82F6', '#FBBF24', '#F97316', '#EC4899']; // Indigo, Green, Red, Yellow, Orange, Pink
 
     // Destroy existing charts before creating new ones
     if (distributionChartInstance) { distributionChartInstance.destroy(); }
@@ -687,7 +712,7 @@ async function updateDashboard() {
         console.log(`Updating dashboard for user: ${userId}`);
 
         // Define the asset types we track on the dashboard
-        const assetTypes = ['stocks', 'mutual_funds', 'nps', 'insurance', 'post_office_rd', 'sukanya'];
+        const assetTypes = ['stocks', 'mutual_funds', 'nps', 'nps_vatsalya', 'insurance', 'post_office_rd', 'sukanya'];
 
         // Fetch data using Promise.all for concurrency
         const dataPromises = assetTypes.map(async (type) => {
@@ -793,8 +818,8 @@ function cleanupListeners() {
 function setupDataListeners(userId) {
     cleanupListeners(); // Ensure no duplicate listeners
     console.log(`Setting up Firestore listeners for user: ${userId}`);
-    const assetTypes = ['stocks', 'mutual_funds', 'nps', 'insurance', 'post_office_rd', 'sukanya'];
-    const summaryTypes = ['stocks', 'mutual_funds', 'nps', 'insurance', 'post_office_rd', 'sukanya']; // Assuming summary docs exist for all
+    const assetTypes = ['stocks', 'mutual_funds', 'nps', 'nps_vatsalya', 'insurance', 'post_office_rd', 'sukanya'];
+    const summaryTypes = ['stocks', 'mutual_funds', 'nps', 'nps_vatsalya', 'insurance', 'post_office_rd', 'sukanya']; // Assuming summary docs exist for all
 
     // Listen to changes in individual item collections (if applicable)
     assetTypes.forEach(type => {
@@ -853,6 +878,44 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }, 100); // Check every 100ms
 });
+
+// Add NPS Vatsalya data fetching logic
+async function getNpsVatsalyaData(userId) {
+    let totalInvestment = 0;
+    let currentValue = 0;
+    try {
+        // Get total investment from metadata
+        const metaDoc = await firebase.firestore()
+            .collection('users')
+            .doc(userId)
+            .collection('nps_vatsalya_meta')
+            .doc('total_investment')
+            .get();
+
+        if (metaDoc.exists) {
+            totalInvestment = safeParseFloat(metaDoc.data().amount);
+        }
+
+        // Calculate current value from holdings
+        const snapshot = await firebase.firestore()
+            .collection('users')
+            .doc(userId)
+            .collection('nps_vatsalya')
+            .get();
+
+        snapshot.forEach(doc => {
+            const data = doc.data();
+            if (data && data.units !== undefined && data.nav !== undefined) {
+                currentValue += safeParseFloat(data.units) * safeParseFloat(data.nav);
+            }
+        });
+
+        return { total: totalInvestment, current: currentValue };
+    } catch (error) {
+        console.error('Error fetching NPS Vatsalya data:', error);
+        return { total: 0, current: 0 };
+    }
+}
 
 </script>
 

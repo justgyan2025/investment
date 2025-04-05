@@ -4,12 +4,78 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Investment Tracker</title>
+    <!-- Include Font Awesome CDN in base.html to ensure it's available everywhere -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
     <style>
+        /* Ensure base navbar styles have high specificity to prevent overrides */
+        html body .nav-container {
+            position: relative;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(229, 231, 235, 0.5);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            z-index: 1000;
+        }
+
+        html body .nav-link {
+            position: relative;
+            color: #4B5563 !important;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        html body .nav-link:hover {
+            color: #3B82F6 !important;
+            background: rgba(59, 130, 246, 0.1);
+        }
+
+        html body .nav-link.active {
+            color: #3B82F6 !important;
+            background: rgba(59, 130, 246, 0.1);
+        }
+
+        html body .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: #3B82F6;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        html body .nav-link:hover::after {
+            width: 80%;
+        }
+
+        html body .nav-link.active::after {
+            width: 80%;
+        }
+
+        html body .logo {
+            font-weight: 700;
+            background: linear-gradient(45deg, #3B82F6, #8B5CF6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        html body .logo:hover {
+            transform: scale(1.05);
+        }
+
         /* Custom form styling */
         .input-group {
             margin-bottom: 1rem;
@@ -17,32 +83,110 @@
             flex-direction: column;
         }
         
-        /* Add mobile menu styles */
+        /* Modern Navigation Styles */
+        .nav-container {
+            position: relative;
+        }
+
+        /* Modern Mobile Menu */
         .mobile-menu {
             display: none;
-            position: absolute;
-            top: 100%;
-            right: 1rem;
-            width: 280px;
-            background-color: white;
-            border-radius: 0.5rem;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            z-index: 100;
-            transition: all 0.3s ease-in-out;
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            z-index: 2000;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             opacity: 0;
-            transform: translateY(-10px);
-            margin-top: 0.5rem;
+            transform: translateX(100%);
+            padding: 1rem;
+            overflow-y: auto;
         }
         
         .mobile-menu.show {
             display: block;
             opacity: 1;
-            transform: translateY(0);
+            transform: translateX(0);
+        }
+
+        .mobile-menu-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            border-bottom: 1px solid rgba(229, 231, 235, 0.5);
+            margin-bottom: 1rem;
+        }
+
+        .mobile-menu-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #1F2937;
+        }
+
+        .mobile-menu-close {
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            color: #6B7280;
+            transition: all 0.2s;
+        }
+
+        .mobile-menu-close:hover {
+            background: rgba(59, 130, 246, 0.1);
+            color: #3B82F6;
+        }
+
+        .mobile-menu-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            color: #4B5563;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.2s;
+            text-decoration: none;
+            border-radius: 0.75rem;
+            margin: 0.5rem 0;
+        }
+
+        .mobile-menu-item:hover {
+            background: rgba(59, 130, 246, 0.1);
+            color: #3B82F6;
+            transform: translateX(5px);
+        }
+
+        .mobile-menu-item i {
+            margin-right: 1rem;
+            width: 1.5rem;
+            text-align: center;
+            font-size: 1.25rem;
+        }
+
+        .mobile-menu-divider {
+            height: 1px;
+            background: rgba(229, 231, 235, 0.5);
+            margin: 1rem 0;
+        }
+
+        .mobile-menu-footer {
+            padding: 1rem;
+            margin-top: auto;
+            border-top: 1px solid rgba(229, 231, 235, 0.5);
+        }
+
+        /* Prevent body scroll when mobile menu is open */
+        body.mobile-menu-open {
+            overflow: hidden;
         }
 
         /* Desktop navigation styles */
         .desktop-nav {
             display: none;
+            align-items: center;
+            gap: 0.5rem;
         }
 
         @media (min-width: 640px) {
@@ -58,14 +202,26 @@
         .mobile-menu-button {
             position: relative;
             z-index: 101;
+            padding: 0.75rem;
+            border-radius: 0.75rem;
+            background: rgba(59, 130, 246, 0.1);
+            color: #3B82F6;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .mobile-menu-button:focus {
-            outline: none;
+        .mobile-menu-button:hover {
+            background: rgba(59, 130, 246, 0.2);
+            transform: scale(1.05);
         }
 
         .mobile-menu-button .menu-icon {
-            transition: transform 0.3s ease-in-out;
+            width: 24px;
+            height: 24px;
+            stroke-width: 2;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .mobile-menu-button.active .menu-icon {
@@ -194,90 +350,137 @@
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
-        /* Navigation container */
-        .nav-container {
-            position: relative;
+        /* Enhanced Mobile Navigation */
+        @media (max-width: 639px) {
+            /* Force display of mobile menu button */
+            .mobile-menu-button {
+                display: flex !important;
+                position: relative;
+                z-index: 2001;
+                padding: 0.75rem;
+                border-radius: 0.75rem;
+                background: rgba(59, 130, 246, 0.1);
+                color: #3B82F6;
+                transition: all 0.3s ease;
+                align-items: center;
+                justify-content: center;
+            }
+
+            /* Hide desktop nav on small screens regardless of other styles */
+            .desktop-nav {
+                display: none !important;
+            }
+
+            /* Ensure the navbar container is properly positioned on mobile */
+            .nav-container-mobile {
+                position: relative;
+                display: flex;
+                align-items: center;
+                justify-content: flex-end;
+                z-index: 1001;
+            }
+
+            /* Make mobile menu visible when shown */
+            .mobile-menu.show {
+                display: block !important;
+                opacity: 1;
+                transform: translateX(0);
+            }
         }
     </style>
+    <!-- Common CSS for all pages -->
+    <link rel="stylesheet" href="/static/css/shared.css">
     <script>
         // Initialize Firebase
         const firebaseConfig = JSON.parse('{{ firebase_config | tojson | safe }}');
         firebase.initializeApp(firebaseConfig);
     </script>
 </head>
-<body class="bg-gray-100">
-    <!-- Navigation -->
-    <nav class="bg-white shadow-lg">
+<body class="bg-gray-50">
+    <!-- Navigation - Hidden on index and login pages -->
+    {% if request.path != '/login' and request.path != '/' %}
+    <nav class="nav-container">
         <div class="max-w-7xl mx-auto px-4">
             <div class="flex justify-between h-16">
-                <div class="flex">
-                    <div class="flex-shrink-0 flex items-center">
-                        <a href="/" class="text-xl font-bold text-indigo-600">Investment Tracker</a>
-                    </div>
-                    {% if request.path != '/login' and request.path != '/' %}
-                    <div class="desktop-nav sm:ml-6 sm:space-x-8">
-                        <a href="/dashboard" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
-                            Dashboard
+                <div class="flex items-center">
+                    <a href="/" class="logo text-xl">Investment Tracker</a>
+                    <div class="desktop-nav ml-6">
+                        <a href="/dashboard" class="nav-link {% if request.path == '/dashboard' %}active{% endif %}">
+                            <i class="fas fa-chart-line"></i> Dashboard
                         </a>
-                        <a href="/stocks" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
-                            Stocks
+                        <a href="/stocks" class="nav-link {% if request.path == '/stocks' %}active{% endif %}">
+                            <i class="fas fa-chart-bar"></i> Stocks
                         </a>
-                        <a href="/mutual_funds" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
-                            Mutual Funds
+                        <a href="{{ url_for('nps') }}" class="nav-link {% if request.path == '/nps' %}active{% endif %}">
+                            <i class="fas fa-piggy-bank"></i> NPS
                         </a>
-                        <a href="/insurance" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
-                            Insurance
+                        <a href="{{ url_for('nps_vatsalya') }}" class="nav-link {% if request.path == '/nps_vatsalya' %}active{% endif %}">
+                            <i class="fas fa-child"></i> NPS Vatsalya
                         </a>
-                        <a href="/nps" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
-                            NPS
+                        <a href="/mutual_funds" class="nav-link {% if request.path == '/mutual_funds' %}active{% endif %}">
+                            <i class="fas fa-chart-pie"></i> Mutual Funds
                         </a>
-                        <a href="/others" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
-                            Others
+                        <a href="/insurance" class="nav-link {% if request.path == '/insurance' %}active{% endif %}">
+                            <i class="fas fa-shield-alt"></i> Insurance
                         </a>
-                        <button id="logoutBtn" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium cursor-pointer">
-                            Logout
+                        <a href="/others" class="nav-link {% if request.path == '/others' %}active{% endif %}">
+                            <i class="fas fa-ellipsis-h"></i> Others
+                        </a>
+                        <button id="logoutBtn" class="nav-link text-red-500 hover:bg-red-50">
+                            <i class="fas fa-sign-out-alt"></i> Logout
                         </button>
                     </div>
-                    {% endif %}
                 </div>
-                {% if request.path != '/login' and request.path != '/' %}
-                <div class="nav-container flex items-center sm:hidden">
-                    <button type="button" class="mobile-menu-button inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+                <div class="nav-container-mobile">
+                    <button type="button" class="mobile-menu-button">
                         <span class="sr-only">Open main menu</span>
-                        <svg class="menu-icon block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <svg class="menu-icon h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                         </svg>
                     </button>
-                    <!-- Mobile menu -->
-                    <div class="sm:hidden mobile-menu">
-                        <a href="/dashboard" class="mobile-menu-item">
-                            Dashboard
-                        </a>
-                        <a href="/stocks" class="mobile-menu-item">
-                            Stocks
-                        </a>
-                        <a href="/mutual_funds" class="mobile-menu-item">
-                            Mutual Funds
-                        </a>
-                        <a href="/insurance" class="mobile-menu-item">
-                            Insurance
-                        </a>
-                        <a href="/nps" class="mobile-menu-item">
-                            NPS
-                        </a>
-                        <a href="/others" class="mobile-menu-item">
-                            Others
-                        </a>
-                        <div class="mobile-menu-divider"></div>
-                        <button id="mobileLogoutBtn" class="w-full text-left mobile-menu-item text-red-600 hover:bg-red-50">
-                            Logout
+                    <!-- Enhanced Mobile Menu -->
+                    <div class="mobile-menu">
+                        <div class="mobile-menu-header">
+                            <span class="mobile-menu-title">Menu</span>
+                            <button class="mobile-menu-close">
+                                <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+                        <div class="mobile-menu-content">
+                            <a href="/dashboard" class="mobile-menu-item">
+                                <i class="fas fa-chart-line"></i> Dashboard
+                            </a>
+                            <a href="/stocks" class="mobile-menu-item">
+                                <i class="fas fa-chart-bar"></i> Stocks
+                            </a>
+                            <a href="{{ url_for('nps') }}" class="mobile-menu-item">
+                                <i class="fas fa-piggy-bank"></i> NPS
+                            </a>
+                            <a href="{{ url_for('nps_vatsalya') }}" class="mobile-menu-item">
+                                <i class="fas fa-child"></i> NPS Vatsalya
+                            </a>
+                            <a href="/mutual_funds" class="mobile-menu-item">
+                                <i class="fas fa-chart-pie"></i> Mutual Funds
+                            </a>
+                            <a href="/insurance" class="mobile-menu-item">
+                                <i class="fas fa-shield-alt"></i> Insurance
+                            </a>
+                            <a href="/others" class="mobile-menu-item">
+                                <i class="fas fa-ellipsis-h"></i> Others
+                            </a>
+                            <div class="mobile-menu-divider"></div>
+                            <button id="mobileLogoutBtn" class="w-full text-left mobile-menu-item text-red-500 hover:bg-red-50">
+                                <i class="fas fa-sign-out-alt"></i> Logout
                         </button>
+                        </div>
                     </div>
                 </div>
-                {% endif %}
             </div>
         </div>
     </nav>
+    {% endif %}
 
     <!-- Main content -->
     <main>
@@ -285,83 +488,99 @@
     </main>
 
     <script>
-        // Mobile menu toggle
+        // Enhanced mobile menu functionality - Only initialize if navbar exists
+        document.addEventListener('DOMContentLoaded', function() {
         const mobileMenuButton = document.querySelector('.mobile-menu-button');
         const mobileMenu = document.querySelector('.mobile-menu');
-        const desktopNav = document.querySelector('.desktop-nav');
-
-        // Function to toggle mobile menu
-        function toggleMobileMenu() {
-            const isOpen = mobileMenu.classList.contains('show');
-            mobileMenu.classList.toggle('show');
-            mobileMenuButton.classList.toggle('active');
             
-            // Update menu icon
-            const icon = mobileMenuButton.querySelector('.menu-icon');
-            if (!isOpen) {
-                icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />';
-            } else {
-                icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />';
-            }
-        }
+            // Only run mobile menu code if these elements exist (not on login/index pages)
+            if (mobileMenuButton && mobileMenu) {
+                const mobileMenuClose = document.querySelector('.mobile-menu-close');
+                const body = document.body;
 
-        // Function to close mobile menu
-        function closeMobileMenu() {
-            mobileMenu.classList.remove('show');
-            mobileMenuButton.classList.remove('active');
-            const icon = mobileMenuButton.querySelector('.menu-icon');
-            icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />';
-        }
-
-        if (mobileMenuButton) {
-            mobileMenuButton.addEventListener('click', (e) => {
-                e.stopPropagation();
-                toggleMobileMenu();
-            });
-        }
-
-        // Close mobile menu when clicking outside
-        document.addEventListener('click', (event) => {
-            if (mobileMenu && mobileMenu.classList.contains('show')) {
-                const isClickInside = mobileMenu.contains(event.target) || mobileMenuButton.contains(event.target);
-                if (!isClickInside) {
-                    closeMobileMenu();
+                // Initialize mobile menu and button visibility
+                if (window.innerWidth < 640) {
+                    mobileMenuButton.style.display = 'flex';
+                } else {
+                    mobileMenuButton.style.display = 'none';
                 }
-            }
-        });
 
-        // Close mobile menu when clicking a link
-        const mobileMenuLinks = mobileMenu.querySelectorAll('a, button');
-        mobileMenuLinks.forEach(link => {
-            link.addEventListener('click', closeMobileMenu);
-        });
-
-        // Handle window resize
-        window.addEventListener('resize', () => {
-            if (window.innerWidth >= 640) { // sm breakpoint
-                closeMobileMenu();
-            }
-        });
-
-        // Prevent body scroll when mobile menu is open
-        function toggleBodyScroll(disable) {
-            document.body.style.overflow = disable ? 'hidden' : '';
-        }
-
-        // Update body scroll when menu state changes
-        const observer = new MutationObserver((mutations) => {
-            mutations.forEach((mutation) => {
-                if (mutation.attributeName === 'class') {
-                    toggleBodyScroll(mobileMenu.classList.contains('show'));
+                function toggleMobileMenu() {
+                    const isOpen = mobileMenu.classList.contains('show');
+                    mobileMenu.classList.toggle('show');
+                    mobileMenuButton.classList.toggle('active');
+                    body.classList.toggle('mobile-menu-open');
+                    
+                    // Update menu icon
+                    const icon = mobileMenuButton.querySelector('.menu-icon');
+                    if (!isOpen) {
+                        icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />';
+                    } else {
+                        icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />';
+                    }
                 }
-            });
-        });
 
-        if (mobileMenu) {
-            observer.observe(mobileMenu, { attributes: true });
-        }
+                function closeMobileMenu() {
+                    mobileMenu.classList.remove('show');
+                    mobileMenuButton.classList.remove('active');
+                    body.classList.remove('mobile-menu-open');
+                    const icon = mobileMenuButton.querySelector('.menu-icon');
+                    icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />';
+                }
 
-        // Logout functionality
+                mobileMenuButton.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    toggleMobileMenu();
+                });
+
+                if (mobileMenuClose) {
+                    mobileMenuClose.addEventListener('click', closeMobileMenu);
+                }
+
+                // Handle window resize for mobile/desktop transitions
+                window.addEventListener('resize', () => {
+                    if (window.innerWidth >= 640) { // sm breakpoint
+                        closeMobileMenu();
+                        mobileMenuButton.style.display = 'none';
+                    } else {
+                        mobileMenuButton.style.display = 'flex';
+                    }
+                });
+
+                // Close mobile menu when clicking outside
+                document.addEventListener('click', (event) => {
+                    if (mobileMenu.classList.contains('show')) {
+                        const isClickInside = mobileMenu.contains(event.target) || mobileMenuButton.contains(event.target);
+                        if (!isClickInside) {
+                            closeMobileMenu();
+                        }
+                    }
+                });
+
+                // Close mobile menu when clicking a link
+                const mobileMenuLinks = mobileMenu.querySelectorAll('a, button');
+                mobileMenuLinks.forEach(link => {
+                    link.addEventListener('click', closeMobileMenu);
+                });
+
+                // Prevent body scroll when mobile menu is open
+                function toggleBodyScroll(disable) {
+                    document.body.style.overflow = disable ? 'hidden' : '';
+                }
+
+                // Update body scroll when menu state changes
+                const observer = new MutationObserver((mutations) => {
+                    mutations.forEach((mutation) => {
+                        if (mutation.attributeName === 'class') {
+                            toggleBodyScroll(mobileMenu.classList.contains('show'));
+                        }
+                    });
+                });
+
+                observer.observe(mobileMenu, { attributes: true });
+            }
+
+            // Logout functionality - Only initialize if the buttons exist
         const logoutBtn = document.getElementById('logoutBtn');
         const mobileLogoutBtn = document.getElementById('mobileLogoutBtn');
 
@@ -395,48 +614,6 @@
             // Add click event listeners to logout buttons
             logoutBtn.addEventListener('click', handleLogout);
             mobileLogoutBtn.addEventListener('click', handleLogout);
-        }
-
-        // Check authentication state
-        let redirectInProgress = false;
-
-        firebase.auth().onAuthStateChanged((user) => {
-            const currentPath = window.location.pathname;
-            const isLoginPage = currentPath === '/login';
-            const isIndexPage = currentPath === '/';
-            
-            if (user) {
-                // User is signed in
-                console.log('User is logged in:', user.email);
-                
-                if (isLoginPage && !redirectInProgress) {
-                    // Redirect to dashboard if on login page
-                    redirectInProgress = true;
-                    console.log('Redirecting from login to dashboard');
-                    window.location.href = '/dashboard';
-                } else if (!isIndexPage) {
-                    // Show nav elements on protected pages (not index/login)
-                    if (desktopNav) desktopNav.classList.remove('hidden');
-                }
-            } else {
-                // User is signed out
-                console.log('User is not logged in');
-                
-                // Hide navigation elements
-                if (desktopNav) desktopNav.classList.add('hidden');
-                
-                // Check if token cookie exists but no Firebase user (stale cookie)
-                if (document.cookie.split(';').some((item) => item.trim().startsWith('token='))) {
-                    console.log('Clearing stale token cookie');
-                    document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-                }
-                
-                // Redirect to login except if already on login or index page
-                if (!isLoginPage && !isIndexPage && !redirectInProgress) {
-                    redirectInProgress = true;
-                    console.log('Redirecting to login page');
-                    window.location.href = '/login';
-                }
             }
         });
     </script>

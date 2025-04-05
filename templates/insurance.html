@@ -7,18 +7,15 @@
         
         <!-- Insurance Type Tabs -->
         <div class="border-b border-gray-200">
-            <nav class="-mb-px flex space-x-8 md:space-x-12 overflow-x-auto" aria-label="Tabs">
-                <button onclick="showInsuranceSection('life')" class="tab-button border-indigo-500 text-indigo-600 whitespace-nowrap py-4 md:py-6 px-2 md:px-4 border-b-2 font-medium text-sm md:text-base flex items-center">
-                    <img src="/static/images/life-insurance.png" alt="Life Insurance" class="w-5 h-5 md:w-6 md:h-6 mr-2 md:mr-3">
-                    Life Insurance
+            <nav class="-mb-px flex space-x-1 md:space-x-2 overflow-x-auto" aria-label="Tabs">
+                <button onclick="showInsuranceSection('life')" class="tab-button active border-indigo-500 text-indigo-600 bg-indigo-50 whitespace-nowrap py-2 md:py-3 px-3 md:px-4 border-b-2 font-medium text-sm md:text-base flex items-center rounded-t-lg transition-all duration-300">
+                    <span>Life Insurance</span>
                 </button>
-                <button onclick="showInsuranceSection('health')" class="tab-button border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 md:py-6 px-2 md:px-4 border-b-2 font-medium text-sm md:text-base flex items-center">
-                    <img src="/static/images/health-insurance.png" alt="Health Insurance" class="w-5 h-5 md:w-6 md:h-6 mr-2 md:mr-3">
-                    Health Insurance
+                <button onclick="showInsuranceSection('health')" class="tab-button border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 hover:bg-gray-50 whitespace-nowrap py-2 md:py-3 px-3 md:px-4 border-b-2 font-medium text-sm md:text-base flex items-center rounded-t-lg transition-all duration-300">
+                    <span>Health Insurance</span>
                 </button>
-                <button onclick="showInsuranceSection('motor')" class="tab-button border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 md:py-6 px-2 md:px-4 border-b-2 font-medium text-sm md:text-base flex items-center">
-                    <img src="/static/images/car-insurance.jpg" alt="Motor Insurance" class="w-5 h-5 md:w-6 md:h-6 mr-2 md:mr-3">
-                    Motor Insurance
+                <button onclick="showInsuranceSection('motor')" class="tab-button border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 hover:bg-gray-50 whitespace-nowrap py-2 md:py-3 px-3 md:px-4 border-b-2 font-medium text-sm md:text-base flex items-center rounded-t-lg transition-all duration-300">
+                    <span>Motor Insurance</span>
                 </button>
             </nav>
         </div>
@@ -26,26 +23,22 @@
         <!-- Life Insurance Section -->
         <div id="lifeInsurance" class="insurance-section">
             <div class="mt-8">
+                <!-- Life Insurance header - add image -->
                 <div class="flex justify-between items-center mb-6">
-                    <h2 class="text-xl md:text-2xl font-semibold text-gray-900">Life Insurance</h2>
+                    <h2 class="text-xl md:text-2xl font-semibold text-gray-900 flex items-center">
+                        <img src="/static/images/life-insurance.png" alt="Life Insurance" class="w-8 h-8 md:w-10 md:h-10 mr-3">
+                        Life Insurance
+                    </h2>
                     <div class="flex items-center space-x-4">
-                        <!-- Toggle View Button (Mobile Only) -->
-                        <button onclick="toggleView('life')" class="md:hidden bg-gray-100 text-gray-700 px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-200">
-                            <span id="lifeViewIcon">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"></path>
-                                </svg>
-                            </span>
-                        </button>
                         <button onclick="showAddModal('life')" class="bg-indigo-600 text-white px-3 md:px-4 py-2 rounded-md text-sm font-medium hover:bg-indigo-700 flex items-center">
-                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
-                            </svg>
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                        </svg>
                             <span class="hidden md:inline">Add Life Insurance</span>
                             <span class="md:hidden">Add</span>
-                        </button>
+                    </button>
                     </div>
-                </div>
+    </div>
 
                 <!-- Life Insurance Summary Cards -->
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-8">
@@ -120,32 +113,28 @@
                                 <!-- Life insurance policies will be populated here -->
                             </tbody>
                         </table>
-                    </div>
-                </div>
-            </div>
-        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
         <!-- Health Insurance Section -->
         <div id="healthInsurance" class="insurance-section hidden">
             <div class="mt-8">
+                <!-- Health Insurance header - add image -->
                 <div class="flex justify-between items-center mb-6">
-                    <h2 class="text-xl md:text-2xl font-semibold text-gray-900">Health Insurance</h2>
+                    <h2 class="text-xl md:text-2xl font-semibold text-gray-900 flex items-center">
+                        <img src="/static/images/health-insurance.png" alt="Health Insurance" class="w-8 h-8 md:w-10 md:h-10 mr-3">
+                        Health Insurance
+                    </h2>
                     <div class="flex items-center space-x-4">
-                        <!-- Toggle View Button (Mobile Only) -->
-                        <button onclick="toggleView('health')" class="md:hidden bg-gray-100 text-gray-700 px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-200">
-                            <span id="healthViewIcon">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"></path>
-                                </svg>
-                            </span>
-                        </button>
                         <button onclick="showAddModal('health')" class="bg-indigo-600 text-white px-3 md:px-4 py-2 rounded-md text-sm font-medium hover:bg-indigo-700 flex items-center">
-                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
-                            </svg>
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                        </svg>
                             <span class="hidden md:inline">Add Health Insurance</span>
                             <span class="md:hidden">Add</span>
-                        </button>
+                    </button>
                     </div>
                 </div>
 
@@ -214,24 +203,20 @@
         <!-- Motor Insurance Section -->
         <div id="motorInsurance" class="insurance-section hidden">
             <div class="mt-8">
+                <!-- Motor Insurance header - add image -->
                 <div class="flex justify-between items-center mb-6">
-                    <h2 class="text-xl md:text-2xl font-semibold text-gray-900">Motor Insurance</h2>
+                    <h2 class="text-xl md:text-2xl font-semibold text-gray-900 flex items-center">
+                        <img src="/static/images/car-insurance.jpg" alt="Motor Insurance" class="w-8 h-8 md:w-10 md:h-10 mr-3">
+                        Motor Insurance
+                    </h2>
                     <div class="flex items-center space-x-4">
-                        <!-- Toggle View Button (Mobile Only) -->
-                        <button onclick="toggleView('motor')" class="md:hidden bg-gray-100 text-gray-700 px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-200">
-                            <span id="motorViewIcon">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"></path>
-                                </svg>
-                            </span>
-                        </button>
                         <button onclick="showAddModal('motor')" class="bg-indigo-600 text-white px-3 md:px-4 py-2 rounded-md text-sm font-medium hover:bg-indigo-700 flex items-center">
-                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
-                            </svg>
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                        </svg>
                             <span class="hidden md:inline">Add Motor Insurance</span>
                             <span class="md:hidden">Add</span>
-                        </button>
+                    </button>
                     </div>
                 </div>
 
@@ -559,6 +544,193 @@
             @apply text-sm;
         }
     }
+    
+    /* Add new animation classes for smooth transitions */
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    
+    @keyframes fadeOut {
+        from { opacity: 1; transform: translateY(0); }
+        to { opacity: 0; transform: translateY(10px); }
+    }
+    
+    .animate-fade-in {
+        animation: fadeIn 0.3s ease-out forwards;
+    }
+    
+    .animate-fade-out {
+        animation: fadeOut 0.3s ease-out forwards;
+    }
+    
+    /* Enhanced Mobile Grid Styles */
+    .insurance-grid {
+        @apply grid grid-cols-1 sm:grid-cols-2 gap-3;
+    }
+    
+    .insurance-grid-item {
+        @apply bg-white rounded-lg shadow-sm border border-gray-200 transition-all duration-200;
+    }
+    
+    .insurance-grid-item:hover {
+        @apply shadow-md transform scale-[1.01] border-indigo-200;
+    }
+    
+    .insurance-grid-header {
+        @apply p-3 border-b border-gray-100 flex flex-col;
+    }
+    
+    .insurance-grid-body {
+        @apply p-3 flex-grow;
+    }
+    
+    .insurance-grid-footer {
+        @apply p-2 bg-gray-50 rounded-b-lg flex justify-between items-center;
+    }
+    
+    /* Enhanced table styles */
+    table {
+        border-collapse: separate;
+        border-spacing: 0;
+        width: 100%;
+        border-radius: 0.5rem;
+        overflow: hidden;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    }
+    
+    thead {
+        background: linear-gradient(90deg, rgba(79, 70, 229, 0.9) 0%, rgba(124, 58, 237, 0.9) 100%);
+        color: white;
+        position: sticky;
+        top: 0;
+        z-index: 10;
+    }
+    
+    th {
+        padding: 1rem;
+        text-align: left;
+        font-weight: 600;
+        font-size: 0.75rem;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        border-bottom: 1px solid rgba(124, 58, 237, 0.2);
+        color: white !important; /* Ensure text is white */
+    }
+    
+    td {
+        padding: 1rem;
+        vertical-align: middle;
+        border-bottom: 1px solid rgba(229, 231, 235, 0.5);
+    }
+    
+    tbody tr {
+        transition: all 0.2s;
+    }
+    
+    tbody tr:hover {
+        background-color: rgba(79, 70, 229, 0.05);
+        transform: scale(1.005);
+    }
+    
+    tbody tr:nth-child(even) {
+        background-color: rgba(249, 250, 251, 0.7);
+    }
+    
+    .action-btn {
+        padding: 0.375rem 0.75rem;
+        border-radius: 0.375rem;
+        font-size: 0.75rem;
+        font-weight: 500;
+        transition: all 0.2s;
+        display: inline-flex;
+        align-items: center;
+    }
+    
+    .edit-btn {
+        background: #EEF2FF;
+        color: #4F46E5;
+    }
+    
+    .edit-btn:hover {
+        background: #E0E7FF;
+        transform: translateY(-1px);
+    }
+    
+    .delete-btn {
+        background: #FEE2E2;
+        color: #EF4444;
+    }
+    
+    .delete-btn:hover {
+        background: #FECACA;
+        transform: translateY(-1px);
+    }
+    
+    /* Add a shimmer effect for loading */
+    @keyframes shimmer {
+        0% {
+            background-position: -1000px 0;
+        }
+        100% {
+            background-position: 1000px 0;
+        }
+    }
+    
+    .shimmer {
+        background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+        background-size: 1000px 100%;
+        animation: shimmer 2s infinite linear;
+    }
+    
+    /* Enhanced Tab Styles */
+    .tab-button {
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .tab-button.active {
+        background: linear-gradient(to bottom, rgba(79, 70, 229, 0.1) 0%, rgba(79, 70, 229, 0.05) 100%);
+        box-shadow: 0 -4px 10px rgba(79, 70, 229, 0.05);
+    }
+    
+    .tab-button.active::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: linear-gradient(to right, #4f46e5, #8b5cf6);
+        animation: tabGlow 2s infinite alternate;
+    }
+    
+    @keyframes tabGlow {
+        from { box-shadow: 0 0 4px rgba(79, 70, 229, 0.5); }
+        to { box-shadow: 0 0 8px rgba(139, 92, 246, 0.8); }
+    }
+    
+    .tab-button::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(120deg, transparent, rgba(79, 70, 229, 0.05), transparent);
+        transform: translateX(-100%);
+        transition: 0.6s;
+        z-index: 0;
+    }
+    
+    .tab-button.active:hover::before {
+        transform: translateX(100%);
+    }
+    
+    .tab-button span {
+        position: relative;
+        z-index: 1;
+    }
 </style>
 
 <script>
@@ -731,18 +903,24 @@ function showInsuranceSection(type) {
         section.classList.add('hidden');
     });
     
-    // Show selected section
-    document.getElementById(`${type}Insurance`).classList.remove('hidden');
+    // Show the selected section
+    const selectedSection = document.getElementById(`${type}Insurance`);
+    if (selectedSection) {
+        selectedSection.classList.remove('hidden');
+    }
     
     // Update tab styling
     document.querySelectorAll('.tab-button').forEach(button => {
-        button.classList.remove('border-indigo-500', 'text-indigo-600');
+        button.classList.remove('border-indigo-500', 'text-indigo-600', 'bg-indigo-50', 'active');
         button.classList.add('border-transparent', 'text-gray-500');
     });
     
-    // Highlight selected tab
-    event.target.classList.remove('border-transparent', 'text-gray-500');
-    event.target.classList.add('border-indigo-500', 'text-indigo-600');
+    // Apply active styling to selected tab
+    const activeButton = document.querySelector(`[onclick="showInsuranceSection('${type}')"]`);
+    if (activeButton) {
+        activeButton.classList.remove('border-transparent', 'text-gray-500');
+        activeButton.classList.add('border-indigo-500', 'text-indigo-600', 'bg-indigo-50', 'active');
+    }
 }
 
 // Function to format number in Indian format
@@ -772,90 +950,215 @@ function animateValue(element, start, end, duration) {
 
 // Update the insurance policy row generation
 function generateInsuranceRow(policy, type) {
+    // Calculate if renewal date is within 30 days
+    const today = new Date();
+    const renewalDate = policy.nextPremiumDue ? new Date(policy.nextPremiumDue) : null;
+    const daysDiff = renewalDate ? Math.ceil((renewalDate - today) / (1000 * 60 * 60 * 24)) : 999;
+    const isRenewalSoon = daysDiff <= 30 && daysDiff > 0;
+    
     let rowContent = '';
     switch(type) {
         case 'life':
             rowContent = `
-                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${policy.policyName}</td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${policy.companyName || ''}</td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${policy.policyType}</td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">₹${formatIndianNumber(policy.coverageAmount.toFixed(2))}</td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">₹${formatIndianNumber(policy.premiumAmount.toFixed(2))}</td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${policy.premiumMode}</td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${new Date(policy.nextPremiumDue).toLocaleDateString()}</td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${new Date(policy.startDate).toLocaleDateString()}</td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${new Date(policy.endDate).toLocaleDateString()}</td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">₹${formatIndianNumber(policy.investedAmount.toFixed(2))}</td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    <div class="flex space-x-2">
-                        <button class="text-blue-600 hover:text-blue-900" onclick="editInsurance('${policy.policyNumber}')">
+                <td class="px-6 py-4 whitespace-nowrap">
+                    <div class="text-sm font-medium text-gray-900">${policy.policyName}</div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                    <div class="text-sm text-gray-600">${policy.companyName || ''}</div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                    <span class="px-2 py-1 text-xs font-medium rounded-full bg-indigo-100 text-indigo-800">
+                        ${policy.policyType}
+                    </span>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-right">
+                    <div class="text-sm font-semibold text-gray-900">₹${formatIndianNumber(policy.coverageAmount.toFixed(2))}</div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-right">
+                    <div class="text-sm font-medium text-gray-900">₹${formatIndianNumber(policy.premiumAmount.toFixed(2))}</div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                    <div class="text-sm text-gray-600">${policy.premiumMode}</div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                    <div class="text-sm font-bold ${isRenewalSoon ? 'bg-red-100 text-red-700 px-2 py-1 rounded' : 'text-gray-600'}">
+                        ${formatDate(policy.nextPremiumDue)}
+                        ${isRenewalSoon ? `<span class="text-xs">(${daysDiff} days)</span>` : ''}
+                    </div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                    <div class="text-sm text-gray-600">${formatDate(policy.startDate)}</div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                    <div class="text-sm text-gray-600">${formatDate(policy.endDate)}</div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-right">
+                    <div class="text-sm font-semibold text-gray-900">₹${formatIndianNumber((policy.investedAmount || 0).toFixed(2))}</div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-center">
+                    <div class="flex justify-center space-x-2">
+                        <button class="action-btn edit-btn" onclick="editInsurance('${policy.policyNumber || policy.id || policy.policyName}')">
+                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path>
+                            </svg>
                             Edit
                         </button>
-                        <button class="text-red-600 hover:text-red-900" onclick="deleteInsurance('${policy.policyNumber}')">
-                        Delete
-                    </button>
+                        <button class="action-btn delete-btn" onclick="deleteInsurance('${policy.policyNumber || policy.id || policy.policyName}')">
+                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                            </svg>
+                            Delete
+                        </button>
                     </div>
                 </td>
             `;
             break;
         case 'health':
             rowContent = `
-                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${policy.policyName}</td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${policy.companyName || ''}</td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${policy.policyType}</td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">₹${formatIndianNumber(policy.coverageAmount.toFixed(2))}</td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">₹${formatIndianNumber(policy.premiumAmount.toFixed(2))}</td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${new Date(policy.nextPremiumDue).toLocaleDateString()}</td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${new Date(policy.startDate).toLocaleDateString()}</td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${new Date(policy.endDate).toLocaleDateString()}</td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    <div class="flex space-x-2">
-                        <button class="text-blue-600 hover:text-blue-900" onclick="editInsurance('${policy.policyName}')">
+                <td class="px-6 py-4 whitespace-nowrap">
+                    <div class="text-sm font-medium text-gray-900">${policy.policyName}</div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                    <div class="text-sm text-gray-600">${policy.companyName || ''}</div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                    <span class="px-2 py-1 text-xs font-medium rounded-full bg-green-100 text-green-800">
+                        ${policy.policyType}
+                    </span>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-right">
+                    <div class="text-sm font-semibold text-gray-900">₹${formatIndianNumber(policy.coverageAmount.toFixed(2))}</div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-right">
+                    <div class="text-sm font-medium text-gray-900">₹${formatIndianNumber(policy.premiumAmount.toFixed(2))}</div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                    <div class="text-sm font-bold ${isRenewalSoon ? 'bg-red-100 text-red-700 px-2 py-1 rounded' : 'text-gray-600'}">
+                        ${formatDate(policy.nextPremiumDue)}
+                        ${isRenewalSoon ? `<span class="text-xs">(${daysDiff} days)</span>` : ''}
+                    </div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                    <div class="text-sm text-gray-600">${formatDate(policy.startDate)}</div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                    <div class="text-sm text-gray-600">${formatDate(policy.endDate)}</div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-center">
+                    <div class="flex justify-center space-x-2">
+                        <button class="action-btn edit-btn" onclick="editInsurance('${policy.policyNumber || policy.id || policy.policyName}')">
+                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path>
+                            </svg>
                             Edit
                         </button>
-                        <button class="text-red-600 hover:text-red-900" onclick="deleteInsurance('${policy.policyName}')">
-                        Delete
-                    </button>
+                        <button class="action-btn delete-btn" onclick="deleteInsurance('${policy.policyNumber || policy.id || policy.policyName}')">
+                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                            </svg>
+                            Delete
+                        </button>
                     </div>
                 </td>
             `;
             break;
         case 'motor':
             rowContent = `
-                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${policy.policyName}</td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${policy.companyName || ''}</td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${policy.vehicleType}</td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">₹${formatIndianNumber(policy.coverageAmount.toFixed(2))}</td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">₹${formatIndianNumber(policy.premiumAmount.toFixed(2))}</td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${new Date(policy.nextPremiumDue).toLocaleDateString()}</td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${new Date(policy.startDate).toLocaleDateString()}</td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${new Date(policy.endDate).toLocaleDateString()}</td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    <div class="flex space-x-2">
-                        <button class="text-blue-600 hover:text-blue-900" onclick="editInsurance('${policy.policyName}')">
+                <td class="px-6 py-4 whitespace-nowrap">
+                    <div class="text-sm font-medium text-gray-900">${policy.policyName}</div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                    <div class="text-sm text-gray-600">${policy.companyName || ''}</div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                    <span class="px-2 py-1 text-xs font-medium rounded-full bg-blue-100 text-blue-800">
+                        ${policy.vehicleType || policy.policyType || ''}
+                    </span>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-right">
+                    <div class="text-sm font-semibold text-gray-900">₹${formatIndianNumber(policy.coverageAmount.toFixed(2))}</div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-right">
+                    <div class="text-sm font-medium text-gray-900">₹${formatIndianNumber(policy.premiumAmount.toFixed(2))}</div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                    <div class="text-sm font-bold ${isRenewalSoon ? 'bg-red-100 text-red-700 px-2 py-1 rounded' : 'text-gray-600'}">
+                        ${formatDate(policy.nextPremiumDue)}
+                        ${isRenewalSoon ? `<span class="text-xs">(${daysDiff} days)</span>` : ''}
+                    </div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                    <div class="text-sm text-gray-600">${formatDate(policy.startDate)}</div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                    <div class="text-sm text-gray-600">${formatDate(policy.endDate)}</div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-center">
+                    <div class="flex justify-center space-x-2">
+                        <button class="action-btn edit-btn" onclick="editInsurance('${policy.policyNumber || policy.id || policy.policyName}')">
+                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path>
+                            </svg>
                             Edit
                         </button>
-                        <button class="text-red-600 hover:text-red-900" onclick="deleteInsurance('${policy.policyName}')">
-                        Delete
-                    </button>
+                        <button class="action-btn delete-btn" onclick="deleteInsurance('${policy.policyNumber || policy.id || policy.policyName}')">
+                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                            </svg>
+                            Delete
+                        </button>
                     </div>
                 </td>
             `;
             break;
     }
+    
+    // If renewal is soon, add a special class to highlight the entire row
+    if (isRenewalSoon) {
+        return `<tr class="bg-red-50">${rowContent}</tr>`;
+    }
+    
     return rowContent;
 }
 
-// Update the updateInsurancePolicies function to use the new row generation
+// Store policies for reuse
+let lifePolicies = [];
+let healthPolicies = [];
+let motorPolicies = [];
+
 async function updateInsurancePolicies() {
     try {
-        const userId = firebase.auth().currentUser.uid;
+        const user = firebase.auth().currentUser;
+        if (!user) {
+            console.log('No user authenticated. Skipping insurance policies update.');
+            return;
+        }
+        
+        const userId = user.uid;
+        if (!userId) {
+            console.log('User ID is missing. Skipping insurance policies update.');
+            return;
+        }
+        
         const insuranceSnapshot = await db.collection('users').doc(userId).collection('insurance').get();
         
         // Reset all tables
-        document.getElementById('lifeInsurancePolicies').innerHTML = '';
-        document.getElementById('healthInsurancePolicies').innerHTML = '';
-        document.getElementById('motorInsurancePolicies').innerHTML = '';
+        const lifeTableBody = document.getElementById('lifeInsurancePolicies');
+        const healthTableBody = document.getElementById('healthInsurancePolicies');
+        const motorTableBody = document.getElementById('motorInsurancePolicies');
+        
+        if (lifeTableBody) lifeTableBody.innerHTML = '';
+        if (healthTableBody) healthTableBody.innerHTML = '';
+        if (motorTableBody) motorTableBody.innerHTML = '';
+        
+        // Reset mobile cards
+        const lifeCards = document.getElementById('lifeInsuranceMobileCards');
+        const healthCards = document.getElementById('healthInsuranceMobileCards');
+        const motorCards = document.getElementById('motorInsuranceMobileCards');
+        
+        if (lifeCards) lifeCards.innerHTML = '';
+        if (healthCards) healthCards.innerHTML = '';
+        if (motorCards) motorCards.innerHTML = '';
         
         let lifeTotalCoverage = 0;
         let lifeAnnualPremium = 0;
@@ -864,9 +1167,18 @@ async function updateInsurancePolicies() {
         let healthAnnualPremium = 0;
         let motorTotalCoverage = 0;
         let motorAnnualPremium = 0;
+        
+        // Reset global policy arrays
+        lifePolicies = [];
+        healthPolicies = [];
+        motorPolicies = [];
 
         insuranceSnapshot.forEach(doc => {
             const policy = doc.data();
+            const policyId = doc.id;
+            
+            // Add the id to the policy object
+            policy.id = policyId;
             
             // Update summary statistics based on insurance type
             switch(policy.insuranceType) {
@@ -874,33 +1186,144 @@ async function updateInsurancePolicies() {
                     lifeTotalCoverage += policy.coverageAmount || 0;
                     lifeAnnualPremium += policy.premiumAmount || 0;
                     lifeTotalInvestment += policy.investedAmount || 0;
-                    document.getElementById('lifeInsurancePolicies').innerHTML += generateInsuranceRow(policy, 'life');
+                    if (lifeTableBody) {
+                        const row = generateInsuranceRow(policy, 'life');
+                        if (row.startsWith('<tr')) {
+                            // Already wrapped in <tr>
+                            lifeTableBody.innerHTML += row;
+                        } else {
+                            // Need to wrap in <tr>
+                            const tr = document.createElement('tr');
+                            tr.innerHTML = row;
+                            lifeTableBody.appendChild(tr);
+                        }
+                    }
+                    lifePolicies.push(policy);
                     break;
                 case 'health':
                     healthTotalCoverage += policy.coverageAmount || 0;
                     healthAnnualPremium += policy.premiumAmount || 0;
-                    document.getElementById('healthInsurancePolicies').innerHTML += generateInsuranceRow(policy, 'health');
+                    if (healthTableBody) {
+                        const row = generateInsuranceRow(policy, 'health');
+                        if (row.startsWith('<tr')) {
+                            // Already wrapped in <tr>
+                            healthTableBody.innerHTML += row;
+                        } else {
+                            // Need to wrap in <tr>
+                            const tr = document.createElement('tr');
+                            tr.innerHTML = row;
+                            healthTableBody.appendChild(tr);
+                        }
+                    }
+                    healthPolicies.push(policy);
                     break;
                 case 'motor':
                     motorTotalCoverage += policy.coverageAmount || 0;
                     motorAnnualPremium += policy.premiumAmount || 0;
-                    document.getElementById('motorInsurancePolicies').innerHTML += generateInsuranceRow(policy, 'motor');
+                    if (motorTableBody) {
+                        const row = generateInsuranceRow(policy, 'motor');
+                        if (row.startsWith('<tr')) {
+                            // Already wrapped in <tr>
+                            motorTableBody.innerHTML += row;
+                        } else {
+                            // Need to wrap in <tr>
+                            const tr = document.createElement('tr');
+                            tr.innerHTML = row;
+                            motorTableBody.appendChild(tr);
+                        }
+                    }
+                    motorPolicies.push(policy);
                     break;
             }
         });
 
+        // Render mobile grid for each insurance type
+        renderInsuranceGrid('life', lifePolicies);
+        renderInsuranceGrid('health', healthPolicies);
+        renderInsuranceGrid('motor', motorPolicies);
+
         // Update summary cards with formatted numbers
-        document.getElementById('lifeTotalCoverage').textContent = formatIndianNumber(lifeTotalCoverage.toFixed(2));
-        document.getElementById('lifeAnnualPremium').textContent = formatIndianNumber(lifeAnnualPremium.toFixed(2));
-        document.getElementById('lifeTotalReturns').textContent = formatIndianNumber(lifeTotalInvestment.toFixed(2));
-        document.getElementById('healthTotalCoverage').textContent = formatIndianNumber(healthTotalCoverage.toFixed(2));
-        document.getElementById('healthAnnualPremium').textContent = formatIndianNumber(healthAnnualPremium.toFixed(2));
-        document.getElementById('motorTotalCoverage').textContent = formatIndianNumber(motorTotalCoverage.toFixed(2));
-        document.getElementById('motorAnnualPremium').textContent = formatIndianNumber(motorAnnualPremium.toFixed(2));
+        updateSummaryCard('lifeTotalCoverage', lifeTotalCoverage);
+        updateSummaryCard('lifeAnnualPremium', lifeAnnualPremium);
+        updateSummaryCard('lifeTotalReturns', lifeTotalInvestment);
+        updateSummaryCard('healthTotalCoverage', healthTotalCoverage);
+        updateSummaryCard('healthAnnualPremium', healthAnnualPremium);
+        updateSummaryCard('motorTotalCoverage', motorTotalCoverage);
+        updateSummaryCard('motorAnnualPremium', motorAnnualPremium);
     } catch (error) {
         console.error('Error updating insurance policies:', error);
     }
 }
+
+// Helper function to update summary cards safely
+function updateSummaryCard(elementId, value) {
+    const element = document.getElementById(elementId);
+    if (element) {
+        element.textContent = formatIndianNumber(value.toFixed(2));
+    }
+}
+
+// Updated document ready function to handle authentication status
+document.addEventListener('DOMContentLoaded', function() {
+    // Set up auth state change listener first
+    firebase.auth().onAuthStateChanged((user) => {
+        if (user) {
+            console.log('User authenticated:', user.email);
+            updateInsurancePolicies();
+            
+            // Set up real-time updates
+            const userId = user.uid;
+            db.collection('users').doc(userId).collection('insurance').onSnapshot((snapshot) => {
+                updateInsurancePolicies();
+            });
+        } else {
+            console.log('No user authenticated');
+        }
+    });
+    
+    // Update mobile toggle buttons and show default section
+    try {
+        updateMobileToggleButtons();
+        
+        // Show life insurance section by default without requiring an event
+        document.querySelectorAll('.insurance-section').forEach(section => {
+            section.classList.add('hidden');
+        });
+        
+        const lifeSection = document.getElementById('lifeInsurance');
+        if (lifeSection) {
+            lifeSection.classList.remove('hidden');
+        }
+        
+        // Highlight the life insurance tab
+        document.querySelectorAll('.tab-button').forEach(button => {
+            if (button) {
+                button.classList.remove('border-indigo-500', 'text-indigo-600');
+                button.classList.add('border-transparent', 'text-gray-500');
+            }
+        });
+        
+        const lifeButton = document.querySelector('[onclick="showInsuranceSection(\'life\')"]');
+        if (lifeButton) {
+            lifeButton.classList.remove('border-transparent', 'text-gray-500');
+            lifeButton.classList.add('border-indigo-500', 'text-indigo-600');
+        }
+        
+        // Initialize toggle switches
+        initializeToggleSwitches();
+    } catch (error) {
+        console.error('Error in DOMContentLoaded setup:', error);
+    }
+    
+    // Set initial view state based on screen size
+    const handleResize = () => {
+        initializeToggleSwitches();
+    };
+    
+    // Run initially and add resize listener
+    handleResize();
+    window.addEventListener('resize', handleResize);
+});
 
 // Function to delete insurance policy
 async function deleteInsurance(policyNumber) {
@@ -932,222 +1355,1072 @@ async function deleteInsurance(policyNumber) {
 }
 
 // Add edit insurance functionality
-async function editInsurance(policyNumber) {
+async function editInsurance(policyId) {
     try {
-        const userId = firebase.auth().currentUser.uid;
-        const insuranceRef = db.collection('users').doc(userId).collection('insurance').doc(policyNumber);
-        const insuranceDoc = await insuranceRef.get();
-        const insurance = insuranceDoc.data();
-
-        // Show the appropriate modal based on insurance type
-        showAddModal(insurance.insuranceType);
-
-        // Populate form fields with existing data
-        document.getElementById('policyName').value = insurance.policyName;
-        document.getElementById('companyName').value = insurance.companyName || '';
-        document.getElementById('policyNumber').value = insurance.policyNumber || '';
-        document.getElementById('policyType').value = insurance.policyType;
-        document.getElementById('premiumMode').value = insurance.premiumMode || 'yearly';
-        document.getElementById('coverageAmount').value = insurance.coverageAmount;
-        document.getElementById('premiumAmount').value = insurance.premiumAmount;
-        document.getElementById('investedAmount').value = insurance.investedAmount || '';
-        document.getElementById('startDate').value = insurance.startDate;
-        document.getElementById('nextPremiumDue').value = insurance.nextPremiumDue;
-        document.getElementById('endDate').value = insurance.endDate;
-
-        // Change save button text and functionality
+        // Show loading state
+        showLoadingSpinner();
+        
+        const userId = firebase.auth().currentUser?.uid;
+        if (!userId) {
+            throw new Error('You must be logged in to edit data');
+        }
+        
+        console.log('Editing policy with ID:', policyId);
+        
+        // Get the policy document
+        const policySnapshot = await db.collection('users').doc(userId).collection('insurance').doc(policyId).get();
+        
+        if (!policySnapshot.exists) {
+            throw new Error('Policy not found');
+        }
+        
+        const policy = policySnapshot.data();
+        console.log('Policy data:', policy);
+        
+        // Find the correct modal based on insurance type
+        let modalElement = document.getElementById('addInsuranceModal');
+        
+        // Show the appropriate modal based on insurance type and populate it
+        showAddModal(policy.insuranceType);
+        
+        // Populate the form with existing data
+        document.getElementById('policyName').value = policy.policyName || '';
+        document.getElementById('companyName').value = policy.companyName || '';
+        document.getElementById('policyNumber').value = policy.policyNumber || '';
+        document.getElementById('policyType').value = policy.policyType || '';
+        
+        if (policy.insuranceType === 'life') {
+            document.getElementById('premiumMode').value = policy.premiumMode || 'yearly';
+        }
+        
+        document.getElementById('coverageAmount').value = policy.coverageAmount || '';
+        document.getElementById('premiumAmount').value = policy.premiumAmount || '';
+        
+        if (policy.insuranceType === 'life') {
+            document.getElementById('investedAmount').value = policy.investedAmount || '';
+        }
+        
+        document.getElementById('startDate').value = policy.startDate || '';
+        document.getElementById('nextPremiumDue').value = policy.nextPremiumDue || '';
+        document.getElementById('endDate').value = policy.endDate || '';
+        
+        // Update save button to handle updating instead of creating
         const saveBtn = document.getElementById('saveInsuranceBtn');
-        saveBtn.textContent = 'Update';
+        saveBtn.textContent = 'Update Policy';
+        
+        // Store the original save button onclick function
+        const originalSaveFunction = saveBtn.onclick;
+        
+        // Replace with update function
         saveBtn.onclick = async () => {
             try {
-                const updatedData = {
+                const updatedPolicy = {
                     policyName: document.getElementById('policyName').value,
                     companyName: document.getElementById('companyName').value,
-                    policyNumber: document.getElementById('policyNumber').value,
+                    policyNumber: document.getElementById('policyNumber').value || policyId,
                     policyType: document.getElementById('policyType').value,
-                    premiumMode: document.getElementById('premiumMode').value,
                     coverageAmount: parseFloat(document.getElementById('coverageAmount').value),
                     premiumAmount: parseFloat(document.getElementById('premiumAmount').value),
-                    investedAmount: document.getElementById('investedAmount').value ? parseFloat(document.getElementById('investedAmount').value) : null,
                     startDate: document.getElementById('startDate').value,
                     nextPremiumDue: document.getElementById('nextPremiumDue').value,
                     endDate: document.getElementById('endDate').value,
+                    insuranceType: policy.insuranceType,
                     lastUpdated: firebase.firestore.FieldValue.serverTimestamp()
                 };
-
-                // Remove policyNumber and premiumMode for health insurance
-                if (insurance.insuranceType === 'health') {
-                    delete updatedData.policyNumber;
-                    delete updatedData.premiumMode;
+                
+                // Add properties based on insurance type
+                if (policy.insuranceType === 'life') {
+                    updatedPolicy.premiumMode = document.getElementById('premiumMode').value;
+                    updatedPolicy.investedAmount = parseFloat(document.getElementById('investedAmount').value) || 0;
                 }
-
-                // Convert premium amount to annual if necessary
-                if (insurance.insuranceType !== 'health') {
-                    switch (updatedData.premiumMode) {
-                        case 'monthly':
-                            updatedData.premiumAmount *= 12;
-                            break;
-                        case 'quarterly':
-                            updatedData.premiumAmount *= 4;
-                            break;
-                        case 'halferly':
-                            updatedData.premiumAmount *= 2;
-                            break;
-                    }
-                }
-
-                // Calculate the difference in coverage amount
-                const coverageDiff = updatedData.coverageAmount - insurance.coverageAmount;
-                const premiumDiff = updatedData.premiumAmount - insurance.premiumAmount;
-                const investmentDiff = (updatedData.investedAmount || 0) - (insurance.investedAmount || 0);
-
+                
+                // Calculate coverage and premium differences
+                const coverageDiff = updatedPolicy.coverageAmount - policy.coverageAmount;
+                const premiumDiff = updatedPolicy.premiumAmount - policy.premiumAmount;
+                
                 // Update the insurance document
-                await insuranceRef.update(updatedData);
-
+                await db.collection('users').doc(userId).collection('insurance').doc(policyId).update(updatedPolicy);
+                
                 // Update user's total insurance value
                 const userRef = db.collection('users').doc(userId);
                 await userRef.update({
-                    [`${insurance.insuranceType}InsuranceValue`]: firebase.firestore.FieldValue.increment(coverageDiff),
+                    [`${policy.insuranceType}InsuranceValue`]: firebase.firestore.FieldValue.increment(coverageDiff),
                     totalInvestment: firebase.firestore.FieldValue.increment(premiumDiff)
                 });
-
+                
+                // Close the modal and reset the save button
                 modal.classList.add('hidden');
-                updateInsurancePolicies();
-                alert('Insurance policy updated successfully!');
+                saveBtn.textContent = 'Save';
+                saveBtn.onclick = originalSaveFunction;
+                
+                // Show success message
+                showSuccessMessage('Policy updated successfully!');
+                
+                // Refresh the display
+            updateInsurancePolicies();
             } catch (error) {
-                console.error('Error updating insurance policy:', error);
-                alert('Error updating insurance policy. Please try again.');
+                console.error('Error updating policy:', error);
+                showErrorMessage('Failed to update policy: ' + error.message);
             }
         };
-
-        // Change cancel button to reset save button
+        
+        // Update cancel button to reset the save button
         const cancelBtn = document.getElementById('cancelInsuranceBtn');
+        const originalCancelFunction = cancelBtn.onclick;
+        
         cancelBtn.onclick = () => {
             modal.classList.add('hidden');
             saveBtn.textContent = 'Save';
-            saveBtn.onclick = null; // Reset to original save functionality
+            saveBtn.onclick = originalSaveFunction;
+            cancelBtn.onclick = originalCancelFunction;
         };
-
+        
+        // Hide loading state
+        hideLoadingSpinner();
     } catch (error) {
-        console.error('Error loading insurance policy:', error);
-        alert('Error loading insurance policy. Please try again.');
+        console.error('Error preparing policy edit:', error);
+        showErrorMessage('Error preparing edit: ' + error.message);
+        hideLoadingSpinner();
     }
 }
 
-// Update insurance policies when page loads
+// Utility functions for displaying messages and loading spinners
+function showLoadingSpinner() {
+    const loadingSpinner = document.createElement('div');
+    loadingSpinner.id = 'loadingSpinner';
+    loadingSpinner.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
+    loadingSpinner.innerHTML = `
+        <div class="bg-white p-4 rounded-md shadow-lg">
+            <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-500 mx-auto"></div>
+            <p class="mt-2 text-center text-gray-700">Loading...</p>
+        </div>
+    `;
+    document.body.appendChild(loadingSpinner);
+}
+
+function hideLoadingSpinner() {
+    const loadingSpinner = document.getElementById('loadingSpinner');
+    if (loadingSpinner) {
+        loadingSpinner.remove();
+    }
+}
+
+function showSuccessMessage(message) {
+    const toast = document.createElement('div');
+    toast.className = 'fixed bottom-4 right-4 bg-green-500 text-white px-6 py-3 rounded-md shadow-lg animate-fade-in z-50';
+    toast.innerHTML = `<div class="flex items-center"><svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+    </svg> ${message}</div>`;
+    document.body.appendChild(toast);
+    
+    setTimeout(() => {
+        toast.classList.replace('animate-fade-in', 'animate-fade-out');
+        setTimeout(() => toast.remove(), 300);
+    }, 3000);
+}
+
+function showErrorMessage(message) {
+    const toast = document.createElement('div');
+    toast.className = 'fixed bottom-4 right-4 bg-red-500 text-white px-6 py-3 rounded-md shadow-lg animate-fade-in z-50';
+    toast.innerHTML = `<div class="flex items-center"><svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+    </svg> ${message}</div>`;
+    document.body.appendChild(toast);
+    
+    setTimeout(() => {
+        toast.classList.replace('animate-fade-in', 'animate-fade-out');
+        setTimeout(() => toast.remove(), 300);
+    }, 3000);
+}
+
+// Update the mobile toggle buttons function
+function updateMobileToggleButtons() {
+    // Health insurance toggle button
+    const healthToggleButton = document.querySelector('[onclick="toggleView(\'health\')"]');
+    if (healthToggleButton) {
+        healthToggleButton.classList.add('flex', 'items-center');
+        const healthViewIcon = document.getElementById('healthViewIcon');
+        if (healthViewIcon) {
+            healthViewIcon.classList.add('mr-2');
+        }
+    }
+    
+    // Motor insurance toggle button
+    const motorToggleButton = document.querySelector('[onclick="toggleView(\'motor\')"]');
+    if (motorToggleButton) {
+        motorToggleButton.classList.add('flex', 'items-center');
+        const motorViewIcon = document.getElementById('motorViewIcon');
+        if (motorViewIcon) {
+            motorViewIcon.classList.add('mr-2');
+        }
+    }
+}
+
+// Update the mobile cards rendering when data is loaded
+async function updateInsurancePolicies() {
+    try {
+        const userId = firebase.auth().currentUser.uid;
+        const insuranceSnapshot = await db.collection('users').doc(userId).collection('insurance').get();
+        
+        // Reset all tables
+        document.getElementById('lifeInsurancePolicies').innerHTML = '';
+        document.getElementById('healthInsurancePolicies').innerHTML = '';
+        document.getElementById('motorInsurancePolicies').innerHTML = '';
+        
+        // Reset mobile cards
+        document.getElementById('lifeInsuranceMobileCards').innerHTML = '';
+        document.getElementById('healthInsuranceMobileCards').innerHTML = '';
+        document.getElementById('motorInsuranceMobileCards').innerHTML = '';
+        
+        let lifeTotalCoverage = 0;
+        let lifeAnnualPremium = 0;
+        let lifeTotalInvestment = 0;
+        let healthTotalCoverage = 0;
+        let healthAnnualPremium = 0;
+        let motorTotalCoverage = 0;
+        let motorAnnualPremium = 0;
+        
+        // Group policies by type
+        const lifePolicies = [];
+        const healthPolicies = [];
+        const motorPolicies = [];
+
+        insuranceSnapshot.forEach(doc => {
+            const policy = doc.data();
+            const policyId = doc.id;
+            
+            // Add the id to the policy object
+            policy.id = policyId;
+            
+            // Update summary statistics based on insurance type
+            switch(policy.insuranceType) {
+                case 'life':
+                    lifeTotalCoverage += policy.coverageAmount || 0;
+                    lifeAnnualPremium += policy.premiumAmount || 0;
+                    lifeTotalInvestment += policy.investedAmount || 0;
+                    document.getElementById('lifeInsurancePolicies').innerHTML += generateInsuranceRow(policy, 'life');
+                    // Add to life policies for mobile cards
+                    lifePolicies.push(policy);
+                    break;
+                case 'health':
+                    healthTotalCoverage += policy.coverageAmount || 0;
+                    healthAnnualPremium += policy.premiumAmount || 0;
+                    document.getElementById('healthInsurancePolicies').innerHTML += generateInsuranceRow(policy, 'health');
+                    // Add to health policies for mobile cards
+                    healthPolicies.push(policy);
+                    break;
+                case 'motor':
+                    motorTotalCoverage += policy.coverageAmount || 0;
+                    motorAnnualPremium += policy.premiumAmount || 0;
+                    document.getElementById('motorInsurancePolicies').innerHTML += generateInsuranceRow(policy, 'motor');
+                    // Add to motor policies for mobile cards
+                    motorPolicies.push(policy);
+                    break;
+            }
+        });
+
+        // Render mobile grid for each insurance type
+        renderInsuranceGrid('life', lifePolicies);
+        renderInsuranceGrid('health', healthPolicies);
+        renderInsuranceGrid('motor', motorPolicies);
+
+        // Update summary cards with formatted numbers
+        document.getElementById('lifeTotalCoverage').textContent = formatIndianNumber(lifeTotalCoverage.toFixed(2));
+        document.getElementById('lifeAnnualPremium').textContent = formatIndianNumber(lifeAnnualPremium.toFixed(2));
+        document.getElementById('lifeTotalReturns').textContent = formatIndianNumber(lifeTotalInvestment.toFixed(2));
+        document.getElementById('healthTotalCoverage').textContent = formatIndianNumber(healthTotalCoverage.toFixed(2));
+        document.getElementById('healthAnnualPremium').textContent = formatIndianNumber(healthAnnualPremium.toFixed(2));
+        document.getElementById('motorTotalCoverage').textContent = formatIndianNumber(motorTotalCoverage.toFixed(2));
+        document.getElementById('motorAnnualPremium').textContent = formatIndianNumber(motorAnnualPremium.toFixed(2));
+    } catch (error) {
+        console.error('Error updating insurance policies:', error);
+    }
+}
+
+// Function to render mobile cards
+function renderMobileCards(type, policies) {
+    const cardsContainer = document.getElementById(`${type}InsuranceMobileCards`);
+    if (!policies.length) {
+        cardsContainer.innerHTML = `
+            <div class="text-center py-8 text-gray-500">
+                <svg class="w-16 h-16 mx-auto text-gray-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                <p class="text-lg font-medium">No policies found</p>
+                <p class="text-sm">Add your first policy to get started.</p>
+            </div>
+        `;
+        return;
+    }
+    
+    let cardsHTML = '';
+    
+    policies.forEach(policy => {
+        cardsHTML += `
+            <div class="insurance-card mb-4">
+                <div class="insurance-card-header">
+                    <h3 class="insurance-card-title">${policy.policyName}</h3>
+                    <span class="text-sm text-indigo-600 font-medium">${policy.companyName || ''}</span>
+                </div>
+                <div class="insurance-card-body">
+                    <div class="insurance-card-field">
+                        <span class="insurance-card-label">Type:</span>
+                        <span class="insurance-card-value">${policy.policyType || policy.vehicleType || ''}</span>
+                    </div>
+                    <div class="insurance-card-field">
+                        <span class="insurance-card-label">${type === 'life' ? 'Sum Assured' : 'Coverage'}:</span>
+                        <span class="insurance-card-value">₹${formatIndianNumber((policy.coverageAmount || 0).toFixed(2))}</span>
+                    </div>
+                    <div class="insurance-card-field">
+                        <span class="insurance-card-label">Premium:</span>
+                        <span class="insurance-card-value">₹${formatIndianNumber((policy.premiumAmount || 0).toFixed(2))}</span>
+                    </div>
+                    ${type === 'life' ? `
+                    <div class="insurance-card-field">
+                        <span class="insurance-card-label">Premium Mode:</span>
+                        <span class="insurance-card-value">${policy.premiumMode || 'Yearly'}</span>
+                    </div>
+                    ` : ''}
+                    <div class="insurance-card-field">
+                        <span class="insurance-card-label">Renewal Date:</span>
+                        <span class="insurance-card-value">${policy.nextPremiumDue ? new Date(policy.nextPremiumDue).toLocaleDateString() : 'N/A'}</span>
+                    </div>
+                    ${type === 'life' && policy.investedAmount ? `
+                    <div class="insurance-card-field">
+                        <span class="insurance-card-label">Invested Amount:</span>
+                        <span class="insurance-card-value">₹${formatIndianNumber((policy.investedAmount || 0).toFixed(2))}</span>
+                    </div>
+                    ` : ''}
+                </div>
+                <div class="insurance-card-actions">
+                    <button onclick="editInsurance('${policy.policyNumber || policy.policyName}')" class="px-3 py-1 bg-indigo-50 text-indigo-600 rounded-md hover:bg-indigo-100">
+                        <i class="fas fa-edit mr-1"></i>Edit
+                    </button>
+                    <button onclick="deleteInsurance('${policy.policyNumber || policy.policyName}')" class="px-3 py-1 bg-red-50 text-red-600 rounded-md hover:bg-red-100">
+                        <i class="fas fa-trash mr-1"></i>Delete
+                    </button>
+                </div>
+            </div>
+        `;
+    });
+    
+    cardsContainer.innerHTML = cardsHTML;
+}
+
+// Initialize view states and set up the page when it loads
 document.addEventListener('DOMContentLoaded', () => {
+    updateMobileToggleButtons();
     updateInsurancePolicies();
     showInsuranceSection('life'); // Show life insurance section by default
+    
+    // Set initial view state based on screen size
+    const handleResize = () => {
+        if (window.innerWidth < 768) {
+            // On mobile, default to card view
+            document.getElementById('lifeInsuranceTable').classList.add('hidden');
+            document.getElementById('healthInsuranceTable').classList.add('hidden');
+            document.getElementById('motorInsuranceTable').classList.add('hidden');
+            document.getElementById('lifeInsuranceMobileCards').classList.remove('hidden');
+            document.getElementById('healthInsuranceMobileCards').classList.remove('hidden');
+            document.getElementById('motorInsuranceMobileCards').classList.remove('hidden');
+        } else {
+            // On desktop, force table view
+            document.getElementById('lifeInsuranceTable').classList.remove('hidden');
+            document.getElementById('healthInsuranceTable').classList.remove('hidden');
+            document.getElementById('motorInsuranceTable').classList.remove('hidden');
+            document.getElementById('lifeInsuranceMobileCards').classList.add('hidden');
+            document.getElementById('healthInsuranceMobileCards').classList.add('hidden');
+            document.getElementById('motorInsuranceMobileCards').classList.add('hidden');
+        }
+    };
+    
+    // Run initially and add resize listener
+    handleResize();
+    window.addEventListener('resize', handleResize);
 });
 
-// Listen for real-time updates
-firebase.auth().onAuthStateChanged((user) => {
-    if (user) {
-        const userId = user.uid;
-        db.collection('users').doc(userId).collection('insurance').onSnapshot((snapshot) => {
-            updateInsurancePolicies();
-        });
-    }
-});
-
-// View state for each insurance type
-const viewStates = {
-    life: 'card',
-    health: 'card',
-    motor: 'card'
-};
-
-// Toggle between card and table view on mobile
+// Toggle view function (table/cards)
 function toggleView(type) {
-    const cardsDiv = document.getElementById(`${type}InsuranceMobileCards`);
-    const tableDiv = document.getElementById(`${type}InsuranceTable`);
-    const viewIcon = document.getElementById(`${type}ViewIcon`);
+    const tableContainer = document.getElementById(`${type}InsuranceTable`);
+    const cardsContainer = document.getElementById(`${type}InsuranceMobileCards`);
+    const viewToggle = document.getElementById(`${type}ViewToggle`);
     
-    viewStates[type] = viewStates[type] === 'card' ? 'table' : 'card';
+    if (!tableContainer || !cardsContainer || !viewToggle) return;
     
-    if (viewStates[type] === 'card') {
-        cardsDiv.classList.remove('hidden');
-        tableDiv.classList.add('hidden', 'md:block');
-        viewIcon.innerHTML = `
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 1h16a2 2 0 012 2v16a2 2 0 01-2 2H4a2 2 0 01-2-2V3a2 2 0 012-2z"></path>
-            </svg>
-        `;
+    // Add fade out animation
+    if (tableContainer.classList.contains('hidden')) {
+        // Switching to table view
+        cardsContainer.classList.add('animate-fade-out');
+        viewToggle.classList.remove('grid-view'); // Change from 'card-view' to 'grid-view'
+        
+        setTimeout(() => {
+            cardsContainer.classList.add('hidden');
+            cardsContainer.classList.remove('animate-fade-out');
+            
+            tableContainer.classList.remove('hidden');
+            tableContainer.classList.add('animate-fade-in');
+            
+            setTimeout(() => {
+                tableContainer.classList.remove('animate-fade-in');
+            }, 300);
+        }, 300);
     } else {
-        cardsDiv.classList.add('hidden');
-        tableDiv.classList.remove('hidden');
-        viewIcon.innerHTML = `
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 1h16a2 2 0 012 2v16a2 2 0 01-2 2H4a2 2 0 01-2-2V3a2 2 0 012-2z"></path>
-            </svg>
-        `;
+        // Switching to grid view
+        tableContainer.classList.add('animate-fade-out');
+        viewToggle.classList.add('grid-view'); // Change from 'card-view' to 'grid-view'
+        
+        setTimeout(() => {
+            tableContainer.classList.add('hidden');
+            tableContainer.classList.remove('animate-fade-out');
+            
+            // Convert cards to grid layout
+            const policies = type === 'life' ? lifePolicies : 
+                           type === 'health' ? healthPolicies : 
+                           type === 'motor' ? motorPolicies : [];
+            
+            // Render mobile grid layout
+            renderMobileGrid(type, policies);
+            
+            cardsContainer.classList.remove('hidden');
+            cardsContainer.classList.add('animate-fade-in');
+            
+            setTimeout(() => {
+                cardsContainer.classList.remove('animate-fade-in');
+            }, 300);
+        }, 300);
     }
 }
 
-// Function to create mobile card HTML
-function createInsuranceCard(policy, type) {
-    return `
-        <div class="insurance-card view-transition">
-            <div class="insurance-card-header">
-                <h3 class="insurance-card-title">${policy.policyHolder}</h3>
-                <span class="text-sm text-gray-500">${policy.companyName}</span>
+// Function to render mobile cards in a list format
+function renderMobileList(type, policies) {
+    const cardsContainer = document.getElementById(`${type}InsuranceMobileCards`);
+    if (!policies.length) {
+        cardsContainer.innerHTML = `
+            <div class="text-center py-8 text-gray-500">
+                <svg class="w-16 h-16 mx-auto text-gray-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                <p class="text-lg font-medium">No policies found</p>
+                <p class="text-sm">Add your first policy to get started.</p>
             </div>
-            <div class="insurance-card-body">
-                <div class="insurance-card-field">
-                    <span class="insurance-card-label">Type:</span>
-                    <span class="insurance-card-value">${type === 'motor' ? policy.vehicleType : policy.type}</span>
+        `;
+        return;
+    }
+    
+    cardsContainer.innerHTML = `
+        <div class="space-y-4">
+            ${policies.map(policy => {
+                const today = new Date();
+                const renewalDate = policy.nextPremiumDue ? new Date(policy.nextPremiumDue) : null;
+                const daysDiff = renewalDate ? Math.ceil((renewalDate - today) / (1000 * 60 * 60 * 24)) : 999;
+                const isRenewalSoon = daysDiff <= 30 && daysDiff > 0;
+                
+                // Determine badge color based on insurance type and renewal status
+                let badgeClass = '';
+                if (isRenewalSoon) {
+                    badgeClass = 'bg-red-100 text-red-800';
+                } else {
+                    badgeClass = type === 'life' ? 'bg-indigo-100 text-indigo-800' : 
+                               type === 'health' ? 'bg-green-100 text-green-800' : 
+                               'bg-blue-100 text-blue-800';
+                }
+                
+                return `
+                <div class="bg-white rounded-xl shadow-md overflow-hidden border ${isRenewalSoon ? 'border-red-300' : 'border-gray-200'} transform transition-all duration-200 hover:shadow-lg hover:scale-[1.01]">
+                    <!-- Card Header -->
+                    <div class="p-4 ${isRenewalSoon ? 'bg-gradient-to-r from-red-50 to-white' : 'bg-gradient-to-r from-gray-50 to-white'}">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="text-base font-semibold text-gray-900">${policy.policyName}</h3>
+                                <p class="text-sm text-gray-600">${policy.companyName || ''}</p>
+                            </div>
+                            <span class="px-3 py-1 text-xs font-medium rounded-full inline-flex items-center ${badgeClass}">
+                                ${isRenewalSoon ? '<svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>' : ''}
+                                ${policy.policyType || policy.vehicleType || ''}
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <!-- Card Body -->
+                    <div class="p-4 bg-white">
+                        <!-- Renewal Alert if needed -->
+                        ${isRenewalSoon ? `
+                        <div class="mb-3 bg-red-50 text-red-700 text-sm rounded-md p-2 flex items-center">
+                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                            </svg>
+                            Renewal due in <span class="font-bold">${daysDiff}</span> days
+                        </div>
+                        ` : ''}
+                        
+                        <!-- Policy Details -->
+                        <div class="grid grid-cols-2 gap-3 text-sm">
+                            <div class="col-span-2 flex justify-between bg-gray-50 p-2 rounded-md">
+                                <span class="text-gray-600 font-medium">Coverage:</span>
+                                <span class="font-bold text-gray-900">₹${formatIndianNumber((policy.coverageAmount || 0).toFixed(2))}</span>
+                            </div>
+                            
+                            <div class="flex items-center">
+                                <svg class="w-4 h-4 mr-1 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                                <div>
+                                    <div class="text-xs text-gray-500">Premium</div>
+                                    <div class="font-medium">₹${formatIndianNumber((policy.premiumAmount || 0).toFixed(2))}</div>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center">
+                                <svg class="w-4 h-4 mr-1 ${isRenewalSoon ? 'text-red-500' : 'text-gray-500'}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                </svg>
+                                <div>
+                                    <div class="text-xs ${isRenewalSoon ? 'text-red-500 font-medium' : 'text-gray-500'}">Renewal Date</div>
+                                    <div class="${isRenewalSoon ? 'font-bold text-red-600' : 'font-medium'}">${formatDate(policy.nextPremiumDue)}</div>
+                                </div>
+                            </div>
+                            
+                            ${type === 'life' ? `
+                            <div class="flex items-center">
+                                <svg class="w-4 h-4 mr-1 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                                </svg>
+                                <div>
+                                    <div class="text-xs text-gray-500">Premium Mode</div>
+                                    <div class="font-medium">${policy.premiumMode || 'Yearly'}</div>
+                                </div>
+                            </div>
+                            ` : ''}
+                            
+                            <div class="flex items-center">
+                                <svg class="w-4 h-4 mr-1 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                </svg>
+                                <div>
+                                    <div class="text-xs text-gray-500">Start Date</div>
+                                    <div class="font-medium">${formatDate(policy.startDate)}</div>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center">
+                                <svg class="w-4 h-4 mr-1 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                </svg>
+                                <div>
+                                    <div class="text-xs text-gray-500">End Date</div>
+                                    <div class="font-medium">${formatDate(policy.endDate)}</div>
+                                </div>
+                            </div>
+                            
+                            ${type === 'life' && policy.investedAmount ? `
+                            <div class="flex items-center">
+                                <svg class="w-4 h-4 mr-1 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                                <div>
+                                    <div class="text-xs text-gray-500">Invested Amount</div>
+                                    <div class="font-medium">₹${formatIndianNumber((policy.investedAmount || 0).toFixed(2))}</div>
+                                </div>
+                            </div>
+                            ` : ''}
+                        </div>
+                    </div>
+                    
+                    <!-- Card Footer -->
+                    <div class="bg-gray-50 px-4 py-3 flex justify-end space-x-2">
+                        <button onclick="editInsurance('${policy.policyNumber || policy.id || policy.policyName}')" class="action-btn edit-btn flex items-center">
+                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path>
+                            </svg>
+                            Edit
+                        </button>
+                        <button onclick="deleteInsurance('${policy.policyNumber || policy.id || policy.policyName}')" class="action-btn delete-btn flex items-center">
+                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                            </svg>
+                            Delete
+                        </button>
+                    </div>
                 </div>
-                <div class="insurance-card-field">
-                    <span class="insurance-card-label">${type === 'life' ? 'Sum Assured' : 'Coverage'}:</span>
-                    <span class="insurance-card-value">₹${formatIndianNumber(policy.coverage || policy.sumAssured)}</span>
-                </div>
-                <div class="insurance-card-field">
-                    <span class="insurance-card-label">Premium:</span>
-                    <span class="insurance-card-value">₹${formatIndianNumber(policy.premium)}</span>
-                </div>
-                <div class="insurance-card-field">
-                    <span class="insurance-card-label">Renewal Date:</span>
-                    <span class="insurance-card-value">${formatDate(policy.renewalDate)}</span>
-                </div>
-            </div>
-            <div class="insurance-card-actions">
-                <button onclick="editInsurance('${type}', '${policy.id}')" class="text-indigo-600 hover:text-indigo-800">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
-                    </svg>
-                </button>
-                <button onclick="deleteInsurance('${type}', '${policy.id}')" class="text-red-600 hover:text-red-800">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
-                    </svg>
-                </button>
-            </div>
+                `;
+            }).join('')}
         </div>
     `;
 }
 
-// Function to update the mobile cards view
-function updateMobileCards(type, policies) {
-    const cardsContainer = document.getElementById(`${type}InsuranceMobileCards`);
-    if (!cardsContainer) return;
-
-    cardsContainer.innerHTML = policies.map(policy => createInsuranceCard(policy, type)).join('');
+// Add a function to format dates as dd/mm/yyyy
+function formatDate(dateString) {
+    if (!dateString) return '-';
+    
+    const date = new Date(dateString);
+    if (isNaN(date.getTime())) return '-'; // Invalid date
+    
+    const day = date.getDate().toString().padStart(2, '0');
+    const month = (date.getMonth() + 1).toString().padStart(2, '0'); // getMonth() is 0-indexed
+    const year = date.getFullYear();
+    
+    return `${day}/${month}/${year}`;
 }
 
-// Modify the existing renderPolicies functions to include mobile card updates
-function renderLifeInsurancePolicies(policies) {
-    // Existing table rendering code...
-    updateMobileCards('life', policies);
+// Initialize toggle switch states
+function initializeToggleSwitches() {
+    const types = ['life', 'health', 'motor'];
+    
+    types.forEach(type => {
+        const tableContainer = document.getElementById(`${type}InsuranceTable`);
+        const cardsContainer = document.getElementById(`${type}InsuranceMobileCards`);
+        const viewToggle = document.getElementById(`${type}ViewToggle`);
+        
+        if (tableContainer && cardsContainer && viewToggle) {
+            if (window.innerWidth < 768) {
+                // On mobile, default to grid view
+                tableContainer.classList.add('hidden');
+                cardsContainer.classList.remove('hidden');
+                viewToggle.classList.add('grid-view'); // Change from 'card-view' to 'grid-view'
+                
+                // Load the grid view initially
+                const policies = type === 'life' ? lifePolicies : 
+                               type === 'health' ? healthPolicies : 
+                               type === 'motor' ? motorPolicies : [];
+                               
+                if (policies.length > 0) {
+                    renderMobileGrid(type, policies);
+                }
+            } else {
+                // On desktop, default to table view
+                tableContainer.classList.remove('hidden');
+                cardsContainer.classList.add('hidden');
+                viewToggle.classList.remove('grid-view'); // Change from 'card-view' to 'grid-view'
+            }
+        }
+    });
 }
 
-function renderHealthInsurancePolicies(policies) {
-    // Existing table rendering code...
-    updateMobileCards('health', policies);
+// Replace renderMobileList with renderMobileGrid for grid layout
+function renderMobileGrid(type, policies) {
+    const gridContainer = document.getElementById(`${type}InsuranceMobileCards`);
+    if (!policies.length) {
+        gridContainer.innerHTML = `
+            <div class="text-center py-8 text-gray-500">
+                <svg class="w-16 h-16 mx-auto text-gray-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                <p class="text-lg font-medium">No policies found</p>
+                <p class="text-sm">Add your first policy to get started.</p>
+            </div>
+        `;
+        return;
+    }
+    
+    gridContainer.innerHTML = `
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            ${policies.map(policy => {
+                const today = new Date();
+                const renewalDate = policy.nextPremiumDue ? new Date(policy.nextPremiumDue) : null;
+                const daysDiff = renewalDate ? Math.ceil((renewalDate - today) / (1000 * 60 * 60 * 24)) : 999;
+                const isRenewalSoon = daysDiff <= 30 && daysDiff > 0;
+                
+                // Determine badge color based on insurance type and renewal status
+                let badgeClass = '';
+                if (isRenewalSoon) {
+                    badgeClass = 'bg-red-100 text-red-800';
+                } else {
+                    badgeClass = type === 'life' ? 'bg-indigo-100 text-indigo-800' : 
+                               type === 'health' ? 'bg-green-100 text-green-800' : 
+                               'bg-blue-100 text-blue-800';
+                }
+                
+                return `
+                <div class="bg-white rounded-lg shadow-md h-full border ${isRenewalSoon ? 'border-red-300' : 'border-gray-200'} transform transition-all duration-200 hover:shadow-lg hover:scale-[1.01] flex flex-col">
+                    <!-- Card Header -->
+                    <div class="p-3 ${isRenewalSoon ? 'bg-gradient-to-r from-red-50 to-white' : 'bg-gradient-to-r from-gray-50 to-white'} rounded-t-lg">
+                        <div class="flex justify-between items-center">
+                            <h3 class="text-sm font-semibold text-gray-900 truncate" title="${policy.policyName}">${policy.policyName}</h3>
+                            <span class="px-2 py-1 text-xs font-medium rounded-full inline-flex items-center ${badgeClass}">
+                                ${policy.policyType || policy.vehicleType || ''}
+                            </span>
+                        </div>
+                        <p class="text-xs text-gray-600">${policy.companyName || ''}</p>
+                    </div>
+                    
+                    <!-- Card Body -->
+                    <div class="p-3 flex-grow">
+                        <!-- Renewal Alert if needed -->
+                        ${isRenewalSoon ? `
+                        <div class="mb-2 bg-red-50 text-red-700 text-xs rounded p-1 flex items-center">
+                            <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                            </svg>
+                            Renewal: ${daysDiff} days
+                        </div>
+                        ` : ''}
+                        
+                        <!-- Amount Details -->
+                        <div class="mb-2 flex justify-between">
+                            <span class="text-xs font-medium text-gray-500">Coverage:</span>
+                            <span class="text-xs font-bold text-gray-900">₹${formatIndianNumber((policy.coverageAmount || 0).toFixed(2))}</span>
+                        </div>
+                        
+                        <div class="mb-2 flex justify-between">
+                            <span class="text-xs font-medium text-gray-500">Premium:</span>
+                            <span class="text-xs font-medium">₹${formatIndianNumber((policy.premiumAmount || 0).toFixed(2))}</span>
+                        </div>
+                        
+                        <!-- Dates -->
+                        <div class="mb-2 flex justify-between">
+                            <span class="text-xs font-medium ${isRenewalSoon ? 'text-red-600' : 'text-gray-500'}">Renewal:</span>
+                            <span class="text-xs font-medium ${isRenewalSoon ? 'text-red-600' : ''}">
+                                ${formatDate(policy.nextPremiumDue)}
+                            </span>
+                        </div>
+                        
+                        ${type === 'life' ? `
+                        <div class="mb-2 flex justify-between">
+                            <span class="text-xs font-medium text-gray-500">Mode:</span>
+                            <span class="text-xs">${policy.premiumMode || 'Yearly'}</span>
+                        </div>
+                        ` : ''}
+                    </div>
+                    
+                    <!-- Card Footer -->
+                    <div class="p-2 bg-gray-50 rounded-b-lg flex justify-between items-center">
+                        <span class="text-xs text-gray-500">${formatDate(policy.startDate)} - ${formatDate(policy.endDate)}</span>
+                        <div class="flex space-x-1">
+                            <button onclick="editInsurance('${policy.policyNumber || policy.id || policy.policyName}')" class="p-1 bg-indigo-50 text-indigo-600 rounded hover:bg-indigo-100">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path>
+                                </svg>
+                            </button>
+                            <button onclick="deleteInsurance('${policy.policyNumber || policy.id || policy.policyName}')" class="p-1 bg-red-50 text-red-600 rounded hover:bg-red-100">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                `;
+            }).join('')}
+        </div>
+    `;
 }
 
-function renderMotorInsurancePolicies(policies) {
-    // Existing table rendering code...
-    updateMobileCards('motor', policies);
+// Add new grid function and update updateInsurancePolicies
+function renderInsuranceGrid(type, policies) {
+    const gridContainer = document.getElementById(`${type}InsuranceMobileCards`);
+    if (!policies.length) {
+        gridContainer.innerHTML = `
+            <div class="text-center py-8 text-gray-500">
+                <svg class="w-16 h-16 mx-auto text-gray-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                <p class="text-lg font-medium">No policies found</p>
+                <p class="text-sm">Add your first policy to get started.</p>
+            </div>
+        `;
+        return;
+    }
+    
+    gridContainer.innerHTML = `
+        <div class="insurance-grid">
+            ${policies.map(policy => {
+                const today = new Date();
+                const renewalDate = policy.nextPremiumDue ? new Date(policy.nextPremiumDue) : null;
+                const daysDiff = renewalDate ? Math.ceil((renewalDate - today) / (1000 * 60 * 60 * 24)) : 999;
+                const isRenewalSoon = daysDiff <= 30 && daysDiff > 0;
+                
+                // Determine badge color based on insurance type and renewal status
+                let badgeClass = '';
+                if (isRenewalSoon) {
+                    badgeClass = 'bg-red-100 text-red-800';
+                } else {
+                    badgeClass = type === 'life' ? 'bg-indigo-100 text-indigo-800' : 
+                               type === 'health' ? 'bg-green-100 text-green-800' : 
+                               'bg-blue-100 text-blue-800';
+                }
+                
+                return `
+                <div class="insurance-grid-item ${isRenewalSoon ? 'border-red-300' : ''} flex flex-col">
+                    <!-- Card Header -->
+                    <div class="insurance-grid-header ${isRenewalSoon ? 'bg-gradient-to-r from-red-50 to-white' : ''}">
+                        <div class="flex justify-between items-center mb-1">
+                            <h3 class="text-sm font-semibold text-gray-900 truncate" title="${policy.policyName}">${policy.policyName}</h3>
+                            <span class="px-2 py-1 text-xs font-medium rounded-full ${badgeClass}">
+                                ${policy.policyType || policy.vehicleType || ''}
+                            </span>
+                        </div>
+                        <p class="text-xs text-gray-600 truncate">${policy.companyName || ''}</p>
+                    </div>
+                    
+                    <!-- Card Body -->
+                    <div class="insurance-grid-body">
+                        <!-- Renewal Alert if needed -->
+                        ${isRenewalSoon ? `
+                        <div class="mb-2 bg-red-50 text-red-700 text-xs rounded p-1 flex items-center">
+                            <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                            </svg>
+                            Renewal: ${daysDiff} days
+                        </div>
+                        ` : ''}
+                        
+                        <!-- Amount Details -->
+                        <div class="mb-2 flex justify-between">
+                            <span class="text-xs font-medium text-gray-500">Coverage:</span>
+                            <span class="text-xs font-bold text-gray-900">₹${formatIndianNumber((policy.coverageAmount || 0).toFixed(2))}</span>
+                        </div>
+                        
+                        <div class="mb-2 flex justify-between">
+                            <span class="text-xs font-medium text-gray-500">Premium:</span>
+                            <span class="text-xs font-medium">₹${formatIndianNumber((policy.premiumAmount || 0).toFixed(2))}</span>
+                        </div>
+                        
+                        <!-- Dates -->
+                        <div class="mb-2 flex justify-between">
+                            <span class="text-xs font-medium ${isRenewalSoon ? 'text-red-600' : 'text-gray-500'}">Renewal:</span>
+                            <span class="text-xs font-medium ${isRenewalSoon ? 'text-red-600' : ''}">
+                                ${formatDate(policy.nextPremiumDue)}
+                            </span>
+                        </div>
+                        
+                        ${type === 'life' ? `
+                        <div class="mb-2 flex justify-between">
+                            <span class="text-xs font-medium text-gray-500">Mode:</span>
+                            <span class="text-xs">${policy.premiumMode || 'Yearly'}</span>
+                        </div>
+                        ` : ''}
+                    </div>
+                    
+                    <!-- Card Footer -->
+                    <div class="insurance-grid-footer mt-auto">
+                        <span class="text-xs text-gray-500">${formatDate(policy.startDate)} - ${formatDate(policy.endDate)}</span>
+                        <div class="flex space-x-1">
+                            <button onclick="editInsurance('${policy.policyNumber || policy.id || policy.policyName}')" class="p-1 bg-indigo-50 text-indigo-600 rounded hover:bg-indigo-100">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path>
+                                </svg>
+                            </button>
+                            <button onclick="deleteInsurance('${policy.policyNumber || policy.id || policy.policyName}')" class="p-1 bg-red-50 text-red-600 rounded hover:bg-red-100">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                `;
+            }).join('')}
+        </div>
+    `;
 }
+
+async function updateInsurancePolicies() {
+    try {
+        const user = firebase.auth().currentUser;
+        if (!user) {
+            console.log('No user authenticated. Skipping insurance policies update.');
+            return;
+        }
+        
+        const userId = user.uid;
+        if (!userId) {
+            console.log('User ID is missing. Skipping insurance policies update.');
+            return;
+        }
+        
+        const insuranceSnapshot = await db.collection('users').doc(userId).collection('insurance').get();
+        
+        // Reset all tables
+        const lifeTableBody = document.getElementById('lifeInsurancePolicies');
+        const healthTableBody = document.getElementById('healthInsurancePolicies');
+        const motorTableBody = document.getElementById('motorInsurancePolicies');
+        
+        if (lifeTableBody) lifeTableBody.innerHTML = '';
+        if (healthTableBody) healthTableBody.innerHTML = '';
+        if (motorTableBody) motorTableBody.innerHTML = '';
+        
+        // Reset mobile cards
+        const lifeCards = document.getElementById('lifeInsuranceMobileCards');
+        const healthCards = document.getElementById('healthInsuranceMobileCards');
+        const motorCards = document.getElementById('motorInsuranceMobileCards');
+        
+        if (lifeCards) lifeCards.innerHTML = '';
+        if (healthCards) healthCards.innerHTML = '';
+        if (motorCards) motorCards.innerHTML = '';
+        
+        let lifeTotalCoverage = 0;
+        let lifeAnnualPremium = 0;
+        let lifeTotalInvestment = 0;
+        let healthTotalCoverage = 0;
+        let healthAnnualPremium = 0;
+        let motorTotalCoverage = 0;
+        let motorAnnualPremium = 0;
+        
+        // Reset global policy arrays
+        lifePolicies = [];
+        healthPolicies = [];
+        motorPolicies = [];
+
+        insuranceSnapshot.forEach(doc => {
+            const policy = doc.data();
+            const policyId = doc.id;
+            
+            // Add the id to the policy object
+            policy.id = policyId;
+            
+            // Update summary statistics based on insurance type
+            switch(policy.insuranceType) {
+                case 'life':
+                    lifeTotalCoverage += policy.coverageAmount || 0;
+                    lifeAnnualPremium += policy.premiumAmount || 0;
+                    lifeTotalInvestment += policy.investedAmount || 0;
+                    if (lifeTableBody) {
+                        const row = generateInsuranceRow(policy, 'life');
+                        if (row.startsWith('<tr')) {
+                            // Already wrapped in <tr>
+                            lifeTableBody.innerHTML += row;
+                        } else {
+                            // Need to wrap in <tr>
+                            const tr = document.createElement('tr');
+                            tr.innerHTML = row;
+                            lifeTableBody.appendChild(tr);
+                        }
+                    }
+                    lifePolicies.push(policy);
+                    break;
+                case 'health':
+                    healthTotalCoverage += policy.coverageAmount || 0;
+                    healthAnnualPremium += policy.premiumAmount || 0;
+                    if (healthTableBody) {
+                        const row = generateInsuranceRow(policy, 'health');
+                        if (row.startsWith('<tr')) {
+                            // Already wrapped in <tr>
+                            healthTableBody.innerHTML += row;
+                        } else {
+                            // Need to wrap in <tr>
+                            const tr = document.createElement('tr');
+                            tr.innerHTML = row;
+                            healthTableBody.appendChild(tr);
+                        }
+                    }
+                    healthPolicies.push(policy);
+                    break;
+                case 'motor':
+                    motorTotalCoverage += policy.coverageAmount || 0;
+                    motorAnnualPremium += policy.premiumAmount || 0;
+                    if (motorTableBody) {
+                        const row = generateInsuranceRow(policy, 'motor');
+                        if (row.startsWith('<tr')) {
+                            // Already wrapped in <tr>
+                            motorTableBody.innerHTML += row;
+                        } else {
+                            // Need to wrap in <tr>
+                            const tr = document.createElement('tr');
+                            tr.innerHTML = row;
+                            motorTableBody.appendChild(tr);
+                        }
+                    }
+                    motorPolicies.push(policy);
+                    break;
+            }
+        });
+
+        // Render mobile grid for each insurance type
+        renderInsuranceGrid('life', lifePolicies);
+        renderInsuranceGrid('health', healthPolicies);
+        renderInsuranceGrid('motor', motorPolicies);
+
+        // Update summary cards with formatted numbers
+        updateSummaryCard('lifeTotalCoverage', lifeTotalCoverage);
+        updateSummaryCard('lifeAnnualPremium', lifeAnnualPremium);
+        updateSummaryCard('lifeTotalReturns', lifeTotalInvestment);
+        updateSummaryCard('healthTotalCoverage', healthTotalCoverage);
+        updateSummaryCard('healthAnnualPremium', healthAnnualPremium);
+        updateSummaryCard('motorTotalCoverage', motorTotalCoverage);
+        updateSummaryCard('motorAnnualPremium', motorAnnualPremium);
+    } catch (error) {
+        console.error('Error updating insurance policies:', error);
+    }
+}
+
+// Update document ready function to handle responsive layout without toggle
+document.addEventListener('DOMContentLoaded', function() {
+    // Set up auth state change listener first
+firebase.auth().onAuthStateChanged((user) => {
+    if (user) {
+            console.log('User authenticated:', user.email);
+            updateInsurancePolicies();
+            
+            // Set up real-time updates
+        const userId = user.uid;
+        db.collection('users').doc(userId).collection('insurance').onSnapshot((snapshot) => {
+            updateInsurancePolicies();
+        });
+        } else {
+            console.log('No user authenticated');
+        }
+    });
+    
+    try {
+        // Show life insurance section by default without requiring an event
+        document.querySelectorAll('.insurance-section').forEach(section => {
+            section.classList.add('hidden');
+        });
+        
+        const lifeSection = document.getElementById('lifeInsurance');
+        if (lifeSection) {
+            lifeSection.classList.remove('hidden');
+        }
+        
+        // Highlight the life insurance tab
+        document.querySelectorAll('.tab-button').forEach(button => {
+            if (button) {
+                button.classList.remove('border-indigo-500', 'text-indigo-600');
+                button.classList.add('border-transparent', 'text-gray-500');
+            }
+        });
+        
+        const lifeButton = document.querySelector('[onclick="showInsuranceSection(\'life\')"]');
+        if (lifeButton) {
+            lifeButton.classList.remove('border-transparent', 'text-gray-500');
+            lifeButton.classList.add('border-indigo-500', 'text-indigo-600');
+        }
+    } catch (error) {
+        console.error('Error in DOMContentLoaded setup:', error);
+    }
+    
+    // Responsive layout handler
+    const handleResize = () => {
+        const isMobile = window.innerWidth < 768;
+        
+        // Get all table and grid containers
+        const tableContainers = document.querySelectorAll('[id$="InsuranceTable"]');
+        const gridContainers = document.querySelectorAll('[id$="InsuranceMobileCards"]');
+        
+        if (isMobile) {
+            // On mobile, show grid view and hide tables
+            tableContainers.forEach(el => {
+                if (el) el.classList.add('hidden');
+            });
+            
+            gridContainers.forEach(el => {
+                if (el) el.classList.remove('hidden');
+            });
+        } else {
+            // On desktop, show tables and hide grid view
+            tableContainers.forEach(el => {
+                if (el) el.classList.remove('hidden');
+            });
+            
+            gridContainers.forEach(el => {
+                if (el) el.classList.add('hidden');
+            });
+        }
+    };
+    
+    // Run initially and add resize listener
+    handleResize();
+    window.addEventListener('resize', handleResize);
+});
 </script>
 {% endblock %} 
