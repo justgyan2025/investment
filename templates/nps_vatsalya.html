@@ -6,15 +6,12 @@
         <!-- Header Section -->
         <div class="mb-8 flex items-center justify-between bg-white rounded-2xl p-6 shadow-lg glass-effect">
             <div class="relative">
-                <h4 class="text-4xl font-bold gradient-text transform transition-all duration-300 hover:scale-105">
+                <h4 class="text-1xl font-bold gradient-text transform transition-all duration-300 hover:scale-105">
                     NPS Vatsalya Portfolio
                     <div class="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-full transform scale-x-0 transition-transform duration-300 origin-left hover:scale-x-100"></div>
                 </h4>
             </div>
-            <div class="text-sm text-gray-500 flex items-center space-x-2 bg-gray-50 px-4 py-2 rounded-full">
-                <i class="fas fa-clock text-indigo-500"></i>
-                <span>Last updated: <span id="lastUpdated" class="font-medium">Loading...</span></span>
-            </div>
+            
         </div>
 
         <!-- Summary Cards -->
@@ -689,7 +686,11 @@ async function updateInvestments() {
         document.getElementById('returnPercentage').textContent = `(${returnsPercentage.toFixed(2)}%)`;
         document.getElementById('returnPercentage').className = `text-sm font-medium ${totalReturns >= 0 ? 'text-green-600' : 'text-red-600'}`;
         
-        document.getElementById('lastUpdated').textContent = new Date().toLocaleString();
+        // Add null check for lastUpdated element
+        const lastUpdatedEl = document.getElementById('lastUpdated');
+        if (lastUpdatedEl) {
+            lastUpdatedEl.textContent = new Date().toLocaleString();
+        }
         
     } catch (error) {
         console.error('Error updating investments:', error);

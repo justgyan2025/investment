@@ -12,10 +12,7 @@
                     <div class="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-full transform scale-x-0 transition-transform duration-300 origin-left hover:scale-x-100"></div>
                 </h1>
             </div>
-            <div class="text-sm text-gray-500 flex items-center space-x-2 bg-gray-50 px-4 py-2 rounded-full">
-                <i class="fas fa-clock text-indigo-500"></i>
-                <span>Last updated: <span id="lastUpdated" class="font-medium">Loading...</span></span>
-            </div>
+            
         </div>
 
         <!-- Stats Cards Grid with Modern Design -->
@@ -65,8 +62,7 @@
                 </div>
                 <h3 class="text-gray-500 text-sm font-medium">Total Returns</h3>
                 <div class="mt-2">
-                    <p class="value-display">₹<span id="totalReturns" class="animate-value">0</span></p>
-                    <span id="returnsTrend" class="percentage-display"></span>
+                    <p id="totalReturnsDisplay" class="text-xl font-bold">₹<span id="totalReturns" class="animate-value">0</span></p>
                 </div>
             </div>
 
@@ -82,27 +78,15 @@
                 </div>
                 <h3 class="text-gray-500 text-sm font-medium">Returns Percentage</h3>
                 <div class="mt-2">
-                    <p class="value-display"><span id="returnsPercentage">0.00</span>%</p>
-                    <span id="percentageTrend" class="percentage-display"></span>
+                    <p class="percentage-value"><span id="returnsPercentage" class="returns-percentage">0.00</span> </p>
                 </div>
             </div>
         </div>
 
-        <!-- Asset Distribution and Current Values Section -->
+        <!-- Move Asset Distribution section below Current Asset Values -->
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
-            <!-- Asset Distribution Doughnut Chart -->
-            <div class="chart-container glass-effect">
-                <h3 class="text-lg font-semibold gradient-text mb-4 flex items-center">
-                    <i class="fas fa-chart-pie text-purple-500 mr-2"></i>
-                    Asset Distribution
-                </h3>
-                <div class="h-[300px] relative">
-                    <canvas id="distributionChart"></canvas>
-                </div>
-            </div>
-
-            <!-- Current Asset Values List -->
-            <div class="lg:col-span-2 chart-container glass-effect">
+            <!-- Current Asset Values List (now first) -->
+            <div class="lg:col-span-3 chart-container glass-effect">
                 <div class="flex items-center justify-between mb-6">
                     <h3 class="text-lg font-semibold gradient-text flex items-center">
                         <i class="fas fa-list text-indigo-500 mr-2"></i>
@@ -250,16 +234,27 @@
                     </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Asset Allocation Section -->
-        <div class="allocation-section glass-effect p-6 rounded-xl">
-            <h3 class="text-lg font-semibold gradient-text mb-6 flex items-center">
-                <i class="fas fa-balance-scale text-green-500 mr-2"></i>
-                Asset Allocation
-            </h3>
-            <div class="h-[300px] relative">
-                <canvas id="allocationChart"></canvas>
+            <!-- Asset Distribution Doughnut Chart (now moved below) -->
+            <div class="chart-container glass-effect">
+                <h3 class="text-lg font-semibold gradient-text mb-4 flex items-center">
+                    <i class="fas fa-chart-pie text-purple-500 mr-2"></i>
+                    Asset Distribution
+                </h3>
+                <div class="h-[300px] relative">
+                    <canvas id="distributionChart"></canvas>
+                </div>
+            </div>
+            
+            <!-- Allocation Section (resized to 2 columns) -->
+            <div class="lg:col-span-2 chart-container glass-effect">
+                <h3 class="text-lg font-semibold gradient-text mb-6 flex items-center">
+                    <i class="fas fa-balance-scale text-green-500 mr-2"></i>
+                    Asset Allocation
+                </h3>
+                <div class="h-[300px] relative">
+                    <canvas id="allocationChart"></canvas>
+                </div>
             </div>
         </div>
     </div>
@@ -759,8 +754,37 @@ async function updateDashboard() {
         animateValue(document.getElementById('currentValue'), currentCurrVal, currentValue, 500);
         animateValue(document.getElementById('totalReturns'), currentTotalRet, totalReturns, 500);
 
+        // Update total returns display color
+        const totalReturnsDisplay = document.getElementById('totalReturnsDisplay');
+        if (totalReturnsDisplay) {
+            // Remove existing color classes
+            totalReturnsDisplay.classList.remove('text-green-600', 'text-red-600', 'text-gray-900');
+            
+            // Apply color based on value
+            if (totalReturns > 0) {
+                totalReturnsDisplay.classList.add('text-green-600');
+            } else if (totalReturns < 0) {
+                totalReturnsDisplay.classList.add('text-red-600');
+            } else {
+                totalReturnsDisplay.classList.add('text-gray-900');
+            }
+        }
+
+        // Update percentage color styling
         const returnsPercentageEl = document.getElementById('returnsPercentage');
-        if (returnsPercentageEl) { returnsPercentageEl.textContent = returnsPercentage.toFixed(2); }
+        if (returnsPercentageEl) {
+            // Remove existing color classes
+            returnsPercentageEl.classList.remove('text-green-600', 'text-red-600');
+            
+            // Add appropriate color class based on value
+            if (returnsPercentage > 0) {
+                returnsPercentageEl.classList.add('text-green-600');
+            } else if (returnsPercentage < 0) {
+                returnsPercentageEl.classList.add('text-red-600');
+            }
+            
+            returnsPercentageEl.textContent = returnsPercentage.toFixed(2);
+        }
 
         // Update trend indicators
         updateTrendIndicator('returnsTrend', returnsPercentage);
@@ -1309,6 +1333,25 @@ async function getNpsVatsalyaData(userId) {
     input {
         font-size: 0.875rem !important;
     }
+}
+
+/* CSS for returns values */
+.returns-value {
+    font-size: 1.5rem;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.returns-percentage {
+    font-weight: 600;
+    font-size: 1.5rem;
+    transition: color 0.3s ease;
+}
+
+.percentage-value {
+    font-size: 1.5rem;
+    font-weight: 600;
+    transition: color 0.3s ease;
 }
 </style>
 {% endblock %} 
