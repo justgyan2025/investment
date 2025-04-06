@@ -845,41 +845,66 @@ cancelInsuranceBtn.addEventListener('click', () => {
 
 // Save insurance policy
 saveInsuranceBtn.addEventListener('click', async () => {
-    const policyData = {
-        policyName: document.getElementById('policyName').value,
-        companyName: document.getElementById('companyName').value,
-        policyNumber: document.getElementById('policyNumber').value,
-        policyType: document.getElementById('policyType').value,
-        premiumMode: document.getElementById('premiumMode').value,
-        coverageAmount: parseFloat(document.getElementById('coverageAmount').value),
-        premiumAmount: parseFloat(document.getElementById('premiumAmount').value),
-        investedAmount: document.getElementById('investedAmount').value ? parseFloat(document.getElementById('investedAmount').value) : null,
-        startDate: document.getElementById('startDate').value,
-        nextPremiumDue: document.getElementById('nextPremiumDue').value,
-        endDate: document.getElementById('endDate').value,
-        insuranceType: currentInsuranceType,
-        lastUpdated: firebase.firestore.FieldValue.serverTimestamp()
-    };
-
-    // Convert premium amount to annual if necessary
-    switch (policyData.premiumMode) {
-        case 'monthly':
-            policyData.premiumAmount *= 12; // Convert to annual
-            break;
-        case 'quarterly':
-            policyData.premiumAmount *= 4; // Convert to annual
-            break;
-        case 'halferly':
-            policyData.premiumAmount *= 2; // Convert to annual
-            break;
-        // No conversion needed for yearly and oneTime
-    }
-
     try {
-        const userId = firebase.auth().currentUser.uid;
-        const insuranceRef = db.collection('users').doc(userId).collection('insurance').doc(policyData.policyNumber || policyData.policyName);
+        const policyData = {
+            policyHolder: document.getElementById('policyName').value.trim(),
+            policyName: document.getElementById('policyName').value.trim(),
+            companyName: document.getElementById('companyName').value.trim(),
+            policyNumber: document.getElementById('policyNumber').value.trim() || null,
+            policyType: document.getElementById('policyType').value,
+            premiumMode: document.getElementById('premiumMode').value,
+            coverageAmount: parseFloat(document.getElementById('coverageAmount').value) || 0,
+            premiumAmount: parseFloat(document.getElementById('premiumAmount').value) || 0,
+            investedAmount: document.getElementById('investedAmount').value ? parseFloat(document.getElementById('investedAmount').value) : 0,
+            startDate: document.getElementById('startDate').value,
+            nextPremiumDue: document.getElementById('nextPremiumDue').value,
+            endDate: document.getElementById('endDate').value,
+            insuranceType: currentInsuranceType,
+            lastUpdated: firebase.firestore.FieldValue.serverTimestamp()
+        };
+
+        // Validate required fields
+        if (!policyData.policyName) {
+            alert('Policy Holder name is required');
+            return;
+        }
+        
+        if (!policyData.coverageAmount) {
+            alert('Coverage Amount is required');
+            return;
+        }
+
+        // Convert premium amount to annual if necessary
+        switch (policyData.premiumMode) {
+            case 'monthly':
+                policyData.premiumAmount *= 12; // Convert to annual
+                break;
+            case 'quarterly':
+                policyData.premiumAmount *= 4; // Convert to annual
+                break;
+            case 'halferly':
+                policyData.premiumAmount *= 2; // Convert to annual
+                break;
+            // No conversion needed for yearly and oneTime
+        }
+
+        const user = firebase.auth().currentUser;
+        if (!user) {
+            console.log('No user authenticated. Cannot add insurance policy.');
+            alert('You must be logged in to add an insurance policy.');
+            return;
+        }
+        
+        const userId = user.uid;
+        
+        // Generate a unique ID for the policy if policyNumber is not provided
+        const policyId = policyData.policyNumber || `${currentInsuranceType}_${policyData.policyName}_${Date.now()}`;
+        console.log('Saving policy with ID:', policyId);
+        
+        const insuranceRef = db.collection('users').doc(userId).collection('insurance').doc(policyId);
         
         await insuranceRef.set(policyData);
+        console.log('Policy saved successfully');
 
         // Update user's total insurance value
         const userRef = db.collection('users').doc(userId);
@@ -889,10 +914,23 @@ saveInsuranceBtn.addEventListener('click', async () => {
         });
 
         modal.classList.add('hidden');
-        updateInsurancePolicies();
+        
+        // Clear form fields
+        document.getElementById('policyName').value = '';
+        document.getElementById('companyName').value = '';
+        document.getElementById('policyNumber').value = '';
+        document.getElementById('coverageAmount').value = '';
+        document.getElementById('premiumAmount').value = '';
+        document.getElementById('investedAmount').value = '';
+        document.getElementById('startDate').value = '';
+        document.getElementById('nextPremiumDue').value = '';
+        document.getElementById('endDate').value = '';
+        
+        // Update the insurance policies display
+        await updateInsurancePolicies();
     } catch (error) {
         console.error('Error adding insurance policy:', error);
-        alert('Error adding insurance policy. Please try again.');
+        alert('Error adding insurance policy: ' + error.message);
     }
 });
 
@@ -950,175 +988,180 @@ function animateValue(element, start, end, duration) {
 
 // Update the insurance policy row generation
 function generateInsuranceRow(policy, type) {
-    // Calculate if renewal date is within 30 days
-    const today = new Date();
-    const renewalDate = policy.nextPremiumDue ? new Date(policy.nextPremiumDue) : null;
-    const daysDiff = renewalDate ? Math.ceil((renewalDate - today) / (1000 * 60 * 60 * 24)) : 999;
-    const isRenewalSoon = daysDiff <= 30 && daysDiff > 0;
-    
-    let rowContent = '';
-    switch(type) {
-        case 'life':
-            rowContent = `
-                <td class="px-6 py-4 whitespace-nowrap">
-                    <div class="text-sm font-medium text-gray-900">${policy.policyName}</div>
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap">
-                    <div class="text-sm text-gray-600">${policy.companyName || ''}</div>
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap">
-                    <span class="px-2 py-1 text-xs font-medium rounded-full bg-indigo-100 text-indigo-800">
-                        ${policy.policyType}
-                    </span>
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap text-right">
-                    <div class="text-sm font-semibold text-gray-900">₹${formatIndianNumber(policy.coverageAmount.toFixed(2))}</div>
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap text-right">
-                    <div class="text-sm font-medium text-gray-900">₹${formatIndianNumber(policy.premiumAmount.toFixed(2))}</div>
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap">
-                    <div class="text-sm text-gray-600">${policy.premiumMode}</div>
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap">
-                    <div class="text-sm font-bold ${isRenewalSoon ? 'bg-red-100 text-red-700 px-2 py-1 rounded' : 'text-gray-600'}">
-                        ${formatDate(policy.nextPremiumDue)}
-                        ${isRenewalSoon ? `<span class="text-xs">(${daysDiff} days)</span>` : ''}
-                    </div>
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap">
-                    <div class="text-sm text-gray-600">${formatDate(policy.startDate)}</div>
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap">
-                    <div class="text-sm text-gray-600">${formatDate(policy.endDate)}</div>
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap text-right">
-                    <div class="text-sm font-semibold text-gray-900">₹${formatIndianNumber((policy.investedAmount || 0).toFixed(2))}</div>
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap text-center">
-                    <div class="flex justify-center space-x-2">
-                        <button class="action-btn edit-btn" onclick="editInsurance('${policy.policyNumber || policy.id || policy.policyName}')">
-                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path>
-                            </svg>
-                            Edit
-                        </button>
-                        <button class="action-btn delete-btn" onclick="deleteInsurance('${policy.policyNumber || policy.id || policy.policyName}')">
-                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
-                            </svg>
-                            Delete
-                        </button>
-                    </div>
-                </td>
-            `;
-            break;
-        case 'health':
-            rowContent = `
-                <td class="px-6 py-4 whitespace-nowrap">
-                    <div class="text-sm font-medium text-gray-900">${policy.policyName}</div>
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap">
-                    <div class="text-sm text-gray-600">${policy.companyName || ''}</div>
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap">
-                    <span class="px-2 py-1 text-xs font-medium rounded-full bg-green-100 text-green-800">
-                        ${policy.policyType}
-                    </span>
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap text-right">
-                    <div class="text-sm font-semibold text-gray-900">₹${formatIndianNumber(policy.coverageAmount.toFixed(2))}</div>
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap text-right">
-                    <div class="text-sm font-medium text-gray-900">₹${formatIndianNumber(policy.premiumAmount.toFixed(2))}</div>
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap">
-                    <div class="text-sm font-bold ${isRenewalSoon ? 'bg-red-100 text-red-700 px-2 py-1 rounded' : 'text-gray-600'}">
-                        ${formatDate(policy.nextPremiumDue)}
-                        ${isRenewalSoon ? `<span class="text-xs">(${daysDiff} days)</span>` : ''}
-                    </div>
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap">
-                    <div class="text-sm text-gray-600">${formatDate(policy.startDate)}</div>
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap">
-                    <div class="text-sm text-gray-600">${formatDate(policy.endDate)}</div>
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap text-center">
-                    <div class="flex justify-center space-x-2">
-                        <button class="action-btn edit-btn" onclick="editInsurance('${policy.policyNumber || policy.id || policy.policyName}')">
-                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path>
-                            </svg>
-                            Edit
-                        </button>
-                        <button class="action-btn delete-btn" onclick="deleteInsurance('${policy.policyNumber || policy.id || policy.policyName}')">
-                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
-                            </svg>
-                            Delete
-                        </button>
-                    </div>
-                </td>
-            `;
-            break;
-        case 'motor':
-            rowContent = `
-                <td class="px-6 py-4 whitespace-nowrap">
-                    <div class="text-sm font-medium text-gray-900">${policy.policyName}</div>
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap">
-                    <div class="text-sm text-gray-600">${policy.companyName || ''}</div>
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap">
-                    <span class="px-2 py-1 text-xs font-medium rounded-full bg-blue-100 text-blue-800">
-                        ${policy.vehicleType || policy.policyType || ''}
-                    </span>
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap text-right">
-                    <div class="text-sm font-semibold text-gray-900">₹${formatIndianNumber(policy.coverageAmount.toFixed(2))}</div>
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap text-right">
-                    <div class="text-sm font-medium text-gray-900">₹${formatIndianNumber(policy.premiumAmount.toFixed(2))}</div>
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap">
-                    <div class="text-sm font-bold ${isRenewalSoon ? 'bg-red-100 text-red-700 px-2 py-1 rounded' : 'text-gray-600'}">
-                        ${formatDate(policy.nextPremiumDue)}
-                        ${isRenewalSoon ? `<span class="text-xs">(${daysDiff} days)</span>` : ''}
-                    </div>
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap">
-                    <div class="text-sm text-gray-600">${formatDate(policy.startDate)}</div>
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap">
-                    <div class="text-sm text-gray-600">${formatDate(policy.endDate)}</div>
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap text-center">
-                    <div class="flex justify-center space-x-2">
-                        <button class="action-btn edit-btn" onclick="editInsurance('${policy.policyNumber || policy.id || policy.policyName}')">
-                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path>
-                            </svg>
-                            Edit
-                        </button>
-                        <button class="action-btn delete-btn" onclick="deleteInsurance('${policy.policyNumber || policy.id || policy.policyName}')">
-                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
-                            </svg>
-                            Delete
-                        </button>
-                    </div>
-                </td>
-            `;
-            break;
+    try {
+        // Calculate if renewal date is within 30 days
+        const today = new Date();
+        const renewalDate = policy.nextPremiumDue ? new Date(policy.nextPremiumDue) : null;
+        const daysDiff = renewalDate ? Math.ceil((renewalDate - today) / (1000 * 60 * 60 * 24)) : 999;
+        const isRenewalSoon = daysDiff <= 30 && daysDiff > 0;
+        
+        let rowContent = '';
+        switch(type) {
+            case 'life':
+                rowContent = `
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="text-sm font-medium text-gray-900">${policy.policyName || policy.policyHolder || ''}</div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="text-sm text-gray-600">${policy.companyName || ''}</div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <span class="px-2 py-1 text-xs font-medium rounded-full bg-indigo-100 text-indigo-800">
+                            ${policy.policyType || ''}
+                        </span>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-right">
+                        <div class="text-sm font-semibold text-gray-900">₹${formatIndianNumber((policy.coverageAmount || 0).toFixed(2))}</div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-right">
+                        <div class="text-sm font-medium text-gray-900">₹${formatIndianNumber((policy.premiumAmount || 0).toFixed(2))}</div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="text-sm text-gray-600">${policy.premiumMode || 'Yearly'}</div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="text-sm font-bold ${isRenewalSoon ? 'bg-red-100 text-red-700 px-2 py-1 rounded' : 'text-gray-600'}">
+                            ${formatDate(policy.nextPremiumDue)}
+                            ${isRenewalSoon ? `<span class="text-xs">(${daysDiff} days)</span>` : ''}
+                        </div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="text-sm text-gray-600">${formatDate(policy.startDate)}</div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="text-sm text-gray-600">${formatDate(policy.endDate)}</div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-right">
+                        <div class="text-sm font-semibold text-gray-900">₹${formatIndianNumber((policy.investedAmount || 0).toFixed(2))}</div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-center">
+                        <div class="flex justify-center space-x-2">
+                            <button class="action-btn edit-btn" onclick="editInsurance('${policy.id || policy.policyNumber || policy.policyName}')">
+                                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path>
+                                </svg>
+                                Edit
+                            </button>
+                            <button class="action-btn delete-btn" onclick="deleteInsurance('${policy.id || policy.policyNumber || policy.policyName}')">
+                                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                                </svg>
+                                Delete
+                            </button>
+                        </div>
+                    </td>
+                `;
+                break;
+            case 'health':
+                rowContent = `
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="text-sm font-medium text-gray-900">${policy.policyName || policy.policyHolder || ''}</div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="text-sm text-gray-600">${policy.companyName || ''}</div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <span class="px-2 py-1 text-xs font-medium rounded-full bg-green-100 text-green-800">
+                            ${policy.policyType || ''}
+                        </span>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-right">
+                        <div class="text-sm font-semibold text-gray-900">₹${formatIndianNumber((policy.coverageAmount || 0).toFixed(2))}</div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-right">
+                        <div class="text-sm font-medium text-gray-900">₹${formatIndianNumber((policy.premiumAmount || 0).toFixed(2))}</div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="text-sm font-bold ${isRenewalSoon ? 'bg-red-100 text-red-700 px-2 py-1 rounded' : 'text-gray-600'}">
+                            ${formatDate(policy.nextPremiumDue)}
+                            ${isRenewalSoon ? `<span class="text-xs">(${daysDiff} days)</span>` : ''}
+                        </div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="text-sm text-gray-600">${formatDate(policy.startDate)}</div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="text-sm text-gray-600">${formatDate(policy.endDate)}</div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-center">
+                        <div class="flex justify-center space-x-2">
+                            <button class="action-btn edit-btn" onclick="editInsurance('${policy.id || policy.policyNumber || policy.policyName}')">
+                                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path>
+                                </svg>
+                                Edit
+                            </button>
+                            <button class="action-btn delete-btn" onclick="deleteInsurance('${policy.id || policy.policyNumber || policy.policyName}')">
+                                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                                </svg>
+                                Delete
+                            </button>
+                        </div>
+                    </td>
+                `;
+                break;
+            case 'motor':
+                rowContent = `
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="text-sm font-medium text-gray-900">${policy.policyName || policy.policyHolder || ''}</div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="text-sm text-gray-600">${policy.companyName || ''}</div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <span class="px-2 py-1 text-xs font-medium rounded-full bg-blue-100 text-blue-800">
+                            ${policy.vehicleType || policy.policyType || ''}
+                        </span>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-right">
+                        <div class="text-sm font-semibold text-gray-900">₹${formatIndianNumber((policy.coverageAmount || 0).toFixed(2))}</div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-right">
+                        <div class="text-sm font-medium text-gray-900">₹${formatIndianNumber((policy.premiumAmount || 0).toFixed(2))}</div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="text-sm font-bold ${isRenewalSoon ? 'bg-red-100 text-red-700 px-2 py-1 rounded' : 'text-gray-600'}">
+                            ${formatDate(policy.nextPremiumDue)}
+                            ${isRenewalSoon ? `<span class="text-xs">(${daysDiff} days)</span>` : ''}
+                        </div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="text-sm text-gray-600">${formatDate(policy.startDate)}</div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="text-sm text-gray-600">${formatDate(policy.endDate)}</div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-center">
+                        <div class="flex justify-center space-x-2">
+                            <button class="action-btn edit-btn" onclick="editInsurance('${policy.id || policy.policyNumber || policy.policyName}')">
+                                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path>
+                                </svg>
+                                Edit
+                            </button>
+                            <button class="action-btn delete-btn" onclick="deleteInsurance('${policy.id || policy.policyNumber || policy.policyName}')">
+                                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                                </svg>
+                                Delete
+                            </button>
+                        </div>
+                    </td>
+                `;
+                break;
+        }
+        
+        // If renewal is soon, add a special class to highlight the entire row
+        if (isRenewalSoon) {
+            return `<tr class="bg-red-50">${rowContent}</tr>`;
+        }
+        
+        return `<tr>${rowContent}</tr>`;
+    } catch (error) {
+        console.error('Error generating insurance row:', error, policy);
+        return `<tr><td colspan="11" class="text-center py-4 text-red-600">Error displaying policy</td></tr>`;
     }
-    
-    // If renewal is soon, add a special class to highlight the entire row
-    if (isRenewalSoon) {
-        return `<tr class="bg-red-50">${rowContent}</tr>`;
-    }
-    
-    return rowContent;
 }
 
 // Store policies for reuse
@@ -1140,7 +1183,9 @@ async function updateInsurancePolicies() {
             return;
         }
         
+        console.log('Updating insurance policies for user:', userId);
         const insuranceSnapshot = await db.collection('users').doc(userId).collection('insurance').get();
+        console.log('Fetched insurance policies count:', insuranceSnapshot.size);
         
         // Reset all tables
         const lifeTableBody = document.getElementById('lifeInsurancePolicies');
@@ -1180,6 +1225,8 @@ async function updateInsurancePolicies() {
             // Add the id to the policy object
             policy.id = policyId;
             
+            console.log('Processing policy:', policy.insuranceType, policy.policyName);
+            
             // Update summary statistics based on insurance type
             switch(policy.insuranceType) {
                 case 'life':
@@ -1187,16 +1234,8 @@ async function updateInsurancePolicies() {
                     lifeAnnualPremium += policy.premiumAmount || 0;
                     lifeTotalInvestment += policy.investedAmount || 0;
                     if (lifeTableBody) {
-                        const row = generateInsuranceRow(policy, 'life');
-                        if (row.startsWith('<tr')) {
-                            // Already wrapped in <tr>
-                            lifeTableBody.innerHTML += row;
-                        } else {
-                            // Need to wrap in <tr>
-                            const tr = document.createElement('tr');
-                            tr.innerHTML = row;
-                            lifeTableBody.appendChild(tr);
-                        }
+                        const rowHtml = generateInsuranceRow(policy, 'life');
+                        lifeTableBody.insertAdjacentHTML('beforeend', rowHtml);
                     }
                     lifePolicies.push(policy);
                     break;
@@ -1204,16 +1243,8 @@ async function updateInsurancePolicies() {
                     healthTotalCoverage += policy.coverageAmount || 0;
                     healthAnnualPremium += policy.premiumAmount || 0;
                     if (healthTableBody) {
-                        const row = generateInsuranceRow(policy, 'health');
-                        if (row.startsWith('<tr')) {
-                            // Already wrapped in <tr>
-                            healthTableBody.innerHTML += row;
-                        } else {
-                            // Need to wrap in <tr>
-                            const tr = document.createElement('tr');
-                            tr.innerHTML = row;
-                            healthTableBody.appendChild(tr);
-                        }
+                        const rowHtml = generateInsuranceRow(policy, 'health');
+                        healthTableBody.insertAdjacentHTML('beforeend', rowHtml);
                     }
                     healthPolicies.push(policy);
                     break;
@@ -1221,21 +1252,15 @@ async function updateInsurancePolicies() {
                     motorTotalCoverage += policy.coverageAmount || 0;
                     motorAnnualPremium += policy.premiumAmount || 0;
                     if (motorTableBody) {
-                        const row = generateInsuranceRow(policy, 'motor');
-                        if (row.startsWith('<tr')) {
-                            // Already wrapped in <tr>
-                            motorTableBody.innerHTML += row;
-                        } else {
-                            // Need to wrap in <tr>
-                            const tr = document.createElement('tr');
-                            tr.innerHTML = row;
-                            motorTableBody.appendChild(tr);
-                        }
+                        const rowHtml = generateInsuranceRow(policy, 'motor');
+                        motorTableBody.insertAdjacentHTML('beforeend', rowHtml);
                     }
                     motorPolicies.push(policy);
                     break;
             }
         });
+
+        console.log('Policies processed - Life:', lifePolicies.length, 'Health:', healthPolicies.length, 'Motor:', motorPolicies.length);
 
         // Render mobile grid for each insurance type
         renderInsuranceGrid('life', lifePolicies);
@@ -1326,31 +1351,55 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // Function to delete insurance policy
-async function deleteInsurance(policyNumber) {
+async function deleteInsurance(policyId) {
     if (!confirm('Are you sure you want to delete this insurance policy?')) {
         return;
     }
 
     try {
-        const userId = firebase.auth().currentUser.uid;
-        const insuranceRef = db.collection('users').doc(userId).collection('insurance').doc(policyNumber);
+        const user = firebase.auth().currentUser;
+        if (!user) {
+            console.log('No user authenticated. Cannot delete insurance policy.');
+            alert('You must be logged in to delete an insurance policy.');
+            return;
+        }
+        
+        const userId = user.uid;
+        console.log('Deleting policy with ID:', policyId);
+        
+        const insuranceRef = db.collection('users').doc(userId).collection('insurance').doc(policyId);
         const insuranceDoc = await insuranceRef.get();
+        
+        if (!insuranceDoc.exists) {
+            console.error('Policy not found:', policyId);
+            alert('Policy not found. It may have been already deleted.');
+            return;
+        }
+        
         const insurance = insuranceDoc.data();
+        console.log('Policy to delete:', insurance);
 
         // Delete from Firestore
         await insuranceRef.delete();
+        console.log('Policy deleted successfully');
 
-        // Update user's total insurance value
-        const userRef = db.collection('users').doc(userId);
-        await userRef.update({
-            [`${insurance.insuranceType}InsuranceValue`]: firebase.firestore.FieldValue.increment(-insurance.coverageAmount),
-            totalInvestment: firebase.firestore.FieldValue.increment(-insurance.premiumAmount)
-        });
+        // Update user's total insurance value if values exist
+        if (insurance.coverageAmount || insurance.premiumAmount) {
+            const userRef = db.collection('users').doc(userId);
+            await userRef.update({
+                [`${insurance.insuranceType}InsuranceValue`]: firebase.firestore.FieldValue.increment(-(insurance.coverageAmount || 0)),
+                totalInvestment: firebase.firestore.FieldValue.increment(-(insurance.premiumAmount || 0))
+            });
+        }
 
-        updateInsurancePolicies();
+        // Show success message
+        showSuccessMessage('Policy deleted successfully!');
+        
+        // Update the display
+        await updateInsurancePolicies();
     } catch (error) {
         console.error('Error deleting insurance policy:', error);
-        alert('Error deleting insurance policy. Please try again.');
+        alert('Error deleting insurance policy: ' + error.message);
     }
 }
 
@@ -1869,16 +1918,21 @@ function renderMobileList(type, policies) {
 
 // Add a function to format dates as dd/mm/yyyy
 function formatDate(dateString) {
-    if (!dateString) return '-';
+    if (!dateString || dateString === '') return '-';
     
-    const date = new Date(dateString);
-    if (isNaN(date.getTime())) return '-'; // Invalid date
-    
-    const day = date.getDate().toString().padStart(2, '0');
-    const month = (date.getMonth() + 1).toString().padStart(2, '0'); // getMonth() is 0-indexed
-    const year = date.getFullYear();
-    
-    return `${day}/${month}/${year}`;
+    try {
+        const date = new Date(dateString);
+        if (isNaN(date.getTime())) return '-'; // Invalid date
+        
+        const day = date.getDate().toString().padStart(2, '0');
+        const month = (date.getMonth() + 1).toString().padStart(2, '0'); // getMonth() is 0-indexed
+        const year = date.getFullYear();
+        
+        return `${day}/${month}/${year}`;
+    } catch (error) {
+        console.error('Error formatting date:', error);
+        return '-';
+    }
 }
 
 // Initialize toggle switch states
