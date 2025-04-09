@@ -468,7 +468,7 @@ async function getTotalInvestment(userId, type) {
         case 'stocks':
             return await calculateTotalFromItems(userId, 'stocks', 'totalInvestment');
         case 'mutual_funds':
-            return await calculateTotalFromItems(userId, 'mutual_funds', 'totalInvestment');
+            return await calculateTotalFromItems(userId, 'mutual_funds', 'investment');
         case 'nps':
             return await getNpsTotalInvestment(userId);
         case 'nps_vatsalya':
