@@ -790,6 +790,12 @@ editMFForm.addEventListener('submit', async (e) => {
         const units = parseFloat(document.getElementById('editUnits').value);
         const investment = parseFloat(document.getElementById('editInvestment').value);
 
+        // Get the current mutual fund data to calculate the difference in investment
+        const mfRef = db.collection('users').doc(userId).collection('mutual_funds').doc(schemeCode);
+        const mfDoc = await mfRef.get();
+        const currentMF = mfDoc.data();
+        const investmentDiff = investment - currentMF.investment;
+
         // Fetch current NAV
         const response = await fetch(`/api/mf/${schemeCode}`);
         const data = await response.json();
@@ -804,7 +810,6 @@ editMFForm.addEventListener('submit', async (e) => {
         const returnsPercentage = (returns / investment) * 100;
 
         // Update in Firestore
-        const mfRef = db.collection('users').doc(userId).collection('mutual_funds').doc(schemeCode);
         await mfRef.update({
             units,
             investment,
@@ -813,6 +818,12 @@ editMFForm.addEventListener('submit', async (e) => {
             returns,
             returnsPercentage,
             lastUpdated: firebase.firestore.FieldValue.serverTimestamp()
+        });
+
+        // Update user's total investment value
+        const userRef = db.collection('users').doc(userId);
+        await userRef.update({
+            totalInvestment: firebase.firestore.FieldValue.increment(investmentDiff)
         });
 
         // Close modal and show success message
@@ -903,7 +914,7 @@ async function updateMFHoldings() {
 
         mfSnapshot.forEach(doc => {
             const mf = doc.data();
-            totalInvestment += mf.totalInvestment;
+            totalInvestment += mf.investment;
             currentValue += mf.totalValue;
             totalReturns += mf.returns;
 
