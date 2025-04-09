@@ -694,9 +694,9 @@ const cancelEditBtn = document.getElementById('cancelEditBtn');
 
 // Handle edit button clicks
 document.addEventListener('click', async (e) => {
-    if (e.target.classList.contains('edit-stock-btn')) {
-        const stockId = e.target.dataset.id;
-        editStock(stockId);
+    if (e.target.classList.contains('edit-stock-btn') || e.target.closest('.edit-stock-btn')) {
+        const stockId = e.target.dataset.id || e.target.closest('.edit-stock-btn').dataset.id;
+        await editStock(stockId);
     }
 });
 
@@ -708,6 +708,10 @@ async function editStock(stockId) {
         const doc = await db.collection('users').doc(userId).collection('stocks').doc(stockId).get();
         const data = doc.data();
         
+        if (!data) {
+            throw new Error('Stock data not found');
+        }
+
         document.getElementById('editStockId').value = stockId;
         document.getElementById('editSymbol').value = data.symbol;
         document.getElementById('editCompany').value = data.companyName;
@@ -725,28 +729,34 @@ async function editStock(stockId) {
 updateStockBtn.addEventListener('click', async () => {
     try {
         const stockId = document.getElementById('editStockId').value;
-        const quantity = document.getElementById('editQuantity').value;
-        const avgPrice = document.getElementById('editAvgPrice').value;
+        const quantity = parseFloat(document.getElementById('editQuantity').value);
+        const avgPrice = parseFloat(document.getElementById('editAvgPrice').value);
         
         // Validate inputs
-        if (!quantity || isNaN(Number(quantity)) || Number(quantity) <= 0) {
+        if (!quantity || isNaN(quantity) || quantity <= 0) {
             alert('Please enter a valid quantity');
             return;
         }
         
-        if (!avgPrice || isNaN(Number(avgPrice)) || Number(avgPrice) <= 0) {
+        if (!avgPrice || isNaN(avgPrice) || avgPrice <= 0) {
             alert('Please enter a valid average price');
             return;
         }
         
-        // Show loading state
+        // Show loading state with animation
         updateStockBtn.disabled = true;
-        updateStockBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Updating...';
+        updateStockBtn.innerHTML = `
+            <svg class="animate-spin -ml-1 mr-2 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+            Updating...
+        `;
         
         const userId = firebase.auth().currentUser?.uid;
         if (!userId) throw new Error('User not authenticated');
         
-        // Get the current stock data to access current price
+        // Get the current stock data
         const stockRef = db.collection('users').doc(userId).collection('stocks').doc(stockId);
         const stockDoc = await stockRef.get();
         
@@ -758,22 +768,29 @@ updateStockBtn.addEventListener('click', async () => {
         const currentPrice = stockData.currentPrice;
         
         // Calculate the new values
-        const qtyNumber = Number(quantity);
-        const avgPriceNumber = Number(avgPrice);
-        const totalValue = qtyNumber * currentPrice;
-        const totalInvestment = qtyNumber * avgPriceNumber;
+        const totalValue = quantity * currentPrice;
+        const totalInvestment = quantity * avgPrice;
         const returns = totalValue - totalInvestment;
         const returnsPercentage = totalInvestment > 0 ? (returns / totalInvestment) * 100 : 0;
 
-        // Update the stock document with all the new calculated values
+        // Calculate the difference in investment for user's total
+        const investmentDiff = totalInvestment - stockData.totalInvestment;
+
+        // Update the stock document
         await stockRef.update({
-            quantity: qtyNumber,
-            avgPrice: avgPriceNumber,
+            quantity: quantity,
+            avgPrice: avgPrice,
             totalValue: totalValue,
             totalInvestment: totalInvestment,
             returns: returns,
             returnsPercentage: returnsPercentage,
             lastUpdated: firebase.firestore.FieldValue.serverTimestamp()
+        });
+
+        // Update user's total investment
+        const userRef = db.collection('users').doc(userId);
+        await userRef.update({
+            totalInvestment: firebase.firestore.FieldValue.increment(investmentDiff)
         });
 
         // Close the modal and update the display
